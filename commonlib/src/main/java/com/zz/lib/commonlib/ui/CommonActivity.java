@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gyf.barlibrary.ImmersionBar;
 import com.zz.lib.commonlib.CommonApplication;
 import com.zz.lib.commonlib.utils.PermissionUtils;
 

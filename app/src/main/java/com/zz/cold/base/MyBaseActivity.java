@@ -2,6 +2,7 @@ package com.zz.cold.base;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
@@ -9,7 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.gyf.barlibrary.ImmersionBar;
+
+import com.gyf.immersionbar.ImmersionBar;
 import com.zz.cold.R;
 import com.zz.cold.business.login.LoginActivity;
 import com.zz.cold.net.OutDateEvent;
@@ -59,7 +61,7 @@ public abstract class MyBaseActivity<P extends com.zz.lib.core.ui.mvp.BasePresen
     public void setTransAnimation(Bundle transAnimation) {
         mTransAnimation = transAnimation;
     }
-  public   ImmersionBar immersionBar;
+  public ImmersionBar immersionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -69,16 +71,17 @@ public abstract class MyBaseActivity<P extends com.zz.lib.core.ui.mvp.BasePresen
         initView();
         initToolBar();
         immersionBar = ImmersionBar.with(this);
-        immersionBar.statusBarDarkFont(true)
-                .navigationBarColor(R.color.colorAccent)
+        immersionBar.statusBarDarkFont(false)
+                .navigationBarColor(R.color.black)
+                .fitsSystemWindows(true)
                 .statusBarColor(R.color.colorPrimary)
                 .init();
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (immersionBar != null)
-            immersionBar.destroy();  //必须调用该方法，防止内存泄漏，不调用该方法，如果界面bar发生改变，在不关闭app的情况下，退出此界面再进入将记忆最后一次bar改变的状态
+//        if (immersionBar != null)
+//            immersionBar.destroy();  //必须调用该方法，防止内存泄漏，不调用该方法，如果界面bar发生改变，在不关闭app的情况下，退出此界面再进入将记忆最后一次bar改变的状态
     }
     @Override
     protected void onPause() {
