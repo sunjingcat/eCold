@@ -2,8 +2,6 @@ package com.zz.supervision.business.company.mvp;
 
 import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.lib.core.ui.mvp.BaseView;
-import com.zz.supervision.bean.CompanyBean;
-import com.zz.supervision.bean.BusinessType;
 import com.zz.supervision.bean.ImageBack;
 
 import java.util.List;

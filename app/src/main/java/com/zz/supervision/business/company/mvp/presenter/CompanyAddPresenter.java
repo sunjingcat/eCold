@@ -1,8 +1,6 @@
 package com.zz.supervision.business.company.mvp.presenter;
 
 
-import com.zz.supervision.bean.CompanyBean;
-import com.zz.supervision.bean.BusinessType;
 import com.zz.supervision.bean.ImageBack;
 import com.zz.supervision.business.company.mvp.Contract;
 import com.zz.supervision.net.ApiService;
