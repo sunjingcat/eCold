@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.getui:sdk:2.14.1.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-sdk-2.14.1.0.aar/1551731a0bfc6aaef3f772e4bc9d6d17/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-sdk-2.14.1.0.aar/1551731a0bfc6aaef3f772e4bc9d6d17/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-sdk-2.14.1.0.aar/1551731a0bfc6aaef3f772e4bc9d6d17/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-sdk-2.14.1.0.aar/1551731a0bfc6aaef3f772e4bc9d6d17/jars/libs/GetuiSDK2.14.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.getui/sdk/2.14.1.0/d33fb9df62bb405fed9987b3c1f9d33782f5c1f3/sdk-2.14.1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.getui/sdk/2.14.1.0/d33fb9df62bb405fed9987b3c1f9d33782f5c1f3/sdk-2.14.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

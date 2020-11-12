@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.yalantis:ucrop:2.2.1@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-ucrop-2.2.1.aar/2256143473937f53f27410dcc60301fe/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-ucrop-2.2.1.aar/2256143473937f53f27410dcc60301fe/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-ucrop-2.2.1.aar/2256143473937f53f27410dcc60301fe/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-ucrop-2.2.1.aar/2256143473937f53f27410dcc60301fe/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.yalantis/ucrop/2.2.1/e785cbf1152f706076ef6034bf7b3076842c401b/ucrop-2.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

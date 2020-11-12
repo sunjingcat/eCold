@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.ezviz.sdk:ezviz-sdk:4.9.1.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/ezviz-sdk-4.9.1.1.aar/2cf77cc3c2f0f89bce289dd1dcb1139f/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/ezviz-sdk-4.9.1.1.aar/2cf77cc3c2f0f89bce289dd1dcb1139f/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/ezviz-sdk-4.9.1.1.aar/2cf77cc3c2f0f89bce289dd1dcb1139f/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ezviz.sdk/ezviz-sdk/4.9.1.1/8c35d49cb2f6e984e6496dcc3bab1580611e25d8/ezviz-sdk-4.9.1.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ezviz.sdk/ezviz-sdk/4.9.1.1/8c35d49cb2f6e984e6496dcc3bab1580611e25d8/ezviz-sdk-4.9.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
