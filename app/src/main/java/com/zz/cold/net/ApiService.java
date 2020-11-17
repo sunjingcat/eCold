@@ -6,6 +6,7 @@ package com.zz.cold.net;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.ImageBean;
 import com.zz.cold.bean.QualificationBean;
+import com.zz.cold.bean.StorageBean;
 import com.zz.cold.bean.UserBasicBean;
 import com.zz.cold.bean.UserInfo;
 import com.zz.cold.bean.Version;
@@ -79,7 +80,16 @@ public interface ApiService {
     Observable<JsonT<String>> getDocInfo( @Path("id") String id,@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath")
-    Observable<JsonT<List<QualificationBean>>> getQualificationBeanList( @QueryMap Map<String, Object> params);
+    Observable<JsonT<List<QualificationBean>>> getQualificationList( @QueryMap Map<String, Object> params);
+
+    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
+    Observable<JsonT<QualificationBean>> getQualificationInfo( @Path("id")String id);
+
+    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath")
+    Observable<JsonT<List<StorageBean>>> getStorageList(@QueryMap Map<String, Object> params);
+
+    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
+    Observable<JsonT<StorageBean>> getStorageInfo( @Path("id")String id);
 
 
 }

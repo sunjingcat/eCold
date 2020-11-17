@@ -1,6 +1,7 @@
-package com.zz.cold.business.company;
+package com.zz.cold.business.storage;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,10 +15,14 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.zz.cold.MainActivity;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.QualificationBean;
-import com.zz.cold.business.company.adapter.QualificationAdapter;
+import com.zz.cold.bean.StorageBean;
+import com.zz.cold.business.qualification.QualificationInfoActivity;
+import com.zz.cold.business.qualification.adapter.QualificationAdapter;
+import com.zz.cold.business.storage.adapter.StorageAdapter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;
@@ -39,13 +44,14 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.zz.cold.net.RxNetUtils.getApi;
 
 /**
- *冷库资质
+ * 贮存条件
  */
-public class QualificationActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
+public class StorageActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -58,14 +64,15 @@ public class QualificationActivity extends MyBaseActivity implements OnRefreshLi
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
-    private QualificationAdapter adapter;
-    List<QualificationBean> mlist = new ArrayList<>();
+    private StorageAdapter adapter;
+    List<StorageBean> mlist = new ArrayList<>();
     private int pagenum = 1;
     private int pagesize = 20;
     private String searchStr = "";
+
     @Override
     protected int getContentView() {
-        return R.layout.activity_qualification;
+        return R.layout.activity_storage;
 
     }
 
@@ -78,39 +85,17 @@ public class QualificationActivity extends MyBaseActivity implements OnRefreshLi
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new QualificationAdapter(R.layout.item_qualification, mlist);
+        adapter = new StorageAdapter(R.layout.item_simple, mlist);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
-    }
-
-    @Override
-    protected void initToolBar() {
-        ToolBarUtils.getInstance().setNavigation(toolbar);
-    }
-    @Override
-    public void onRefresh(RefreshLayout refreshlayout) {
-        pagenum = 1;
-        getDate();
-        refreshlayout.finishRefresh();
-    }
-
-    public void showResult(List<QualificationBean> data) {
-        if (pagenum == 1) {
-            mlist.clear();
-        }
-        mlist.addAll(data);
-        adapter.notifyDataSetChanged();
-        if (mlist.size() == 0) {
-            llNull.setVisibility(View.VISIBLE);
-        } else {
-            llNull.setVisibility(View.GONE);
-        }
-
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-
+                Intent intent = new Intent();
+                intent.setClass(StorageActivity.this, StorageInfoActivity.class);
+                intent.putExtra("id",mlist.get(position).getId());
+                startActivity(intent);
             }
         });
         et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -124,12 +109,51 @@ public class QualificationActivity extends MyBaseActivity implements OnRefreshLi
             }
         });
     }
+
+    @OnClick({R.id.toolbar_subtitle})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.toolbar_subtitle:
+
+                Intent intent = new Intent();
+                intent.setClass(StorageActivity.this, AddStorageActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    protected void initToolBar() {
+        ToolBarUtils.getInstance().setNavigation(toolbar);
+    }
+
+    @Override
+    public void onRefresh(RefreshLayout refreshlayout) {
+        pagenum = 1;
+        getDate();
+        refreshlayout.finishRefresh();
+    }
+
+    public void showResult(List<StorageBean> data) {
+        if (pagenum == 1) {
+            mlist.clear();
+        }
+        mlist.addAll(data);
+        adapter.notifyDataSetChanged();
+        if (mlist.size() == 0) {
+            llNull.setVisibility(View.VISIBLE);
+        } else {
+            llNull.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pagenum++;
         getDate();
         refreshLayout.finishLoadMore();
     }
+
     void getDate() {
         Map<String, Object> map = new HashMap<>();
         map.put("pageNum", pagenum);
@@ -138,14 +162,14 @@ public class QualificationActivity extends MyBaseActivity implements OnRefreshLi
         if (!TextUtils.isEmpty(searchStr)) {
             map.put("searchValue", searchStr);
         }
-        RxNetUtils.request(getApi(ApiService.class).getQualificationBeanList(map), new RequestObserver<JsonT<List<QualificationBean>>>() {
+        RxNetUtils.request(getApi(ApiService.class).getStorageList(map), new RequestObserver<JsonT<List<StorageBean>>>() {
             @Override
-            protected void onSuccess(JsonT<List<QualificationBean>> jsonT) {
+            protected void onSuccess(JsonT<List<StorageBean>> jsonT) {
                 showResult(jsonT.getData());
             }
 
             @Override
-            protected void onFail2(JsonT<List<QualificationBean>> stringJsonT) {
+            protected void onFail2(JsonT<List<StorageBean>> stringJsonT) {
                 super.onFail2(stringJsonT);
             }
         }, LoadingUtils.build(this));

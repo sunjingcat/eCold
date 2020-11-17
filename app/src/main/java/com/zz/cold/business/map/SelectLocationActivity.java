@@ -45,7 +45,7 @@ import com.zz.lib.commonlib.utils.ToolBarUtils;
 import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.PLocation;
-import com.zz.cold.business.company.adapter.SearchLocationAdapter;
+import com.zz.cold.business.qualification.adapter.SearchLocationAdapter;
 import com.zz.cold.utils.AMapUtils;
 import com.zz.cold.utils.FileUtils;
 

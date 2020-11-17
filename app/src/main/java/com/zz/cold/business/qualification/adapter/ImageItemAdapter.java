@@ -1,4 +1,4 @@
-package com.zz.cold.business.company.adapter;
+package com.zz.cold.business.qualification.adapter;
 
 import android.view.View;
 import android.widget.ImageView;

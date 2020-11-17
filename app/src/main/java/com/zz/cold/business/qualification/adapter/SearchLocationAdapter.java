@@ -1,4 +1,4 @@
-package com.zz.cold.business.company.adapter;
+package com.zz.cold.business.qualification.adapter;
 
 
 import com.baidu.mapapi.search.core.PoiInfo;

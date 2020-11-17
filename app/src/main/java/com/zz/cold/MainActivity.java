@@ -5,6 +5,7 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import com.zz.cold.R;
+import com.zz.cold.business.qualification.QualificationActivity;
 import com.zz.lib.commonlib.utils.CacheUtility;
 import com.zz.lib.core.http.utils.ToastUtils;
 import com.zz.lib.core.ui.mvp.BasePresenter;
@@ -66,9 +67,9 @@ public class MainActivity extends MyBaseActivity {
 
             case R.id.main_group_1:
 
-//                Intent intent = new Intent();
-//                intent.setClass(MainActivity.this, XCHZFActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, QualificationActivity.class);
+                startActivity(intent);
                 break;
             case R.id.main_group_2:
 //                Intent intent1 = new Intent();

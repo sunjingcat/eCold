@@ -1,6 +1,7 @@
-package com.zz.cold.business.company;
+package com.zz.cold.business.qualification;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -8,21 +9,19 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.zz.cold.MainActivity;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.QualificationBean;
-import com.zz.cold.business.company.adapter.QualificationAdapter;
+import com.zz.cold.business.qualification.adapter.QualificationAdapter;
+import com.zz.cold.business.storage.StorageActivity;
+import com.zz.cold.business.storage.StorageInfoActivity;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;
@@ -32,6 +31,11 @@ import com.zz.lib.commonlib.widget.ClearEditText;
 import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.lib.core.utils.LoadingUtils;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,13 +43,14 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.zz.cold.net.RxNetUtils.getApi;
 
 /**
- *冷库资质详情
+ *冷库资质
  */
-public class QualificationInfoActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
+public class QualificationActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -82,8 +87,38 @@ public class QualificationInfoActivity extends MyBaseActivity implements OnRefre
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                Intent intent = new Intent();
+                intent.setClass(QualificationActivity.this, QualificationInfoActivity.class);
+                intent.putExtra("id",mlist.get(position).getId());
+                startActivity(intent);
+            }
+        });
+        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                getDate();//搜索方法
+                //隐藏软键盘
+                @SuppressLint("WrongConstant") InputMethodManager imm = (InputMethodManager) context.getSystemService("input_method");
+                imm.toggleSoftInput(0, 2);
+                return true;
+            }
+        });
     }
 
+    @OnClick({R.id.toolbar_subtitle})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.toolbar_subtitle:
+
+                Intent intent = new Intent();
+                intent.setClass(QualificationActivity.this, AddQualificationActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
     @Override
     protected void initToolBar() {
         ToolBarUtils.getInstance().setNavigation(toolbar);
@@ -106,23 +141,6 @@ public class QualificationInfoActivity extends MyBaseActivity implements OnRefre
         } else {
             llNull.setVisibility(View.GONE);
         }
-
-        adapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-
-            }
-        });
-        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                getDate();//搜索方法
-                //隐藏软键盘
-                @SuppressLint("WrongConstant") InputMethodManager imm = (InputMethodManager) context.getSystemService("input_method");
-                imm.toggleSoftInput(0, 2);
-                return true;
-            }
-        });
     }
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
@@ -138,7 +156,7 @@ public class QualificationInfoActivity extends MyBaseActivity implements OnRefre
         if (!TextUtils.isEmpty(searchStr)) {
             map.put("searchValue", searchStr);
         }
-        RxNetUtils.request(getApi(ApiService.class).getQualificationBeanList(map), new RequestObserver<JsonT<List<QualificationBean>>>() {
+        RxNetUtils.request(getApi(ApiService.class).getQualificationList(map), new RequestObserver<JsonT<List<QualificationBean>>>() {
             @Override
             protected void onSuccess(JsonT<List<QualificationBean>> jsonT) {
                 showResult(jsonT.getData());

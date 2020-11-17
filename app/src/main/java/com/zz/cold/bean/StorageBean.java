@@ -1,6 +1,6 @@
 package com.zz.cold.bean;
 
-public class QualificationBean {
+public class StorageBean {
     String id;
 
     public String getId() {
