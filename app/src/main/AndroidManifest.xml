@@ -159,6 +159,7 @@
         <activity android:name=".business.storage.StorageActivity" />
         <activity android:name=".business.storage.AddStorageActivity" />
         <activity android:name=".business.storage.AddEquipmentActivity" />
+        <activity android:name=".business.daily.DailyActivity" />
         <!--  屏幕适配########################################-->
         <meta-data
             android:name="android.max_aspect"

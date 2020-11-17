@@ -3,6 +3,7 @@ package com.zz.cold.net;
 
 
 
+import com.zz.cold.bean.DailyBean;
 import com.zz.cold.bean.EquipmentBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.ImageBean;
@@ -102,6 +103,15 @@ public interface ApiService {
 
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
     Observable<JsonT<EquipmentBean>> getEquipmentInfo(@Path("id")String id);
+
+    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath")
+    Observable<JsonT<List<DailyBean>>> getDailyList(@QueryMap Map<String, Object> params);
+
+    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
+    Observable<JsonT<DailyBean>> getDailyInfo( @Path("id")String id);
+
+    @DELETE("/app/v1/supervise/companyInfo/removeCompanyInfo/{id}")
+    Observable<JsonT> removeDailyInfo(@Path("id")String id);
 
 }
 
