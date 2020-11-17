@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="智慧监管"
+            android:text="智慧冷链"
             android:textColor="@color/white"
             android:textSize="25dp" />
 
@@ -57,7 +57,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:src="@drawable/image_group1"
-            android:text="现场执法" />
+            android:text="冷库资质" />
 
         <ImageView
             android:id="@+id/main_group_2"
@@ -68,7 +68,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:src="@drawable/image_group2"
-            android:text="企业信息" />
+            android:text="贮存条件" />
 
 
         <ImageView
@@ -80,7 +80,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:src="@drawable/image_group3"
-            android:text="执法记录" />
+            android:text="溯源管理" />
 
         <ImageView
             android:id="@+id/main_group_4"
@@ -91,7 +91,7 @@
             android:gravity="center"
             android:padding="15dp"
 
-            android:text="执法记录" />
+            android:text="日报管理" />
 
 
     </LinearLayout>

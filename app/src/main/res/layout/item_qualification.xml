@@ -15,7 +15,7 @@
         android:layout_marginLeft="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="12dp"
-        android:background="@drawable/border_radius_5_light"
+        android:background="@drawable/border_radius_5_white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="15dp">

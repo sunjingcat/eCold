@@ -4,6 +4,6 @@
     <item android:state_focused="true" android:drawable="@drawable/border_radius_5_sheep" />
     <item android:state_checked="true" android:drawable="@drawable/border_radius_5_sheep" />
     <item android:state_selected="true" android:drawable="@drawable/border_radius_5_sheep"/>
-    <item android:drawable="@drawable/border_radius_5_light"></item>
+    <item android:drawable="@drawable/border_radius_5_white"></item>
 
 </selector>
