@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="资质添加"
+            android:text="日报添加"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
@@ -46,72 +46,79 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:background="@color/white"
                 android:layout_marginTop="10dp"
+                android:background="@color/white"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
 
-                android:orientation="horizontal">
+                android:paddingRight="10dp">
 
                 <TextView
                     style="@style/textInfoTitleStyle"
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="货品名称" />
+                    android:text="时间" />
 
-                <EditText
-                    style="@style/textRightStyle"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical|right"
-                    android:hint="请填写" />
+                <RadioGroup
+                    android:id="@+id/rg_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/check_login"
+                        android:checked="true"
+                        android:text="上午"
+                        android:textColor="@color/colorTextBlack99"
+                        android:textSize="15dp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:button="@drawable/check_login"
+                        android:text="下午"
+                        android:textColor="@color/colorTextBlack99"
+                        android:textSize="15dp" />
+                </RadioGroup>
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:background="@color/white"
                 android:layout_marginTop="1dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/textInfoTitleStyle"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="营业执照号" />
-
-                <EditText
-                    style="@style/textRightStyle"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical|right"
-                    android:hint="请填写" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
                 android:background="@color/white"
-                android:layout_marginTop="1dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
                     style="@style/textInfoTitleStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="食品经营许可证号" />
+                    android:text="定期抽检" />
 
-                <EditText
+                <TextView
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
                     android:gravity="center_vertical|right"
-                    android:hint="请填写" />
+                    android:hint="请选择" />
             </LinearLayout>
 
 
@@ -119,33 +126,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
 
-                android:layout_marginTop="10dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
                     style="@style/textInfoTitleStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="负责人" />
+                    android:text="违禁货品" />
 
-                <EditText
+                <TextView
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
                     android:gravity="center_vertical|right"
-                    android:hint="请填写" />
+                    android:hint="请选择" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="1dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
                     style="@style/textInfoTitleStyle"
@@ -165,10 +174,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
                     style="@style/textInfoTitleStyle"
@@ -189,10 +198,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="1dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
                     style="@style/textInfoTitleStyle"
@@ -214,10 +223,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
                     style="@style/textInfoTitleStyle"
