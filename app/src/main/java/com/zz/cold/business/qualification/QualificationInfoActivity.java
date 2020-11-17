@@ -1,5 +1,6 @@
 package com.zz.cold.business.qualification;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,8 +10,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.QualificationBean;
@@ -32,9 +35,9 @@ import butterknife.OnClick;
 import static com.zz.cold.net.RxNetUtils.getApi;
 
 /**
- *冷库资质详情
+ * 冷库资质详情
  */
-public class QualificationInfoActivity extends MyBaseActivity  {
+public class QualificationInfoActivity extends MyBaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -44,6 +47,8 @@ public class QualificationInfoActivity extends MyBaseActivity  {
     RecyclerView rvImages;
     QualificationBean qualificationBean;
     String id;
+    private CustomDialog customDialog;
+
     @Override
     protected int getContentView() {
         return R.layout.activity_qualification_info;
@@ -78,18 +83,48 @@ public class QualificationInfoActivity extends MyBaseActivity  {
         ToolBarUtils.getInstance().setNavigation(toolbar);
     }
 
-    @OnClick({R.id.toolbar_subtitle})
+    @OnClick({R.id.toolbar_subtitle, R.id.tv_delete})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
 
                 Intent intent = new Intent();
                 intent.setClass(QualificationInfoActivity.this, AddQualificationActivity.class);
-                intent.putExtra("id",qualificationBean.getId());
+                intent.putExtra("id", qualificationBean.getId());
                 startActivity(intent);
+                break;
+            case R.id.tv_delete:
+
+                if (qualificationBean == null) return;
+                CustomDialog.Builder builder = new CustomDialog.Builder(this)
+                        .setTitle("提示")
+                        .setMessage("确定删除？")
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteDate(qualificationBean.getId());
+                            }
+                        });
+                customDialog = builder.create();
+                customDialog.show();
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (customDialog != null && customDialog.isShowing()) {
+            customDialog.dismiss();
+        }
+    }
+
     public void showResult(QualificationBean data) {
 
 
@@ -106,6 +141,22 @@ public class QualificationInfoActivity extends MyBaseActivity  {
             @Override
             protected void onFail2(JsonT<QualificationBean> stringJsonT) {
                 super.onFail2(stringJsonT);
+            }
+        }, LoadingUtils.build(this));
+    }
+
+    void deleteDate(String id) {
+        RxNetUtils.request(getApi(ApiService.class).removeQualificationInfo(id), new RequestObserver<JsonT>() {
+            @Override
+            protected void onSuccess(JsonT jsonT) {
+                showToast("删除成功");
+                finish();
+            }
+
+            @Override
+            protected void onFail2(JsonT stringJsonT) {
+                super.onFail2(stringJsonT);
+                ToastUtils.showShort(stringJsonT.getMessage());
             }
         }, LoadingUtils.build(this));
     }

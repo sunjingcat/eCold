@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="新增库房"
+            android:text="贮存设备"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
@@ -35,7 +35,8 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,7 +60,8 @@
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="库房编号" />
+                    android:text="名称"
+                    android:textColor="@color/colorTextBlack33" />
 
                 <EditText
                     style="@style/textRightStyle"
@@ -70,79 +72,34 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="1dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/white"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
 
                 <TextView
                     style="@style/textInfoTitleStyle"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="库房名称" />
-
-                <EditText
-                    style="@style/textRightStyle"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical|right"
-                    android:hint="请填写" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    style="@style/textInfoTitleStyle"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="温度设备名称" />
-
-                <EditText
-                    style="@style/textRightStyle"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical|right"
-                    android:hint="请填写" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </androidx.recyclerview.widget.RecyclerView>
-
-            <LinearLayout
-                android:id="@+id/ll_equipment_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/border_radius_3_dae"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:drawableLeft="@drawable/add_gray"
-                    android:gravity="center"
-                    android:textColor="@color/colorTextBlack99"
-                    android:textSize="15dp"
-                    android:drawablePadding="8dp"
-                    android:text="添加贮存设备" />
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="备注"
+                    android:textColor="@color/colorTextBlack33" />
+
+                <EditText
+                    style="@style/textRightStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:gravity="left"
+                    android:hint="请填写" />
             </LinearLayout>
 
+
             <include layout="@layout/layout_images" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

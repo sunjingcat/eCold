@@ -45,17 +45,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/border_radius_5_white"
+                android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="12dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="货品一"
+                    android:text="基础信息"
                     android:textColor="@color/colorTextBlack33"
                     android:textSize="20dp" />
 
@@ -102,10 +100,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/border_radius_5_white"
+                android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="12dp">
 
@@ -115,108 +111,48 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="负责人" />
+                        android:text="贮存设备"
+                        android:textColor="@color/colorTextBlack33"
+                        android:textSize="20dp" />
 
                     <TextView
+                        android:id="@+id/tv_equipment_add"
                         style="@style/textRightStyle"
-                        tools:text="ssssss" />
+                        android:drawableRight="@drawable/add_gray" />
                 </LinearLayout>
 
-                <LinearLayout
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorbg"></View>
 
-                    <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="联系电话" />
-
-                    <TextView
-                        style="@style/textRightStyle"
-                        tools:text="ssssss" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/border_radius_5_white"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
 
-                    <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="冷库种类" />
-
-                    <TextView
-                        style="@style/textRightStyle"
-                        tools:text="ssssss" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="使用者类型" />
-
-                    <TextView
-                        style="@style/textRightStyle"
-                        tools:text="ssssss" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/border_radius_5_white"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="地址" />
-
-                    <TextView
-                        style="@style/textRightStyle"
-                        tools:text="ssssss" />
-                </LinearLayout>
-
+                </androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
 
             <include layout="@layout/layout_images" />
+
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:textSize="14dp"
+                android:textColor="@color/red"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:gravity="center"
+                android:layout_margin="12dp"
+                android:background="@drawable/border_radius_5_white"
+                />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="单位添加"
+            android:text="设备添加"
             android:textColor="@color/white"
             android:textSize="18dp" />
 

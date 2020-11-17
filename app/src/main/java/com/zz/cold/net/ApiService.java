@@ -3,6 +3,7 @@ package com.zz.cold.net;
 
 
 
+import com.zz.cold.bean.EquipmentBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.ImageBean;
 import com.zz.cold.bean.QualificationBean;
@@ -10,12 +11,14 @@ import com.zz.cold.bean.StorageBean;
 import com.zz.cold.bean.UserBasicBean;
 import com.zz.cold.bean.UserInfo;
 import com.zz.cold.bean.Version;
+import com.zz.cold.business.storage.mvp.presenter.EquipmentAddPresenter;
 
 import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -85,12 +88,20 @@ public interface ApiService {
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
     Observable<JsonT<QualificationBean>> getQualificationInfo( @Path("id")String id);
 
+    @DELETE("/app/v1/supervise/companyInfo/removeCompanyInfo/{id}")
+    Observable<JsonT> removeQualificationInfo(@Path("id")String id);
+
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath")
     Observable<JsonT<List<StorageBean>>> getStorageList(@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
     Observable<JsonT<StorageBean>> getStorageInfo( @Path("id")String id);
 
+    @DELETE("/app/v1/supervise/companyInfo/removeCompanyInfo/{id}")
+    Observable<JsonT> removeStorageInfo(@Path("id")String id);
+
+    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
+    Observable<JsonT<EquipmentBean>> getEquipmentInfo(@Path("id")String id);
 
 }
 

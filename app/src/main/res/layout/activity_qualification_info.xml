@@ -217,6 +217,19 @@
             </LinearLayout>
 
             <include layout="@layout/layout_images" />
+            <TextView
+                android:id="@+id/tv_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:textSize="14dp"
+                android:textColor="@color/red"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:gravity="center"
+                android:layout_margin="12dp"
+                android:background="@drawable/border_radius_5_white"
+                />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>
