@@ -5,7 +5,10 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import com.zz.cold.R;
+import com.zz.cold.business.daily.DailyActivity;
 import com.zz.cold.business.qualification.QualificationActivity;
+import com.zz.cold.business.storage.StorageActivity;
+import com.zz.cold.business.trace.TraceActivity;
 import com.zz.lib.commonlib.utils.CacheUtility;
 import com.zz.lib.core.http.utils.ToastUtils;
 import com.zz.lib.core.ui.mvp.BasePresenter;
@@ -61,7 +64,7 @@ public class MainActivity extends MyBaseActivity {
 
     }
 
-    @OnClick({R.id.main_group_1, R.id.main_group_2, R.id.main_group_3, R.id.toolbar_subtitle})
+    @OnClick({R.id.main_group_1, R.id.main_group_2, R.id.main_group_3, R.id.main_group_4, R.id.toolbar_subtitle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
@@ -72,16 +75,19 @@ public class MainActivity extends MyBaseActivity {
                 startActivity(intent);
                 break;
             case R.id.main_group_2:
-//                Intent intent1 = new Intent();
-//                intent1.setClass(MainActivity.this, CompanyListActivity.class);
-//                startActivity(intent1);
-
+                Intent intent1 = new Intent();
+                intent1.setClass(MainActivity.this, StorageActivity.class);
+                startActivity(intent1);
                 break;
-
             case R.id.main_group_3:
-//                Intent intent2 = new Intent();
-//                intent2.setClass(MainActivity.this, CheckListActivity.class);
-//                startActivity(intent2);
+                Intent intent2 = new Intent();
+                intent2.setClass(MainActivity.this, TraceActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.main_group_4:
+                Intent intent3 = new Intent();
+                intent3.setClass(MainActivity.this, DailyActivity.class);
+                startActivity(intent3);
                 break;
             case R.id.toolbar_subtitle:
                 startActivity(new Intent(MainActivity.this, MineActivity.class));
@@ -132,21 +138,7 @@ public class MainActivity extends MyBaseActivity {
         }, null);
     }
 
-    void printer(String host,String post,String path)  {
-        try {
-            CupsClient cupsClient = new CupsClient(new URL(host+":"+post));
-            CupsPrinter printer = cupsClient.getDefaultPrinter();
 
-            InputStream inputStream = new FileInputStream(path);
-
-            PrintJob.Builder builder = new PrintJob.Builder(inputStream).userName("user").copies(1);
-
-            printer.print(builder.build());
-        }catch (Exception e){
-
-        }
-
-    }
 
 
 }

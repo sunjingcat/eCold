@@ -40,13 +40,16 @@
                     android:lines="1"
                     android:textColor="#272727"
                     android:textSize="18dp"
-                    tools:text="入库" />
+                    tools:text="XXX公司" />
+
                 <TextView
                     android:id="@+id/item_weight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
                     android:ellipsize="end"
                     android:gravity="right"
                     android:lines="1"
@@ -71,7 +74,7 @@
                     android:textColor="#999999"
 
                     android:textSize="15dp"
-                    tools:text="2020-11-18" />
+                    tools:text="负责人" />
 
                 <TextView
                     android:id="@+id/item_status"
@@ -83,7 +86,7 @@
                     android:lines="1"
                     android:textColor="#999999"
                     android:textSize="15dp"
-                    tools:text="通过" />
+                    tools:text="联系方式" />
             </LinearLayout>
 
 

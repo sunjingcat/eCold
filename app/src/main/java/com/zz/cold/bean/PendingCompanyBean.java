@@ -1,6 +1,6 @@
 package com.zz.cold.bean;
 
-public class PendingBean {
+public class PendingCompanyBean {
     String id;
 
     public String getId() {

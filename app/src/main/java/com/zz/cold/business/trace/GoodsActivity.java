@@ -7,7 +7,6 @@ import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.bean.TraceBean;
 import com.zz.cold.bean.WmsBean;
-import com.zz.cold.business.qualification.adapter.QualificationAdapter;
 import com.zz.cold.business.trace.adapter.WmsAdapter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;

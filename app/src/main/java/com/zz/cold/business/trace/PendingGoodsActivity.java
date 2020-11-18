@@ -1,13 +1,13 @@
 package com.zz.cold.business.trace;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -17,21 +17,15 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
-import com.zz.cold.bean.TraceBean;
-import com.zz.cold.business.trace.adapter.TraceAdapter;
+import com.zz.cold.bean.PendingCompanyBean;
+import com.zz.cold.business.trace.adapter.PendingAdapter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;
 import com.zz.cold.net.RxNetUtils;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
-import com.zz.lib.commonlib.widget.ClearEditText;
 import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.lib.core.utils.LoadingUtils;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,41 +39,35 @@ import butterknife.OnClick;
 import static com.zz.cold.net.RxNetUtils.getApi;
 
 /**
- *追溯
+ * 待审核进出货请求
  */
-public class TraceActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
+public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.ll_null)
     LinearLayout llNull;
-    @BindView(R.id.et_search)
-    ClearEditText et_search;
     @BindView(R.id.rv)
     RecyclerView rv;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
-    private TraceAdapter adapter;
-    List<TraceBean> mlist = new ArrayList<>();
+    private PendingAdapter adapter;
+    List<PendingCompanyBean> mlist = new ArrayList<>();
     private int pagenum = 1;
     private int pagesize = 20;
-    private String searchStr = "";
 
     @Override
     protected int getContentView() {
-        return R.layout.activity_trace;
+        return R.layout.activity_pending_company;
 
-    }
-    @Override
-    public BasePresenter initPresenter() {
-        return null;
     }
 
     @Override
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TraceAdapter(R.layout.item_qualification, mlist);
+        adapter = new PendingAdapter(R.layout.item_pending_company, mlist);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
@@ -87,21 +75,12 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(TraceActivity.this, GoodsActivity.class);
-                intent.putExtra("id",mlist.get(position).getId());
+                intent.setClass(PendingGoodsActivity.this, GoodsActivity.class);
+                intent.putExtra("id", mlist.get(position).getId());
                 startActivity(intent);
             }
         });
-        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                getDate();//搜索方法
-                //隐藏软键盘
-                @SuppressLint("WrongConstant") InputMethodManager imm = (InputMethodManager) context.getSystemService("input_method");
-                imm.toggleSoftInput(0, 2);
-                return true;
-            }
-        });
+
     }
 
     @OnClick({R.id.toolbar_subtitle})
@@ -109,16 +88,15 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
 
-                Intent intent = new Intent();
-                intent.setClass(TraceActivity.this, PendingCompanyActivity.class);
-                startActivity(intent);
                 break;
         }
     }
+
     @Override
     protected void initToolBar() {
         ToolBarUtils.getInstance().setNavigation(toolbar);
     }
+
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         pagenum = 1;
@@ -126,7 +104,7 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
         refreshlayout.finishRefresh();
     }
 
-    public void showResult(List<TraceBean> data) {
+    public void showResult(List<PendingCompanyBean> data) {
         if (pagenum == 1) {
             mlist.clear();
         }
@@ -138,32 +116,34 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
             llNull.setVisibility(View.GONE);
         }
     }
+
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pagenum++;
         getDate();
         refreshLayout.finishLoadMore();
     }
+
     void getDate() {
         Map<String, Object> map = new HashMap<>();
         map.put("pageNum", pagenum);
         map.put("pageSize", pagesize);
-        searchStr = et_search.getText().toString();
-        if (!TextUtils.isEmpty(searchStr)) {
-            map.put("searchValue", searchStr);
-        }
-        RxNetUtils.request(getApi(ApiService.class).getTraceList(map), new RequestObserver<JsonT<List<TraceBean>>>() {
+
+        RxNetUtils.request(getApi(ApiService.class).getPendingList(map), new RequestObserver<JsonT<List<PendingCompanyBean>>>() {
             @Override
-            protected void onSuccess(JsonT<List<TraceBean>> jsonT) {
+            protected void onSuccess(JsonT<List<PendingCompanyBean>> jsonT) {
                 showResult(jsonT.getData());
             }
 
             @Override
-            protected void onFail2(JsonT<List<TraceBean>> stringJsonT) {
+            protected void onFail2(JsonT<List<PendingCompanyBean>> stringJsonT) {
                 super.onFail2(stringJsonT);
             }
         }, LoadingUtils.build(this));
     }
 
-
+    @Override
+    public BasePresenter initPresenter() {
+        return null;
+    }
 }

@@ -7,14 +7,13 @@ import com.zz.cold.bean.DailyBean;
 import com.zz.cold.bean.EquipmentBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.ImageBean;
-import com.zz.cold.bean.PendingBean;
+import com.zz.cold.bean.PendingCompanyBean;
 import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.bean.StorageBean;
 import com.zz.cold.bean.TraceBean;
 import com.zz.cold.bean.UserBasicBean;
 import com.zz.cold.bean.UserInfo;
 import com.zz.cold.bean.Version;
-import com.zz.cold.business.storage.mvp.presenter.EquipmentAddPresenter;
 
 import java.util.List;
 import java.util.Map;
@@ -116,7 +115,7 @@ public interface ApiService {
     Observable<JsonT<List<TraceBean>>> getTraceList(@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath")
-    Observable<JsonT<List<PendingBean>>> getPendingList(@QueryMap Map<String, Object> params);
+    Observable<JsonT<List<PendingCompanyBean>>> getPendingList(@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
     Observable<JsonT<TraceBean>> getTraceInfo( @Path("id")String id);
