@@ -162,6 +162,8 @@
         <activity android:name=".business.daily.DailyActivity" />
         <activity android:name=".business.daily.DailyInfoActivity" />
         <activity android:name=".business.daily.AddDailyActivity" />
+        <activity android:name=".business.trace.TraceActivity" />
+        <activity android:name=".business.trace.GoodsActivity" />
         <!--  屏幕适配########################################-->
         <meta-data
             android:name="android.max_aspect"

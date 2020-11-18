@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="溯源详情"
+            android:text="商品详情"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
@@ -28,7 +28,7 @@
             android:layout_marginRight="10dp"
             android:padding="8dp"
             android:singleLine="true"
-            android:text="编辑"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="16dp" />
     </androidx.appcompat.widget.Toolbar>
@@ -39,7 +39,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
@@ -48,14 +48,14 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/border_radius_5_white"
+                android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="12dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="货品一"
+                    android:text="基础信息"
                     android:textColor="@color/colorTextBlack33"
                     android:textSize="20dp" />
 
@@ -74,7 +74,7 @@
                         style="@style/textInfoTitleStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="营业执照号" />
+                        android:text="商品名称" />
 
                     <TextView
                         style="@style/textRightStyle"
@@ -90,11 +90,43 @@
                         style="@style/textInfoTitleStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="食品经营许可证号" />
+                        android:text="进货品种" />
 
                     <TextView
                         style="@style/textRightStyle"
                         tools:text="ssssss" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textInfoTitleStyle"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="生产日期/批次" />
+
+                    <TextView
+                        style="@style/textRightStyle"
+                        tools:text="ssssss" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textInfoTitleStyle"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="规格" />
+
+                    <TextView
+                        style="@style/textRightStyle"
+                        tools:text="kg" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -105,146 +137,29 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/border_radius_5_white"
+                android:background="@color/white"
                 android:orientation="vertical"
                 android:padding="12dp">
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:text="进出货详情"
+                    android:textColor="@color/colorTextBlack33"
+                    android:textSize="20dp" />
 
-                    <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="负责人" />
-
-                    <TextView
-                        style="@style/textRightStyle"
-                        tools:text="ssssss" />
-                </LinearLayout>
-
-                <LinearLayout
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorbg"></View>
 
-                    <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="联系电话" />
-
-                    <TextView
-                        style="@style/textRightStyle"
-                        tools:text="ssssss" />
-                </LinearLayout>
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="登录名" />
-
-                    <TextView
-                        style="@style/textRightStyle"
-                        tools:text="ssssss" />
-                </LinearLayout>
-
+                    android:layout_height="wrap_content" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/border_radius_5_white"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="冷库种类" />
-
-                    <TextView
-                        style="@style/textRightStyle"
-                        tools:text="ssssss" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="使用者类型" />
-
-                    <TextView
-                        style="@style/textRightStyle"
-                        tools:text="ssssss" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/border_radius_5_white"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="地址" />
-
-                    <TextView
-                        style="@style/textRightStyle"
-                        tools:text="ssssss" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <include layout="@layout/layout_images" />
-            <TextView
-                android:id="@+id/tv_delete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="删除"
-                android:textSize="14dp"
-                android:textColor="@color/red"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:gravity="center"
-                android:layout_margin="12dp"
-                android:background="@drawable/border_radius_5_white"
-                />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
 </LinearLayout>

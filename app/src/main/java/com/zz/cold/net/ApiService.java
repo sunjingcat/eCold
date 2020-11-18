@@ -9,6 +9,7 @@ import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.ImageBean;
 import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.bean.StorageBean;
+import com.zz.cold.bean.TraceBean;
 import com.zz.cold.bean.UserBasicBean;
 import com.zz.cold.bean.UserInfo;
 import com.zz.cold.bean.Version;
@@ -110,8 +111,12 @@ public interface ApiService {
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
     Observable<JsonT<DailyBean>> getDailyInfo( @Path("id")String id);
 
-    @DELETE("/app/v1/supervise/companyInfo/removeCompanyInfo/{id}")
-    Observable<JsonT> removeDailyInfo(@Path("id")String id);
+    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath")
+    Observable<JsonT<List<TraceBean>>> getTraceList(@QueryMap Map<String, Object> params);
+
+    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
+    Observable<JsonT<TraceBean>> getTraceInfo( @Path("id")String id);
+
 
 }
 
