@@ -40,22 +40,9 @@
                     android:lines="1"
                     android:textColor="#272727"
                     android:textSize="18dp"
-                    tools:text="XXX公司" />
+                    tools:text="XXX商品" />
 
-                <TextView
-                    android:id="@+id/item_weight"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"
-                    android:drawableRight="@drawable/image_arrow"
-                    android:drawablePadding="5dp"
-                    android:ellipsize="end"
-                    android:gravity="right"
-                    android:lines="1"
-                    android:textColor="#999999"
-                    android:textSize="15dp"
-                    tools:text="100kg" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -74,7 +61,7 @@
                     android:textColor="#999999"
 
                     android:textSize="15dp"
-                    tools:text="负责人" />
+                    tools:text="进货 100kg" />
 
                 <TextView
                     android:id="@+id/item_status"
@@ -86,12 +73,35 @@
                     android:lines="1"
                     android:textColor="#999999"
                     android:textSize="15dp"
-                    tools:text="联系方式" />
+                    tools:text="2020-11-18" />
             </LinearLayout>
 
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/border_radius_5_yellow"
+                android:text="通过"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/border_radius_5_yellow"
+                android:text="不通过"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

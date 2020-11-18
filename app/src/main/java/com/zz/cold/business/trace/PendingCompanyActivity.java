@@ -75,7 +75,7 @@ public class PendingCompanyActivity extends MyBaseActivity implements OnRefreshL
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(PendingCompanyActivity.this, GoodsActivity.class);
+                intent.setClass(PendingCompanyActivity.this, PendingGoodsActivity.class);
                 intent.putExtra("id", mlist.get(position).getId());
                 startActivity(intent);
             }

@@ -59,7 +59,7 @@ public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshLis
 
     @Override
     protected int getContentView() {
-        return R.layout.activity_pending_company;
+        return R.layout.activity_pending_goods;
 
     }
 
@@ -67,7 +67,7 @@ public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshLis
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PendingAdapter(R.layout.item_pending_company, mlist);
+        adapter = new PendingAdapter(R.layout.item_pending_goods, mlist);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
