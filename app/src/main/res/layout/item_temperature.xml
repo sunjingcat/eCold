@@ -30,8 +30,8 @@
         tools:text="52487963" />
 
     <RelativeLayout
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp">
 
@@ -41,13 +41,6 @@
             android:layout_height="70dp"
             android:layout_centerInParent="true"
             android:src="@drawable/image_add" />
-
-        <ImageView
-            android:id="@+id/delete"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/image_add_delete" />
     </RelativeLayout>
 
 </LinearLayout>

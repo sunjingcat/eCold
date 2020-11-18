@@ -42,11 +42,35 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textInfoTitleStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="日期" />
+
+                <TextView
+                    style="@style/textRightStyle"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical|right"
+                    android:hint="请选择" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"

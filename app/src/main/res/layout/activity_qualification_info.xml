@@ -140,6 +140,21 @@
                         style="@style/textRightStyle"
                         tools:text="ssssss" />
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textInfoTitleStyle"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="登录名" />
+
+                    <TextView
+                        style="@style/textRightStyle"
+                        tools:text="ssssss" />
+                </LinearLayout>
 
             </LinearLayout>
 

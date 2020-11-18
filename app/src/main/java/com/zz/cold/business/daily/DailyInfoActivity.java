@@ -86,11 +86,11 @@ public class DailyInfoActivity extends MyBaseActivity {
         rvImages.setAdapter(adapter);
 
         rvAm.setLayoutManager(new LinearLayoutManager(this));
-        amAdapter = new TemperatureAdapter(R.layout.item_simple, amList);
+        amAdapter = new TemperatureAdapter(R.layout.item_temperature, amList);
         rvAm.setAdapter(amAdapter);
 
         rvPm.setLayoutManager(new LinearLayoutManager(this));
-        pmAdapter = new TemperatureAdapter(R.layout.item_simple, pmList);
+        pmAdapter = new TemperatureAdapter(R.layout.item_temperature, pmList);
         rvPm.setAdapter(pmAdapter);
 
         id = getIntent().getStringExtra("id");

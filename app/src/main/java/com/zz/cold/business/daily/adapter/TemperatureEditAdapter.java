@@ -1,5 +1,6 @@
 package com.zz.cold.business.daily.adapter;
 
+import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -62,12 +63,22 @@ public class TemperatureEditAdapter extends BaseQuickAdapter<TemperatureBean, Ba
     }
     private TextWatcher mTextWatcher = new TextWatcher() {
         @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (selectedEditTextPosition != -1) {
                 Log.w("MyEditAdapter", "onTextPosiotion " + selectedEditTextPosition);
-                ItemBean itemTest = (ItemBean) getItem(selectedEditTextPosition);
-                itemTest.setText(s.toString());
+                TemperatureBean itemTest = (TemperatureBean) getItem(selectedEditTextPosition);
+                itemTest.setContent(s.toString());
             }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
         }
     };
 }

@@ -198,22 +198,18 @@
                     style="@style/textInfoTitleStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="使用者类型" />
+                    android:text="用户名" />
 
-                <TextView
+                <EditText
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
-                    android:drawableRight="@drawable/image_arrow"
-                    android:drawablePadding="5dp"
                     android:gravity="center_vertical|right"
-                    android:hint="请选择" />
+                    android:hint="请填写" />
             </LinearLayout>
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
                 android:paddingRight="10dp"
                 android:paddingLeft="10dp"
                 android:background="@color/white"
@@ -223,15 +219,13 @@
                     style="@style/textInfoTitleStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="地址" />
+                    android:text="密码" />
 
-                <TextView
+                <EditText
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
-                    android:drawableRight="@drawable/image_arrow"
-                    android:drawablePadding="5dp"
                     android:gravity="center_vertical|right"
-                    android:hint="请选择" />
+                    android:hint="****" />
             </LinearLayout>
 
 
