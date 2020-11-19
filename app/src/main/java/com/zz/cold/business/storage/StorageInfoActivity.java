@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,7 +74,7 @@ public class StorageInfoActivity extends MyBaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        rvImages.setLayoutManager(new LinearLayoutManager(this));
+        rvImages.setLayoutManager(new GridLayoutManager(this,3));
         adapter = new ImageItemAdapter(R.layout.item_image, images);
         rvImages.setAdapter(adapter);
 

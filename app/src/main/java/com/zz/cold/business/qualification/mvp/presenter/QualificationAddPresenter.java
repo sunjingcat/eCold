@@ -1,6 +1,7 @@
 package com.zz.cold.business.qualification.mvp.presenter;
 
 
+import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.bean.UserInfo;
@@ -12,6 +13,7 @@ import com.zz.cold.net.RequestObserver;
 import com.zz.cold.net.RxNetUtils;
 import com.zz.lib.commonlib.utils.CacheUtility;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,60 +43,31 @@ public class QualificationAddPresenter extends MyBasePresenterImpl<Contract.IGet
             }
         }, mDialog);
     }
-
     @Override
-    public void getBusinessType(Map<String, Object> map) {
-//        RxNetUtils.request(getApi(ApiService.class).getDicts(map), new RequestObserver<JsonT<List<BusinessType>>>(this) {
-//            @Override
-//            protected void onSuccess(JsonT<List<BusinessType>> jsonT) {
-//                view.showBusinessType(jsonT.getData());
-//            }
-//
-//            @Override
-//            protected void onFail2(JsonT<List<BusinessType>> stringJsonT) {
-//                super.onFail2(stringJsonT);
-//            }
-//        }, mDialog);
+    public void getColdStorageType() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("dictType","coldstorageType");
+        RxNetUtils.request(getApi(ApiService.class).getDicts(map), new RequestObserver<JsonT<List<DictBean>>>(this) {
+            @Override
+            protected void onSuccess(JsonT<List<DictBean>> jsonT) {
+                view.showColdStorageType(jsonT.getData());
+            }
+
+            @Override
+            protected void onFail2(JsonT<List<DictBean>> stringJsonT) {
+                super.onFail2(stringJsonT);
+            }
+        }, mDialog);
     }
 
     @Override
-    public void getBusiness2Type(Map<String, Object> map) {
-//        RxNetUtils.request(getApi(ApiService.class).getDicts(map), new RequestObserver<JsonT<List<BusinessType>>>(this) {
-//            @Override
-//            protected void onSuccess(JsonT<List<BusinessType>> jsonT) {
-//                view.showBusiness2Type(jsonT.getData());
-//            }
-//
-//            @Override
-//            protected void onFail2(JsonT<List<BusinessType>> stringJsonT) {
-//                super.onFail2(stringJsonT);
-//            }
-//        }, mDialog);
-    }
-
-    @Override
-    public void getQualificationType(Map<String, Object> map) {
-//        RxNetUtils.request(getApi(ApiService.class).getDicts(map), new RequestObserver<JsonT<List<BusinessType>>>(this) {
-//            @Override
-//            protected void onSuccess(JsonT<List<BusinessType>> jsonT) {
-//                view.showQualificationType(jsonT.getData());
-//            }
-//
-//            @Override
-//            protected void onFail2(JsonT<List<BusinessType>> stringJsonT) {
-//                super.onFail2(stringJsonT);
-//            }
-//        }, mDialog);
-    }
-
-    @Override
-    public void postImage( List<MultipartBody.Part> imgs) {
+    public void postImage(String localPath, List<MultipartBody.Part> imgs) {
 
         RxNetUtils.request(getApi(ApiService.class).uploadImg(imgs), new RequestObserver<JsonT<ImageBack>>(this) {
             @Override
             protected void onSuccess(JsonT<ImageBack> data) {
                 if (data.isSuccess()) {
-                    view.showPostImage(data.getData());
+                    view.showPostImage(localPath,data.getData());
                 } else {
 
                 }

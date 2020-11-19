@@ -53,7 +53,7 @@ public class ImageDeleteItemAdapter extends RecyclerView.Adapter<ImageDeleteItem
             holder.imageView.setImageResource(R.drawable.image_add);
             holder.delete.setVisibility(View.GONE);
         }else {
-            GlideUtils.loadImage(mContext, mDatas.get(i).getPath(),  holder.imageView);
+            GlideUtils.loadImage(mContext, mDatas.get(i).getDownloadUrl(),  holder.imageView);
             holder.delete.setVisibility(View.VISIBLE);
         }
         holder. delete.setOnClickListener(new View.OnClickListener() {

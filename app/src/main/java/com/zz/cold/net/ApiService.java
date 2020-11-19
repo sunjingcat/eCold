@@ -4,6 +4,7 @@ package com.zz.cold.net;
 
 
 import com.zz.cold.bean.DailyBean;
+import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.EquipmentBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.ImageBean;
@@ -70,7 +71,10 @@ public interface ApiService {
 
 
     @GET("/app/v1/coldchain/enclosure/{model}/{modelId}")
-    Observable<JsonT<List<ImageBack>>> getModelImages(@Path("type") String type, @Path("modelId") String modelId);
+    Observable<JsonT<List<ImageBack>>> getModelImages(@Path("model") String type, @Path("modelId") String modelId);
+
+    @GET("/app/v1/supervise/dict/getDicts")
+    Observable<JsonT<List<DictBean>>> getDicts(@QueryMap Map<String, Object> params);
 
     @FormUrlEncoded
     @PUT("/app/v1/supervise/{url}/submitSign/{id}")

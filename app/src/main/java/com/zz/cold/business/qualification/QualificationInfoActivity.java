@@ -8,7 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -91,7 +93,7 @@ public class QualificationInfoActivity extends MyBaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        rvImages.setLayoutManager(new LinearLayoutManager(this));
+        rvImages.setLayoutManager(new GridLayoutManager(this,3));
         adapter = new ImageItemAdapter(R.layout.item_image, images);
         rvImages.setAdapter(adapter);
         id = getIntent().getStringExtra("id");
@@ -164,7 +166,15 @@ public class QualificationInfoActivity extends MyBaseActivity {
         tv_loginName.setText(data.getLoginName()+"");
         tv_password.setText(data.getPassword()+"");
         tv_location.setText(data.getAddress()+"");
-        tv_coldstorageType.setText(data.getColdstorageType1Text()+""+data.getColdstorageType2Text());
+        tv_coldstorageType.setText(data.getColdstorageType1Text()+"-"+data.getColdstorageType2Text());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            getData(id);
+        }
     }
 
     void getData(String id) {

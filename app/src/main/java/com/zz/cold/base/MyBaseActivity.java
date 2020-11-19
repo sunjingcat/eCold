@@ -15,10 +15,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.previewlibrary.ZoomMediaLoader;
 import com.zz.cold.R;
 import com.zz.cold.business.login.LoginActivity;
 import com.zz.cold.net.OutDateEvent;
 import com.zz.cold.App;
+import com.zz.cold.utils.ImageLoader;
 import com.zz.cold.utils.woolglass.FragmentClass;
 import com.zz.lib.commonlib.CommonApplication;
 import com.zz.lib.commonlib.utils.CacheUtility;
@@ -83,6 +85,7 @@ public abstract class MyBaseActivity<P extends com.zz.lib.core.ui.mvp.BasePresen
                 .fitsSystemWindows(true)
                 .statusBarColor(R.color.colorPrimary)
                 .init();
+        ZoomMediaLoader.getInstance().init(new ImageLoader());
     }
 
     @Override

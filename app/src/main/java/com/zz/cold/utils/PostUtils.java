@@ -15,6 +15,6 @@ public class PostUtils {
             }
         }
 
-        return "";
+        return ids;
     }
 }
