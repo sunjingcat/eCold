@@ -12,8 +12,15 @@ import com.zz.lib.core.ui.mvp.BaseView;
 import com.zz.lib.core.ui.widget.CustomProgressDialog;
 import com.zz.lib.core.utils.LoadingUtils;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 /**
@@ -111,6 +118,27 @@ public abstract class BaseActivity<P extends BasePresenter> extends CommonActivi
             mCompositeDisposable = new CompositeDisposable();
         }
         mCompositeDisposable.add(subscription);
+    }
+    public List<MultipartBody.Part> getImageBodys(final ArrayList<String> files) {
+        final List<MultipartBody.Part> parts = new ArrayList<>(files.size());
+        for (String strfile : files) {
+            File file = new File(strfile);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+            parts.add(body);
+        }
+        return  parts;
+
+    }
+    public List<MultipartBody.Part> getImageBody(final String filepath) {
+        final List<MultipartBody.Part> parts = new ArrayList<>();
+            File file = new File(filepath);
+            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+            parts.add(body);
+
+        return  parts;
+
     }
 
 }

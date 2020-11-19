@@ -5,6 +5,9 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.TextView;
+
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -35,12 +38,13 @@ public abstract class MyBaseActivity<P extends com.zz.lib.core.ui.mvp.BasePresen
     private Fragment lastFragment;
     private String firstFragment;
     private Bundle mTransAnimation;
+
     @Override
     protected void onResume() {
         super.onResume();
         EventBus.getDefault().register(this);
         CommonApplication.activity = this;
-        App.context=this;
+        App.context = this;
 //        App.context.runOnUiThread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -54,6 +58,7 @@ public abstract class MyBaseActivity<P extends com.zz.lib.core.ui.mvp.BasePresen
 
     //获取Activity布局
     protected abstract int getContentView();
+
     public void clearTransAnimation() {
         mTransAnimation = null;
     }
@@ -61,7 +66,9 @@ public abstract class MyBaseActivity<P extends com.zz.lib.core.ui.mvp.BasePresen
     public void setTransAnimation(Bundle transAnimation) {
         mTransAnimation = transAnimation;
     }
-  public ImmersionBar immersionBar;
+
+    public ImmersionBar immersionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -77,12 +84,14 @@ public abstract class MyBaseActivity<P extends com.zz.lib.core.ui.mvp.BasePresen
                 .statusBarColor(R.color.colorPrimary)
                 .init();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
 //        if (immersionBar != null)
 //            immersionBar.destroy();  //必须调用该方法，防止内存泄漏，不调用该方法，如果界面bar发生改变，在不关闭app的情况下，退出此界面再进入将记忆最后一次bar改变的状态
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -112,6 +121,7 @@ public abstract class MyBaseActivity<P extends com.zz.lib.core.ui.mvp.BasePresen
 
     //初始化标题栏
     protected abstract void initToolBar();
+
     @Override
     public void finish() {
         super.finish();
@@ -166,6 +176,21 @@ public abstract class MyBaseActivity<P extends com.zz.lib.core.ui.mvp.BasePresen
 
     @Override
     public void onError() {
+
+    }
+
+    protected String getText(TextView textView) {
+        String string = textView.getText().toString();
+        if (TextUtils.isEmpty(string)) {
+            return "";
+        } else {
+            String trim = string.trim();
+            if (TextUtils.isEmpty(trim)) {
+                return "";
+            } else {
+                return trim;
+            }
+        }
 
     }
 

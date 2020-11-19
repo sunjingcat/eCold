@@ -9,6 +9,6 @@ import com.zz.cold.BuildConfig;
 
 public class URLs {
 
-    public static final String LMX = BuildConfig.API_HOST;
+    public static final String ZZ = BuildConfig.API_HOST+"/";
 
 }

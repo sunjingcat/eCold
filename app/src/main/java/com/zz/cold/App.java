@@ -40,7 +40,7 @@ public class App extends BaseApplication {
         mApplication = this;
         mHandler = new Handler();
         RxNetUtils.init(this);
-        RxNetUtils.defaultConfig(URLs.LMX);
+        RxNetUtils.defaultConfig(URLs.ZZ);
         if (!BuildConfig.LOG_DEBUG) {
             Logger.clearLogAdapters();
         }

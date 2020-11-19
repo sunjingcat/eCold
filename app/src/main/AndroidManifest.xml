@@ -49,14 +49,14 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".business.mine.MineActivity" />
         <activity android:name=".MainActivity" >
+
+        </activity>
+        <activity android:name=".StartpageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".StartpageActivity">
-
         </activity>
         <activity android:name="com.donkingliang.imageselector.ImageSelectorActivity" />
         <activity
@@ -166,6 +166,7 @@
         <activity android:name=".business.trace.GoodsActivity" />
         <activity android:name=".business.trace.PendingCompanyActivity" />
         <activity android:name=".business.trace.PendingGoodsActivity" />
+        <activity android:name=".business.map.SelectLocationActivity" />
         <!--  屏幕适配########################################-->
         <meta-data
             android:name="android.max_aspect"

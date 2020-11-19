@@ -26,7 +26,7 @@ public class ToolBarUtils {
     public void setNavigation(Toolbar toolbar) {
         toolbar.setTitle("");
         CommonApplication.activity.setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.return_button);
+        toolbar.setNavigationIcon(R.drawable.image_back_white);
         //设置回退监听
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +40,7 @@ public class ToolBarUtils {
     public void setNavigation(Toolbar toolbar, int white) {
         toolbar.setTitle("");
         CommonApplication.activity.setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.image_back_white);
+        toolbar.setNavigationIcon(R.drawable.return_button);
         //设置回退监听
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

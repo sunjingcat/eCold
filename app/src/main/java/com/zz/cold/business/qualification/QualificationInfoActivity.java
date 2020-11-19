@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -16,6 +18,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
+import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.business.qualification.adapter.ImageItemAdapter;
 import com.zz.cold.net.ApiService;
@@ -27,6 +30,7 @@ import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.lib.core.utils.LoadingUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,14 +45,38 @@ public class QualificationInfoActivity extends MyBaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    ArrayList<String> images = new ArrayList<>();
+    ArrayList<ImageBack> images = new ArrayList<>();
     ImageItemAdapter adapter;
     @BindView(R.id.rv_image)
     RecyclerView rvImages;
     QualificationBean qualificationBean;
     String id;
     private CustomDialog customDialog;
+    
+    @BindView(R.id.tv_location)
+    TextView tv_location;
+    @BindView(R.id.tv_coldstorageType)
+    TextView tv_coldstorageType;
+    @BindView(R.id.tv_operatorName)
+    TextView tv_operatorName;
 
+    @BindView(R.id.tv_socialCreditCode)
+    TextView tv_socialCreditCode;
+
+    @BindView(R.id.tv_licenseNumber)
+    TextView tv_licenseNumber;
+
+    @BindView(R.id.tv_contact)
+    TextView tv_contact;
+
+    @BindView(R.id.tv_contactInformation)
+    TextView tv_contactInformation;
+
+    @BindView(R.id.tv_loginName)
+    TextView tv_loginName;
+
+    @BindView(R.id.tv_password)
+    TextView tv_password;
     @Override
     protected int getContentView() {
         return R.layout.activity_qualification_info;
@@ -69,6 +97,7 @@ public class QualificationInfoActivity extends MyBaseActivity {
         id = getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(id)) {
             getData(id);
+            getImages(id);
         }
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -126,8 +155,16 @@ public class QualificationInfoActivity extends MyBaseActivity {
     }
 
     public void showResult(QualificationBean data) {
-
-
+        id = data.getId();
+        tv_operatorName.setText(data.getOperatorName()+"");
+        tv_socialCreditCode.setText(data.getSocialCreditCode()+"");
+        tv_licenseNumber.setText(data.getLicenseNumber()+"");
+        tv_contact.setText(data.getContact()+"");
+        tv_contactInformation.setText(data.getContactInformation()+"");
+        tv_loginName.setText(data.getLoginName()+"");
+        tv_password.setText(data.getPassword()+"");
+        tv_location.setText(data.getAddress()+"");
+        tv_coldstorageType.setText(data.getColdstorageType1Text()+""+data.getColdstorageType2Text());
     }
 
     void getData(String id) {
@@ -140,6 +177,23 @@ public class QualificationInfoActivity extends MyBaseActivity {
 
             @Override
             protected void onFail2(JsonT<QualificationBean> stringJsonT) {
+                super.onFail2(stringJsonT);
+            }
+        }, LoadingUtils.build(this));
+    }
+    void getImages(String id) {
+        RxNetUtils.request(getApi(ApiService.class).getModelImages("coldstorage",id), new RequestObserver<JsonT<List<ImageBack>>>(this) {
+            @Override
+            protected void onSuccess(JsonT<List<ImageBack>> jsonT) {
+                if (jsonT.getData()!=null){
+                    images.clear();
+                    images.addAll(jsonT.getData());
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            protected void onFail2(JsonT<List<ImageBack>> stringJsonT) {
                 super.onFail2(stringJsonT);
             }
         }, LoadingUtils.build(this));

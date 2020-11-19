@@ -18,6 +18,7 @@ import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.EquipmentBean;
+import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.bean.StorageBean;
 import com.zz.cold.business.qualification.AddQualificationActivity;
@@ -46,7 +47,7 @@ public class StorageInfoActivity extends MyBaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    ArrayList<String> images = new ArrayList<>();
+    ArrayList<ImageBack> images = new ArrayList<>();
     ArrayList<EquipmentBean> equipmentBeans = new ArrayList<>();
     ImageItemAdapter adapter;
     EquipmentAdapter equipmentAdapter;

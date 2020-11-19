@@ -53,9 +53,10 @@
                 android:padding="12dp">
 
                 <TextView
+                    android:id="@+id/tv_operatorName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="货品一"
+                    tools:text="货品一"
                     android:textColor="@color/colorTextBlack33"
                     android:textSize="20dp" />
 
@@ -74,11 +75,12 @@
                         style="@style/textInfoTitleStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="营业执照号" />
+                        android:text="社会信用代码" />
 
                     <TextView
+                        android:id="@+id/tv_socialCreditCode"
                         style="@style/textRightStyle"
-                        tools:text="ssssss" />
+                        tools:text="" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -90,11 +92,12 @@
                         style="@style/textInfoTitleStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="食品经营许可证号" />
+                        android:text="经营许可证号" />
 
                     <TextView
+                        android:id="@+id/tv_licenseNumber"
                         style="@style/textRightStyle"
-                        tools:text="ssssss" />
+                        tools:text="" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -121,8 +124,9 @@
                         android:text="负责人" />
 
                     <TextView
+                        android:id="@+id/tv_contact"
                         style="@style/textRightStyle"
-                        tools:text="ssssss" />
+                        tools:text="" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -137,24 +141,11 @@
                         android:text="联系电话" />
 
                     <TextView
+                        android:id="@+id/tv_contactInformation"
                         style="@style/textRightStyle"
-                        tools:text="ssssss" />
+                        tools:text="" />
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        style="@style/textInfoTitleStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="登录名" />
-
-                    <TextView
-                        style="@style/textRightStyle"
-                        tools:text="ssssss" />
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -180,9 +171,24 @@
                         android:text="冷库种类" />
 
                     <TextView
+                        android:id="@+id/tv_coldstorageType"
                         style="@style/textRightStyle"
-                        tools:text="ssssss" />
+                        tools:text="" />
                 </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/border_radius_5_white"
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -193,13 +199,31 @@
                         style="@style/textInfoTitleStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="使用者类型" />
+                        android:text="用户名" />
 
                     <TextView
+                        android:id="@+id/tv_loginName"
                         style="@style/textRightStyle"
-                        tools:text="ssssss" />
+                        android:hint="" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/textInfoTitleStyle"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="密码" />
+
+                    <TextView
+                        android:id="@+id/tv_password"
+                        style="@style/textRightStyle"
+                        android:hint="" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -224,27 +248,28 @@
                         android:text="地址" />
 
                     <TextView
+                        android:id="@+id/tv_location"
                         style="@style/textRightStyle"
-                        tools:text="ssssss" />
+                        tools:text="" />
                 </LinearLayout>
 
 
             </LinearLayout>
 
             <include layout="@layout/layout_images" />
+
             <TextView
                 android:id="@+id/tv_delete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="删除"
-                android:textSize="14dp"
-                android:textColor="@color/red"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:gravity="center"
                 android:layout_margin="12dp"
                 android:background="@drawable/border_radius_5_white"
-                />
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="删除"
+                android:textColor="@color/red"
+                android:textSize="14dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -169,4 +169,9 @@ public class QualificationActivity extends MyBaseActivity implements OnRefreshLi
         }, LoadingUtils.build(this));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDate();
+    }
 }

@@ -46,22 +46,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:background="@color/white"
                 android:layout_marginTop="10dp"
+                android:background="@color/white"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
 
-                android:orientation="horizontal">
+                android:paddingRight="10dp">
 
                 <TextView
-                    style="@style/textInfoTitleStyle"
+                    style="@style/textLeftStyle"
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="货品名称" />
+                    android:text="冷库名称" />
 
                 <EditText
+                    android:id="@+id/et_operatorName"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
@@ -71,20 +72,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:background="@color/white"
                 android:layout_marginTop="1dp"
-                android:orientation="horizontal">
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
-                    style="@style/textInfoTitleStyle"
+                    style="@style/textLeftStyle"
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="营业执照号" />
+                    android:text="社会信用代码" />
 
                 <EditText
+                    android:id="@+id/et_socialCreditCode"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
@@ -94,20 +96,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:background="@color/white"
                 android:layout_marginTop="1dp"
+                android:background="@color/white"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
-                    style="@style/textInfoTitleStyle"
+                    style="@style/textLeftStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="食品经营许可证号" />
+                    android:text="经营许可证号" />
 
                 <EditText
+                    android:id="@+id/et_licenseNumber"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
@@ -120,18 +123,19 @@
                 android:layout_height="45dp"
 
                 android:layout_marginTop="10dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
-                    style="@style/textInfoTitleStyle"
+                    style="@style/textLeftStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="负责人" />
 
                 <EditText
+                    android:id="@+id/et_contact"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
@@ -142,18 +146,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="1dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
-                    style="@style/textInfoTitleStyle"
+                    style="@style/textLeftStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="联系电话" />
 
                 <EditText
+                    android:id="@+id/et_contactInformation"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
@@ -165,18 +170,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
-                    style="@style/textInfoTitleStyle"
+                    style="@style/textLeftStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="冷库种类" />
 
                 <TextView
+                    android:id="@+id/et_coldstorageType"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/image_arrow"
@@ -189,45 +195,72 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="1dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
-                    style="@style/textInfoTitleStyle"
+                    style="@style/textLeftStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="用户名" />
 
                 <EditText
+                    android:id="@+id/et_loginName"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
                     android:hint="请填写" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="1dp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <TextView
-                    style="@style/textInfoTitleStyle"
+                    style="@style/textLeftStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="密码" />
 
                 <EditText
+                    android:id="@+id/et_password"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
-                    android:hint="****" />
+                    android:hint="请填写" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textLeftStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="地址" />
+
+                <TextView
+                    android:id="@+id/et_location"
+                    style="@style/textRightStyle"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical|right"
+                    android:hint="请选择" />
+            </LinearLayout>
 
             <include layout="@layout/layout_images" />
         </LinearLayout>

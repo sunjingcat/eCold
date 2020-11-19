@@ -5,27 +5,22 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
+
 import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.DailyBean;
-import com.zz.cold.bean.EquipmentBean;
-import com.zz.cold.bean.StorageBean;
+
+import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.TemperatureBean;
 import com.zz.cold.business.daily.adapter.TemperatureAdapter;
 import com.zz.cold.business.qualification.AddQualificationActivity;
 import com.zz.cold.business.qualification.adapter.ImageItemAdapter;
-import com.zz.cold.business.storage.AddEquipmentActivity;
-import com.zz.cold.business.storage.adapter.EquipmentAdapter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;
@@ -49,7 +44,7 @@ public class DailyInfoActivity extends MyBaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    ArrayList<String> images = new ArrayList<>();
+    ArrayList<ImageBack> images = new ArrayList<>();
     ArrayList<TemperatureBean> amList = new ArrayList<>();
     ArrayList<TemperatureBean> pmList = new ArrayList<>();
     ImageItemAdapter adapter;

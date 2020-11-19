@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A3C90"
+    android:background="@color/colorThemeLight"
     android:orientation="vertical"
     android:paddingLeft="30dp"
     android:paddingRight="30dp"
@@ -58,8 +58,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@color/white"
-                    android:text=""
                     android:hint="请输入账号"
+                    android:text=""
                     android:textColor="#444444"
                     android:textSize="@dimen/sp_14" />
             </LinearLayout>
@@ -93,16 +93,16 @@
                     android:background="@color/white"
                     android:hint="请输入登录密码"
                     android:inputType="textPassword"
-                    android:textColor="#444444"
                     android:text=""
+                    android:textColor="#444444"
                     android:textSize="@dimen/sp_14" />
 
                 <ImageView
                     android:id="@+id/login_password_show"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:padding="1dp"
                     android:layout_marginRight="10dp"
+                    android:padding="1dp"
                     android:src="@drawable/image_login_password_hide"
                     android:textColor="#444444" />
             </LinearLayout>

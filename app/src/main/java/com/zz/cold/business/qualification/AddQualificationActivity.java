@@ -1,30 +1,50 @@
 package com.zz.cold.business.qualification;
 
+import android.Manifest;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.donkingliang.imageselector.utils.ImageSelector;
+import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.ImageBack;
+import com.zz.cold.bean.PLocation;
 import com.zz.cold.bean.QualificationBean;
+import com.zz.cold.business.map.SelectLocationActivity;
 import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
 import com.zz.cold.business.qualification.mvp.Contract;
 import com.zz.cold.business.qualification.mvp.presenter.QualificationAddPresenter;
+import com.zz.cold.utils.PostUtils;
+import com.zz.lib.commonlib.utils.PermissionUtils;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
 
+import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
- *冷库资质edit
+ * 冷库资质edit
  */
 public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualificationAddPresenter> implements Contract.IGetQualificationAddView {
 
@@ -34,8 +54,40 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     ImageDeleteItemAdapter adapter;
     @BindView(R.id.rv_image)
     RecyclerView rvImages;
+
+    @BindView(R.id.et_location)
+    TextView etLocation;
+    @BindView(R.id.et_coldstorageType)
+    TextView et_coldstorageType;
+    String coldstorageType1;
+    String coldstorageType2;
+
+    @BindView(R.id.et_operatorName)
+    EditText etOperatorName;
+
+    @BindView(R.id.et_socialCreditCode)
+    EditText et_socialCreditCode;
+
+    @BindView(R.id.et_licenseNumber)
+    EditText et_licenseNumber;
+
+    @BindView(R.id.et_contact)
+    EditText et_contact;
+
+    @BindView(R.id.et_contactInformation)
+    EditText et_contactInformation;
+
+    @BindView(R.id.et_loginName)
+    EditText et_loginName;
+
+    @BindView(R.id.et_password)
+    EditText et_password;
+
     QualificationBean qualificationBean;
     String id;
+    double lon = 123.6370661238426;
+    double lat = 47.216275430241495;
+
     @Override
     protected int getContentView() {
         return R.layout.activity_qualification_add;
@@ -56,6 +108,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
         id = getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(id)) {
             mPresenter.getData(id);
+            mPresenter.getImage("coldstorage",id);
         }
         adapter.setOnclick(new ImageDeleteItemAdapter.Onclick() {
             @Override
@@ -90,15 +143,76 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     }
 
 
+    @OnClick({R.id.toolbar_subtitle, R.id.et_location, R.id.et_coldstorageType})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.toolbar_subtitle:
+                postData();
+                break;
+
+            case R.id.et_coldstorageType:
+                startActivityForResult(new Intent(AddQualificationActivity.this, CategoryActivity.class).putExtra("coldstorageType1", lat).putExtra("coldstorageType1", lon), 3001);
+
+                break;
+            case R.id.et_location:
+                PermissionUtils.getInstance().checkPermission(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION}, new PermissionUtils.OnPermissionChangedListener() {
+                    @Override
+                    public void onGranted() {
+                        startActivityForResult(new Intent(AddQualificationActivity.this, SelectLocationActivity.class).putExtra("lat", lat).putExtra("lon", lon), 1002);
+
+                    }
+
+                    @Override
+                    public void onDenied() {
+
+                    }
+                });
+
+
+                break;
+
+        }
+    }
+
+    void postData() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("operatorName",getText(etOperatorName));
+        params.put("socialCreditCode",getText(et_socialCreditCode));
+        params.put("licenseNumber",getText(et_licenseNumber));
+        params.put("contact",getText(et_contact));
+        params.put("contactInformation",getText(et_contactInformation));
+        params.put("loginName",getText(et_loginName));
+        params.put("password",getText(et_password));
+        params.put("coldstorageType1",coldstorageType1);
+        params.put("coldstorageType2",coldstorageType2);
+        params.put("address",getText(etLocation));
+        params.put("latitude",lat);
+        params.put("longitude",lon);
+        params.put("enclosureIds", PostUtils.getImageIds(images));
+        params.put("coldstorageType1", coldstorageType1);
+        params.put("coldstorageType2", coldstorageType2);
+
+        mPresenter.submitData(params);
+    }
+
     @Override
     public void showQualificationInfo(QualificationBean data) {
         qualificationBean = data;
+        etOperatorName.setText(data.getOperatorName()+"");
+        et_socialCreditCode.setText(data.getSocialCreditCode()+"");
+        et_licenseNumber.setText(data.getLicenseNumber()+"");
+        et_contact.setText(data.getContact()+"");
+        et_contactInformation.setText(data.getContactInformation()+"");
+        et_loginName.setText(data.getLoginName()+"");
+        et_password.setText(data.getPassword()+"");
+        etLocation.setText(data.getAddress()+"");
+        et_coldstorageType.setText(data.getColdstorageType1Text()+""+data.getColdstorageType2Text());
+        coldstorageType1 = data.getColdstorageType1();
+        coldstorageType2 = data.getColdstorageType2();
     }
 
-    @Override
-    public void showSubmitResult(String id) {
 
-    }
 
     @Override
     public void showResult() {
@@ -106,12 +220,62 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     }
 
     @Override
-    public void showPostImage(int position, String id) {
-
+    public void showPostImage(ImageBack imageBack) {
+        if (imageBack ==null) return;
+        images.add(imageBack);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void showImage(List<ImageBack> list) {
-
+        if (list ==null) return;
+        images.clear();
+        images.addAll(list);
+        adapter.notifyDataSetChanged();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null) {
+            switch (requestCode) {
+                case 1002:
+                    if (data == null) return;
+                    PLocation poiInfo = data.getParcelableExtra("location");
+                    if (poiInfo == null) return;
+                    if (poiInfo.getLocation() == null) return;
+                    lat = poiInfo.getLocation().latitude;
+                    lon = poiInfo.getLocation().longitude;
+                    etLocation.setText(poiInfo.getAddress() + "");
+                    break;
+                case 1101:
+                    ArrayList<String> selectImages = data.getStringArrayListExtra(
+                            ImageSelectorUtils.SELECT_RESULT);
+                    for (String path : selectImages) {
+                        Luban.with(this)
+                                .load(path)
+                                .ignoreBy(100)
+                                .setCompressListener(new OnCompressListener() {
+                                    @Override
+                                    public void onStart() {
+                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                                    }
+
+                                    @Override
+                                    public void onSuccess(File file) {
+                                        mPresenter.postImage( getImageBody(path));
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        // TODO 当压缩过程出现问题时调用
+                                    }
+                                }).launch();
+
+                    }
+                    break;
+            }
+        }
+    }
+
 }

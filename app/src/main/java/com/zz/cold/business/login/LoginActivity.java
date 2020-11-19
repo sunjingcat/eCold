@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.igexin.sdk.PushManager;
+import com.zz.cold.BuildConfig;
 import com.zz.cold.MainActivity;
 import com.zz.cold.R;
 import com.zz.cold.business.login.mvp.presenter.LoginPresenter;
@@ -56,6 +57,10 @@ public class LoginActivity extends MyBaseActivity<Contract.IsetLoginPresenter> i
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        if (BuildConfig.DEBUG){
+            logNumber.setText("apptest");
+            logPassword.setText("123456");
+        }
     }
 
     @Override

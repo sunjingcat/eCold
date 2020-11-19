@@ -39,23 +39,23 @@ import retrofit2.http.QueryMap;
 public interface ApiService {
 
 
-    @POST( "/app/v1/login")
+    @POST( "/app/v1/coldchain/login")
     Observable<JsonT<UserInfo>> login(@QueryMap Map<String, Object> params);
 
     @POST("/app/light/gtClientId")
     Observable<JsonT> putClientId(@QueryMap Map<String, Object> params);
 
 
-    @GET("/app/v1")
+    @GET("/app/v1/coldchain")
     Observable<JsonT<UserBasicBean>> getUserDetail();
 
-    @POST("/app/v1/logout")
+    @POST("/app/v1/coldchain/logout")
     Observable<JsonT> logout();
 
-    @POST( "/app/v1/resetPwd")
+    @POST( "/app/v1/coldchain/updatePwd")
     Observable<JsonT> resetPwd(@QueryMap Map<String, Object> params);
 
-    @GET("/app/v1/supervise/version/latest")
+    @GET("/app/v1/coldchain/version/latest")
     Observable<JsonT<Version>> getVersion();
    @GET("/app/v1/supervise/version/versionCode/{versionCode}")
     Observable<JsonT<Version>> getVersionInfo(@Path("versionCode") String terminalId);
@@ -64,14 +64,13 @@ public interface ApiService {
     @POST( "/app/v1/supervise/enclosure/upload")
     Observable<JsonT<ImageBean>> upload(@Part List<MultipartBody.Part> imgs);
 
+    @Multipart
+    @POST("/app/v1/coldchain/enclosure/upload/single")
+    Observable<JsonT<ImageBack>> uploadImg(@Part List<MultipartBody.Part> imgs);
 
-    @POST("/app/v1/supervise/enclosure/uploadSingle")
-    @FormUrlEncoded
-    Observable<JsonT<String>> uploadImg( @Field("base64") String handleFile);
 
-
-    @GET("/app/v1/supervise/enclosure/base64/{type}/{modelId}")
-    Observable<JsonT<List<ImageBack>>> getImageBase64(@Path("type") String type, @Path("modelId") String modelId);
+    @GET("/app/v1/coldchain/enclosure/{model}/{modelId}")
+    Observable<JsonT<List<ImageBack>>> getModelImages(@Path("type") String type, @Path("modelId") String modelId);
 
     @FormUrlEncoded
     @PUT("/app/v1/supervise/{url}/submitSign/{id}")
@@ -84,13 +83,19 @@ public interface ApiService {
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
     Observable<JsonT<String>> getDocInfo( @Path("id") String id,@QueryMap Map<String, Object> params);
 
-    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath")
+    @GET("/app/v1/coldchain/coldstorage/list")
     Observable<JsonT<List<QualificationBean>>> getQualificationList( @QueryMap Map<String, Object> params);
 
-    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
+    @GET("/app/v1/coldchain/coldstorage/{id}")
     Observable<JsonT<QualificationBean>> getQualificationInfo( @Path("id")String id);
 
-    @DELETE("/app/v1/supervise/companyInfo/removeCompanyInfo/{id}")
+    @POST("/app/v1/coldchain/coldstorage")
+    Observable<JsonT> postQualificationInfo(@QueryMap Map<String, Object> params);
+
+    @PUT("/app/v1/coldchain/coldstorage")
+    Observable<JsonT> editQualificationInfo(@QueryMap Map<String, Object> params);
+
+    @DELETE("/app/v1/coldchain/coldstorage/{id}")
     Observable<JsonT> removeQualificationInfo(@Path("id")String id);
 
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath")
