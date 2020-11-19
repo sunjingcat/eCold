@@ -3,7 +3,10 @@ package com.zz.cold.business.storage;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.codbking.widget.utils.UIAdjuster;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
@@ -25,17 +29,21 @@ import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
 import com.zz.cold.business.storage.adapter.EquipmentAdapter;
 import com.zz.cold.business.storage.mvp.Contract;
 import com.zz.cold.business.storage.mvp.presenter.StorageAddPresenter;
+import com.zz.cold.utils.PostUtils;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
+import com.zz.lib.commonlib.widget.SelectPopupWindows;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- *贮存条件edit
+ * 贮存条件edit
  */
 public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPresenter> implements Contract.IGetStorageAddView {
 
@@ -49,8 +57,22 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
     String id;
     @BindView(R.id.rv)
     RecyclerView rv;
+
+    @BindView(R.id.text_warehouseCode)
+    EditText text_warehouseCode;
+
+    @BindView(R.id.text_warehouseName)
+    EditText text_warehouseName;
+
+    @BindView(R.id.text_temperatureName)
+    EditText text_temperatureName;
+
+    @BindView(R.id.text_isAccord)
+    TextView text_isAccord;
+    int isAccord=-1;
     ArrayList<EquipmentBean> equipmentBeans = new ArrayList<>();
     EquipmentAdapter equipmentAdapter;
+
     @Override
     protected int getContentView() {
         return R.layout.activity_storage_add;
@@ -65,7 +87,7 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        rvImages.setLayoutManager(new GridLayoutManager(this,3));
+        rvImages.setLayoutManager(new GridLayoutManager(this, 3));
         adapter = new ImageDeleteItemAdapter(this, images);
         rvImages.setAdapter(adapter);
 
@@ -104,11 +126,15 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
             }
         });
     }
-    @OnClick({R.id.toolbar_subtitle,  R.id.ll_equipment_add})
+
+    @OnClick({R.id.toolbar_subtitle, R.id.ll_equipment_add, R.id.text_isAccord})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
-
+                postData();
+                break;
+                case R.id.text_isAccord:
+                    showSelectPopWindow();
                 break;
             case R.id.ll_equipment_add:
                 if (storageBean == null) return;
@@ -116,6 +142,7 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
                 break;
         }
     }
+
     @Override
     protected void initToolBar() {
         ToolBarUtils.getInstance().setNavigation(toolbar);
@@ -127,25 +154,44 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
         storageBean = data;
     }
 
-    @Override
-    public void showSubmitResult(String id) {
+    void postData() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("warehouseCode",getText(text_warehouseCode));
+        params.put("warehouseName",getText(text_warehouseName));
+        params.put("temperatureName",getText(text_temperatureName));
+        params.put("isAccord",isAccord);
+        params.put("enclosureIds", PostUtils.getImageIds(images));
+        if (!TextUtils.isEmpty(id)) {
+            params.put("id", id);
+        }
 
+        mPresenter.submitData(params);
     }
 
     @Override
     public void showResult() {
+        setResult(RESULT_OK);
+        finish();
 
     }
 
     @Override
-    public void showPostImage(int position, String id) {
-
+    public void showPostImage(String localPath, ImageBack imageBack) {
+        if (imageBack == null) return;
+        imageBack.setPath(localPath);
+        images.add(imageBack);
+        adapter.notifyDataSetChanged();
     }
+
 
     @Override
     public void showImage(List<ImageBack> list) {
-
+        if (list == null) return;
+        images.clear();
+        images.addAll(list);
+        adapter.notifyDataSetChanged();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -161,5 +207,30 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
             }
         }
 
+    }
+    SelectPopupWindows selectPopupWindows;
+    void showSelectPopWindow() {
+        UIAdjuster.closeKeyBoard(this);
+
+        String[] array = {"是","否"};
+        selectPopupWindows = new SelectPopupWindows(this, array);
+        selectPopupWindows.showAtLocation(findViewById(R.id.bg),
+                Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectPopupWindows.setOnItemClickListener(new SelectPopupWindows.OnItemClickListener() {
+            @Override
+            public void onSelected(int index, String msg) {
+                text_isAccord.setText(msg);
+                if (index==0){
+                    isAccord = 1;
+                }else {
+                    isAccord = 0;
+                }
+            }
+
+            @Override
+            public void onCancel() {
+                selectPopupWindows.dismiss();
+            }
+        });
     }
 }

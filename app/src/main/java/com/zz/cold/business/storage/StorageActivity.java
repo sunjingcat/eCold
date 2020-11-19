@@ -106,6 +106,12 @@ public class StorageActivity extends MyBaseActivity implements OnRefreshListener
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDate();
+    }
+
     @OnClick({R.id.toolbar_subtitle})
     public void onViewClicked(View view) {
         switch (view.getId()) {

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/bg">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -62,6 +63,7 @@
                     android:text="库房编号" />
 
                 <EditText
+                    android:id="@+id/text_warehouseCode"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
@@ -85,6 +87,7 @@
                     android:text="库房名称" />
 
                 <EditText
+                    android:id="@+id/text_warehouseName"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
@@ -108,10 +111,36 @@
                     android:text="温度设备名称" />
 
                 <EditText
+                    android:id="@+id/text_temperatureName"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
                     android:hint="请填写" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textInfoTitleStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="是否符合标准" />
+
+                <TextView
+                    android:id="@+id/text_isAccord"
+                    style="@style/textRightStyle"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical|right"
+                    android:hint="请选择" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

@@ -9,17 +9,14 @@ import com.zz.lib.core.ui.mvp.BaseView;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.MultipartBody;
+
 public class Contract {
     public interface IsetStorageAddPresenter extends BasePresenter {
         void submitData(Map<String, Object> map);
         void getData(String id);
 
-        void getBusinessType(Map<String, Object> map);
-        void getBusiness2Type(Map<String, Object> map);
-        void getStorageType(Map<String, Object> map);
-
-        void postImage(int position,String files);
-        void uploadStorageImgs(String id,String files);
+        void postImage(String localPath,List<MultipartBody.Part> imgs);
 
         void getImage(String type,String modelId);
     }
@@ -27,14 +24,8 @@ public class Contract {
     public interface IGetStorageAddView extends BaseView {
         void showStorageInfo(StorageBean data);
 
-        void showSubmitResult(String id);
-
         void showResult();
-        void showPostImage(int position,String id);
-//
-//        void showBusinessType(List<BusinessType> list);
-//        void showBusiness2Type(List<BusinessType> list);
-//        void showStorageType(List<BusinessType> list);
+        void showPostImage(String localPath,ImageBack imageBack);
 
         void showImage(List<ImageBack> list);
 

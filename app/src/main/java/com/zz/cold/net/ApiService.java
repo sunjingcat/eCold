@@ -102,8 +102,15 @@ public interface ApiService {
     @DELETE("/app/v1/coldchain/coldstorage/{id}")
     Observable<JsonT> removeQualificationInfo(@Path("id")String id);
 
-    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath")
+    @GET("/app/v1/coldchain/warehouse/list")
     Observable<JsonT<List<StorageBean>>> getStorageList(@QueryMap Map<String, Object> params);
+
+    @POST("/app/v1/coldchain/warehouse/addWarehouseInfo")
+    Observable<JsonT> postStorageInfo(@QueryMap Map<String, Object> params);
+
+    @PUT("/app/v1/coldchain/warehouse/editWarehouseInfo")
+    Observable<JsonT> editStorageInfo(@QueryMap Map<String, Object> params);
+
 
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
     Observable<JsonT<StorageBean>> getStorageInfo( @Path("id")String id);

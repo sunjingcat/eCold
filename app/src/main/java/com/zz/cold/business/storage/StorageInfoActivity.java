@@ -192,8 +192,12 @@ public class StorageInfoActivity extends MyBaseActivity {
                     equipmentBeans.add(equipmentBean);
                     equipmentAdapter.notifyDataSetChanged();
                     break;
+                default:
+                    getData(id);
+                    break;
             }
         }
 
     }
+
 }
