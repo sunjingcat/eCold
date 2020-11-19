@@ -194,7 +194,6 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
         params.put("password",getText(et_password));
         params.put("coldstorageType1",coldstorageType1);
         params.put("coldstorageType2",coldstorageType2);
-
         params.put("address",getText(etLocation));
         params.put("latitude",lat);
         params.put("longitude",lon);
@@ -333,8 +332,8 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
         for (int i = 0; i < coldStorageTypes.size(); i++) {
             String dictValue = coldStorageTypes.get(i).getDictValue();
             if (dictValue.contains(".")) {
-                String[] split = dictValue.split(".");
-                if (split[0].equals(type)){
+                String[] split = dictValue.split("\\.");
+                if (split.length==2&&split[0].equals(type)){
                     list.add(coldStorageTypes.get(i).getDictLabel());
                     list1.add(coldStorageTypes.get(i).getDictValue());
                 }
@@ -349,7 +348,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
         selectPopupWindows2.setOnItemClickListener(new SelectPopupWindows.OnItemClickListener() {
             @Override
             public void onSelected(int index, String msg) {
-                et_coldstorageType.append(msg);
+                et_coldstorageType.append("\n"+msg);
                 coldstorageType1 = values[index];
             }
 
