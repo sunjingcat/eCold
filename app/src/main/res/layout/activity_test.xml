@@ -6,20 +6,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".TestActivity">
+
     <ImageView
         android:id="@+id/iv"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:scaleType="center"/>
+        android:scaleType="center" />
+
     <Button
         android:id="@+id/bt_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="normal"/>
-  <Button
+        android:text="normal" />
+
+    <Button
         android:id="@+id/bt_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="new page"/>
+        android:text="new page" />
+
+    <Button
+        android:id="@+id/bt_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="原生" />
 
 </LinearLayout>
