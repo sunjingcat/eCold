@@ -64,6 +64,7 @@
                     android:textColor="@color/colorTextBlack33" />
 
                 <EditText
+                    android:id="@+id/text_equipmentName"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
@@ -89,6 +90,7 @@
                     android:textColor="@color/colorTextBlack33" />
 
                 <EditText
+                    android:id="@+id/text_equipmentRemark"
                     style="@style/textRightStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

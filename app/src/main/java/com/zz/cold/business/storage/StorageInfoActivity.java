@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,6 +60,17 @@ public class StorageInfoActivity extends MyBaseActivity {
     RecyclerView rv;
     StorageBean storageBean;
     String id;
+    @BindView(R.id.text_warehouseCode)
+    TextView text_warehouseCode;
+
+    @BindView(R.id.text_warehouseName)
+    TextView text_warehouseName;
+
+    @BindView(R.id.text_temperatureName)
+    TextView text_temperatureName;
+
+    @BindView(R.id.text_isAccord)
+    TextView text_isAccord;
     private CustomDialog customDialog;
 
     @Override
@@ -105,7 +118,7 @@ public class StorageInfoActivity extends MyBaseActivity {
             case R.id.toolbar_subtitle:
                 if (storageBean == null) return;
                 Intent intent = new Intent();
-                intent.setClass(StorageInfoActivity.this, AddQualificationActivity.class);
+                intent.setClass(StorageInfoActivity.this, AddStorageActivity.class);
                 intent.putExtra("id", storageBean.getId());
                 startActivity(intent);
                 break;
@@ -131,7 +144,7 @@ public class StorageInfoActivity extends MyBaseActivity {
                 break;
             case R.id.tv_equipment_add:
                 if (storageBean == null) return;
-                startActivityForResult(new Intent().setClass(StorageInfoActivity.this, AddEquipmentActivity.class).putExtra("id", storageBean.getId()), 2001);
+                startActivityForResult(new Intent().setClass(StorageInfoActivity.this, AddEquipmentActivity.class).putExtra("warehouseId", storageBean.getId()), 2001);
                 break;
         }
     }
@@ -145,8 +158,16 @@ public class StorageInfoActivity extends MyBaseActivity {
     }
 
     public void showResult(StorageBean data) {
-
-
+        storageBean = data;
+        text_warehouseCode.setText(data.getWarehouseCode()+"");
+        text_warehouseName.setText(data.getWarehouseName()+"");
+        text_temperatureName.setText(data.getTemperatureName()+"");
+        text_isAccord.setText(data.getIsAccord()==0?"否":"是");
+        if (data.getEquipmentList()!=null){
+            equipmentBeans.clear();
+            equipmentBeans.addAll(data.getEquipmentList());
+            equipmentAdapter.notifyDataSetChanged();
+        }
     }
 
     void getData(String id) {
@@ -185,13 +206,11 @@ public class StorageInfoActivity extends MyBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {
             switch (requestCode) {
-                case 2001:
-                    String name = data.getStringExtra("name");
-                    EquipmentBean equipmentBean = new EquipmentBean();
-                    equipmentBean.setId(name);
-                    equipmentBeans.add(equipmentBean);
-                    equipmentAdapter.notifyDataSetChanged();
-                    break;
+//                case 2001:
+//                    EquipmentBean equipmentBean = data.getParcelableExtra("equipment");
+//                    equipmentBeans.add(equipmentBean);
+//                    equipmentAdapter.notifyDataSetChanged();
+//                    break;
                 default:
                     getData(id);
                     break;

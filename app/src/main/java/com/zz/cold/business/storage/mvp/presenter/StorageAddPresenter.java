@@ -1,6 +1,8 @@
 package com.zz.cold.business.storage.mvp.presenter;
 
 
+import android.text.TextUtils;
+
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.StorageBean;
 import com.zz.cold.business.storage.mvp.Contract;
@@ -83,8 +85,8 @@ public class StorageAddPresenter extends MyBasePresenterImpl<Contract.IGetStorag
     }
 
     @Override
-    public void submitData(Map<String, Object> map) {
-        if (map.containsKey("id")) {
+    public void submitData(StorageBean map) {
+        if (!TextUtils.isEmpty(map.getId())) {
             RxNetUtils.request(getApi(ApiService.class).editStorageInfo(map), new RequestObserver<JsonT>(this) {
                 @Override
                 protected void onSuccess(JsonT jsonT) {

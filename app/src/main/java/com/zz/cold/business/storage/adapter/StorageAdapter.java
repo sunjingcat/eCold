@@ -1,13 +1,11 @@
 package com.zz.cold.business.storage.adapter;
 
-import android.view.View;
-import android.widget.ImageView;
-
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.zz.cold.R;
 import com.zz.cold.bean.StorageBean;
 
 
@@ -24,6 +22,7 @@ public class StorageAdapter extends BaseQuickAdapter<StorageBean, BaseViewHolder
 
     @Override
     protected void convert(BaseViewHolder holder, final StorageBean item) {
+        holder.setText(R.id.item_title,item.getWarehouseName());
 
     }
 }

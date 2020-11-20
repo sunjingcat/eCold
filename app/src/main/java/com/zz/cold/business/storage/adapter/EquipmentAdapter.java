@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.zz.cold.R;
 import com.zz.cold.bean.EquipmentBean;
 import com.zz.cold.bean.StorageBean;
 
@@ -21,6 +22,7 @@ public class EquipmentAdapter extends BaseQuickAdapter<EquipmentBean, BaseViewHo
 
     @Override
     protected void convert(BaseViewHolder holder, final EquipmentBean item) {
+        holder.setText(R.id.item_title,item.getEquipmentName()+"");
 
     }
 }

@@ -4,13 +4,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.donkingliang.imageselector.utils.ImageSelector;
+import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
@@ -23,14 +26,20 @@ import com.zz.cold.business.storage.adapter.EquipmentAdapter;
 import com.zz.cold.business.storage.mvp.Contract;
 import com.zz.cold.business.storage.mvp.presenter.EquipmentAddPresenter;
 import com.zz.cold.business.storage.mvp.presenter.StorageAddPresenter;
+import com.zz.cold.utils.PostUtils;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 /**
  * 贮存设备edit
@@ -43,8 +52,13 @@ public class AddEquipmentActivity extends MyBaseActivity<Contract.IsetEquipmentA
     ImageDeleteItemAdapter adapter;
     @BindView(R.id.rv_image)
     RecyclerView rvImages;
-    StorageBean storageBean;
-    String id;
+
+    String warehouseId;
+
+    @BindView(R.id.text_equipmentName)
+    EditText text_equipmentName;
+    @BindView(R.id.text_equipmentRemark)
+    EditText text_equipmentRemark;
 
     @Override
     protected int getContentView() {
@@ -60,15 +74,11 @@ public class AddEquipmentActivity extends MyBaseActivity<Contract.IsetEquipmentA
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        rvImages.setLayoutManager(new GridLayoutManager(this,3));
+        rvImages.setLayoutManager(new GridLayoutManager(this, 3));
         adapter = new ImageDeleteItemAdapter(this, images);
         rvImages.setAdapter(adapter);
+        warehouseId = getIntent().getStringExtra("warehouseId");
 
-
-        id = getIntent().getStringExtra("id");
-        if (!TextUtils.isEmpty(id)) {
-            mPresenter.getData(id);
-        }
         adapter.setOnclick(new ImageDeleteItemAdapter.Onclick() {
             @Override
             public void onclickAdd(View v, int option) {
@@ -95,18 +105,37 @@ public class AddEquipmentActivity extends MyBaseActivity<Contract.IsetEquipmentA
             }
         });
     }
+
     @OnClick({R.id.toolbar_subtitle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
-                Intent intent = new Intent();
-                intent.putExtra("name", "storageBean.getId()");
-                setResult(RESULT_OK,intent);
-                finish();
+                if (TextUtils.isEmpty(warehouseId)) {
+                    setResult();
+                } else {
+                    postData();
+                }
+
                 break;
 
         }
     }
+
+    void setResult() {
+        EquipmentBean equipmentBean = new EquipmentBean(getText(text_equipmentName), getText(text_equipmentRemark), PostUtils.getImageIds(images));
+        setResult(RESULT_OK, new Intent().putExtra("equipment", equipmentBean));
+        finish();
+    }
+
+    void postData() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("equipmentName", getText(text_equipmentName));
+        params.put("equipmentRemark", getText(text_equipmentRemark));
+        params.put("enclosureIds", PostUtils.getImageIds(images));
+        params.put("warehouseId", warehouseId);
+        mPresenter.submitData(params);
+    }
+
     @Override
     protected void initToolBar() {
         ToolBarUtils.getInstance().setNavigation(toolbar);
@@ -118,23 +147,64 @@ public class AddEquipmentActivity extends MyBaseActivity<Contract.IsetEquipmentA
 
     }
 
-    @Override
-    public void showSubmitResult(String id) {
-
-    }
 
     @Override
     public void showResult() {
+        setResult();
 
     }
 
     @Override
-    public void showPostImage(int position, String id) {
-
+    public void showPostImage(String localPath, ImageBack imageBack) {
+        if (imageBack == null) return;
+        imageBack.setPath(localPath);
+        images.add(imageBack);
+        adapter.notifyDataSetChanged();
     }
+
 
     @Override
     public void showImage(List<ImageBack> list) {
+        if (list == null) return;
+        images.clear();
+        images.addAll(list);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null) {
+            switch (requestCode) {
+                case 1101:
+                    ArrayList<String> selectImages = data.getStringArrayListExtra(
+                            ImageSelectorUtils.SELECT_RESULT);
+                    for (String path : selectImages) {
+                        Luban.with(this)
+                                .load(path)
+                                .ignoreBy(100)
+                                .setCompressListener(new OnCompressListener() {
+                                    @Override
+                                    public void onStart() {
+                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                                    }
+
+                                    @Override
+                                    public void onSuccess(File file) {
+
+                                        mPresenter.postImage(file.getPath(), getImageBody(file.getPath()));
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        // TODO 当压缩过程出现问题时调用
+                                    }
+                                }).launch();
+
+                    }
+                    break;
+            }
+        }
 
     }
 }

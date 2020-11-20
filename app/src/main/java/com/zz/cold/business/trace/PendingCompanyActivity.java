@@ -51,18 +51,14 @@ public class PendingCompanyActivity extends MyBaseActivity implements OnRefreshL
     RecyclerView rv;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
-
     private PendingAdapter adapter;
     List<PendingCompanyBean> mlist = new ArrayList<>();
     private int pagenum = 1;
     private int pagesize = 20;
-
     @Override
     protected int getContentView() {
         return R.layout.activity_pending_company;
-
     }
-
     @Override
     protected void initView() {
         ButterKnife.bind(this);
@@ -80,9 +76,7 @@ public class PendingCompanyActivity extends MyBaseActivity implements OnRefreshL
                 startActivity(intent);
             }
         });
-
     }
-
     @OnClick({R.id.toolbar_subtitle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -91,7 +85,6 @@ public class PendingCompanyActivity extends MyBaseActivity implements OnRefreshL
                 break;
         }
     }
-
     @Override
     protected void onResume() {
         super.onResume();

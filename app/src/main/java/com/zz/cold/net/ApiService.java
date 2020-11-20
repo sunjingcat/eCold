@@ -16,15 +16,18 @@ import com.zz.cold.bean.UserInfo;
 import com.zz.cold.bean.Version;
 import com.zz.cold.bean.WarehouseBean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -109,17 +112,28 @@ public interface ApiService {
     @POST("/app/v1/coldchain/warehouse/addWarehouseInfo")
     Observable<JsonT> postStorageInfo(@QueryMap Map<String, Object> params);
 
+    @POST("/app/v1/coldchain/equipment/addEquipmentInfo")
+    Observable<JsonT> postEquipmentInfo(@QueryMap Map<String, Object> params);
+
+    @POST("/app/v1/coldchain/equipment/editEquipmentInfo")
+    Observable<JsonT> editEquipmentInfo(@QueryMap Map<String, Object> params);
+
+    @Headers("Content-Type: application/json")
+    @POST("/app/v1/coldchain/warehouse/addWarehouseInfo")
+    Observable<JsonT> postStorageInfo(@Body StorageBean requestBody);
+
+    @Headers("Content-Type: application/json")
     @PUT("/app/v1/coldchain/warehouse/editWarehouseInfo")
-    Observable<JsonT> editStorageInfo(@QueryMap Map<String, Object> params);
+    Observable<JsonT> editStorageInfo(@Body StorageBean requestBody);
 
 
-    @GET("/app/v1/coldchain/warehouse/editWarehouseInfo/{id}")
+    @GET("/app/v1/coldchain/warehouse/{id}")
     Observable<JsonT<StorageBean>> getStorageInfo(@Path("id") String id);
 
-    @DELETE("/app/v1/coldchain/warehouse/editWarehouseInfo{id}")
+    @DELETE("/app/v1/coldchain/warehouse/removeWarehouseInfo/{id}")
     Observable<JsonT> removeStorageInfo(@Path("id") String id);
 
-    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
+    @GET("/app/v1/coldchain/equipment/{id}")
     Observable<JsonT<EquipmentBean>> getEquipmentInfo(@Path("id") String id);
 
     @GET("/app/v1/coldchain/coldchainColdstorageDaily/list")

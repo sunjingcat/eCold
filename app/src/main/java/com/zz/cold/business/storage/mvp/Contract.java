@@ -13,7 +13,7 @@ import okhttp3.MultipartBody;
 
 public class Contract {
     public interface IsetStorageAddPresenter extends BasePresenter {
-        void submitData(Map<String, Object> map);
+        void submitData(StorageBean map);
         void getData(String id);
 
         void postImage(String localPath,List<MultipartBody.Part> imgs);
@@ -35,8 +35,7 @@ public class Contract {
         void submitData(Map<String, Object> map);
         void getData(String id);
 
-        void postImage(int position,String files);
-        void uploadStorageImgs(String id,String files);
+        void postImage(String localPath,List<MultipartBody.Part> imgs);
 
         void getImage(String type,String modelId);
     }
@@ -44,10 +43,8 @@ public class Contract {
     public interface IGetEquipmentAddView extends BaseView {
         void showEquipmentInfo(EquipmentBean data);
 
-        void showSubmitResult(String id);
-
         void showResult();
-        void showPostImage(int position,String id);
+        void showPostImage(String localPath,ImageBack imageBack);
 
 
         void showImage(List<ImageBack> list);
