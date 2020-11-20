@@ -31,14 +31,21 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:resizeableActivity="true"
-        android:roundIcon="@mipmap/logo"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".business.inspenction.XCHZFActivity"></activity>
+        <activity android:name=".Test2Activity"></activity>
+        <activity android:name=".TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".business.mine.PasswordActivity" />
         <activity android:name=".business.mine.ChangeCodeActivity" />
         <activity android:name=".business.mine.AboutActivity" />
@@ -50,13 +57,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".business.mine.MineActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".StartpageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".StartpageActivity"></activity>
         <activity android:name="com.donkingliang.imageselector.ImageSelectorActivity" />
         <activity
             android:name="com.donkingliang.imageselector.PreviewActivity"
@@ -150,27 +151,6 @@
             android:name=".CaptureActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CaptureTheme" />
-        <activity android:name=".business.company.CompanyListActivity" />
-        <activity android:name=".business.company.AddCompanyActivity" />
-        <activity android:name=".business.company.BusinessProjectActivity" />
-        <activity android:name=".business.company.CompanyInfoActivity" />
-        <activity android:name=".business.company.PeopleActivity" />
-        <activity android:name=".business.inspenction.SuperviseActivity" />
-        <activity
-            android:name=".business.inspenction.InfoActivity"
-            android:theme="@style/ActivityDialogTheme" />
-        <activity android:name=".business.inspenction.SuperviseResultActivity" />
-        <activity android:name=".business.record.CheckListActivity" />
-        <activity android:name=".business.company.SearchCompanyActivity" />
-        <activity android:name=".business.inspenction.SignActivity"/>
-        <activity android:name=".business.risk.RiskSuperviseActivity" />
-        <activity android:name=".business.inspenction.SuperviseSignActivity" />
-        <activity android:name=".business.inspenction.SuperviseInfoActivity" />
-        <activity android:name=".business.risk.RiskSuperviseInfoActivity" />
-        <activity android:name=".business.company.ShowLocationActivity" />
-        <activity android:name=".business.company.SelectLocationActivity" />
-        <activity android:name=".business.record.ShowDocActivity" />
-        <activity android:name=".business.record.SelectPrintActivity" />
     </application>
 
 </manifest>
