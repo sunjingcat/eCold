@@ -76,7 +76,7 @@ public class PendingCompanyActivity extends MyBaseActivity implements OnRefreshL
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
                 intent.setClass(PendingCompanyActivity.this, PendingGoodsActivity.class);
-                intent.putExtra("id", mlist.get(position).getId());
+                intent.putExtra("coldstorageId", mlist.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -90,6 +90,12 @@ public class PendingCompanyActivity extends MyBaseActivity implements OnRefreshL
 
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDate();
     }
 
     @Override

@@ -110,13 +110,19 @@ public class DailyActivity extends MyBaseActivity implements OnRefreshListener, 
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDate();
+    }
+
     @OnClick({R.id.toolbar_subtitle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
 
                 Intent intent = new Intent();
-                intent.setClass(DailyActivity.this, AddStorageActivity.class);
+                intent.setClass(DailyActivity.this, AddDailyActivity.class);
                 startActivity(intent);
                 break;
         }

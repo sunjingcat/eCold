@@ -56,6 +56,7 @@ public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshLis
     List<PendingCompanyBean> mlist = new ArrayList<>();
     private int pagenum = 1;
     private int pagesize = 20;
+    private String coldstorageId = "";
 
     @Override
     protected int getContentView() {
@@ -71,6 +72,7 @@ public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshLis
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
+        coldstorageId = getIntent().getStringExtra("coldstorageId");
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
@@ -128,8 +130,9 @@ public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshLis
         Map<String, Object> map = new HashMap<>();
         map.put("pageNum", pagenum);
         map.put("pageSize", pagesize);
+        map.put("coldstorageId", coldstorageId);
 
-        RxNetUtils.request(getApi(ApiService.class).getPendingList(map), new RequestObserver<JsonT<List<PendingCompanyBean>>>() {
+        RxNetUtils.request(getApi(ApiService.class).getPendingGoodsList(map), new RequestObserver<JsonT<List<PendingCompanyBean>>>() {
             @Override
             protected void onSuccess(JsonT<List<PendingCompanyBean>> jsonT) {
                 showResult(jsonT.getData());

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/bg"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -59,6 +60,7 @@
                     android:text="日期" />
 
                 <TextView
+                    android:id="@+id/text_reportTime"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/image_arrow"
@@ -123,7 +125,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginTop="1dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -137,6 +139,7 @@
                     android:text="定期抽检" />
 
                 <TextView
+                    android:id="@+id/text_isRegularCheck"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/image_arrow"
@@ -145,6 +148,32 @@
                     android:hint="请选择" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_regularCheckRemark"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:visibility="gone"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textInfoTitleStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="定期检查备注" />
+
+                <EditText
+                    android:id="@+id/text_regularCheckRemark"
+                    style="@style/textRightStyle"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical|right"
+                    android:hint="请选择" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -163,15 +192,18 @@
                     android:text="违禁货品" />
 
                 <TextView
+                    android:id="@+id/text_isProhibitedFood"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/image_arrow"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical|right"
-                    android:hint="请选择" />
+                    android:hint="请输入" />
             </LinearLayout>
 
+
             <LinearLayout
+                android:id="@+id/ll_prohibitedFoodRemark"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="1dp"
@@ -184,87 +216,16 @@
                     style="@style/textInfoTitleStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="联系电话" />
+                    android:text="违禁食品备注" />
 
                 <EditText
-                    style="@style/textRightStyle"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical|right"
-                    android:hint="请填写" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    style="@style/textInfoTitleStyle"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="冷库种类" />
-
-                <TextView
+                    android:id="@+id/text_prohibitedFoodRemark"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/image_arrow"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical|right"
-                    android:hint="请选择" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="1dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    style="@style/textInfoTitleStyle"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="使用者类型" />
-
-                <TextView
-                    style="@style/textRightStyle"
-                    android:layout_height="match_parent"
-                    android:drawableRight="@drawable/image_arrow"
-                    android:drawablePadding="5dp"
-                    android:gravity="center_vertical|right"
-                    android:hint="请选择" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
-
-                <TextView
-                    style="@style/textInfoTitleStyle"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="地址" />
-
-                <TextView
-                    style="@style/textRightStyle"
-                    android:layout_height="match_parent"
-                    android:drawableRight="@drawable/image_arrow"
-                    android:drawablePadding="5dp"
-                    android:gravity="center_vertical|right"
-                    android:hint="请选择" />
+                    android:hint="请输入" />
             </LinearLayout>
 
 
