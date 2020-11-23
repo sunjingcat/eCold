@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.business.login.LoginActivity;
+import com.zz.cold.business.trace.TraceActivity;
 import com.zz.lib.commonlib.utils.CacheUtility;
 import com.zz.lib.core.ui.mvp.BasePresenter;
 
@@ -40,12 +41,14 @@ public class StartpageActivity extends MyBaseActivity implements View.OnClickLis
                 skip.setText("跳过" + "0s");
 //                CacheUtility.saveToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1aWQiOiIyIiwiaXNfZmlyc3RfbG9naW4iOiJmYWxzZSIsImJ1aWxkaW5nX2N1cnJlbnRfY29uc3RydWN0aW9uX3NpdGVfbmFtZSI6IuWkqeeJqeacquadpeWfjiIsImJ1aWxkaW5nX3VzZXJfdHlwZSI6IjEiLCJzY29wZSI6ImJ1aWxkaW5ncyIsImJ1aWxkaW5nX2N1cnJlbnRfY29uc3RydWN0aW9uX3NpdGVfY29kZSI6IjIwMTkwMTI0MDEiLCJ1dWlkIjoiMTczNTcyMDlhZWFhNDkxMWIzMDJhZWE2ZjIyODAyNDkifQ.hpLEIw0dX2gdyhXnA7qS5Jbjjc3Eo1ta50k8B1tEIEfLofjG_9hMGVNiH7eRnu02rJ4H6TuDgSEBP5YOyYWZ_w");
 //                CacheUtility.spSave(CacheUtility.KEY_PROGRAM_CODE,"2019012401");
-                String token = CacheUtility.getToken();
                 if (TextUtils.isEmpty(CacheUtility.getToken())) {
                     startActivity(new Intent(StartpageActivity.this, LoginActivity.class));
                 } else {
-
-                    startActivity(new Intent(StartpageActivity.this, MainActivity.class));
+                    if (CacheUtility.getRole()==1) {
+                        startActivity(new Intent(StartpageActivity.this, MainActivity.class));
+                    }else {
+                        startActivity(new Intent(StartpageActivity.this, TraceActivity.class));
+                    }
 
                 }
 
@@ -80,8 +83,12 @@ public class StartpageActivity extends MyBaseActivity implements View.OnClickLis
                 if (TextUtils.isEmpty(CacheUtility.getToken())) {
                     startActivity(new Intent(StartpageActivity.this, LoginActivity.class));
                 } else {
+                    if (CacheUtility.getRole()==1) {
+                        startActivity(new Intent(StartpageActivity.this, MainActivity.class));
+                    }else {
+                        startActivity(new Intent(StartpageActivity.this, TraceActivity.class));
+                    }
 
-                    startActivity(new Intent(StartpageActivity.this, MainActivity.class));
 
                 }
                 if (timer != null) {

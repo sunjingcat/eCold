@@ -42,7 +42,7 @@
             android:gravity="center"
             android:paddingVertical="5dp"
             android:singleLine="true"
-            android:text="待"
+
             android:textColor="@color/white"
             android:textSize="16dp" />
     </androidx.appcompat.widget.Toolbar>
@@ -53,12 +53,16 @@
 
         <include layout="@layout/refresh_layout" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:src="@mipmap/ic_launcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin" />
+        <Button
+            android:id="@+id/bt_ru"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:elevation="@dimen/dp_10"
+            android:background="@drawable/icon_ru" />
+
     </RelativeLayout>
 </LinearLayout>

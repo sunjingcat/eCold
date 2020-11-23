@@ -89,6 +89,7 @@ public class MineActivity extends MyBaseActivity<Contract.IsetMineInfoPresenter>
     @Override
     public void showIntent() {
         CacheUtility.saveToken("");
+        CacheUtility.saveRole(0);
         CacheUtility.clear();
 //        startActivity(new Intent(MineActivity.this, LoginActivity.class));
         EventBus.getDefault().post(new OutDateEvent());

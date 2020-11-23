@@ -102,6 +102,7 @@ public class PasswordActivity extends MyBaseActivity {
             protected void onSuccess(JsonT data) {
                 if (data.isSuccess()) {
                     CacheUtility.saveToken("");
+                    CacheUtility.saveRole(0);
                     CacheUtility.clear();
                     startActivity(new Intent(PasswordActivity.this, LoginActivity.class));
                     EventBus.getDefault().post(new OutDateEvent());

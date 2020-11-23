@@ -106,6 +106,7 @@ public abstract class MyBaseActivity<P extends com.zz.lib.core.ui.mvp.BasePresen
     public void onOutDate(OutDateEvent event) {
         onOutDatePreExcuted();
         CacheUtility.saveToken("");
+        CacheUtility.saveRole(0);
         Intent intent = new Intent();
         intent.setClass(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |

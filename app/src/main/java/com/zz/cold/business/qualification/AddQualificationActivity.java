@@ -64,8 +64,8 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     TextView etLocation;
     @BindView(R.id.et_coldstorageType)
     TextView et_coldstorageType;
-    String coldstorageType1;
-    String coldstorageType2;
+    String coldstorageType1="";
+    String coldstorageType2="";
 
     @BindView(R.id.et_operatorName)
     EditText etOperatorName;
@@ -214,7 +214,9 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
         et_contact.setText(data.getContact()+"");
         et_contactInformation.setText(data.getContactInformation()+"");
         et_loginName.setText(data.getLoginName()+"");
-        et_password.setText(data.getPassword()+"");
+        et_loginName.setEnabled(false);
+        et_password.setText("******");
+        et_password.setEnabled(false);
         etLocation.setText(data.getAddress()+"");
         et_coldstorageType.setText(data.getColdstorageType1Text()+"-"+data.getColdstorageType2Text());
         coldstorageType1 = data.getColdstorageType1();
@@ -349,7 +351,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
             @Override
             public void onSelected(int index, String msg) {
                 et_coldstorageType.append("\n"+msg);
-                coldstorageType1 = values[index];
+                coldstorageType2 = values[index];
             }
 
             @Override

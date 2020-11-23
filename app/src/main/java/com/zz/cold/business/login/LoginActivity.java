@@ -13,10 +13,13 @@ import com.igexin.sdk.PushManager;
 import com.zz.cold.BuildConfig;
 import com.zz.cold.MainActivity;
 import com.zz.cold.R;
+import com.zz.cold.StartpageActivity;
 import com.zz.cold.business.login.mvp.presenter.LoginPresenter;
 import com.zz.cold.base.MyBaseActivity;
 
 import com.zz.cold.business.login.mvp.Contract;
+import com.zz.cold.business.trace.TraceActivity;
+import com.zz.lib.commonlib.utils.CacheUtility;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +60,7 @@ public class LoginActivity extends MyBaseActivity<Contract.IsetLoginPresenter> i
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             logNumber.setText("apptest");
             logPassword.setText("123456");
         }
@@ -115,8 +118,12 @@ public class LoginActivity extends MyBaseActivity<Contract.IsetLoginPresenter> i
         PushManager.getInstance().turnOnPush(this);
 
         Intent intent = new Intent();
+        if (CacheUtility.getRole() == 1) {
+            intent.setClass(this, MainActivity.class);
+        } else {
+            intent.setClass(this, TraceActivity.class);
+        }
 
-        intent.setClass(this, MainActivity.class);
 
         startActivity(intent);
         finish();

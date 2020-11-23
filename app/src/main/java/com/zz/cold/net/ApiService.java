@@ -167,6 +167,7 @@ public interface ApiService {
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
     Observable<JsonT<TraceBean>> getTraceInfo(@Path("id") String id);
 
-
+    @POST("/app/v1/coldchain/coldchainGoodsAccount")
+    Observable<JsonT> postGoodsAccount(@QueryMap Map<String, Object> params);
 }
 

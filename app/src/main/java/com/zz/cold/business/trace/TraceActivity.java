@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,11 +19,14 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.TraceBean;
+import com.zz.cold.business.mine.MineActivity;
 import com.zz.cold.business.trace.adapter.TraceAdapter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;
 import com.zz.cold.net.RxNetUtils;
+import com.zz.cold.utils.TabUtils;
+import com.zz.lib.commonlib.utils.CacheUtility;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
 import com.zz.lib.commonlib.widget.ClearEditText;
 import com.zz.lib.core.ui.mvp.BasePresenter;
@@ -45,7 +49,7 @@ import butterknife.OnClick;
 import static com.zz.cold.net.RxNetUtils.getApi;
 
 /**
- *追溯
+ * 追溯
  */
 public class TraceActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
     @BindView(R.id.toolbar)
@@ -58,6 +62,11 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
     RecyclerView rv;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.toolbar_subtitle)
+    TextView toolbar_subtitle;
+    @BindView(R.id.bt_ru)
+    Button bt_ru;
+
 
     private TraceAdapter adapter;
     List<TraceBean> mlist = new ArrayList<>();
@@ -70,6 +79,7 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
         return R.layout.activity_trace;
 
     }
+
     @Override
     public BasePresenter initPresenter() {
         return null;
@@ -88,7 +98,7 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
                 intent.setClass(TraceActivity.this, GoodsActivity.class);
-                intent.putExtra("id",mlist.get(position).getId());
+                intent.putExtra("id", mlist.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -102,6 +112,13 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
                 return true;
             }
         });
+        if (CacheUtility.getRole() == 2) {
+            TabUtils.setDrawableLeft(this,toolbar_subtitle,R.drawable.icon_user_main);
+            toolbar_subtitle.setText("");
+        }else {
+            toolbar_subtitle.setText("待");
+            TabUtils.setDrawableLeft(this,toolbar_subtitle,0);
+        }
     }
 
     @Override
@@ -114,17 +131,32 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
-
-                Intent intent = new Intent();
-                intent.setClass(TraceActivity.this, PendingCompanyActivity.class);
-                startActivity(intent);
+                if (CacheUtility.getRole() == 2) {
+                    Intent intent = new Intent();
+                    intent.setClass(TraceActivity.this, MineActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent();
+                    intent.setClass(TraceActivity.this, PendingCompanyActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.bt_ru:
+                Intent intent1 = new Intent();
+                intent1.setClass(TraceActivity.this, PendingCompanyActivity.class);
+                startActivity(intent1);
                 break;
         }
     }
+
     @Override
     protected void initToolBar() {
-        ToolBarUtils.getInstance().setNavigation(toolbar);
+        if (CacheUtility.getRole()!= 2) {
+            ToolBarUtils.getInstance().setNavigation(toolbar);
+        }
+
     }
+
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         pagenum = 1;
@@ -144,12 +176,14 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
             llNull.setVisibility(View.GONE);
         }
     }
+
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pagenum++;
         getDate();
         refreshLayout.finishLoadMore();
     }
+
     void getDate() {
         Map<String, Object> map = new HashMap<>();
         map.put("pageNum", pagenum);
