@@ -164,7 +164,7 @@ public interface ApiService {
     @GET("/app/v1/coldchain/coldchainGoodsAccount/listByColdstorageId")
     Observable<JsonT<List<PendingCompanyBean>>> getPendingGoodsList(@QueryMap Map<String, Object> params);
 
-    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
+    @GET("/app/v1/coldchain/coldchainGoodsAccount/{id}")
     Observable<JsonT<TraceBean>> getTraceInfo(@Path("id") String id);
 
     @POST("/app/v1/coldchain/coldchainGoodsAccount")

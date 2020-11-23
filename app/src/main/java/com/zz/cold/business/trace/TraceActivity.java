@@ -143,7 +143,7 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
                 break;
             case R.id.bt_ru:
                 Intent intent1 = new Intent();
-                intent1.setClass(TraceActivity.this, PendingCompanyActivity.class);
+                intent1.setClass(TraceActivity.this, PurchaseActivity.class);
                 startActivity(intent1);
                 break;
         }

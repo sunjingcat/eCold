@@ -9,7 +9,7 @@ import com.zz.lib.commonlib.CommonApplication;
 public class CacheUtility {
     private static final String KEY_USERID = "key_userid";
     private static final String KEY_TOKEN = "key_token";
-    private static final String KEY_IndexType = "indexType";
+    private static final String KEY_ROLE = "key_role";
     public static final String KEY_URL = "BASE_URL";
     public static final String KEY_CODE = "key_code";
     private static final String KEY_PHONE = "key_phone";
@@ -80,8 +80,8 @@ public class CacheUtility {
     public static void saveToken(String token) {
         spSave(KEY_TOKEN, token);
     }
-    public static void saveIndexType(int indexType) {
-        spSave(KEY_IndexType, indexType);
+    public static void saveRole(int role) {
+        spSave(KEY_ROLE, role);
     }
     public static void saveURL(String url) {
         spSave(KEY_URL, url);
@@ -106,8 +106,8 @@ public class CacheUtility {
     public static String getToken() {
         return spGetOut( KEY_TOKEN,"");
     }
-    public static int getIndexType() {
-        return spGetOut( KEY_IndexType,0);
+    public static int getRole() {
+        return spGetOut( KEY_ROLE,0);
     }
 
     public static void saveQQ( String qq) {
