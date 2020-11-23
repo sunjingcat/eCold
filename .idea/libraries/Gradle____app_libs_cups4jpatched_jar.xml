@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: ./app/libs/cups4jpatched.jar">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/cups4jpatched.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
