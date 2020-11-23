@@ -31,4 +31,15 @@ public class Contract {
 
     }
 
+    public interface IsetDeliverPresenter extends BasePresenter {
+        void submitData(Map<String, Object> map);
+        void postImage(String localPath,List<MultipartBody.Part> imgs);
+    }
+
+    public interface IGetDeliverView extends BaseView {
+        void showResult();
+        void showPostImage(String localPath,ImageBack imageBack);
+
+    }
+
 }
