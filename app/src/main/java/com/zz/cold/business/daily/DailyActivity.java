@@ -93,7 +93,7 @@ public class DailyActivity extends MyBaseActivity implements OnRefreshListener, 
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(DailyActivity.this, StorageInfoActivity.class);
+                intent.setClass(DailyActivity.this, DailyInfoActivity.class);
                 intent.putExtra("id", mlist.get(position).getId());
                 startActivity(intent);
             }

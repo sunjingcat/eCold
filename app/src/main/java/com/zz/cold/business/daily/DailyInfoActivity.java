@@ -4,6 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -45,14 +48,13 @@ public class DailyInfoActivity extends MyBaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    ArrayList<ImageBack> images = new ArrayList<>();
-    ArrayList<TemperatureBean> amList = new ArrayList<>();
-    ArrayList<TemperatureBean> pmList = new ArrayList<>();
-    ImageItemAdapter adapter;
+
+    ArrayList<DailyBean.Temperature> amList = new ArrayList<>();
+    ArrayList<DailyBean.Temperature> pmList = new ArrayList<>();
+
     TemperatureAdapter amAdapter;
     TemperatureAdapter pmAdapter;
-    @BindView(R.id.rv_image)
-    RecyclerView rvImages;
+
 
     @BindView(R.id.rv_am)
     RecyclerView rvAm;
@@ -61,6 +63,28 @@ public class DailyInfoActivity extends MyBaseActivity {
     RecyclerView rvPm;
     DailyBean dailyBean;
     String id;
+
+
+    @BindView(R.id.text_isRegularCheck)
+    TextView text_isRegularCheck;
+
+    @BindView(R.id.text_isProhibitedFood)
+    TextView text_isProhibitedFood;
+
+
+    @BindView(R.id.text_regularCheckRemark)
+    TextView text_regularCheckRemark;
+
+    @BindView(R.id.ll_regularCheckRemark)
+    LinearLayout ll_regularCheckRemark;
+
+
+    @BindView(R.id.text_prohibitedFoodRemark)
+    TextView text_prohibitedFoodRemark;
+
+    @BindView(R.id.ll_prohibitedFoodRemark)
+    LinearLayout ll_prohibitedFoodRemark;
+
     private CustomDialog customDialog;
 
     @Override
@@ -77,9 +101,6 @@ public class DailyInfoActivity extends MyBaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        rvImages.setLayoutManager(new GridLayoutManager(this,3));
-        adapter = new ImageItemAdapter(R.layout.item_image, images);
-        rvImages.setAdapter(adapter);
 
         rvAm.setLayoutManager(new LinearLayoutManager(this));
         amAdapter = new TemperatureAdapter(R.layout.item_temperature, amList);
@@ -106,7 +127,7 @@ public class DailyInfoActivity extends MyBaseActivity {
             case R.id.toolbar_subtitle:
                 if (dailyBean == null) return;
                 Intent intent = new Intent();
-                intent.setClass(DailyInfoActivity.this, AddQualificationActivity.class);
+                intent.setClass(DailyInfoActivity.this, AddDailyActivity.class);
                 intent.putExtra("id", dailyBean.getId());
                 startActivity(intent);
                 break;
@@ -143,6 +164,21 @@ public class DailyInfoActivity extends MyBaseActivity {
     }
 
     public void showResult(DailyBean data) {
+        amList.clear();
+        amList.addAll(data.getTemperatureAmList());
+        amAdapter.notifyDataSetChanged();
+
+        pmList.clear();
+        pmList.addAll(data.getTemperatureAmList());
+        pmAdapter.notifyDataSetChanged();
+
+        text_isRegularCheck.setText(data.getIsRegularCheck()==1?"是":"否");
+        text_isProhibitedFood.setText(data.getIsProhibitedFood()==1?"是":"否");
+
+        ll_regularCheckRemark.setVisibility(data.getIsRegularCheck()==1?View.VISIBLE:View.GONE);
+        ll_prohibitedFoodRemark.setVisibility(data.getIsProhibitedFood()==1?View.VISIBLE:View.GONE);
+        text_regularCheckRemark.setText(data.getRegularCheckRemark()+"");
+        text_prohibitedFoodRemark.setText(data.getProhibitedFoodRemark()+"");
 
     }
 

@@ -169,10 +169,9 @@
                     android:id="@+id/text_regularCheckRemark"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
-                    android:drawableRight="@drawable/image_arrow"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical|right"
-                    android:hint="请选择" />
+                    android:hint="请输入" />
             </LinearLayout>
 
             <LinearLayout
@@ -222,7 +221,6 @@
                     android:id="@+id/text_prohibitedFoodRemark"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
-                    android:drawableRight="@drawable/image_arrow"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical|right"
                     android:hint="请输入" />

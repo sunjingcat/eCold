@@ -41,7 +41,7 @@ public class TemperatureEditAdapter extends BaseQuickAdapter<TemperatureBean, Ba
         editText.setOnTouchListener(this);
         editText.setOnFocusChangeListener(this);
         editText.setTag(position);
-
+        holder.setText(R.id.item_title,item.getWarehouseName()+"");
         if (selectedEditTextPosition != -1 && position == selectedEditTextPosition) { // 保证每个时刻只有一个EditText能获取到焦点
             editText.requestFocus();
         } else {

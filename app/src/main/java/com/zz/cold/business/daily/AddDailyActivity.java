@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.GsonUtils;
+import com.blankj.utilcode.util.JsonUtils;
 import com.codbking.widget.DatePickDialog;
 import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
@@ -71,13 +73,13 @@ public class AddDailyActivity extends MyBaseActivity<Contract.IsetDailyAddPresen
 
     @BindView(R.id.rv)
     RecyclerView rv;
-    @BindView(R.id.text_reportTime)
-    TextView text_reportTime;
+
     String reportTime = "";
     int isRegularCheck = -1;
     int isProhibitedFood = -1;
     String timeType = "am";
-
+    @BindView(R.id.text_reportTime)
+    TextView text_reportTime;
     @BindView(R.id.text_regularCheckRemark)
     EditText text_regularCheckRemark;
 
@@ -140,7 +142,9 @@ public class AddDailyActivity extends MyBaseActivity<Contract.IsetDailyAddPresen
 
             @Override
             public void onclickDelete(View v, int option) {
-
+                temperatures.get(option).setEnclosureId("");
+                temperatures.get(option).setEnclosureURL("" );
+                temperatureEditAdapter.notifyDataSetChanged();
             }
         });
         mPresenter.getWarehouseData();
@@ -220,7 +224,7 @@ public class AddDailyActivity extends MyBaseActivity<Contract.IsetDailyAddPresen
         warehouseBean.setProhibitedFoodRemark(getText(text_prohibitedFoodRemark));
         warehouseBean.setRegularCheckRemark(getText(text_regularCheckRemark));
         warehouseBean.setTimeType(timeType);
-        warehouseBean.setColdchainWarehouseDailyList(temperatures);
+        warehouseBean.setColdchainWarehouseDailyList(GsonUtils.toJson(temperatures));
 
         mPresenter.submitData(warehouseBean);
     }

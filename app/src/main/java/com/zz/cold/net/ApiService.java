@@ -148,7 +148,7 @@ public interface ApiService {
     @POST("/app/v1/coldchain/coldchainColdstorageDaily")
     Observable<JsonT> postDailyInfo(@Body WarehouseBean requestBody);
 
-    @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
+    @GET("/app/v1/coldchain/coldchainColdstorageDaily/{id}")
     Observable<JsonT<DailyBean>> getDailyInfo(@Path("id") String id);
 
     @GET("/app/v1/coldchain/warehouse/allList")

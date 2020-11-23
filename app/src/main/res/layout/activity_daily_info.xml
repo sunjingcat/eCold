@@ -30,7 +30,8 @@
             android:singleLine="true"
             android:text="编辑"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:visibility="gone"/>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
@@ -122,9 +123,10 @@
                         style="@style/textInfoTitleStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="定期抽检" />
+                        android:text="是否定期抽检" />
 
                     <TextView
+                        android:id="@+id/text_isRegularCheck"
                         style="@style/textRightStyle"
                         tools:text="ssssss" />
                 </LinearLayout>
@@ -146,16 +148,68 @@
                         style="@style/textInfoTitleStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
+                        android:text="定期抽检备注" />
+
+                    <TextView
+                        android:id="@+id/text_regularCheckRemark"
+                        style="@style/textRightStyle"
+                        tools:text="ssssss" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorbg"></View>
+
+                <LinearLayout
+                    android:id="@+id/ll_regularCheckRemark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        style="@style/textInfoTitleStyle"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
                         android:text="违禁食品" />
 
                     <TextView
+                        android:id="@+id/text_isProhibitedFood"
+                        style="@style/textRightStyle"
+                        tools:text="ssssss" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorbg"></View>
+
+                <LinearLayout
+                    android:id="@+id/ll_prohibitedFoodRemark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp">
+
+                    <TextView
+                        style="@style/textInfoTitleStyle"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="违禁食品备注" />
+
+                    <TextView
+                        android:id="@+id/text_prohibitedFoodRemark"
                         style="@style/textRightStyle"
                         tools:text="ssssss" />
                 </LinearLayout>
 
             </LinearLayout>
 
-            <include layout="@layout/layout_images" />
 
             <TextView
                 android:id="@+id/tv_delete"

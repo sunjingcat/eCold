@@ -26,8 +26,9 @@
         android:background="@color/white"
         android:gravity="right|center_vertical"
         android:textColor="#999999"
-        android:textSize="12dp"
-        tools:text="52487963" />
+        android:textSize="14dp"
+        tools:text="52487963"
+        android:hint="请输入"/>
 
     <RelativeLayout
         android:layout_width="80dp"

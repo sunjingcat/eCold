@@ -17,7 +17,7 @@
         android:textSize="15dp"
         tools:text="集中器1" />
 
-    <EditText
+    <TextView
         android:id="@+id/item_content"
         android:layout_width="0dp"
         android:layout_height="40dp"
@@ -26,7 +26,7 @@
         android:background="@color/white"
         android:gravity="right|center_vertical"
         android:textColor="#999999"
-        android:textSize="12dp"
+        android:textSize="14dp"
         tools:text="52487963" />
 
     <RelativeLayout
