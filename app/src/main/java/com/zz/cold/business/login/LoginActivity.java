@@ -65,12 +65,10 @@ public class LoginActivity extends MyBaseActivity<Contract.IsetLoginPresenter> i
             logPassword.setText("123456");
         }
     }
-
     @Override
     protected void initToolBar() {
 
     }
-
     @OnClick({R.id.login_password_show, R.id.login_btn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -114,17 +112,13 @@ public class LoginActivity extends MyBaseActivity<Contract.IsetLoginPresenter> i
     @Override
     public void showIntent() {
         showToast("登录成功");
-
         PushManager.getInstance().turnOnPush(this);
-
         Intent intent = new Intent();
         if (CacheUtility.getRole() == 1) {
             intent.setClass(this, MainActivity.class);
         } else {
             intent.setClass(this, TraceActivity.class);
         }
-
-
         startActivity(intent);
         finish();
     }

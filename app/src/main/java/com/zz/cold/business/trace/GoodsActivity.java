@@ -76,7 +76,6 @@ public class GoodsActivity extends MyBaseActivity {
 
     public void showResult(TraceBean data) {
 
-
     }
 
     void getData(String id) {

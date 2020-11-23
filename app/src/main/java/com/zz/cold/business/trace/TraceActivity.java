@@ -115,9 +115,10 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
         if (CacheUtility.getRole() == 2) {
             TabUtils.setDrawableLeft(this,toolbar_subtitle,R.drawable.icon_user_main);
             toolbar_subtitle.setText("");
+            bt_ru.setVisibility(View.VISIBLE);
         }else {
             toolbar_subtitle.setText("待");
-            TabUtils.setDrawableLeft(this,toolbar_subtitle,0);
+            bt_ru.setVisibility(View.GONE);
         }
     }
 
