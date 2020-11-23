@@ -2,6 +2,7 @@ package com.zz.cold.net;
 
 
 import com.zz.cold.bean.DailyBean;
+import com.zz.cold.bean.DailyPost;
 import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.EquipmentBean;
 import com.zz.cold.bean.ImageBack;

@@ -2,6 +2,7 @@ package com.zz.cold.business.daily.mvp.presenter;
 
 
 import com.zz.cold.bean.DailyBean;
+import com.zz.cold.bean.DailyPost;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.StorageBean;
 import com.zz.cold.bean.TemperatureBean;

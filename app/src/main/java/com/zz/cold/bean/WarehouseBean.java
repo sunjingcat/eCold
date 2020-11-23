@@ -10,9 +10,9 @@ public class WarehouseBean {
     String prohibitedFoodRemark;
     String regularCheckRemark;
     String timeType;
-    String coldchainWarehouseDailyList;
+    List<TemperatureBean> coldchainWarehouseDailyList;
 
-    public void setColdchainWarehouseDailyList(String coldchainWarehouseDailyList) {
+    public void setColdchainWarehouseDailyList(List<TemperatureBean> coldchainWarehouseDailyList) {
         this.coldchainWarehouseDailyList = coldchainWarehouseDailyList;
     }
 

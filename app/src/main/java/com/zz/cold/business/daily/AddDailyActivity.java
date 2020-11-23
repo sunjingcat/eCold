@@ -29,6 +29,7 @@ import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
+import com.zz.cold.bean.DailyPost;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.DailyBean;
 import com.zz.cold.bean.PLocation;
@@ -224,8 +225,7 @@ public class AddDailyActivity extends MyBaseActivity<Contract.IsetDailyAddPresen
         warehouseBean.setProhibitedFoodRemark(getText(text_prohibitedFoodRemark));
         warehouseBean.setRegularCheckRemark(getText(text_regularCheckRemark));
         warehouseBean.setTimeType(timeType);
-        warehouseBean.setColdchainWarehouseDailyList(GsonUtils.toJson(temperatures));
-
+        warehouseBean.setColdchainWarehouseDailyList(temperatures);
         mPresenter.submitData(warehouseBean);
     }
 

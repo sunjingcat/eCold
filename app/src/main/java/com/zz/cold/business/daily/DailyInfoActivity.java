@@ -169,7 +169,7 @@ public class DailyInfoActivity extends MyBaseActivity {
         amAdapter.notifyDataSetChanged();
 
         pmList.clear();
-        pmList.addAll(data.getTemperatureAmList());
+        pmList.addAll(data.getTemperaturePmList());
         pmAdapter.notifyDataSetChanged();
 
         text_isRegularCheck.setText(data.getIsRegularCheck()==1?"是":"否");
