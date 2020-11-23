@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -61,6 +62,8 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
     String id;
     @BindView(R.id.rv)
     RecyclerView rv;
+    @BindView(R.id.ll_equipment_add)
+    LinearLayout ll_equipment_add;
 
     @BindView(R.id.text_warehouseCode)
     EditText text_warehouseCode;
@@ -103,6 +106,8 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
         id = getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(id)) {
             mPresenter.getData(id);
+            rv.setVisibility(View.GONE);
+            ll_equipment_add.setVisibility(View.GONE);
         }
         adapter.setOnclick(new ImageDeleteItemAdapter.Onclick() {
             @Override
@@ -160,11 +165,11 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
         text_warehouseName.setText(data.getWarehouseName() + "");
         text_temperatureName.setText(data.getTemperatureName() + "");
         text_isAccord.setText(data.getIsAccord() == 0 ? "否" : "是");
-        if (data.getEquipmentList() != null) {
-            equipmentBeans.clear();
-            equipmentBeans.addAll(data.getEquipmentList());
-            equipmentAdapter.notifyDataSetChanged();
-        }
+//        if (data.getEquipmentList() != null) {
+//            equipmentBeans.clear();
+//            equipmentBeans.addAll(data.getEquipmentList());
+//            equipmentAdapter.notifyDataSetChanged();
+//        }
     }
 
     void postData() {
@@ -175,12 +180,11 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
         storageBean.setTemperatureName(getText(text_temperatureName));
         storageBean.setIsAccord(isAccord);
         storageBean.setEnclosureIds(PostUtils.getImageIds(images));
-        storageBean.setEquipmentList(equipmentBeans);
         if (!TextUtils.isEmpty(id)) {
             storageBean.setId( id);
+        }else {
+            storageBean.setEquipmentList(equipmentBeans);
         }
-
-
         mPresenter.submitData(storageBean);
     }
 

@@ -87,7 +87,7 @@ public class StorageInfoActivity extends MyBaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        rvImages.setLayoutManager(new GridLayoutManager(this,3));
+        rvImages.setLayoutManager(new GridLayoutManager(this, 3));
         adapter = new ImageItemAdapter(R.layout.item_image, images);
         rvImages.setAdapter(adapter);
 
@@ -159,11 +159,11 @@ public class StorageInfoActivity extends MyBaseActivity {
 
     public void showResult(StorageBean data) {
         storageBean = data;
-        text_warehouseCode.setText(data.getWarehouseCode()+"");
-        text_warehouseName.setText(data.getWarehouseName()+"");
-        text_temperatureName.setText(data.getTemperatureName()+"");
-        text_isAccord.setText(data.getIsAccord()==0?"否":"是");
-        if (data.getEquipmentList()!=null){
+        text_warehouseCode.setText(data.getWarehouseCode() + "");
+        text_warehouseName.setText(data.getWarehouseName() + "");
+        text_temperatureName.setText(data.getTemperatureName() + "");
+        text_isAccord.setText(data.getIsAccord() == 0 ? "否" : "是");
+        if (data.getEquipmentList() != null) {
             equipmentBeans.clear();
             equipmentBeans.addAll(data.getEquipmentList());
             equipmentAdapter.notifyDataSetChanged();

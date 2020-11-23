@@ -3,8 +3,12 @@ package com.zz.cold;
 import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.zz.cold.R;
+import com.zz.cold.bean.MainShowData;
 import com.zz.cold.business.daily.DailyActivity;
 import com.zz.cold.business.qualification.QualificationActivity;
 import com.zz.cold.business.storage.StorageActivity;
@@ -33,6 +37,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -41,6 +46,18 @@ import static com.zz.cold.net.RxNetUtils.getApi;
 public class MainActivity extends MyBaseActivity {
 
     private long mExitTime = 0;
+    @BindView(R.id.tv_employCount)
+    TextView tv_employCount;
+    @BindView(R.id.tv_warehouseCount)
+    TextView tv_warehouseCount;
+    @BindView(R.id.tv_goodsCount)
+    TextView tv_goodsCount;
+    @BindView(R.id.tv_goodsNoNucleicCount)
+    TextView tv_goodsNoNucleicCount;
+    @BindView(R.id.tv_noReportedCount)
+    TextView tv_noReportedCount;
+    @BindView(R.id.tv_goodsImportCount)
+    TextView tv_goodsImportCount;
 
     @Override
     protected int getContentView() {
@@ -57,11 +74,17 @@ public class MainActivity extends MyBaseActivity {
     protected void initView() {
         ButterKnife.bind(this);
         new UpdateManager(this).checkUpdate();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getMainData();
     }
 
     @Override
     protected void initToolBar() {
-
     }
 
     @OnClick({R.id.main_group_1, R.id.main_group_2, R.id.main_group_3, R.id.main_group_4, R.id.toolbar_subtitle})
@@ -109,36 +132,31 @@ public class MainActivity extends MyBaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventSuccessComment(EventBusSimpleInfo event) {
 
-        String info = event.getStringData();
-        if ("putCid".equals(info)) {
-//            putClientId();
-        }
-    }
-
-    public void putClientId() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("cId", CacheUtility.spGetOut("cId", ""));
-        RxNetUtils.request(getApi(ApiService.class).putClientId(map), new RequestObserver<JsonT>(this) {
+    public void getMainData() {
+        RxNetUtils.request(getApi(ApiService.class).getMainData(), new RequestObserver<JsonT<MainShowData>>(this) {
             @Override
-            protected void onSuccess(JsonT login_data) {
-                if (login_data.isSuccess()) {
+            protected void onSuccess(JsonT<MainShowData> jsonT) {
 
+                if (jsonT.isSuccess()) {
+                    MainShowData data = jsonT.getData();
+                    tv_employCount.setText(data.getEmployCount() + "");
+                    tv_goodsCount.setText(data.getGoodsCount() + "");
+                    tv_warehouseCount.setText(data.getWarehouseCount() + "");
+                    tv_goodsImportCount.setText(data.getGoodsImportCount() + "");
+                    tv_goodsNoNucleicCount.setText(data.getGoodsNoNucleicCount() + "");
+                    tv_noReportedCount.setText(data.getNoReportedCount() + "");
                 } else {
 
                 }
             }
 
             @Override
-            protected void onFail2(JsonT userInfoJsonT) {
+            protected void onFail2(JsonT<MainShowData> userInfoJsonT) {
                 super.onFail2(userInfoJsonT);
             }
         }, null);
     }
-
-
 
 
 }

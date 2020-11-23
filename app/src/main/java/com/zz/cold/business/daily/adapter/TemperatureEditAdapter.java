@@ -1,11 +1,13 @@
 package com.zz.cold.business.daily.adapter;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -15,6 +17,8 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.zz.cold.R;
 import com.zz.cold.bean.TemperatureBean;
 import com.zz.cold.bean.WarehouseBean;
+import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
+import com.zz.cold.utils.GlideUtils;
 
 import java.util.List;
 
@@ -22,15 +26,16 @@ import java.util.List;
  * Created by ASUS on 2018/9/26.
  */
 //温度
-public class TemperatureEditAdapter extends BaseQuickAdapter<WarehouseBean, BaseViewHolder> implements View.OnTouchListener, View.OnFocusChangeListener {
+public class TemperatureEditAdapter extends BaseQuickAdapter<TemperatureBean, BaseViewHolder> implements View.OnTouchListener, View.OnFocusChangeListener {
 
     private int selectedEditTextPosition = -1;
-    public TemperatureEditAdapter(@LayoutRes int layoutResId, @Nullable List<WarehouseBean> data) {
+
+    public TemperatureEditAdapter(@LayoutRes int layoutResId, @Nullable List<TemperatureBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder holder, final WarehouseBean item) {
+    protected void convert(BaseViewHolder holder, final TemperatureBean item) {
         EditText editText = holder.getView(R.id.item_content);
         int position = holder.getAdapterPosition();
         editText.setOnTouchListener(this);
@@ -41,6 +46,24 @@ public class TemperatureEditAdapter extends BaseQuickAdapter<WarehouseBean, Base
             editText.requestFocus();
         } else {
             editText.clearFocus();
+        }
+        holder.getView(R.id.image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onclick.onclickAdd(v,holder.getAdapterPosition());
+            }
+        });
+        GlideUtils.loadImage(getContext(), item.getEnclosureURL(), (ImageView) holder.getView(R.id.image));
+        holder.getView(R.id.delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onclick.onclickDelete(v,holder.getAdapterPosition());
+            }
+        });
+        if (TextUtils.isEmpty(item.getEnclosureId())){
+            holder.getView(R.id.delete).setVisibility(View.GONE);
+        }else {
+            holder.getView(R.id.delete).setVisibility(View.VISIBLE);
         }
     }
 
@@ -62,6 +85,7 @@ public class TemperatureEditAdapter extends BaseQuickAdapter<WarehouseBean, Base
             editText.removeTextChangedListener(mTextWatcher);
         }
     }
+
     private TextWatcher mTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -72,8 +96,8 @@ public class TemperatureEditAdapter extends BaseQuickAdapter<WarehouseBean, Base
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (selectedEditTextPosition != -1) {
                 Log.w("MyEditAdapter", "onTextPosiotion " + selectedEditTextPosition);
-                WarehouseBean itemTest = (WarehouseBean) getItem(selectedEditTextPosition);
-                itemTest.setContent(s.toString());
+                TemperatureBean itemTest = (TemperatureBean) getItem(selectedEditTextPosition);
+                itemTest.setTemperatureValue(s.toString());
             }
         }
 
@@ -82,4 +106,12 @@ public class TemperatureEditAdapter extends BaseQuickAdapter<WarehouseBean, Base
 
         }
     };
+    public Onclick onclick;
+    public void setOnclick(Onclick onclick) {
+        this.onclick = onclick;
+    }
+    public interface  Onclick{
+        void onclickAdd(View v, int option);
+        void onclickDelete(View v, int option);
+    }
 }

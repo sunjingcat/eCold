@@ -3,6 +3,7 @@ package com.zz.cold.business.daily.mvp.presenter;
 
 import com.zz.cold.bean.DailyBean;
 import com.zz.cold.bean.ImageBack;
+import com.zz.cold.bean.StorageBean;
 import com.zz.cold.bean.TemperatureBean;
 import com.zz.cold.bean.WarehouseBean;
 import com.zz.cold.business.daily.mvp.Contract;
@@ -30,13 +31,13 @@ public class DailyAddPresenter extends MyBasePresenterImpl<Contract.IGetDailyAdd
 
 
     @Override
-    public void postImage(String localPath, List<MultipartBody.Part> imgs) {
+    public void postImage(int position, List<MultipartBody.Part> imgs) {
 
         RxNetUtils.request(getApi(ApiService.class).uploadImg(imgs), new RequestObserver<JsonT<ImageBack>>(this) {
             @Override
             protected void onSuccess(JsonT<ImageBack> data) {
                 if (data.isSuccess()) {
-                    view.showPostImage(localPath,data.getData());
+                    view.showPostImage(position,data.getData());
                 } else {
 
                 }
@@ -56,7 +57,7 @@ public class DailyAddPresenter extends MyBasePresenterImpl<Contract.IGetDailyAdd
             @Override
             protected void onSuccess(JsonT<List<ImageBack>> data) {
                 if (data.isSuccess()) {
-                    view.showImage(data.getData());
+
                 } else {
 
                 }
@@ -71,9 +72,9 @@ public class DailyAddPresenter extends MyBasePresenterImpl<Contract.IGetDailyAdd
     }
 
     @Override
-    public void submitData(Map<String, Object> map) {
+    public void submitData(WarehouseBean requestBody) {
 
-            RxNetUtils.request(getApi(ApiService.class).postDailyInfo(map), new RequestObserver<JsonT>(this) {
+            RxNetUtils.request(getApi(ApiService.class).postDailyInfo(requestBody), new RequestObserver<JsonT>(this) {
                 @Override
                 protected void onSuccess(JsonT jsonT) {
                     view.showResult();
@@ -90,9 +91,9 @@ public class DailyAddPresenter extends MyBasePresenterImpl<Contract.IGetDailyAdd
 
     @Override
     public void getWarehouseData() {
-        RxNetUtils.request(getApi(ApiService.class).getWarehouseAll(), new RequestObserver<JsonT<List<WarehouseBean>>>(this) {
+        RxNetUtils.request(getApi(ApiService.class).getWarehouseAll(), new RequestObserver<JsonT<List<StorageBean>>>(this) {
             @Override
-            protected void onSuccess(JsonT<List<WarehouseBean>> data) {
+            protected void onSuccess(JsonT<List<StorageBean>> data) {
                 if (data.isSuccess()) {
                     view.showWarehouseData(data.getData());
                 } else {
@@ -101,7 +102,7 @@ public class DailyAddPresenter extends MyBasePresenterImpl<Contract.IGetDailyAdd
             }
 
             @Override
-            protected void onFail2(JsonT<List<WarehouseBean>> userInfoJsonT) {
+            protected void onFail2(JsonT<List<StorageBean>> userInfoJsonT) {
                 super.onFail2(userInfoJsonT);
                 view.showToast(userInfoJsonT.getMessage());
             }

@@ -6,6 +6,7 @@ import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.EquipmentBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.ImageBean;
+import com.zz.cold.bean.MainShowData;
 import com.zz.cold.bean.PendingCompanyBean;
 import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.bean.StorageBean;
@@ -61,6 +62,9 @@ public interface ApiService {
 
     @GET("/app/v1/coldchain/version/latest")
     Observable<JsonT<Version>> getVersion();
+
+    @GET("/app/v1/coldchain/mainShow/getMainData")
+    Observable<JsonT<MainShowData>> getMainData();
 
     @GET("/app/v1/supervise/version/versionCode/{versionCode}")
     Observable<JsonT<Version>> getVersionInfo(@Path("versionCode") String terminalId);
@@ -139,14 +143,16 @@ public interface ApiService {
     @GET("/app/v1/coldchain/coldchainColdstorageDaily/list")
     Observable<JsonT<List<DailyBean>>> getDailyList(@QueryMap Map<String, Object> params);
 
+
+    @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainColdstorageDaily")
-    Observable<JsonT> postDailyInfo(@QueryMap Map<String, Object> params);
+    Observable<JsonT> postDailyInfo(@Body WarehouseBean requestBody);
 
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
     Observable<JsonT<DailyBean>> getDailyInfo(@Path("id") String id);
 
     @GET("/app/v1/coldchain/warehouse/allList")
-    Observable<JsonT<List<WarehouseBean>>> getWarehouseAll();
+    Observable<JsonT<List<StorageBean>>> getWarehouseAll();
 
     @GET("/app/v1/coldchain/coldchainGoodsAccount/list")
     Observable<JsonT<List<TraceBean>>> getTraceList(@QueryMap Map<String, Object> params);
