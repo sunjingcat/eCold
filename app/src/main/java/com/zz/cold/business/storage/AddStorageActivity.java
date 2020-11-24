@@ -1,6 +1,4 @@
 package com.zz.cold.business.storage;
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -18,14 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.codbking.widget.utils.UIAdjuster;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
-import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.EquipmentBean;
 import com.zz.cold.bean.ImageBack;
 
 import com.zz.cold.bean.StorageBean;
-import com.zz.cold.business.qualification.AddQualificationActivity;
 import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
 
 import com.zz.cold.business.storage.adapter.EquipmentAdapter;

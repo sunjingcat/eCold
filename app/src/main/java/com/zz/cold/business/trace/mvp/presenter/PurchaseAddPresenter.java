@@ -42,6 +42,23 @@ public class PurchaseAddPresenter extends MyBasePresenterImpl<Contract.IGetPurch
 //        }, mDialog);
     }
 
+    @Override
+    public void getType(String type) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("dictType","goodsType");
+        RxNetUtils.request(getApi(ApiService.class).getDicts(map), new RequestObserver<JsonT<List<DictBean>>>(this) {
+            @Override
+            protected void onSuccess(JsonT<List<DictBean>> jsonT) {
+                view.showGoodsType(type,jsonT.getData());
+            }
+
+            @Override
+            protected void onFail2(JsonT<List<DictBean>> stringJsonT) {
+                super.onFail2(stringJsonT);
+            }
+        }, mDialog);
+    }
+
 
     @Override
     public void postImage(String localPath, List<MultipartBody.Part> imgs) {

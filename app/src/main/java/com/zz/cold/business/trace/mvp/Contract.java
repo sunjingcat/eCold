@@ -15,6 +15,7 @@ public class Contract {
     public interface IsetPurchaseAddPresenter extends BasePresenter {
         void submitData(Map<String, Object> map);
         void getData(String id);
+        void getType(String type);
 
 
         void postImage(String localPath,List<MultipartBody.Part> imgs);
@@ -28,7 +29,7 @@ public class Contract {
         void showPostImage(String localPath,ImageBack imageBack);
 
         void showImage(List<ImageBack> list);
-
+        void showGoodsType(String type,List<DictBean> list);
     }
 
     public interface IsetDeliverPresenter extends BasePresenter {

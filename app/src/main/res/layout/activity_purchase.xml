@@ -199,12 +199,14 @@
                     android:layout_height="wrap_content"
                     android:text="进货时间" />
 
-                <EditText
+                <TextView
                     android:id="@+id/text_purchaseTime"
                     style="@style/textRightStyle"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
-                    android:hint="请填写" />
+                    android:hint="请选择" />
             </LinearLayout>
 
             <LinearLayout
@@ -246,14 +248,14 @@
                     android:layout_height="wrap_content"
                     android:text="供货者地址" />
 
-                <TextView
+                <EditText
                     android:id="@+id/text_supplierAddress"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
-                    android:drawableRight="@drawable/image_arrow"
+
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical|right"
-                    android:hint="请选择" />
+                    android:hint="请输入" />
             </LinearLayout>
 
             <LinearLayout
@@ -357,7 +359,8 @@
                 android:id="@+id/ll_imported"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -374,14 +377,14 @@
                         android:layout_height="wrap_content"
                         android:text="入境口岸" />
 
-                    <TextView
-
+                    <EditText
+                        android:id="@+id/text_entryPort"
                         style="@style/textRightStyle"
                         android:layout_height="match_parent"
-                        android:drawableRight="@drawable/image_arrow"
+
                         android:drawablePadding="5dp"
                         android:gravity="center_vertical|right"
-                        android:hint="请选择" />
+                        android:hint="请输入" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -400,7 +403,7 @@
                         android:text="食品核酸检测" />
 
                     <TextView
-
+                        android:id="@+id/text_isSphsjc"
                         style="@style/textRightStyle"
                         android:layout_height="match_parent"
                         android:drawableRight="@drawable/image_arrow"
@@ -425,7 +428,7 @@
                         android:text="人员核酸检测" />
 
                     <TextView
-
+                        android:id="@+id/text_isRyhsjc"
                         style="@style/textRightStyle"
                         android:layout_height="match_parent"
                         android:drawableRight="@drawable/image_arrow"
@@ -450,7 +453,7 @@
                         android:text="车辆核酸检测" />
 
                     <TextView
-                        android:id="@+id/text_entryPort"
+                        android:id="@+id/text_isClhsjc"
                         style="@style/textRightStyle"
                         android:layout_height="match_parent"
                         android:drawableRight="@drawable/image_arrow"
@@ -475,10 +478,14 @@
                         android:layout_height="wrap_content"
                         android:text="消毒证明" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/text_xdzmEnclosureIdList"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/text_isXdzm"
+                        style="@style/textRightStyle"
+                        android:layout_height="match_parent"
+                        android:drawableRight="@drawable/image_arrow"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical|right"
+                        android:hint="请选择" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -495,7 +502,14 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="非非洲猪瘟检测报告" />
-
+                    <TextView
+                        android:id="@+id/text_isFfzzwjc"
+                        style="@style/textRightStyle"
+                        android:layout_height="match_parent"
+                        android:drawableRight="@drawable/image_arrow"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical|right"
+                        android:hint="请选择" />
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_ffzzwjcEnclosureIdList"
                         android:layout_width="match_parent"

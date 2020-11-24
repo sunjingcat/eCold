@@ -128,7 +128,7 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
         getDate();
     }
 
-    @OnClick({R.id.toolbar_subtitle})
+    @OnClick({R.id.toolbar_subtitle,R.id.bt_ru})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
