@@ -571,11 +571,10 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     }
 
 
-
     @Override
     public void showType(String type, List<DictBean> list) {
         if (list == null) return;
-         if (type.equals("transportMode")) {
+        if (type.equals("transportMode")) {
             transportModes.clear();
             transportModes.addAll(list);
         } else if (type.equals("isImported")) {
@@ -587,29 +586,28 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     List<DictBean> options1Items = new ArrayList<>();
     List<List<DictBean>> options2Items = new ArrayList<>();
     List<List<List<DictBean>>> options3Items = new ArrayList<>();
+
     @Override
     public void showGoods(List<CategoryBean> list) {
         if (list == null) return;
         goodsTypes.clear();
         goodsTypes.addAll(list);
-        for (CategoryBean categoryBean:goodsTypes){
-            options1Items.add((DictBean)categoryBean);
+        for (CategoryBean categoryBean : goodsTypes) {
+            options1Items.add((DictBean) categoryBean);
             List<List<DictBean>> optionsItems2 = new ArrayList<>();
             List<DictBean> optionsItems_02 = new ArrayList<>();
-            for (CategoryBean.Child1 child1:categoryBean.getChilds()){
+            for (CategoryBean.Child1 child1 : categoryBean.getChilds()) {
                 List<DictBean> optionsItems = new ArrayList<>();
-                for (CategoryBean.Child2 child2:child1.getChilds()){
+                for (CategoryBean.Child2 child2 : child1.getChilds()) {
                     optionsItems.add(child2);
                 }
                 optionsItems2.add(optionsItems);
                 optionsItems_02.add(child1);
             }
-            if (optionsItems_02.size()>1){
-                options2Items.add(optionsItems_02);
-            }
-//            if (optionsItems2.size()>0) {
-                options3Items.add(optionsItems2);
-//            }
+
+            options2Items.add(optionsItems_02);
+            options3Items.add(optionsItems2);
+
         }
         LogUtils.v("--");
     }
