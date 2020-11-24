@@ -332,7 +332,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_isImported"
+
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
@@ -358,7 +358,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_imported"
+                android:id="@+id/ll_isImported"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

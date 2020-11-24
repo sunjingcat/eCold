@@ -289,6 +289,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
 
     void postData() {
         Map<String, Object> params = new HashMap<>();
+        params.put("operationType", 1);
         params.put("goodsName", getText(text_goodsName));
         params.put("productionDate", getText(text_productionDate));
         params.put("spec", getText(text_spec));
