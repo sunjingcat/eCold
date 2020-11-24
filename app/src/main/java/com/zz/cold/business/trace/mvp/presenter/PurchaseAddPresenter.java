@@ -45,11 +45,11 @@ public class PurchaseAddPresenter extends MyBasePresenterImpl<Contract.IGetPurch
     @Override
     public void getType(String type) {
         Map<String, Object> map = new HashMap<>();
-        map.put("dictType","goodsType");
+        map.put("dictType",type);
         RxNetUtils.request(getApi(ApiService.class).getDicts(map), new RequestObserver<JsonT<List<DictBean>>>(this) {
             @Override
             protected void onSuccess(JsonT<List<DictBean>> jsonT) {
-                view.showGoodsType(type,jsonT.getData());
+                view.showType(type,jsonT.getData());
             }
 
             @Override

@@ -87,10 +87,10 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     TextView text_transportMode;
     String transportMode;
     @BindView(R.id.text_period)
-    EditText text_period;
+    TextView text_period;
     @BindView(R.id.text_isImported)
-    String isImported = "";
     TextView text_isImported;
+    String isImported = "";
     @BindView(R.id.ll_isImported)
     LinearLayout ll_isImported;
     @BindView(R.id.text_isSphsjc)
@@ -172,7 +172,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     }
 
 
-    @OnClick({R.id.toolbar_subtitle, R.id.text_productionDate, R.id.text_purchaseTime, R.id.text_transportMode, R.id.text_isImported, R.id.text_isSphsjc, R.id.text_isRyhsjc, R.id.text_isClhsjc, R.id.text_isXdzm, R.id.text_isFfzzwjc})
+    @OnClick({R.id.toolbar_subtitle, R.id.text_productionDate, R.id.text_period, R.id.text_purchaseTime, R.id.text_transportMode, R.id.text_isImported, R.id.text_isSphsjc, R.id.text_isRyhsjc, R.id.text_isClhsjc, R.id.text_isXdzm, R.id.text_isFfzzwjc})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
@@ -233,6 +233,34 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                     }
                 });
                 dialog1.show();
+                break;
+            case R.id.text_period:
+                DatePickDialog dialog2 = new DatePickDialog(PurchaseActivity.this);
+                //设置上下年分限制
+                //设置上下年分限制
+                dialog2.setYearLimt(20);
+                //设置标题
+                dialog2.setTitle("选择时间");
+                //设置类型
+                dialog2.setType(DateType.TYPE_YMD);
+                //设置消息体的显示格式，日期格式
+                dialog2.setMessageFormat("yyyy-MM-dd");
+                //设置选择回调
+                dialog2.setOnChangeLisener(new OnChangeLisener() {
+                    @Override
+                    public void onChanged(Date date) {
+                        Log.v("+++", date.toString());
+                    }
+                });
+                //设置点击确定按钮回调
+                dialog2.setOnSureLisener(new OnSureLisener() {
+                    @Override
+                    public void onSure(Date date) {
+                        String time = TimeUtils.getTime(date.getTime(), TimeUtils.DATE_FORMAT_DATE);
+                        text_period.setText(time);
+                    }
+                });
+                dialog2.show();
                 break;
             case R.id.text_transportMode:
                 showSelectPopWindow("transportMode");
@@ -319,7 +347,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     }
 
     @Override
-    public void showGoodsType(String type, List<DictBean> list) {
+    public void showType(String type, List<DictBean> list) {
         if (list == null) return;
         if (type.equals("goodsType")) {
             goodsTypes.clear();
@@ -374,7 +402,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
 
     void showSelectPopWindow(String type) {
         UIAdjuster.closeKeyBoard(this);
-        String[] array;
+        String[] array = new String[isImporteds.size()];
         String[] values = new String[isImporteds.size()];
         if (type.equals("isImported")) {
             List<String> list = new ArrayList<>();

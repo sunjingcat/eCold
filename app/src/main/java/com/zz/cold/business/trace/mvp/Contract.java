@@ -29,7 +29,7 @@ public class Contract {
         void showPostImage(String localPath,ImageBack imageBack);
 
         void showImage(List<ImageBack> list);
-        void showGoodsType(String type,List<DictBean> list);
+        void showType(String type,List<DictBean> list);
     }
 
     public interface IsetDeliverPresenter extends BasePresenter {
