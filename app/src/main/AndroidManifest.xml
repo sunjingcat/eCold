@@ -154,7 +154,6 @@
         <activity android:name=".business.qualification.AddQualificationActivity" />
         <activity android:name=".business.qualification.QualificationInfoActivity" />
         <activity android:name=".business.qualification.QualificationActivity" />
-        <activity android:name=".business.qualification.CategoryActivity" />
         <activity android:name=".business.storage.StorageInfoActivity" />
         <activity android:name=".business.storage.StorageActivity" />
         <activity android:name=".business.storage.AddStorageActivity" />

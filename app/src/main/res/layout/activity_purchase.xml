@@ -412,8 +412,13 @@
                         android:drawablePadding="5dp"
                         android:gravity="center_vertical|right"
                         android:hint="请选择" />
-                </LinearLayout>
 
+
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_Sphsjc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -437,8 +442,12 @@
                         android:drawablePadding="5dp"
                         android:gravity="center_vertical|right"
                         android:hint="请选择" />
-                </LinearLayout>
 
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_Ryhsjc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -463,14 +472,17 @@
                         android:gravity="center_vertical|right"
                         android:hint="请选择" />
                 </LinearLayout>
-
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_Clhsjc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
                     android:background="@color/white"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
 
@@ -489,13 +501,16 @@
                         android:gravity="center_vertical|right"
                         android:hint="请选择" />
                 </LinearLayout>
-
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_Xdzm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
                     android:background="@color/white"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
 
@@ -512,12 +527,12 @@
                         android:drawablePadding="5dp"
                         android:gravity="center_vertical|right"
                         android:hint="请选择" />
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_ffzzwjcEnclosureIdList"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
 
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_ffzzwjc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <include layout="@layout/layout_images" />

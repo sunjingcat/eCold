@@ -1,6 +1,9 @@
 package com.zz.cold.bean;
 
-public class DictBean {
+import com.bigkoo.pickerview.configure.PickerOptions;
+import com.contrarywind.interfaces.IPickerViewData;
+
+public class DictBean implements IPickerViewData {
 
     String deptId;// null,
     String dictCode;// 165,
@@ -12,6 +15,15 @@ public class DictBean {
     String listClass;// null,
     String isDefault;// Y,
     String status;// 0,
+    boolean isSelect;// 0,
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 
     public String getDeptId() {
         return deptId;
@@ -51,5 +63,10 @@ public class DictBean {
 
     public String getStatus() {
         return status;
+    }
+
+    @Override
+    public String getPickerViewText() {
+        return dictLabel;
     }
 }

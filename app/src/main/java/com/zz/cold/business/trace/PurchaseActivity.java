@@ -15,6 +15,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.blankj.utilcode.util.LogUtils;
 import com.codbking.widget.DatePickDialog;
 import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
@@ -24,6 +28,7 @@ import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
+import com.zz.cold.bean.CategoryBean;
 import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.ImageBack;
@@ -57,12 +62,38 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     ArrayList<ImageBack> images = new ArrayList<>();
-    ArrayList<DictBean> goodsTypes = new ArrayList<>();
+
+    ArrayList<CategoryBean> goodsTypes = new ArrayList<>();
     ArrayList<DictBean> isImporteds = new ArrayList<>();
     ArrayList<DictBean> transportModes = new ArrayList<>();
     ImageDeleteItemAdapter adapter;
     @BindView(R.id.rv_image)
     RecyclerView rvImages;
+
+    @BindView(R.id.rv_Sphsjc)
+    RecyclerView rv_Sphsjc;
+    ArrayList<ImageBack> images_Sphsjc = new ArrayList<>();
+    ImageDeleteItemAdapter adapter_Sphsjc;
+
+    @BindView(R.id.rv_Ryhsjc)
+    RecyclerView rv_Ryhsjc;
+    ArrayList<ImageBack> images_Ryhsjc = new ArrayList<>();
+    ImageDeleteItemAdapter adapter_Ryhsjc;
+
+    @BindView(R.id.rv_Clhsjc)
+    RecyclerView rv_Clhsjc;
+    ArrayList<ImageBack> images_Clhsjc = new ArrayList<>();
+    ImageDeleteItemAdapter adapter_Clhsjc;
+
+    @BindView(R.id.rv_Xdzm)
+    RecyclerView rv_Xdzm;
+    ArrayList<ImageBack> images_Xdzm = new ArrayList<>();
+    ImageDeleteItemAdapter adapter_Xdzm;
+
+    @BindView(R.id.rv_ffzzwjc)
+    RecyclerView rv_ffzzwjc;
+    ArrayList<ImageBack> images_ffzzwjc = new ArrayList<>();
+    ImageDeleteItemAdapter adapter_ffzzwjc;
 
     @BindView(R.id.text_goodsName)
     EditText text_goodsName;
@@ -131,12 +162,33 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         rvImages.setLayoutManager(new GridLayoutManager(this, 3));
         adapter = new ImageDeleteItemAdapter(this, images);
         rvImages.setAdapter(adapter);
+
+        rv_Sphsjc.setLayoutManager(new GridLayoutManager(this, 3));
+        adapter_Sphsjc = new ImageDeleteItemAdapter(this, images_Sphsjc);
+        rv_Sphsjc.setAdapter(adapter_Sphsjc);
+
+        rv_Ryhsjc.setLayoutManager(new GridLayoutManager(this, 3));
+        adapter_Ryhsjc = new ImageDeleteItemAdapter(this, images_Ryhsjc);
+        rv_Ryhsjc.setAdapter(adapter_Ryhsjc);
+
+        rv_Clhsjc.setLayoutManager(new GridLayoutManager(this, 3));
+        adapter_Clhsjc = new ImageDeleteItemAdapter(this, images_Clhsjc);
+        rv_Clhsjc.setAdapter(adapter_Clhsjc);
+
+        rv_Xdzm.setLayoutManager(new GridLayoutManager(this, 3));
+        adapter_Xdzm = new ImageDeleteItemAdapter(this, images_Xdzm);
+        rv_Xdzm.setAdapter(adapter_Xdzm);
+
+        rv_ffzzwjc.setLayoutManager(new GridLayoutManager(this, 3));
+        adapter_ffzzwjc = new ImageDeleteItemAdapter(this, images_ffzzwjc);
+        rv_ffzzwjc.setAdapter(adapter_ffzzwjc);
+
         id = getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(id)) {
             mPresenter.getData(id);
 
         }
-        mPresenter.getType("goodsType");
+        mPresenter.getGoodsType();
         mPresenter.getType("transportMode");
         mPresenter.getType("isImported");
         adapter.setOnclick(new ImageDeleteItemAdapter.Onclick() {
@@ -164,6 +216,133 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 adapter.notifyDataSetChanged();
             }
         });
+        adapter_Sphsjc.setOnclick(new ImageDeleteItemAdapter.Onclick() {
+            @Override
+            public void onclickAdd(View v, int option) {
+                ArrayList<String> localPath = new ArrayList<>();
+                for (int i = 0; i < images_Sphsjc.size(); i++) {
+                    if (!TextUtils.isEmpty(images_Sphsjc.get(i).getPath())) {
+                        localPath.add(images_Sphsjc.get(i).getPath());
+                    } else {
+                    }
+                }
+                ImageSelector.builder()
+                        .useCamera(true) // 设置是否使用拍照
+                        .setSingle(false)  //设置是否单选
+                        .setMaxSelectCount(9 - images_Sphsjc.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setSelected(localPath) // 把已选的图片传入默认选中。
+                        .setViewImage(true) //是否点击放大图片查看,，默认为true
+                        .start(PurchaseActivity.this, 1102); // 打开相册
+            }
+
+            @Override
+            public void onclickDelete(View v, int option) {
+                images_Sphsjc.remove(option);
+                adapter_Sphsjc.notifyDataSetChanged();
+            }
+        });
+
+        adapter_Ryhsjc.setOnclick(new ImageDeleteItemAdapter.Onclick() {
+            @Override
+            public void onclickAdd(View v, int option) {
+                ArrayList<String> localPath = new ArrayList<>();
+                for (int i = 0; i < images_Ryhsjc.size(); i++) {
+                    if (!TextUtils.isEmpty(images_Ryhsjc.get(i).getPath())) {
+                        localPath.add(images_Ryhsjc.get(i).getPath());
+                    } else {
+                    }
+                }
+                ImageSelector.builder()
+                        .useCamera(true) // 设置是否使用拍照
+                        .setSingle(false)  //设置是否单选
+                        .setMaxSelectCount(9 - images_Ryhsjc.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setSelected(localPath) // 把已选的图片传入默认选中。
+                        .setViewImage(true) //是否点击放大图片查看,，默认为true
+                        .start(PurchaseActivity.this, 1103); // 打开相册
+            }
+
+            @Override
+            public void onclickDelete(View v, int option) {
+                images_Ryhsjc.remove(option);
+                adapter_Ryhsjc.notifyDataSetChanged();
+            }
+        });
+
+        adapter_Clhsjc.setOnclick(new ImageDeleteItemAdapter.Onclick() {
+            @Override
+            public void onclickAdd(View v, int option) {
+                ArrayList<String> localPath = new ArrayList<>();
+                for (int i = 0; i < images_Clhsjc.size(); i++) {
+                    if (!TextUtils.isEmpty(images_Clhsjc.get(i).getPath())) {
+                        localPath.add(images_Clhsjc.get(i).getPath());
+                    } else {
+                    }
+                }
+                ImageSelector.builder()
+                        .useCamera(true) // 设置是否使用拍照
+                        .setSingle(false)  //设置是否单选
+                        .setMaxSelectCount(9 - images_Clhsjc.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setSelected(localPath) // 把已选的图片传入默认选中。
+                        .setViewImage(true) //是否点击放大图片查看,，默认为true
+                        .start(PurchaseActivity.this, 1104); // 打开相册
+            }
+
+            @Override
+            public void onclickDelete(View v, int option) {
+                images_Clhsjc.remove(option);
+                adapter_Clhsjc.notifyDataSetChanged();
+            }
+        });
+        adapter_Xdzm.setOnclick(new ImageDeleteItemAdapter.Onclick() {
+            @Override
+            public void onclickAdd(View v, int option) {
+                ArrayList<String> localPath = new ArrayList<>();
+                for (int i = 0; i < images_Xdzm.size(); i++) {
+                    if (!TextUtils.isEmpty(images_Xdzm.get(i).getPath())) {
+                        localPath.add(images_Xdzm.get(i).getPath());
+                    } else {
+                    }
+                }
+                ImageSelector.builder()
+                        .useCamera(true) // 设置是否使用拍照
+                        .setSingle(false)  //设置是否单选
+                        .setMaxSelectCount(9 - images_Xdzm.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setSelected(localPath) // 把已选的图片传入默认选中。
+                        .setViewImage(true) //是否点击放大图片查看,，默认为true
+                        .start(PurchaseActivity.this, 1105); // 打开相册
+            }
+
+            @Override
+            public void onclickDelete(View v, int option) {
+                images_Xdzm.remove(option);
+                adapter_Xdzm.notifyDataSetChanged();
+            }
+        });
+        adapter_ffzzwjc.setOnclick(new ImageDeleteItemAdapter.Onclick() {
+            @Override
+            public void onclickAdd(View v, int option) {
+                ArrayList<String> localPath = new ArrayList<>();
+                for (int i = 0; i < images_ffzzwjc.size(); i++) {
+                    if (!TextUtils.isEmpty(images_ffzzwjc.get(i).getPath())) {
+                        localPath.add(images_ffzzwjc.get(i).getPath());
+                    } else {
+                    }
+                }
+                ImageSelector.builder()
+                        .useCamera(true) // 设置是否使用拍照
+                        .setSingle(false)  //设置是否单选
+                        .setMaxSelectCount(9 - images_ffzzwjc.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setSelected(localPath) // 把已选的图片传入默认选中。
+                        .setViewImage(true) //是否点击放大图片查看,，默认为true
+                        .start(PurchaseActivity.this, 1106); // 打开相册
+            }
+
+            @Override
+            public void onclickDelete(View v, int option) {
+                images_ffzzwjc.remove(option);
+                adapter_ffzzwjc.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -172,11 +351,26 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     }
 
 
-    @OnClick({R.id.toolbar_subtitle, R.id.text_productionDate, R.id.text_period, R.id.text_purchaseTime, R.id.text_transportMode, R.id.text_isImported, R.id.text_isSphsjc, R.id.text_isRyhsjc, R.id.text_isClhsjc, R.id.text_isXdzm, R.id.text_isFfzzwjc})
+    @OnClick({R.id.toolbar_subtitle, R.id.text_goodsType, R.id.text_productionDate, R.id.text_period, R.id.text_purchaseTime, R.id.text_transportMode, R.id.text_isImported, R.id.text_isSphsjc, R.id.text_isRyhsjc, R.id.text_isClhsjc, R.id.text_isXdzm, R.id.text_isFfzzwjc})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
                 postData();
+                break;
+            case R.id.text_goodsType:
+                OptionsPickerView pvOptions = new OptionsPickerBuilder(PurchaseActivity.this, new OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int option2, int options3, View v) {
+                        //返回的分别是三个级别的选中位置
+                        String tx = options1Items.get(options1).getPickerViewText()
+                                + options2Items.get(options1).get(option2)
+                                + options3Items.get(options1).get(option2).get(options3).getPickerViewText();
+                        text_goodsType.setText(tx);
+                    }
+                }).build();
+                pvOptions.setPicker(options1Items, options2Items, options3Items);
+                pvOptions.show();
+
                 break;
             case R.id.text_productionDate:
                 DatePickDialog dialog = new DatePickDialog(PurchaseActivity.this);
@@ -308,7 +502,11 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         params.put("isXdzm", isXdzm);
         params.put("isFfzzwjc", isFfzzwjc);
 
-
+        params.put("sphsjcEnclosureIdList", PostUtils.getImageIds(images_Sphsjc));
+        params.put("ryhsjcEnclosureIdList", PostUtils.getImageIds(images_Ryhsjc));
+        params.put("clhsjcEnclosureIdList", PostUtils.getImageIds(images_Clhsjc));
+        params.put("xdzmEnclosureIdList", PostUtils.getImageIds(images_Xdzm));
+        params.put("ffzzwjcEnclosureIdList", PostUtils.getImageIds(images_ffzzwjc));
         params.put("enclosureIds", PostUtils.getImageIds(images));
         if (!TextUtils.isEmpty(id)) {
             params.put("id", id);
@@ -331,11 +529,36 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     }
 
     @Override
-    public void showPostImage(String localPath, ImageBack imageBack) {
+    public void showPostImage(int requestCode, String localPath, ImageBack imageBack) {
         if (imageBack == null) return;
         imageBack.setPath(localPath);
-        images.add(imageBack);
-        adapter.notifyDataSetChanged();
+        switch (requestCode) {
+            case 1101:
+                images.add(imageBack);
+                adapter.notifyDataSetChanged();
+                break;
+            case 1102:
+                images_Sphsjc.add(imageBack);
+                adapter_Sphsjc.notifyDataSetChanged();
+                break;
+            case 1103:
+                images_Ryhsjc.add(imageBack);
+                adapter_Ryhsjc.notifyDataSetChanged();
+                break;
+            case 1104:
+                images_Clhsjc.add(imageBack);
+                adapter_Clhsjc.notifyDataSetChanged();
+                break;
+            case 1105:
+                images_Xdzm.add(imageBack);
+                adapter_Xdzm.notifyDataSetChanged();
+                break;
+            case 1106:
+                images_ffzzwjc.add(imageBack);
+                adapter_ffzzwjc.notifyDataSetChanged();
+                break;
+        }
+
     }
 
 
@@ -347,13 +570,12 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         adapter.notifyDataSetChanged();
     }
 
+
+
     @Override
     public void showType(String type, List<DictBean> list) {
         if (list == null) return;
-        if (type.equals("goodsType")) {
-            goodsTypes.clear();
-            goodsTypes.addAll(list);
-        } else if (type.equals("transportMode")) {
+         if (type.equals("transportMode")) {
             transportModes.clear();
             transportModes.addAll(list);
         } else if (type.equals("isImported")) {
@@ -362,39 +584,57 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         }
     }
 
+    List<DictBean> options1Items = new ArrayList<>();
+    List<List<DictBean>> options2Items = new ArrayList<>();
+    List<List<List<DictBean>>> options3Items = new ArrayList<>();
+    @Override
+    public void showGoods(List<CategoryBean> list) {
+        if (list == null) return;
+        goodsTypes.clear();
+        goodsTypes.addAll(list);
+        for (CategoryBean categoryBean:goodsTypes){
+            options1Items.add((DictBean)categoryBean);
+            List<List<DictBean>> optionsItems2 = new ArrayList<>();
+            for (CategoryBean.Child1 child1:categoryBean.getChilds()){
+                List<DictBean> optionsItems = new ArrayList<>();
+                for (CategoryBean.Child2 child2:child1.getChilds()){
+                    optionsItems.add(child2);
+                }
+                optionsItems2.add(optionsItems);
+                options2Items.add(optionsItems);
+            }
+            options3Items.add(optionsItems2);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {
-            switch (requestCode) {
+            ArrayList<String> selectImages = data.getStringArrayListExtra(
+                    ImageSelectorUtils.SELECT_RESULT);
+            for (String path : selectImages) {
+                Luban.with(this)
+                        .load(path)
+                        .ignoreBy(100)
+                        .setCompressListener(new OnCompressListener() {
+                            @Override
+                            public void onStart() {
+                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                            }
 
-                case 1101:
-                    ArrayList<String> selectImages = data.getStringArrayListExtra(
-                            ImageSelectorUtils.SELECT_RESULT);
-                    for (String path : selectImages) {
-                        Luban.with(this)
-                                .load(path)
-                                .ignoreBy(100)
-                                .setCompressListener(new OnCompressListener() {
-                                    @Override
-                                    public void onStart() {
-                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
-                                    }
+                            @Override
+                            public void onSuccess(File file) {
 
-                                    @Override
-                                    public void onSuccess(File file) {
+                                mPresenter.postImage(requestCode, file.getPath(), getImageBody(file.getPath()));
+                            }
 
-                                        mPresenter.postImage(file.getPath(), getImageBody(file.getPath()));
-                                    }
+                            @Override
+                            public void onError(Throwable e) {
+                                // TODO 当压缩过程出现问题时调用
+                            }
+                        }).launch();
 
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        // TODO 当压缩过程出现问题时调用
-                                    }
-                                }).launch();
-
-                    }
-                    break;
             }
         }
     }
@@ -470,4 +710,9 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LogUtils.v("------onDestroy");
+    }
 }

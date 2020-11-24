@@ -1,6 +1,7 @@
 package com.zz.cold.net;
 
 
+import com.zz.cold.bean.CategoryBean;
 import com.zz.cold.bean.DailyBean;
 import com.zz.cold.bean.DailyPost;
 import com.zz.cold.bean.DictBean;
@@ -84,6 +85,9 @@ public interface ApiService {
 
     @GET("/app/v1/supervise/dict/getDicts")
     Observable<JsonT<List<DictBean>>> getDicts(@QueryMap Map<String, Object> params);
+
+    @GET("/app/v1/supervise/dict/getDicts")
+    Observable<JsonT<List<CategoryBean>>> getGoodsType(@QueryMap Map<String, Object> params);
 
     @FormUrlEncoded
     @PUT("/app/v1/supervise/{url}/submitSign/{id}")

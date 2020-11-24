@@ -1,6 +1,7 @@
 package com.zz.cold.business.trace.mvp.presenter;
 
 
+import com.zz.cold.bean.CategoryBean;
 import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.ImageBack;
@@ -59,15 +60,32 @@ public class PurchaseAddPresenter extends MyBasePresenterImpl<Contract.IGetPurch
         }, mDialog);
     }
 
+    @Override
+    public void getGoodsType() {
+        Map<String, Object> map = new HashMap<>();
+
+        RxNetUtils.request(getApi(ApiService.class).getGoodsType(map), new RequestObserver<JsonT<List<CategoryBean>>>(this) {
+            @Override
+            protected void onSuccess(JsonT<List<CategoryBean>> jsonT) {
+                view.showGoods(jsonT.getData());
+            }
+
+            @Override
+            protected void onFail2(JsonT<List<CategoryBean>> stringJsonT) {
+                super.onFail2(stringJsonT);
+            }
+        }, mDialog);
+    }
+
 
     @Override
-    public void postImage(String localPath, List<MultipartBody.Part> imgs) {
+    public void postImage(int requestCode,String localPath, List<MultipartBody.Part> imgs) {
 
         RxNetUtils.request(getApi(ApiService.class).uploadImg(imgs), new RequestObserver<JsonT<ImageBack>>(this) {
             @Override
             protected void onSuccess(JsonT<ImageBack> data) {
                 if (data.isSuccess()) {
-                    view.showPostImage(localPath,data.getData());
+                    view.showPostImage(requestCode,localPath,data.getData());
                 } else {
 
                 }

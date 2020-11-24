@@ -1,5 +1,6 @@
 package com.zz.cold.business.trace.mvp;
 
+import com.zz.cold.bean.CategoryBean;
 import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.ImageBack;
@@ -16,9 +17,10 @@ public class Contract {
         void submitData(Map<String, Object> map);
         void getData(String id);
         void getType(String type);
+        void getGoodsType();
 
 
-        void postImage(String localPath,List<MultipartBody.Part> imgs);
+        void postImage(int requestCode,String localPath,List<MultipartBody.Part> imgs);
 
         void getImage(String type,String modelId);
     }
@@ -26,10 +28,11 @@ public class Contract {
     public interface IGetPurchaseAddView extends BaseView {
         void showPurchaseInfo(GoodsBean data);
         void showResult();
-        void showPostImage(String localPath,ImageBack imageBack);
+        void showPostImage(int requestCode,String localPath,ImageBack imageBack);
 
         void showImage(List<ImageBack> list);
         void showType(String type,List<DictBean> list);
+        void showGoods(List<CategoryBean> list);
     }
 
     public interface IsetDeliverPresenter extends BasePresenter {
