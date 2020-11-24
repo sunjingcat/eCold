@@ -595,16 +595,23 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         for (CategoryBean categoryBean:goodsTypes){
             options1Items.add((DictBean)categoryBean);
             List<List<DictBean>> optionsItems2 = new ArrayList<>();
+            List<DictBean> optionsItems_02 = new ArrayList<>();
             for (CategoryBean.Child1 child1:categoryBean.getChilds()){
                 List<DictBean> optionsItems = new ArrayList<>();
                 for (CategoryBean.Child2 child2:child1.getChilds()){
                     optionsItems.add(child2);
                 }
                 optionsItems2.add(optionsItems);
-                options2Items.add(optionsItems);
+                optionsItems_02.add(child1);
             }
-            options3Items.add(optionsItems2);
+            if (optionsItems_02.size()>1){
+                options2Items.add(optionsItems_02);
+            }
+//            if (optionsItems2.size()>0) {
+                options3Items.add(optionsItems2);
+//            }
         }
+        LogUtils.v("--");
     }
 
     @Override

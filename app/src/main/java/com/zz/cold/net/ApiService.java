@@ -86,7 +86,7 @@ public interface ApiService {
     @GET("/app/v1/supervise/dict/getDicts")
     Observable<JsonT<List<DictBean>>> getDicts(@QueryMap Map<String, Object> params);
 
-    @GET("/app/v1/supervise/dict/getDicts")
+    @GET("/app/v1/coldchain/coldchainGoodsAccount/selectGoodsType")
     Observable<JsonT<List<CategoryBean>>> getGoodsType(@QueryMap Map<String, Object> params);
 
     @FormUrlEncoded
