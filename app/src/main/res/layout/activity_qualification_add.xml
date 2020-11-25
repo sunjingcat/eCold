@@ -249,6 +249,7 @@
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
+                android:visibility="gone"
                 android:paddingRight="10dp">
 
                 <TextView

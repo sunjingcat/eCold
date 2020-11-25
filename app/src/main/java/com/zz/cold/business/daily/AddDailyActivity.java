@@ -87,6 +87,9 @@ public class AddDailyActivity extends MyBaseActivity<Contract.IsetDailyAddPresen
     @BindView(R.id.ll_regularCheckRemark)
     LinearLayout ll_regularCheckRemark;
 
+    @BindView(R.id.ll_pm)
+    LinearLayout ll_pm;
+
     @BindView(R.id.text_isRegularCheck)
     TextView text_isRegularCheck;
 
@@ -155,13 +158,16 @@ public class AddDailyActivity extends MyBaseActivity<Contract.IsetDailyAddPresen
                 switch (checkedId) {
                     case R.id.rb_am:
                         timeType = "am";
+                        ll_pm.setVisibility(View.GONE);
                         break;
                     case R.id.rb_pm:
                         timeType = "pm";
+                        ll_pm.setVisibility(View.VISIBLE);
                         break;
                 }
             }
         });
+        ll_pm.setVisibility(View.GONE);
     }
 
     @OnClick({R.id.toolbar_subtitle, R.id.text_reportTime, R.id.text_isProhibitedFood, R.id.text_isRegularCheck})

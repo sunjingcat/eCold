@@ -145,8 +145,7 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
                 showSelectPopWindow();
                 break;
             case R.id.ll_equipment_add:
-                if (storageBean == null) return;
-                startActivityForResult(new Intent().setClass(AddStorageActivity.this, AddEquipmentActivity.class).putExtra("id", storageBean.getId()), 2001);
+                startActivityForResult(new Intent().setClass(AddStorageActivity.this, AddEquipmentActivity.class), 2001);
                 break;
         }
     }

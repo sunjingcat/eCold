@@ -85,6 +85,11 @@ public class DailyInfoActivity extends MyBaseActivity {
     @BindView(R.id.ll_prohibitedFoodRemark)
     LinearLayout ll_prohibitedFoodRemark;
 
+    @BindView(R.id.ll_am)
+    LinearLayout ll_am;
+    @BindView(R.id.ll_pm)
+    LinearLayout ll_pm;
+
     private CustomDialog customDialog;
 
     @Override
@@ -164,13 +169,23 @@ public class DailyInfoActivity extends MyBaseActivity {
     }
 
     public void showResult(DailyBean data) {
-        amList.clear();
-        amList.addAll(data.getTemperatureAmList());
-        amAdapter.notifyDataSetChanged();
+        if (data.getTemperatureAmList()==null||data.getTemperatureAmList().size()==0){
+            ll_am.setVisibility(View.GONE);
+        }else {
+            ll_am.setVisibility(View.VISIBLE);
+            amList.clear();
+            amList.addAll(data.getTemperatureAmList());
+            amAdapter.notifyDataSetChanged();
+        }
 
-        pmList.clear();
-        pmList.addAll(data.getTemperaturePmList());
-        pmAdapter.notifyDataSetChanged();
+        if (data.getTemperaturePmList()==null||data.getTemperaturePmList().size()==0){
+            ll_pm.setVisibility(View.GONE);
+        }else {
+            ll_pm.setVisibility(View.VISIBLE);
+            pmList.clear();
+            pmList.addAll(data.getTemperaturePmList());
+            pmAdapter.notifyDataSetChanged();
+        }
 
         text_isRegularCheck.setText(data.getIsRegularCheck()==1?"是":"否");
         text_isProhibitedFood.setText(data.getIsProhibitedFood()==1?"是":"否");
