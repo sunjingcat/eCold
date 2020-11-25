@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -65,7 +66,7 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
     @BindView(R.id.toolbar_subtitle)
     TextView toolbar_subtitle;
     @BindView(R.id.toolbar_subtitle_mine)
-    TextView toolbar_subtitle_mine;
+    ImageView toolbar_subtitle_mine;
     @BindView(R.id.bt_ru)
     Button bt_ru;
 

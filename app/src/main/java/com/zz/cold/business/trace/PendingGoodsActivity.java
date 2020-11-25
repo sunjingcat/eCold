@@ -53,8 +53,6 @@ public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshLis
     Toolbar toolbar;
     @BindView(R.id.ll_null)
     LinearLayout llNull;
-    @BindView(R.id.ll_review)
-    LinearLayout ll_review;
     @BindView(R.id.rv)
     RecyclerView rv;
     @BindView(R.id.refreshLayout)
@@ -81,12 +79,7 @@ public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshLis
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
         coldstorageId = getIntent().getStringExtra("id");
-        String from = getIntent().getStringExtra("from");
-        if (!TextUtils.isEmpty(from)) {
-            ll_review.setVisibility(View.VISIBLE);
-        } else {
-            ll_review.setVisibility(View.GONE);
-        }
+
         adapter.setOnclick(new PendingGoodsAdapter.Onclick() {
             @Override
             public void onclickOk(View v, int option) {

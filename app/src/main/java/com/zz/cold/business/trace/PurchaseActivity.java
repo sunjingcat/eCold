@@ -364,12 +364,13 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 postData();
                 break;
             case R.id.text_goodsType:
+                UIAdjuster.closeKeyBoard(this);
                 OptionsPickerView pvOptions = new OptionsPickerBuilder(PurchaseActivity.this, new OnOptionsSelectListener() {
                     @Override
                     public void onOptionsSelect(int options1, int option2, int options3, View v) {
                         //返回的分别是三个级别的选中位置
                         String tx = options1Items.get(options1).getPickerViewText()
-                                + options2Items.get(options1).get(option2)
+                                + options2Items.get(options1).get(option2).getPickerViewText()
                                 + options3Items.get(options1).get(option2).get(options3).getPickerViewText();
                         text_goodsType.setText(tx);
                         goodsType1 = options1Items.get(options1).getDictValue();

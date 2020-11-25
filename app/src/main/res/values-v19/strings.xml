@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">eCold</string>
+    <string name="app_name">智慧冷链</string>
     <string name="tab_control">实时控制</string>
     <string name="tab_alarm">告警报警</string>
     <string name="tab_home">首页</string>

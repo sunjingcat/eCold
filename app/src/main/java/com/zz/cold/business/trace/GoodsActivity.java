@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
@@ -57,6 +58,9 @@ public class GoodsActivity extends MyBaseActivity {
     Button bt_ru;
     @BindView(R.id.bt_chu)
     Button bt_chu;
+    @BindView(R.id.ll_review)
+    LinearLayout ll_review;
+
 
     private WmsAdapter adapter;
     private InfoAdapter infoAdapter;
@@ -88,7 +92,12 @@ public class GoodsActivity extends MyBaseActivity {
         rv_info.setLayoutManager(new LinearLayoutManager(this));
         infoAdapter = new InfoAdapter(R.layout.item_info, infoList);
         rv_info.setAdapter(infoAdapter);
-
+        String from = getIntent().getStringExtra("from");
+        if (!TextUtils.isEmpty(from)) {
+            ll_review.setVisibility(View.VISIBLE);
+        } else {
+            ll_review.setVisibility(View.GONE);
+        }
         id = getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(id)) {
             getData(id);
