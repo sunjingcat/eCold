@@ -64,6 +64,8 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.toolbar_subtitle)
     TextView toolbar_subtitle;
+    @BindView(R.id.toolbar_subtitle_mine)
+    TextView toolbar_subtitle_mine;
     @BindView(R.id.bt_ru)
     Button bt_ru;
 
@@ -113,12 +115,13 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
             }
         });
         if (CacheUtility.getRole() == 2) {
-            TabUtils.setDrawableLeft(this,toolbar_subtitle,R.drawable.icon_user_main);
-            toolbar_subtitle.setText("");
+            toolbar_subtitle_mine.setVisibility(View.VISIBLE);
+            toolbar_subtitle.setVisibility(View.GONE);
             bt_ru.setVisibility(View.VISIBLE);
-        }else {
-            toolbar_subtitle.setText("待");
+        } else {
             bt_ru.setVisibility(View.GONE);
+            toolbar_subtitle_mine.setVisibility(View.GONE);
+            toolbar_subtitle.setVisibility(View.VISIBLE);
         }
     }
 
@@ -128,19 +131,21 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
         getDate();
     }
 
-    @OnClick({R.id.toolbar_subtitle,R.id.bt_ru})
+    @OnClick({R.id.toolbar_subtitle, R.id.bt_ru, R.id.toolbar_subtitle_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
-                if (CacheUtility.getRole() == 2) {
-                    Intent intent = new Intent();
-                    intent.setClass(TraceActivity.this, MineActivity.class);
-                    startActivity(intent);
-                }else {
-                    Intent intent = new Intent();
-                    intent.setClass(TraceActivity.this, PendingCompanyActivity.class);
-                    startActivity(intent);
-                }
+
+                Intent intent = new Intent();
+                intent.setClass(TraceActivity.this, PendingCompanyActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.toolbar_subtitle_mine:
+
+                Intent intent2 = new Intent();
+                intent2.setClass(TraceActivity.this, MineActivity.class);
+                startActivity(intent2);
+
                 break;
             case R.id.bt_ru:
                 Intent intent1 = new Intent();
@@ -152,7 +157,7 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
 
     @Override
     protected void initToolBar() {
-        if (CacheUtility.getRole()!= 2) {
+        if (CacheUtility.getRole() != 2) {
             ToolBarUtils.getInstance().setNavigation(toolbar);
         }
 

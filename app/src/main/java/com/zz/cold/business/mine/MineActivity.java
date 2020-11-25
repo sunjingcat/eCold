@@ -28,6 +28,7 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 /**
  * 我的
  */
@@ -77,13 +78,13 @@ public class MineActivity extends MyBaseActivity<Contract.IsetMineInfoPresenter>
     @Override
     public void showUserInfo(UserBasicBean userInfo) {
         this.userInfo = userInfo;
-        myName.setText(userInfo.getUserName() + "");
-        notContent.setText(userInfo.getPhonenumber() + "");
+        myName.setText(userInfo.getLoginName() + "");
+//        notContent.setText(userInfo.getPhonenumber() + "");
 
-        if (!TextUtils.isEmpty(userInfo.getAvatar())) {
-
-            GlideUtils.loadCircleImage(this, userInfo.getAvatar(), myHead);
-        }
+//        if (!TextUtils.isEmpty(userInfo.getAvatar())) {
+//
+//            GlideUtils.loadCircleImage(this, userInfo.getAvatar(), myHead);
+//        }
     }
 
     @Override

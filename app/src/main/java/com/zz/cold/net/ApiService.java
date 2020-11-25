@@ -10,10 +10,12 @@ import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.ImageBean;
 import com.zz.cold.bean.MainShowData;
 import com.zz.cold.bean.PendingCompanyBean;
+import com.zz.cold.bean.PendingGoods;
 import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.bean.StorageBean;
 import com.zz.cold.bean.TemperatureBean;
 import com.zz.cold.bean.TraceBean;
+import com.zz.cold.bean.TracePostBean;
 import com.zz.cold.bean.UserBasicBean;
 import com.zz.cold.bean.UserInfo;
 import com.zz.cold.bean.Version;
@@ -166,12 +168,20 @@ public interface ApiService {
     Observable<JsonT<List<PendingCompanyBean>>> getPendingList(@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/coldchainGoodsAccount/listByColdstorageId")
-    Observable<JsonT<List<PendingCompanyBean>>> getPendingGoodsList(@QueryMap Map<String, Object> params);
+    Observable<JsonT<List<PendingGoods>>> getPendingGoodsList(@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/coldchainGoodsAccount/{id}")
     Observable<JsonT<TraceBean>> getTraceInfo(@Path("id") String id);
 
+    @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoodsAccount")
-    Observable<JsonT> postGoodsAccount(@QueryMap Map<String, Object> params);
+    Observable<JsonT> postGoodsAccount(@Body TracePostBean requestBody);
+
+    @Headers("Content-Type: application/json")
+    @POST("/app/v1/coldchain/coldchainGoodsAccount/confirm")
+    Observable<JsonT> confirmGoodsAccount(@Body TracePostBean requestBody);
+
+    @POST("/app/v1/coldchain/coldchainGoodsAccount/review/{accountId}")
+    Observable<JsonT> reviewGoods(@Path("accountId") String accountId,@QueryMap Map<String, Object> params);
 }
 

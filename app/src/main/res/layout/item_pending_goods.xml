@@ -52,7 +52,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/item_time"
+                    android:id="@+id/item_count"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
@@ -64,7 +64,7 @@
                     tools:text="进货 100kg" />
 
                 <TextView
-                    android:id="@+id/item_status"
+                    android:id="@+id/item_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -84,21 +84,29 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@drawable/border_radius_5_yellow"
+            <TextView
+                android:id="@+id/bt_ok"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_radius_30_f6"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:text="通过"
                 android:textColor="@color/white"
                 android:textSize="15dp" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@drawable/border_radius_5_yellow"
-                android:text="不通过"
+            <TextView
+                android:id="@+id/bt_no"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/white"
+                android:background="@drawable/border_radius_30_9c"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="不通过"
+                android:textColor="@color/colorPrimary"
                 android:textSize="15dp" />
 
         </LinearLayout>

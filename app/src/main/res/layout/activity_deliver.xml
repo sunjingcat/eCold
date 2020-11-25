@@ -124,7 +124,8 @@
             </LinearLayout>
 
 
-            <include layout="@layout/layout_images" />
+            <include layout="@layout/layout_images"
+                android:visibility="gone"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

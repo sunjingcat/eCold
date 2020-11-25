@@ -6,6 +6,7 @@ import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.TraceBean;
+import com.zz.cold.bean.TracePostBean;
 import com.zz.cold.business.trace.mvp.Contract;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
@@ -47,11 +48,11 @@ public class PurchaseAddPresenter extends MyBasePresenterImpl<Contract.IGetPurch
     @Override
     public void getType(String type) {
         Map<String, Object> map = new HashMap<>();
-        map.put("dictType",type);
+        map.put("dictType", type);
         RxNetUtils.request(getApi(ApiService.class).getDicts(map), new RequestObserver<JsonT<List<DictBean>>>(this) {
             @Override
             protected void onSuccess(JsonT<List<DictBean>> jsonT) {
-                view.showType(type,jsonT.getData());
+                view.showType(type, jsonT.getData());
             }
 
             @Override
@@ -80,13 +81,13 @@ public class PurchaseAddPresenter extends MyBasePresenterImpl<Contract.IGetPurch
 
 
     @Override
-    public void postImage(int requestCode,String localPath, List<MultipartBody.Part> imgs) {
+    public void postImage(int requestCode, String localPath, List<MultipartBody.Part> imgs) {
 
         RxNetUtils.request(getApi(ApiService.class).uploadImg(imgs), new RequestObserver<JsonT<ImageBack>>(this) {
             @Override
             protected void onSuccess(JsonT<ImageBack> data) {
                 if (data.isSuccess()) {
-                    view.showPostImage(requestCode,localPath,data.getData());
+                    view.showPostImage(requestCode, localPath, data.getData());
                 } else {
 
                 }
@@ -121,34 +122,35 @@ public class PurchaseAddPresenter extends MyBasePresenterImpl<Contract.IGetPurch
     }
 
     @Override
-    public void submitData(Map<String, Object> map) {
-//        if (map.containsKey("id")) {
-//            RxNetUtils.request(getApi(ApiService.class).editPurchaseInfo(map), new RequestObserver<JsonT>(this) {
-//                @Override
-//                protected void onSuccess(JsonT jsonT) {
-//                    view.showResult();
-//                }
-//
-//                @Override
-//                protected void onFail2(JsonT stringJsonT) {
-//                    super.onFail2(stringJsonT);
-//                    view.showToast(stringJsonT.getMessage());
-//                }
-//            }, mDialog);
-//        } else {
-            RxNetUtils.request(getApi(ApiService.class).postGoodsAccount(map), new RequestObserver<JsonT>(this) {
-                @Override
-                protected void onSuccess(JsonT jsonT) {
-                    view.showResult();
-                }
+    public void submitData(TracePostBean tracePostBean) {
 
-                @Override
-                protected void onFail2(JsonT stringJsonT) {
-                    super.onFail2(stringJsonT);
-                    view.showToast(stringJsonT.getMessage());
-                }
-            }, mDialog);
-//        }
+        RxNetUtils.request(getApi(ApiService.class).confirmGoodsAccount(tracePostBean), new RequestObserver<JsonT>(this) {
+            @Override
+            protected void onSuccess(JsonT jsonT) {
+                postData(tracePostBean);
+            }
+
+            @Override
+            protected void onFail2(JsonT stringJsonT) {
+                super.onFail2(stringJsonT);
+                view.showToast(stringJsonT.getMessage());
+            }
+        }, mDialog);
+    }
+
+    public void postData(TracePostBean tracePostBean) {
+        RxNetUtils.request(getApi(ApiService.class).postGoodsAccount(tracePostBean), new RequestObserver<JsonT>(this) {
+            @Override
+            protected void onSuccess(JsonT jsonT) {
+                view.showResult();
+            }
+
+            @Override
+            protected void onFail2(JsonT stringJsonT) {
+                super.onFail2(stringJsonT);
+                view.showToast(stringJsonT.getMessage());
+            }
+        }, mDialog);
     }
 
 

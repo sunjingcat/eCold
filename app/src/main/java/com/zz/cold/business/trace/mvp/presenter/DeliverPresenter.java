@@ -2,6 +2,7 @@ package com.zz.cold.business.trace.mvp.presenter;
 
 
 import com.zz.cold.bean.ImageBack;
+import com.zz.cold.bean.TracePostBean;
 import com.zz.cold.business.trace.mvp.Contract;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
@@ -48,7 +49,7 @@ public class DeliverPresenter extends MyBasePresenterImpl<Contract.IGetDeliverVi
     }
 
     @Override
-    public void submitData(Map<String, Object> map) {
+    public void submitData(TracePostBean tracePostBean) {
 //        if (map.containsKey("id")) {
 //            RxNetUtils.request(getApi(ApiService.class).editPurchaseInfo(map), new RequestObserver<JsonT>(this) {
 //                @Override
@@ -63,7 +64,7 @@ public class DeliverPresenter extends MyBasePresenterImpl<Contract.IGetDeliverVi
 //                }
 //            }, mDialog);
 //        } else {
-            RxNetUtils.request(getApi(ApiService.class).postGoodsAccount(map), new RequestObserver<JsonT>(this) {
+            RxNetUtils.request(getApi(ApiService.class).postGoodsAccount(tracePostBean), new RequestObserver<JsonT>(this) {
                 @Override
                 protected void onSuccess(JsonT jsonT) {
                     view.showResult();

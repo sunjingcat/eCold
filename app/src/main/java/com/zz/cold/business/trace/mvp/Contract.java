@@ -5,6 +5,7 @@ import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.TraceBean;
+import com.zz.cold.bean.TracePostBean;
 import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.lib.core.ui.mvp.BaseView;
 
@@ -15,7 +16,7 @@ import okhttp3.MultipartBody;
 
 public class Contract {
     public interface IsetPurchaseAddPresenter extends BasePresenter {
-        void submitData(Map<String, Object> map);
+        void submitData(TracePostBean tracePostBean);
         void getData(String id);
         void getType(String type);
         void getGoodsType();
@@ -37,7 +38,7 @@ public class Contract {
     }
 
     public interface IsetDeliverPresenter extends BasePresenter {
-        void submitData(Map<String, Object> map);
+        void submitData(TracePostBean tracePostBean);
         void postImage(String localPath,List<MultipartBody.Part> imgs);
     }
 

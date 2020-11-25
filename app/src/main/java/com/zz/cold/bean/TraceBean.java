@@ -39,11 +39,11 @@ public class TraceBean {
     String isClhsjcText;// 否,
     String isXdzmText;// 否,
     String isFfzzwjcText;// 否,
-    List<String> sphsjcEnclosureList;// null,
-    List<String> ryhsjcEnclosureList;// null,
-    List<String> clhsjcEnclosureList;// null,
-    List<String> xdzmEnclosureList;// null,
-    List<String> ffzzwjcEnclosureList;// null,
+    List<ImageBack> sphsjcEnclosureList;// null,
+    List<ImageBack> ryhsjcEnclosureList;// null,
+    List<ImageBack> clhsjcEnclosureList;// null,
+    List<ImageBack> xdzmEnclosureList;// null,
+    List<ImageBack> ffzzwjcEnclosureList;// null,
     List<WmsBean> coldchainGoodsAccountcList;// null,
 
     public List<WmsBean> getColdchainGoodsAccountcList() {
@@ -90,23 +90,23 @@ public class TraceBean {
         return isFfzzwjcText;
     }
 
-    public List<String> getSphsjcEnclosureList() {
+    public List<ImageBack> getSphsjcEnclosureList() {
         return sphsjcEnclosureList;
     }
 
-    public List<String> getRyhsjcEnclosureList() {
+    public List<ImageBack> getRyhsjcEnclosureList() {
         return ryhsjcEnclosureList;
     }
 
-    public List<String> getClhsjcEnclosureList() {
+    public List<ImageBack> getClhsjcEnclosureList() {
         return clhsjcEnclosureList;
     }
 
-    public List<String> getXdzmEnclosureList() {
+    public List<ImageBack> getXdzmEnclosureList() {
         return xdzmEnclosureList;
     }
 
-    public List<String> getFfzzwjcEnclosureList() {
+    public List<ImageBack> getFfzzwjcEnclosureList() {
         return ffzzwjcEnclosureList;
     }
 

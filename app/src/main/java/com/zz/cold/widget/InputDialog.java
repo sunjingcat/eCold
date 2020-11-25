@@ -68,6 +68,7 @@ public class InputDialog extends Dialog {
             this.message = msg;
             this.title = title;
         }
+
         public Builder setMessage(String message) {
             this.message = message;
             return this;
@@ -87,9 +88,11 @@ public class InputDialog extends Dialog {
             this.title = title;
             return this;
         }
+
         public interface OnPClickListener {
             void onClick(InputDialog v, String msg);
         }
+
         public Builder setShowCloseIcon(boolean showCloseIcon) {
             this.showCloseIcon = showCloseIcon;
             return this;
@@ -207,8 +210,8 @@ public class InputDialog extends Dialog {
                 if (negativeButtonClickListener != null) {
                     ((TextView) layout.findViewById(R.id.lblNegative)).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
-                            negativeButtonClickListener.onClick(dialog,"");
-                            if (dialog !=null &&dialog.isShowing()){
+                            negativeButtonClickListener.onClick(dialog, "");
+                            if (dialog != null && dialog.isShowing()) {
                                 dialog.dismiss();
                             }
                         }
@@ -230,13 +233,13 @@ public class InputDialog extends Dialog {
                     lblPositive.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             String s = msg.getText().toString();
-                            if (TextUtils.isEmpty(s)){
-                                ToastUtils.showToast("请输入名称");
+                            if (TextUtils.isEmpty(s)) {
+                                ToastUtils.showToast("请输入内容");
                                 return;
                             }
-                            positiveButtonClickListener.onClick(dialog,s);
+                            positiveButtonClickListener.onClick(dialog, s);
                             SoftKeyboardUtils.closeInoutDecorView((Activity) context);
-                            if (dialog !=null &&dialog.isShowing()){
+                            if (dialog != null && dialog.isShowing()) {
                                 dialog.dismiss();
                             }
                         }
@@ -256,7 +259,8 @@ public class InputDialog extends Dialog {
             return dialog;
         }
     }
-   public interface OnClickListener {
+
+    public interface OnClickListener {
         void onClick(DialogInterface dialog, String msg);
     }
 }

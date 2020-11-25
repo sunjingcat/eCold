@@ -17,6 +17,7 @@ import com.zz.cold.R;
 
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.ImageBack;
+import com.zz.cold.bean.TracePostBean;
 import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
 import com.zz.cold.business.trace.mvp.Contract;
 import com.zz.cold.business.trace.mvp.presenter.DeliverPresenter;
@@ -54,12 +55,14 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
     RecyclerView rvImages;
     @BindView(R.id.text_time)
     TextView text_time;
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
     @BindView(R.id.text_Name)
     TextView text_Name;
     @BindView(R.id.text_count)
     EditText text_count;
     String id;
-
+    int operationType;
     @Override
     protected int getContentView() {
         return R.layout.activity_deliver;
@@ -104,6 +107,12 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
         });
         id = getIntent().getStringExtra("id");
         String name = getIntent().getStringExtra("name");
+         operationType = getIntent().getIntExtra("operationType",1);
+        if (operationType==2){
+            toolbar_title.setText("出货");
+        }else {
+            toolbar_title.setText("进货");
+        }
         text_Name.setText(name+"");
     }
 
@@ -145,12 +154,12 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
     }
 
     void postData() {
-        Map<String, Object> params = new HashMap<>();
-        params.put("operationType", 2);
-        params.put("id", id);
-        params.put("time", getText(text_time));
-        params.put("count", getText(text_count));
-        params.put("enclosureIds", PostUtils.getImageIds(images));
+        TracePostBean params = new TracePostBean();
+        params.setOperationType(operationType);
+        params.setId(id);
+        params.setTime(getText(text_time));
+        params.setCount(getText(text_count));
+        params.setEnclosureIds(PostUtils.getImageIdList(images));
         mPresenter.submitData(params);
     }
 

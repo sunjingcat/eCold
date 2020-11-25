@@ -33,6 +33,7 @@ import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.TraceBean;
+import com.zz.cold.bean.TracePostBean;
 import com.zz.cold.business.daily.AddDailyActivity;
 import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
 import com.zz.cold.business.trace.mvp.Contract;
@@ -146,9 +147,9 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
 
     String id;
 
-    String  goodsType1="";
-    String  goodsType2="";
-    String  goodsType3="";
+    String goodsType1 = "";
+    String goodsType2 = "";
+    String goodsType3 = "";
 
     @Override
     protected int getContentView() {
@@ -371,9 +372,9 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                                 + options2Items.get(options1).get(option2)
                                 + options3Items.get(options1).get(option2).get(options3).getPickerViewText();
                         text_goodsType.setText(tx);
-                        goodsType1=options1Items.get(options1).getDictValue();
-                        goodsType2=options2Items.get(options1).get(option2).getDictValue();
-                        goodsType3=options3Items.get(options1).get(option2).get(options3).getDictValue();
+                        goodsType1 = options1Items.get(options1).getDictValue();
+                        goodsType2 = options2Items.get(options1).get(option2).getDictValue();
+                        goodsType3 = options3Items.get(options1).get(option2).get(options3).getDictValue();
                     }
                 }).build();
                 pvOptions.setPicker(options1Items, options2Items, options3Items);
@@ -490,37 +491,38 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     }
 
     void postData() {
-        Map<String, Object> params = new HashMap<>();
-        params.put("operationType", 1);
-        params.put("goodsName", getText(text_goodsName));
-        params.put("productionDate", getText(text_productionDate));
-        params.put("goodsType1", goodsType1);
-        params.put("goodsType2", goodsType2);
-        params.put("goodsType3", goodsType3);
-        params.put("spec", getText(text_spec));
-        params.put("count", getText(text_count));
-        params.put("purchaseTime", getText(text_purchaseTime));
-        params.put("supplierName", getText(text_supplierName));
-        params.put("supplierAddress", getText(text_supplierAddress));
-        params.put("supplierContact", getText(text_supplierContact));
-        params.put("period", getText(text_period));
 
-        params.put("isImported", isImported);
-        params.put("entryPort", getText(text_entryPort));
-        params.put("isSphsjc", isSphsjc);
-        params.put("isRyhsjc", isRyhsjc);
-        params.put("isClhsjc", isClhsjc);
-        params.put("isXdzm", isXdzm);
-        params.put("isFfzzwjc", isFfzzwjc);
+        TracePostBean params = new TracePostBean();
+        params.setOperationType(1);
+        params.setGoodsName(getText(text_goodsName));
+        params.setProductionDate(getText(text_productionDate));
+        params.setGoodsType1(goodsType1);
+        params.setGoodsType2(goodsType2);
+        params.setGoodsType3(goodsType3);
+        params.setSpec(getText(text_spec));
+        params.setCount(getText(text_count));
+        params.setPurchaseTime(getText(text_purchaseTime));
+        params.setSupplierName(getText(text_supplierName));
+        params.setSupplierAddress(getText(text_supplierAddress));
+        params.setSupplierContact(getText(text_supplierContact));
+        params.setPeriod(getText(text_period));
 
-        params.put("sphsjcEnclosureIdList", PostUtils.getImageIds(images_Sphsjc));
-        params.put("ryhsjcEnclosureIdList", PostUtils.getImageIds(images_Ryhsjc));
-        params.put("clhsjcEnclosureIdList", PostUtils.getImageIds(images_Clhsjc));
-        params.put("xdzmEnclosureIdList", PostUtils.getImageIds(images_Xdzm));
-        params.put("ffzzwjcEnclosureIdList", PostUtils.getImageIds(images_ffzzwjc));
-        params.put("enclosureIds", PostUtils.getImageIds(images));
+        params.setIsImported(isImported);
+        params.setEntryPort(getText(text_entryPort));
+        params.setIsSphsjc(isSphsjc);
+        params.setIsRyhsjc(isRyhsjc);
+        params.setIsClhsjc(isClhsjc);
+        params.setIsXdzm(isXdzm);
+        params.setIsFfzzwjc(isFfzzwjc);
+
+        params.setSphsjcEnclosureIdList(PostUtils.getImageIdList(images_Sphsjc));
+        params.setRyhsjcEnclosureIdList(PostUtils.getImageIdList(images_Ryhsjc));
+        params.setClhsjcEnclosureIdList(PostUtils.getImageIdList(images_Clhsjc));
+        params.setXdzmEnclosureIdList(PostUtils.getImageIdList(images_Xdzm));
+        params.setFfzzwjcEnclosureIdList(PostUtils.getImageIdList(images_ffzzwjc));
+        params.setEnclosureIds(PostUtils.getImageIdList(images));
         if (!TextUtils.isEmpty(id)) {
-            params.put("id", id);
+            params.setId(id);
         }
 
         mPresenter.submitData(params);
@@ -529,20 +531,25 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     @Override
     public void showInfo(TraceBean data) {
         goodsBean = data;
-        text_goodsName.setText(data.getGoodsName()+"");
-        text_productionDate.setText(data.getProductionDate()+"");
-        text_spec.setText(data.getSpec()+"");
-        text_count.setText(data.getCount()+"");
-        text_purchaseTime.setText(data.getPurchaseTime()+"");
-        text_supplierName.setText(data.getSupplierName()+"");
-        text_supplierAddress.setText(data.getSupplierAddress()+"");
-        text_supplierContact.setText(data.getSupplierContact()+"");
-        text_period.setText(data.getPeriod()+"");
+        text_goodsName.setText(data.getGoodsName() + "");
+        text_productionDate.setText(data.getProductionDate() + "");
+        text_spec.setText(data.getSpec() + "");
+        text_count.setText(data.getCount() + "");
+        text_purchaseTime.setText(data.getPurchaseTime() + "");
+        text_supplierName.setText(data.getSupplierName() + "");
+        text_supplierAddress.setText(data.getSupplierAddress() + "");
+        text_supplierContact.setText(data.getSupplierContact() + "");
+        text_period.setText(data.getPeriod() + "");
         isImported = data.getIsImported();
-        text_isImported.setText(data.getIsImportedText()+"");
-        text_entryPort.setText(data.getEntryPort()+"");
+        text_isImported.setText(data.getIsImportedText() + "");
+        text_entryPort.setText(data.getEntryPort() + "");
         isSphsjc = data.getIsSphsjc();
         text_isSphsjc.setText(data.getIsSphsjcText());
+        if (isImported.equals("进口")){
+            ll_isImported.setVisibility(View.VISIBLE);
+        }else {
+            ll_isImported.setVisibility(View.GONE);
+        }
 
         isRyhsjc = data.getIsRyhsjc();
         text_isRyhsjc.setText(data.getIsRyhsjcText());
@@ -559,7 +566,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         goodsType1 = data.getGoodsType1();
         goodsType2 = data.getGoodsType2();
         goodsType3 = data.getGoodsType3();
-        text_goodsType.setText(data.getGoodsType1Text()+""+data.getGoodsType2Text()+data.getGoodsType3Text());
+        text_goodsType.setText(data.getGoodsType1Text() + "" + data.getGoodsType2Text() + data.getGoodsType3Text());
 
     }
 
