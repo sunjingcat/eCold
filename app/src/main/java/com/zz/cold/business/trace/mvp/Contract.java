@@ -4,6 +4,7 @@ import com.zz.cold.bean.CategoryBean;
 import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.ImageBack;
+import com.zz.cold.bean.TraceBean;
 import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.lib.core.ui.mvp.BaseView;
 
@@ -26,7 +27,7 @@ public class Contract {
     }
 
     public interface IGetPurchaseAddView extends BaseView {
-        void showPurchaseInfo(GoodsBean data);
+        void showInfo(TraceBean data);
         void showResult();
         void showPostImage(int requestCode,String localPath,ImageBack imageBack);
 

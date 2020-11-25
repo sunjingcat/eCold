@@ -32,6 +32,7 @@ import com.zz.cold.bean.CategoryBean;
 import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.ImageBack;
+import com.zz.cold.bean.TraceBean;
 import com.zz.cold.business.daily.AddDailyActivity;
 import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
 import com.zz.cold.business.trace.mvp.Contract;
@@ -141,9 +142,13 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     @BindView(R.id.text_isFfzzwjc)
     TextView text_isFfzzwjc;
     int isFfzzwjc = 0;
-    GoodsBean goodsBean;
+    TraceBean goodsBean;
 
     String id;
+
+    String  goodsType1="";
+    String  goodsType2="";
+    String  goodsType3="";
 
     @Override
     protected int getContentView() {
@@ -366,6 +371,9 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                                 + options2Items.get(options1).get(option2)
                                 + options3Items.get(options1).get(option2).get(options3).getPickerViewText();
                         text_goodsType.setText(tx);
+                        goodsType1=options1Items.get(options1).getDictValue();
+                        goodsType2=options2Items.get(options1).get(option2).getDictValue();
+                        goodsType3=options3Items.get(options1).get(option2).get(options3).getDictValue();
                     }
                 }).build();
                 pvOptions.setPicker(options1Items, options2Items, options3Items);
@@ -486,6 +494,9 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         params.put("operationType", 1);
         params.put("goodsName", getText(text_goodsName));
         params.put("productionDate", getText(text_productionDate));
+        params.put("goodsType1", goodsType1);
+        params.put("goodsType2", goodsType2);
+        params.put("goodsType3", goodsType3);
         params.put("spec", getText(text_spec));
         params.put("count", getText(text_count));
         params.put("purchaseTime", getText(text_purchaseTime));
@@ -516,8 +527,39 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     }
 
     @Override
-    public void showPurchaseInfo(GoodsBean data) {
+    public void showInfo(TraceBean data) {
         goodsBean = data;
+        text_goodsName.setText(data.getGoodsName()+"");
+        text_productionDate.setText(data.getProductionDate()+"");
+        text_spec.setText(data.getSpec()+"");
+        text_count.setText(data.getCount()+"");
+        text_purchaseTime.setText(data.getPurchaseTime()+"");
+        text_supplierName.setText(data.getSupplierName()+"");
+        text_supplierAddress.setText(data.getSupplierAddress()+"");
+        text_supplierContact.setText(data.getSupplierContact()+"");
+        text_period.setText(data.getPeriod()+"");
+        isImported = data.getIsImported();
+        text_isImported.setText(data.getIsImportedText()+"");
+        text_entryPort.setText(data.getEntryPort()+"");
+        isSphsjc = data.getIsSphsjc();
+        text_isSphsjc.setText(data.getIsSphsjcText());
+
+        isRyhsjc = data.getIsRyhsjc();
+        text_isRyhsjc.setText(data.getIsRyhsjcText());
+
+        isClhsjc = data.getIsClhsjc();
+        text_isClhsjc.setText(data.getIsClhsjcText());
+
+        isXdzm = data.getIsXdzm();
+        text_isXdzm.setText(data.getIsXdzmText());
+
+        isFfzzwjc = data.getIsFfzzwjc();
+        text_isFfzzwjc.setText(data.getIsFfzzwjcText());
+
+        goodsType1 = data.getGoodsType1();
+        goodsType2 = data.getGoodsType2();
+        goodsType3 = data.getGoodsType3();
+        text_goodsType.setText(data.getGoodsType1Text()+""+data.getGoodsType2Text()+data.getGoodsType3Text());
 
     }
 

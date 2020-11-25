@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.zz.cold.R;
 import com.zz.cold.bean.TraceBean;
 import com.zz.cold.bean.WmsBean;
 
@@ -22,6 +23,10 @@ public class WmsAdapter extends BaseQuickAdapter<WmsBean, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder holder, final WmsBean item) {
+        holder.setText(R.id.item_title,item.getOperationTypeText()+"");
+        holder.setText(R.id.item_weight,item.getCount()+"");
+        holder.setText(R.id.item_time,item.getOperationTime()+"");
+        holder.setText(R.id.item_status,item.getReviewStatusText()+"");
 
     }
 }

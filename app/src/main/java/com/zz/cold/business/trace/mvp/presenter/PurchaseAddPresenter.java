@@ -5,6 +5,7 @@ import com.zz.cold.bean.CategoryBean;
 import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.ImageBack;
+import com.zz.cold.bean.TraceBean;
 import com.zz.cold.business.trace.mvp.Contract;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
@@ -30,17 +31,17 @@ public class PurchaseAddPresenter extends MyBasePresenterImpl<Contract.IGetPurch
 
     @Override
     public void getData(String id) {
-//        RxNetUtils.request(getApi(ApiService.class).getPurchaseInfo(id), new RequestObserver<JsonT<GoodsBean>>(this) {
-//            @Override
-//            protected void onSuccess(JsonT<GoodsBean> jsonT) {
-//                view.showPurchaseInfo(jsonT.getData());
-//            }
-//
-//            @Override
-//            protected void onFail2(JsonT<GoodsBean> stringJsonT) {
-//                super.onFail2(stringJsonT);
-//            }
-//        }, mDialog);
+        RxNetUtils.request(getApi(ApiService.class).getTraceInfo(id), new RequestObserver<JsonT<TraceBean>>(this) {
+            @Override
+            protected void onSuccess(JsonT<TraceBean> jsonT) {
+                view.showInfo(jsonT.getData());
+            }
+
+            @Override
+            protected void onFail2(JsonT<TraceBean> stringJsonT) {
+                super.onFail2(stringJsonT);
+            }
+        }, mDialog);
     }
 
     @Override

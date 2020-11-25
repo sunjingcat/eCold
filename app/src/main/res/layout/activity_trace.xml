@@ -62,7 +62,9 @@
             android:layout_alignParentRight="true"
             android:layout_margin="20dp"
             android:elevation="@dimen/dp_10"
-            android:background="@drawable/icon_ru" />
+            android:background="@drawable/border_radius_40_theme"
+            android:text="入"
+            android:textColor="@color/white"/>
 
     </RelativeLayout>
 </LinearLayout>

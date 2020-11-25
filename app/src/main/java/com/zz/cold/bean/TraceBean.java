@@ -1,5 +1,7 @@
 package com.zz.cold.bean;
 
+import java.util.List;
+
 public class TraceBean {
 
     String id;// 1,
@@ -19,7 +21,7 @@ public class TraceBean {
     String productionAddress;// null,
     String transportMode;// null,
     String period;// 2020-11-25,
-    int isImported;// 1,
+    String isImported;// 1,
     String entryPort;// ,
     int isSphsjc;// 0,
     int isRyhsjc;// 0,
@@ -27,6 +29,86 @@ public class TraceBean {
     int isXdzm;// 0,
     int isFfzzwjc;// 0,
     String operatorName;// 冷库1
+    String goodsType1Text;// ,
+    String goodsType2Text;// ,
+    String goodsType3Text;// ,
+    String transportModeText;// ,
+    String isImportedText;// 国产,
+    String isSphsjcText;// 否,
+    String isRyhsjcText;// 否,
+    String isClhsjcText;// 否,
+    String isXdzmText;// 否,
+    String isFfzzwjcText;// 否,
+    List<String> sphsjcEnclosureList;// null,
+    List<String> ryhsjcEnclosureList;// null,
+    List<String> clhsjcEnclosureList;// null,
+    List<String> xdzmEnclosureList;// null,
+    List<String> ffzzwjcEnclosureList;// null,
+    List<WmsBean> coldchainGoodsAccountcList;// null,
+
+    public List<WmsBean> getColdchainGoodsAccountcList() {
+        return coldchainGoodsAccountcList;
+    }
+
+    public String getGoodsType1Text() {
+        return goodsType1Text;
+    }
+
+    public String getGoodsType2Text() {
+        return goodsType2Text;
+    }
+
+    public String getGoodsType3Text() {
+        return goodsType3Text;
+    }
+
+    public String getTransportModeText() {
+        return transportModeText;
+    }
+
+    public String getIsImportedText() {
+        return isImportedText;
+    }
+
+    public String getIsSphsjcText() {
+        return isSphsjcText;
+    }
+
+    public String getIsRyhsjcText() {
+        return isRyhsjcText;
+    }
+
+    public String getIsClhsjcText() {
+        return isClhsjcText;
+    }
+
+    public String getIsXdzmText() {
+        return isXdzmText;
+    }
+
+    public String getIsFfzzwjcText() {
+        return isFfzzwjcText;
+    }
+
+    public List<String> getSphsjcEnclosureList() {
+        return sphsjcEnclosureList;
+    }
+
+    public List<String> getRyhsjcEnclosureList() {
+        return ryhsjcEnclosureList;
+    }
+
+    public List<String> getClhsjcEnclosureList() {
+        return clhsjcEnclosureList;
+    }
+
+    public List<String> getXdzmEnclosureList() {
+        return xdzmEnclosureList;
+    }
+
+    public List<String> getFfzzwjcEnclosureList() {
+        return ffzzwjcEnclosureList;
+    }
 
     public String getId() {
         return id;
@@ -96,7 +178,7 @@ public class TraceBean {
         return period;
     }
 
-    public int getIsImported() {
+    public String getIsImported() {
         return isImported;
     }
 
