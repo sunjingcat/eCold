@@ -3,7 +3,7 @@
     android:id="@+id/activity_startpage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#033A8B"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
 
     >
@@ -34,17 +34,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_margin="50dp"
+            android:layout_marginHorizontal="50dp"
             android:layout_marginTop="100dp"
             android:src="@drawable/image_start_logo" />
 
-        <ImageView
-            android:layout_width="150dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/iv_logo"
+            android:layout_below="@+id/iv_logo"
             android:layout_centerHorizontal="true"
-
-            android:src="@drawable/image_start_text" />
+            android:layout_marginTop="50dp"
+            android:text="智慧冷链"
+            android:textColor="@color/white"
+            android:textSize="40dp" />
 
         <TextView
             android:layout_width="match_parent"
