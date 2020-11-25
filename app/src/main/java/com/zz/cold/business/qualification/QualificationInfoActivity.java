@@ -122,7 +122,7 @@ public class QualificationInfoActivity extends MyBaseActivity {
                 Intent intent = new Intent();
                 intent.setClass(QualificationInfoActivity.this, AddQualificationActivity.class);
                 intent.putExtra("id", qualificationBean.getId());
-                startActivity(intent);
+                startActivityForResult(intent,3001);
                 break;
             case R.id.tv_delete:
 
@@ -174,6 +174,7 @@ public class QualificationInfoActivity extends MyBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode==RESULT_OK){
             getData(id);
+            getImages(id);
         }
     }
 

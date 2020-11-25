@@ -120,7 +120,7 @@ public class StorageInfoActivity extends MyBaseActivity {
                 Intent intent = new Intent();
                 intent.setClass(StorageInfoActivity.this, AddStorageActivity.class);
                 intent.putExtra("id", storageBean.getId());
-                startActivity(intent);
+                startActivityForResult(intent, 5001);
                 break;
             case R.id.tv_delete:
                 if (storageBean == null) return;
@@ -204,17 +204,8 @@ public class StorageInfoActivity extends MyBaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && data != null) {
-            switch (requestCode) {
-//                case 2001:
-//                    EquipmentBean equipmentBean = data.getParcelableExtra("equipment");
-//                    equipmentBeans.add(equipmentBean);
-//                    equipmentAdapter.notifyDataSetChanged();
-//                    break;
-                default:
-                    getData(id);
-                    break;
-            }
+        if (resultCode == RESULT_OK) {
+            getData(id);
         }
 
     }

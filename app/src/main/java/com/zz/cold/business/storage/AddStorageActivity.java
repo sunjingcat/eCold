@@ -72,6 +72,8 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
 
     @BindView(R.id.text_isAccord)
     TextView text_isAccord;
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
     int isAccord = -1;
     ArrayList<EquipmentBean> equipmentBeans = new ArrayList<>();
     EquipmentAdapter equipmentAdapter;
@@ -104,6 +106,7 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
             mPresenter.getData(id);
             rv.setVisibility(View.GONE);
             ll_equipment_add.setVisibility(View.GONE);
+            toolbar_title.setText("编辑库房信息");
         }
         adapter.setOnclick(new ImageDeleteItemAdapter.Onclick() {
             @Override
@@ -161,6 +164,7 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
         text_warehouseName.setText(data.getWarehouseName() + "");
         text_temperatureName.setText(data.getTemperatureName() + "");
         text_isAccord.setText(data.getIsAccord() == 0 ? "否" : "是");
+        isAccord = data.getIsAccord();
 //        if (data.getEquipmentList() != null) {
 //            equipmentBeans.clear();
 //            equipmentBeans.addAll(data.getEquipmentList());
@@ -175,6 +179,7 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
         storageBean.setWarehouseName(getText(text_warehouseName));
         storageBean.setTemperatureName(getText(text_temperatureName));
         storageBean.setIsAccord(isAccord);
+
         storageBean.setEnclosureIds(PostUtils.getImageIds(images));
         if (!TextUtils.isEmpty(id)) {
             storageBean.setId( id);
