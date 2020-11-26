@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -54,7 +55,10 @@ public class AddEquipmentActivity extends MyBaseActivity<Contract.IsetEquipmentA
     RecyclerView rvImages;
 
     String warehouseId;
+    String id;
 
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
     @BindView(R.id.text_equipmentName)
     EditText text_equipmentName;
     @BindView(R.id.text_equipmentRemark)
@@ -78,6 +82,13 @@ public class AddEquipmentActivity extends MyBaseActivity<Contract.IsetEquipmentA
         adapter = new ImageDeleteItemAdapter(this, images);
         rvImages.setAdapter(adapter);
         warehouseId = getIntent().getStringExtra("warehouseId");
+        id = getIntent().getStringExtra("id");
+        if (!TextUtils.isEmpty(id)){
+            toolbar_title.setText("修改贮存设备");
+            mPresenter.getData(id);
+        }else {
+            toolbar_title.setText("新增贮存设备");
+        }
 
         adapter.setOnclick(new ImageDeleteItemAdapter.Onclick() {
             @Override
@@ -144,7 +155,9 @@ public class AddEquipmentActivity extends MyBaseActivity<Contract.IsetEquipmentA
 
     @Override
     public void showEquipmentInfo(EquipmentBean data) {
-
+        text_equipmentName.setText(data.getEquipmentName()+"");
+        text_equipmentRemark.setText(data.getEquipmentRemark()+"");
+        warehouseId = data.getWarehouseId();
     }
 
 

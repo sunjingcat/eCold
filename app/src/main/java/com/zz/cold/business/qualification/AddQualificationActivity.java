@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -60,12 +61,14 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     @BindView(R.id.rv_image)
     RecyclerView rvImages;
 
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
     @BindView(R.id.et_location)
     TextView etLocation;
     @BindView(R.id.et_coldstorageType)
     TextView et_coldstorageType;
-    String coldstorageType1="";
-    String coldstorageType2="";
+    String coldstorageType1 = "";
+    String coldstorageType2 = "";
 
     @BindView(R.id.et_operatorName)
     EditText etOperatorName;
@@ -87,6 +90,10 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
 
     @BindView(R.id.et_password)
     EditText et_password;
+    @BindView(R.id.ll_loginName)
+    LinearLayout ll_loginName;
+    @BindView(R.id.ll_password)
+    LinearLayout ll_password;
 
     QualificationBean qualificationBean;
 
@@ -96,6 +103,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     SelectPopupWindows selectPopupWindows;
     SelectPopupWindows selectPopupWindows2;
     List<DictBean> coldStorageTypes = new ArrayList<>();
+
     @Override
     protected int getContentView() {
         return R.layout.activity_qualification_add;
@@ -110,14 +118,17 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        rvImages.setLayoutManager(new GridLayoutManager(this,3));
+        rvImages.setLayoutManager(new GridLayoutManager(this, 3));
         adapter = new ImageDeleteItemAdapter(this, images);
         rvImages.setAdapter(adapter);
         mPresenter.getColdStorageType();
         id = getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(id)) {
             mPresenter.getData(id);
-            mPresenter.getImage("coldstorage",id);
+            mPresenter.getImage("coldstorage", id);
+            toolbar_title.setText("资质修改");
+            ll_loginName.setVisibility(View.GONE);
+            ll_password.setVisibility(View.GONE);
         }
         adapter.setOnclick(new ImageDeleteItemAdapter.Onclick() {
             @Override
@@ -185,21 +196,21 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
 
     void postData() {
         Map<String, Object> params = new HashMap<>();
-        params.put("operatorName",getText(etOperatorName));
-        params.put("socialCreditCode",getText(et_socialCreditCode));
-        params.put("licenseNumber",getText(et_licenseNumber));
-        params.put("contact",getText(et_contact));
-        params.put("contactInformation",getText(et_contactInformation));
-        params.put("loginName",getText(et_loginName));
-        params.put("password",getText(et_password));
-        params.put("coldstorageType1",coldstorageType1);
-        params.put("coldstorageType2",coldstorageType2);
-        params.put("address",getText(etLocation));
-        params.put("latitude",lat);
-        params.put("longitude",lon);
+        params.put("operatorName", getText(etOperatorName));
+        params.put("socialCreditCode", getText(et_socialCreditCode));
+        params.put("licenseNumber", getText(et_licenseNumber));
+        params.put("contact", getText(et_contact));
+        params.put("contactInformation", getText(et_contactInformation));
+        params.put("loginName", getText(et_loginName));
+        params.put("password", getText(et_password));
+        params.put("coldstorageType1", coldstorageType1);
+        params.put("coldstorageType2", coldstorageType2);
+        params.put("address", getText(etLocation));
+        params.put("latitude", lat);
+        params.put("longitude", lon);
         params.put("enclosureIds", PostUtils.getImageIds(images));
-        if (!TextUtils.isEmpty(id)){
-            params.put("id",id);
+        if (!TextUtils.isEmpty(id)) {
+            params.put("id", id);
         }
 
         mPresenter.submitData(params);
@@ -208,21 +219,20 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     @Override
     public void showQualificationInfo(QualificationBean data) {
         qualificationBean = data;
-        etOperatorName.setText(data.getOperatorName()+"");
-        et_socialCreditCode.setText(data.getSocialCreditCode()+"");
-        et_licenseNumber.setText(data.getLicenseNumber()+"");
-        et_contact.setText(data.getContact()+"");
-        et_contactInformation.setText(data.getContactInformation()+"");
-        et_loginName.setText(data.getLoginName()+"");
+        etOperatorName.setText(data.getOperatorName() + "");
+        et_socialCreditCode.setText(data.getSocialCreditCode() + "");
+        et_licenseNumber.setText(data.getLicenseNumber() + "");
+        et_contact.setText(data.getContact() + "");
+        et_contactInformation.setText(data.getContactInformation() + "");
+        et_loginName.setText(data.getLoginName() + "");
         et_loginName.setEnabled(false);
         et_password.setText("******");
         et_password.setEnabled(false);
-        etLocation.setText(data.getAddress()+"");
-        et_coldstorageType.setText(data.getColdstorageType1Text()+"-"+data.getColdstorageType2Text());
+        etLocation.setText(data.getAddress() + "");
+        et_coldstorageType.setText(data.getColdstorageType1Text() + "-" + data.getColdstorageType2Text());
         coldstorageType1 = data.getColdstorageType1();
         coldstorageType2 = data.getColdstorageType2();
     }
-
 
 
     @Override
@@ -232,8 +242,8 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     }
 
     @Override
-    public void showPostImage(String localPath,ImageBack imageBack) {
-        if (imageBack ==null) return;
+    public void showPostImage(String localPath, ImageBack imageBack) {
+        if (imageBack == null) return;
         imageBack.setPath(localPath);
         images.add(imageBack);
         adapter.notifyDataSetChanged();
@@ -241,13 +251,13 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
 
     @Override
     public void showColdStorageType(List<DictBean> list) {
-        if (list ==null) return;
+        if (list == null) return;
         coldStorageTypes = list;
     }
 
     @Override
     public void showImage(List<ImageBack> list) {
-        if (list ==null) return;
+        if (list == null) return;
         images.clear();
         images.addAll(list);
         adapter.notifyDataSetChanged();
@@ -297,6 +307,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
             }
         }
     }
+
     void showSelectPopWindow() {
         UIAdjuster.closeKeyBoard(this);
         List<String> list = new ArrayList<>();
@@ -327,6 +338,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
             }
         });
     }
+
     void showSelectPopWindow2(String type) {
         UIAdjuster.closeKeyBoard(this);
         List<String> list = new ArrayList<>();
@@ -335,13 +347,13 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
             String dictValue = coldStorageTypes.get(i).getDictValue();
             if (dictValue.contains(".")) {
                 String[] split = dictValue.split("\\.");
-                if (split.length==2&&split[0].equals(type)){
+                if (split.length == 2 && split[0].equals(type)) {
                     list.add(coldStorageTypes.get(i).getDictLabel());
                     list1.add(coldStorageTypes.get(i).getDictValue());
                 }
             }
         }
-        if (list.size()==0)return;
+        if (list.size() == 0) return;
         String[] array = (String[]) list.toArray(new String[list.size()]);
         String[] values = (String[]) list1.toArray(new String[list1.size()]);
         selectPopupWindows2 = new SelectPopupWindows(this, array);
@@ -350,7 +362,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
         selectPopupWindows2.setOnItemClickListener(new SelectPopupWindows.OnItemClickListener() {
             @Override
             public void onSelected(int index, String msg) {
-                et_coldstorageType.append("\n"+msg);
+                et_coldstorageType.append("\n" + msg);
                 coldstorageType2 = values[index];
             }
 

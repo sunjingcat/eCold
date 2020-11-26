@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="新增贮存设备"
+            android:text="设备详情"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
@@ -28,7 +28,7 @@
             android:layout_marginRight="10dp"
             android:padding="8dp"
             android:singleLine="true"
-            android:text="保存"
+            android:text="编辑"
             android:textColor="@color/white"
             android:textSize="16dp" />
     </androidx.appcompat.widget.Toolbar>
@@ -63,12 +63,12 @@
                     android:text="名称"
                     android:textColor="@color/colorTextBlack33" />
 
-                <EditText
+                <TextView
                     android:id="@+id/text_equipmentName"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
-                    android:hint="请填写" />
+                  />
             </LinearLayout>
 
             <LinearLayout
@@ -89,14 +89,14 @@
                     android:text="备注"
                     android:textColor="@color/colorTextBlack33" />
 
-                <EditText
+                <TextView
                     android:id="@+id/text_equipmentRemark"
                     style="@style/textRightStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
                     android:gravity="left"
-                    android:hint="请填写" />
+                  />
             </LinearLayout>
 
 

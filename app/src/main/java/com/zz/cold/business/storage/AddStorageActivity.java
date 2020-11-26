@@ -1,4 +1,5 @@
 package com.zz.cold.business.storage;
+
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -7,12 +8,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.codbking.widget.utils.UIAdjuster;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
@@ -104,6 +108,7 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
         id = getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(id)) {
             mPresenter.getData(id);
+            mPresenter.getImage("warehouse", id);
             rv.setVisibility(View.GONE);
             ll_equipment_add.setVisibility(View.GONE);
             toolbar_title.setText("编辑库房信息");
@@ -131,6 +136,14 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
             public void onclickDelete(View v, int option) {
                 images.remove(option);
                 adapter.notifyDataSetChanged();
+            }
+        });
+        equipmentAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                startActivityForResult(new Intent().setClass(AddStorageActivity.this, EquipmentInfoActivity.class)
+                                .putExtra("id", equipmentBeans.get(position).getId())
+                        , 2001);
             }
         });
     }
@@ -181,8 +194,8 @@ public class AddStorageActivity extends MyBaseActivity<Contract.IsetStorageAddPr
 
         storageBean.setEnclosureIds(PostUtils.getImageIds(images));
         if (!TextUtils.isEmpty(id)) {
-            storageBean.setId( id);
-        }else {
+            storageBean.setId(id);
+        } else {
             storageBean.setEquipmentList(equipmentBeans);
         }
         mPresenter.submitData(storageBean);

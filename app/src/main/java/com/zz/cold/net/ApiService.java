@@ -61,7 +61,7 @@ public interface ApiService {
     @POST("/app/v1/coldchain/logout")
     Observable<JsonT> logout();
 
-    @POST("/app/v1/coldchain/updatePwd")
+    @PUT("/app/v1/coldchain/updatePwd")
     Observable<JsonT> resetPwd(@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/version/latest")
@@ -146,6 +146,9 @@ public interface ApiService {
 
     @GET("/app/v1/coldchain/equipment/{id}")
     Observable<JsonT<EquipmentBean>> getEquipmentInfo(@Path("id") String id);
+
+    @DELETE("/app/v1/coldchain/equipment/removeEquipmentInfo/{id}")
+    Observable<JsonT> removeEquipment(@Path("id") String id);
 
     @GET("/app/v1/coldchain/coldchainColdstorageDaily/list")
     Observable<JsonT<List<DailyBean>>> getDailyList(@QueryMap Map<String, Object> params);

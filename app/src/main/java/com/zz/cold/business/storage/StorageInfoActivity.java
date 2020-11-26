@@ -36,6 +36,7 @@ import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.lib.core.utils.LoadingUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -102,7 +103,7 @@ public class StorageInfoActivity extends MyBaseActivity {
         equipmentAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-
+                startActivityForResult(new Intent().setClass(StorageInfoActivity.this, EquipmentInfoActivity.class).putExtra("id", equipmentBeans.get(position).getId()), 2001);
             }
         });
     }
@@ -171,6 +172,7 @@ public class StorageInfoActivity extends MyBaseActivity {
     }
 
     void getData(String id) {
+        getImages(id);
         RxNetUtils.request(getApi(ApiService.class).getStorageInfo(id), new RequestObserver<JsonT<StorageBean>>(this) {
             @Override
             protected void onSuccess(JsonT<StorageBean> jsonT) {
@@ -200,7 +202,23 @@ public class StorageInfoActivity extends MyBaseActivity {
             }
         }, LoadingUtils.build(this));
     }
+    void getImages(String id) {
+        RxNetUtils.request(getApi(ApiService.class).getModelImages("warehouse",id), new RequestObserver<JsonT<List<ImageBack>>>(this) {
+            @Override
+            protected void onSuccess(JsonT<List<ImageBack>> jsonT) {
+                if (jsonT.getData()!=null){
+                    images.clear();
+                    images.addAll(jsonT.getData());
+                    adapter.notifyDataSetChanged();
+                }
+            }
 
+            @Override
+            protected void onFail2(JsonT<List<ImageBack>> stringJsonT) {
+                super.onFail2(stringJsonT);
+            }
+        }, LoadingUtils.build(this));
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

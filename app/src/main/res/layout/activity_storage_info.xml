@@ -66,6 +66,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -83,13 +85,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
                     android:orientation="horizontal">
 
                     <TextView
                         style="@style/textInfoTitleStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="冷库名称" />
+                        android:text="库房名称" />
 
                     <TextView
                         android:id="@+id/text_warehouseName"
@@ -100,6 +104,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -117,6 +123,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
                     android:orientation="horizontal">
 
                     <TextView
