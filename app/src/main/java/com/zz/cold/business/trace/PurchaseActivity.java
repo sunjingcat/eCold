@@ -371,6 +371,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 break;
             case R.id.text_goodsType:
                 UIAdjuster.closeKeyBoard(this);
+
                 OptionsPickerView pvOptions = new OptionsPickerBuilder(PurchaseActivity.this, new OnOptionsSelectListener() {
                     @Override
                     public void onOptionsSelect(int options1, int option2, int options3, View v) {
@@ -382,15 +383,16 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                         goodsType1 = options1Items.get(options1).getDictValue();
                         goodsType2 = options2Items.get(options1).get(option2).getDictValue();
                         goodsType3 = options3Items.get(options1).get(option2).get(options3).getDictValue();
-                        if (goodsType1.equals("5")|| goodsType1.equals("6")|| goodsType1.equals("7")){
+                        if (goodsType1.equals("5") || goodsType1.equals("6") || goodsType1.equals("7")) {
                             ll_typeRemark.setVisibility(View.VISIBLE);
-                        }else {
+                        } else {
                             ll_typeRemark.setVisibility(View.GONE);
                         }
                     }
                 }).build();
                 pvOptions.setPicker(options1Items, options2Items, options3Items);
                 pvOptions.show();
+
 
                 break;
 
@@ -535,9 +537,9 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         goodsType3 = data.getGoodsType3();
         text_goodsType.setText(data.getGoodsType1Text() + "" + data.getGoodsType2Text() + data.getGoodsType3Text());
         text_typeRemark.setText(data.getTypeRemark() + "");
-        if (goodsType1.equals("5")|| goodsType1.equals("6")|| goodsType1.equals("7")){
+        if (goodsType1.equals("5") || goodsType1.equals("6") || goodsType1.equals("7")) {
             ll_typeRemark.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             ll_typeRemark.setVisibility(View.GONE);
         }
     }
@@ -634,19 +636,26 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         goodsTypes.addAll(list);
         for (CategoryBean categoryBean : goodsTypes) {
             options1Items.add((DictBean) categoryBean);
-            List<List<DictBean>> optionsItems2 = new ArrayList<>();
-            List<DictBean> optionsItems_02 = new ArrayList<>();
-            for (CategoryBean.Child1 child1 : categoryBean.getChilds()) {
-                List<DictBean> optionsItems = new ArrayList<>();
-                for (CategoryBean.Child2 child2 : child1.getChilds()) {
-                    optionsItems.add(child2);
+            List<List<DictBean>> optionsItems3 = new ArrayList<>();
+            List<DictBean> optionsItems2 = new ArrayList<>();
+            if (categoryBean.getChilds() != null && categoryBean.getChilds().size() > 0) {
+                for (CategoryBean.Child1 child1 : categoryBean.getChilds()) {
+                    List<DictBean> optionsItems = new ArrayList<>();
+                    for (CategoryBean.Child2 child2 : child1.getChilds()) {
+                        optionsItems.add(child2);
+                    }
+                    optionsItems3.add(optionsItems);
+                    optionsItems2.add(child1);
                 }
-                optionsItems2.add(optionsItems);
-                optionsItems_02.add(child1);
-            }
 
-            options2Items.add(optionsItems_02);
-            options3Items.add(optionsItems2);
+            }else {
+                optionsItems2.add(new DictBean());
+                List<DictBean> optionsItems = new ArrayList<>();
+                optionsItems.add(new DictBean());
+                optionsItems3.add(optionsItems);
+            }
+            options2Items.add(optionsItems2);
+            options3Items.add(optionsItems3);
 
         }
         LogUtils.v("--");

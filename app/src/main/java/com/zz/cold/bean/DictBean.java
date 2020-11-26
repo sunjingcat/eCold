@@ -1,5 +1,7 @@
 package com.zz.cold.bean;
 
+import android.text.TextUtils;
+
 import com.bigkoo.pickerview.configure.PickerOptions;
 import com.contrarywind.interfaces.IPickerViewData;
 
@@ -38,11 +40,17 @@ public class DictBean implements IPickerViewData {
     }
 
     public String getDictLabel() {
-        return dictLabel;
+        if(TextUtils.isEmpty(dictLabel)){
+            return "";
+        }
+        return  dictLabel;
     }
 
     public String getDictValue() {
-        return dictValue;
+        if(TextUtils.isEmpty(dictValue)){
+            return "";
+        }
+        return  dictValue;
     }
 
     public String getDictType() {
@@ -67,6 +75,9 @@ public class DictBean implements IPickerViewData {
 
     @Override
     public String getPickerViewText() {
-        return dictLabel;
+         if(TextUtils.isEmpty(dictLabel)){
+             return "";
+         }
+        return  dictLabel;
     }
 }
