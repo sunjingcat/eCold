@@ -88,6 +88,7 @@ public class PendingCompanyActivity extends MyBaseActivity implements OnRefreshL
     @Override
     protected void onResume() {
         super.onResume();
+        pagenum = 1;
         getDate();
     }
 

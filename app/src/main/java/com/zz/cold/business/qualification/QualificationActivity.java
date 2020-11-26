@@ -172,6 +172,7 @@ public class QualificationActivity extends MyBaseActivity implements OnRefreshLi
     @Override
     protected void onResume() {
         super.onResume();
+        pagenum = 1;
         getDate();
     }
 }

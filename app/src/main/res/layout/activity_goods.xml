@@ -160,7 +160,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/border_radius_40_theme"
                 android:clickable="true"
-                android:text="入"
+                android:text="进"
                 android:textColor="@color/white"
                 android:elevation="@dimen/dp_10" />
 

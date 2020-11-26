@@ -92,6 +92,7 @@ public class HisPendingActivity extends MyBaseActivity implements OnRefreshListe
     @Override
     protected void onResume() {
         super.onResume();
+        pagenum = 1;
         getDate();
     }
 

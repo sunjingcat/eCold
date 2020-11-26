@@ -83,12 +83,12 @@ public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshLis
         adapter.setOnclick(new PendingGoodsAdapter.Onclick() {
             @Override
             public void onclickOk(View v, int option) {
-                ask(1, mlist.get(option));
+                ask(2, mlist.get(option));
             }
 
             @Override
             public void onclickNo(View v, int option) {
-                askRefuse(0, mlist.get(option));
+                askRefuse(3, mlist.get(option));
             }
         });
 
@@ -97,6 +97,7 @@ public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshLis
     @Override
     protected void onResume() {
         super.onResume();
+        pagenum = 1;
         getDate();
     }
 

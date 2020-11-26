@@ -109,6 +109,7 @@ public class StorageActivity extends MyBaseActivity implements OnRefreshListener
     @Override
     protected void onResume() {
         super.onResume();
+        pagenum = 1;
         getDate();
     }
 
