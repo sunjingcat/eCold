@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
+import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.InfoBean;
 import com.zz.cold.bean.PendingGoods;
 import com.zz.cold.bean.QualificationBean;
@@ -116,6 +117,12 @@ public class GoodsActivity extends MyBaseActivity {
         ToolBarUtils.getInstance().setNavigation(toolbar);
     }
 
+    InfoBean sphsjc;
+    InfoBean ryhsjc;
+    InfoBean clhsjc;
+    InfoBean xdzm;
+    InfoBean ffzzwjc;
+
     public void showResult(TraceBean data) {
 
         if (data == null) return;
@@ -134,14 +141,23 @@ public class GoodsActivity extends MyBaseActivity {
         infoList.add(new InfoBean("是否进口", data.getIsImportedText() + ""));
         if (!TextUtils.isEmpty(data.getIsImportedText()) && data.getIsImportedText().equals("进口")) {
             infoList.add(new InfoBean("入境口岸", data.getEntryPort() + ""));
-            infoList.add(new InfoBean("食品核酸检测", data.getIsSphsjcText() + ""));
-            infoList.add(new InfoBean("人员核酸检测", data.getIsRyhsjcText() + ""));
-            infoList.add(new InfoBean("车辆核酸检测", data.getIsClhsjcText() + ""));
-            infoList.add(new InfoBean("消毒证明", data.getIsXdzmText() + ""));
-            infoList.add(new InfoBean("非非洲猪瘟检测报告", data.getIsFfzzwjcText() + ""));
+            sphsjc = new InfoBean("食品核酸检测", data.getIsSphsjcText() + "");
+            infoList.add(sphsjc);
+            ryhsjc = new InfoBean("人员核酸检测", data.getIsRyhsjcText() + "");
+            infoList.add(ryhsjc);
+            clhsjc = new InfoBean("车辆核酸检测", data.getIsClhsjcText() + "");
+            infoList.add(clhsjc);
+            xdzm = new InfoBean("消毒证明", data.getIsXdzmText() + "");
+            infoList.add(xdzm);
+            ffzzwjc = new InfoBean("非非洲猪瘟检测报告", data.getIsFfzzwjcText() + "");
+            infoList.add(ffzzwjc);
+            getImages("sphsjc");
+            getImages("ryhsjc");
+            getImages("clhsjc");
+            getImages("xdzm");
+            getImages("ffzzwjc");
         }
         infoAdapter.notifyDataSetChanged();
-
         if (data.getColdchainGoodsAccountcList() != null) {
             mlist.clear();
             mlist.addAll(data.getColdchainGoodsAccountcList());
@@ -252,6 +268,32 @@ public class GoodsActivity extends MyBaseActivity {
         }, LoadingUtils.build(this));
     }
 
+    void getImages(String type) {
+        RxNetUtils.request(getApi(ApiService.class).getModelImages(type, id), new RequestObserver<JsonT<List<ImageBack>>>(this) {
+            @Override
+            protected void onSuccess(JsonT<List<ImageBack>> jsonT) {
+                if (jsonT.getData() != null && jsonT.getData().size() > 0) {
+                    if ("sphsjc".equals(type)) {
+                        sphsjc.setImages(jsonT.getData());
+                    } else if ("ryhsjc".equals(type)) {
+                        ryhsjc.setImages(jsonT.getData());
+                    } else if ("clhsjc".equals(type)) {
+                        clhsjc.setImages(jsonT.getData());
+                    } else if ("xdzm".equals(type)) {
+                        xdzm.setImages(jsonT.getData());
+                    } else if ("ffzzwjc".equals(type)) {
+                        ffzzwjc.setImages(jsonT.getData());
+                    }
+                }
+            }
+
+            @Override
+            protected void onFail2(JsonT<List<ImageBack>> stringJsonT) {
+                super.onFail2(stringJsonT);
+            }
+        }, LoadingUtils.build(this));
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -262,4 +304,5 @@ public class GoodsActivity extends MyBaseActivity {
             inputDialog.dismiss();
         }
     }
+
 }

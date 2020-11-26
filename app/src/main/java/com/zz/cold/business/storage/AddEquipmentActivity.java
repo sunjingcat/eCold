@@ -144,6 +144,9 @@ public class AddEquipmentActivity extends MyBaseActivity<Contract.IsetEquipmentA
         params.put("equipmentRemark", getText(text_equipmentRemark));
         params.put("enclosureIds", PostUtils.getImageIds(images));
         params.put("warehouseId", warehouseId);
+        if (!TextUtils.isEmpty(id)){
+            params.put("id",id);
+        }
         mPresenter.submitData(params);
     }
 

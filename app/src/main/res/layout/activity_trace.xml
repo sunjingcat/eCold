@@ -13,7 +13,18 @@
         android:background="@color/colorPrimary"
         android:focusable="true"
         android:focusableInTouchMode="true">
-
+        <ImageView
+            android:id="@+id/toolbar_subtitle_mine"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:src="@drawable/icon_user_main"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="16dp" />
         <com.zz.lib.commonlib.widget.ClearEditText
             android:id="@+id/et_search"
             android:layout_width="match_parent"
@@ -45,21 +56,9 @@
             android:textColor="@color/white"
             android:background="@drawable/border_radius_40_huan_theme"
             android:text="待"
-            android:visibility="gone"
             android:textSize="16dp" />
 
-        <ImageView
-            android:id="@+id/toolbar_subtitle_mine"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:padding="5dp"
-            android:singleLine="true"
-            android:src="@drawable/icon_user_main"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="16dp" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout

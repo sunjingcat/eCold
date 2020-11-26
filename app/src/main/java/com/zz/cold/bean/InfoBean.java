@@ -1,8 +1,19 @@
 package com.zz.cold.bean;
 
+import java.util.List;
+
 public class InfoBean {
     String title;
     String value;
+    List<ImageBack> images;
+
+    public List<ImageBack> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageBack> images) {
+        this.images = images;
+    }
 
     public InfoBean(String title, String value) {
         this.title = title;

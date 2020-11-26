@@ -20,6 +20,7 @@ import com.zz.cold.bean.UserBasicBean;
 import com.zz.cold.bean.UserInfo;
 import com.zz.cold.bean.Version;
 import com.zz.cold.bean.WarehouseBean;
+import com.zz.cold.bean.WmsBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,9 @@ public interface ApiService {
 
     @PUT("/app/v1/coldchain/updatePwd")
     Observable<JsonT> resetPwd(@QueryMap Map<String, Object> params);
+
+    @PUT("/app/v1/coldchain/coldstorage/resetPwd/{id}")
+    Observable<JsonT> resetStoragePwd(@Path("id") String id,@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/version/latest")
     Observable<JsonT<Version>> getVersion();
@@ -126,7 +130,7 @@ public interface ApiService {
     @POST("/app/v1/coldchain/equipment/addEquipmentInfo")
     Observable<JsonT> postEquipmentInfo(@QueryMap Map<String, Object> params);
 
-    @POST("/app/v1/coldchain/equipment/editEquipmentInfo")
+    @PUT("/app/v1/coldchain/equipment/editEquipmentInfo")
     Observable<JsonT> editEquipmentInfo(@QueryMap Map<String, Object> params);
 
     @Headers("Content-Type: application/json")
@@ -172,6 +176,9 @@ public interface ApiService {
 
     @GET("/app/v1/coldchain/coldchainGoodsAccount/listByColdstorageId")
     Observable<JsonT<List<PendingGoods>>> getPendingGoodsList(@QueryMap Map<String, Object> params);
+
+    @GET("/app/v1/coldchain/coldchainGoodsAccount/notPassList")
+    Observable<JsonT<List<WmsBean>>> getPendingHisList(@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/coldchainGoodsAccount/{id}")
     Observable<JsonT<TraceBean>> getTraceInfo(@Path("id") String id);

@@ -169,6 +169,8 @@
         <activity android:name=".business.trace.DeliverActivity" />
         <activity android:name=".business.trace.PurchaseActivity" />
         <activity android:name=".business.storage.EquipmentInfoActivity" />
+        <activity android:name=".business.trace.HisPendingActivity" />
+        <activity android:name=".business.qualification.StoragePasswordActivity" />
         <!--  屏幕适配########################################-->
         <meta-data
             android:name="android.max_aspect"

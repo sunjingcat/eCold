@@ -32,7 +32,7 @@ public class Contract {
         void showResult();
         void showPostImage(int requestCode,String localPath,ImageBack imageBack);
 
-        void showImage(List<ImageBack> list);
+        void showImage(String type,List<ImageBack> list);
         void showType(String type,List<DictBean> list);
         void showGoods(List<CategoryBean> list);
     }

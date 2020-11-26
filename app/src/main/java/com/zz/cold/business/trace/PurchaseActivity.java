@@ -102,6 +102,12 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
 
     @BindView(R.id.text_goodsType)
     TextView text_goodsType;
+
+    @BindView(R.id.ll_typeRemark)
+    LinearLayout ll_typeRemark;
+    @BindView(R.id.text_typeRemark)
+    EditText text_typeRemark;
+
     @BindView(R.id.text_productionDate)
     EditText text_productionDate;
     @BindView(R.id.text_spec)
@@ -376,6 +382,11 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                         goodsType1 = options1Items.get(options1).getDictValue();
                         goodsType2 = options2Items.get(options1).get(option2).getDictValue();
                         goodsType3 = options3Items.get(options1).get(option2).get(options3).getDictValue();
+                        if (goodsType1.equals("5")|| goodsType1.equals("6")|| goodsType1.equals("7")){
+                            ll_typeRemark.setVisibility(View.VISIBLE);
+                        }else {
+                            ll_typeRemark.setVisibility(View.GONE);
+                        }
                     }
                 }).build();
                 pvOptions.setPicker(options1Items, options2Items, options3Items);
@@ -445,6 +456,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         params.setGoodsType1(goodsType1);
         params.setGoodsType2(goodsType2);
         params.setGoodsType3(goodsType3);
+        params.setTypeRemark(getText(text_typeRemark));
         params.setSpec(getText(text_spec));
         params.setCount(getText(text_count));
         params.setPurchaseTime(getText(text_purchaseTime));
@@ -486,34 +498,48 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         text_supplierAddress.setText(data.getSupplierAddress() + "");
         text_supplierContact.setText(data.getSupplierContact() + "");
         text_period.setText(data.getPeriod() + "");
+
         isImported = data.getIsImported();
         text_isImported.setText(data.getIsImportedText() + "");
         text_entryPort.setText(data.getEntryPort() + "");
-        isSphsjc = data.getIsSphsjc();
-        text_isSphsjc.setText(data.getIsSphsjcText());
-        if (isImported.equals("进口")){
+
+        if (isImported.equals("进口")) {
             ll_isImported.setVisibility(View.VISIBLE);
-        }else {
+
+            isSphsjc = data.getIsSphsjc();
+            text_isSphsjc.setText(data.getIsSphsjcText());
+
+            isRyhsjc = data.getIsRyhsjc();
+            text_isRyhsjc.setText(data.getIsRyhsjcText());
+
+            isClhsjc = data.getIsClhsjc();
+            text_isClhsjc.setText(data.getIsClhsjcText());
+
+            isXdzm = data.getIsXdzm();
+            text_isXdzm.setText(data.getIsXdzmText());
+
+            isFfzzwjc = data.getIsFfzzwjc();
+            text_isFfzzwjc.setText(data.getIsFfzzwjcText());
+            mPresenter.getImage("sphsjc", id);
+            mPresenter.getImage("ryhsjc", id);
+            mPresenter.getImage("clhsjc", id);
+            mPresenter.getImage("xdzm", id);
+            mPresenter.getImage("ffzzwjc", id);
+        } else {
             ll_isImported.setVisibility(View.GONE);
         }
 
-        isRyhsjc = data.getIsRyhsjc();
-        text_isRyhsjc.setText(data.getIsRyhsjcText());
-
-        isClhsjc = data.getIsClhsjc();
-        text_isClhsjc.setText(data.getIsClhsjcText());
-
-        isXdzm = data.getIsXdzm();
-        text_isXdzm.setText(data.getIsXdzmText());
-
-        isFfzzwjc = data.getIsFfzzwjc();
-        text_isFfzzwjc.setText(data.getIsFfzzwjcText());
 
         goodsType1 = data.getGoodsType1();
         goodsType2 = data.getGoodsType2();
         goodsType3 = data.getGoodsType3();
         text_goodsType.setText(data.getGoodsType1Text() + "" + data.getGoodsType2Text() + data.getGoodsType3Text());
-
+        text_typeRemark.setText(data.getTypeRemark() + "");
+        if (goodsType1.equals("5")|| goodsType1.equals("6")|| goodsType1.equals("7")){
+            ll_typeRemark.setVisibility(View.VISIBLE);
+        }else {
+            ll_typeRemark.setVisibility(View.GONE);
+        }
     }
 
 
@@ -558,11 +584,30 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
 
 
     @Override
-    public void showImage(List<ImageBack> list) {
+    public void showImage(String type, List<ImageBack> list) {
         if (list == null) return;
-        images.clear();
-        images.addAll(list);
-        adapter.notifyDataSetChanged();
+        if ("sphsjc".equals(type)) {
+            images_Sphsjc.clear();
+            images_Sphsjc.addAll(list);
+            adapter_Sphsjc.notifyDataSetChanged();
+        } else if ("ryhsjc".equals(type)) {
+            images_Ryhsjc.clear();
+            images_Ryhsjc.addAll(list);
+            adapter_Ryhsjc.notifyDataSetChanged();
+        } else if ("clhsjc".equals(type)) {
+            images_Clhsjc.clear();
+            images_Clhsjc.addAll(list);
+            adapter_Clhsjc.notifyDataSetChanged();
+        } else if ("xdzm".equals(type)) {
+            images_Xdzm.clear();
+            images_Xdzm.addAll(list);
+            adapter_Xdzm.notifyDataSetChanged();
+        } else if ("ffzzwjc".equals(type)) {
+            images_ffzzwjc.clear();
+            images_ffzzwjc.addAll(list);
+            adapter_ffzzwjc.notifyDataSetChanged();
+        }
+
     }
 
 

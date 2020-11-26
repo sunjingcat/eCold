@@ -54,7 +54,7 @@ public class QualificationInfoActivity extends MyBaseActivity {
     QualificationBean qualificationBean;
     String id;
     private CustomDialog customDialog;
-    
+
     @BindView(R.id.tv_location)
     TextView tv_location;
     @BindView(R.id.tv_coldstorageType)
@@ -79,6 +79,7 @@ public class QualificationInfoActivity extends MyBaseActivity {
 
     @BindView(R.id.tv_password)
     TextView tv_password;
+
     @Override
     protected int getContentView() {
         return R.layout.activity_qualification_info;
@@ -93,7 +94,7 @@ public class QualificationInfoActivity extends MyBaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        rvImages.setLayoutManager(new GridLayoutManager(this,3));
+        rvImages.setLayoutManager(new GridLayoutManager(this, 3));
         adapter = new ImageItemAdapter(R.layout.item_image, images);
         rvImages.setAdapter(adapter);
         id = getIntent().getStringExtra("id");
@@ -114,15 +115,21 @@ public class QualificationInfoActivity extends MyBaseActivity {
         ToolBarUtils.getInstance().setNavigation(toolbar);
     }
 
-    @OnClick({R.id.toolbar_subtitle, R.id.tv_delete})
+    @OnClick({R.id.toolbar_subtitle, R.id.tv_delete, R.id.bt_password})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
 
+                if (qualificationBean == null) return;
                 Intent intent = new Intent();
                 intent.setClass(QualificationInfoActivity.this, AddQualificationActivity.class);
                 intent.putExtra("id", qualificationBean.getId());
-                startActivityForResult(intent,3001);
+                startActivityForResult(intent, 3001);
+                break;
+            case R.id.bt_password:
+
+                if (qualificationBean == null) return;
+                startActivity(new Intent(QualificationInfoActivity.this, StoragePasswordActivity.class).putExtra("id", qualificationBean.getId()));
                 break;
             case R.id.tv_delete:
 
@@ -158,21 +165,21 @@ public class QualificationInfoActivity extends MyBaseActivity {
 
     public void showResult(QualificationBean data) {
         id = data.getId();
-        tv_operatorName.setText(data.getOperatorName()+"");
-        tv_socialCreditCode.setText(data.getSocialCreditCode()+"");
-        tv_licenseNumber.setText(data.getLicenseNumber()+"");
-        tv_contact.setText(data.getContact()+"");
-        tv_contactInformation.setText(data.getContactInformation()+"");
-        tv_loginName.setText(data.getLoginName()+"");
-        tv_password.setText(data.getPassword()+"");
-        tv_location.setText(data.getAddress()+"");
-        tv_coldstorageType.setText(data.getColdstorageType1Text()+"-"+data.getColdstorageType2Text());
+        tv_operatorName.setText(data.getOperatorName() + "");
+        tv_socialCreditCode.setText(data.getSocialCreditCode() + "");
+        tv_licenseNumber.setText(data.getLicenseNumber() + "");
+        tv_contact.setText(data.getContact() + "");
+        tv_contactInformation.setText(data.getContactInformation() + "");
+        tv_loginName.setText(data.getLoginName() + "");
+        tv_password.setText(data.getPassword() + "");
+        tv_location.setText(data.getAddress() + "");
+        tv_coldstorageType.setText(data.getColdstorageType1Text() + "-" + data.getColdstorageType2Text());
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK){
+        if (resultCode == RESULT_OK) {
             getData(id);
             getImages(id);
         }
@@ -192,11 +199,12 @@ public class QualificationInfoActivity extends MyBaseActivity {
             }
         }, LoadingUtils.build(this));
     }
+
     void getImages(String id) {
-        RxNetUtils.request(getApi(ApiService.class).getModelImages("coldstorage",id), new RequestObserver<JsonT<List<ImageBack>>>(this) {
+        RxNetUtils.request(getApi(ApiService.class).getModelImages("coldstorage", id), new RequestObserver<JsonT<List<ImageBack>>>(this) {
             @Override
             protected void onSuccess(JsonT<List<ImageBack>> jsonT) {
-                if (jsonT.getData()!=null){
+                if (jsonT.getData() != null) {
                     images.clear();
                     images.addAll(jsonT.getData());
                     adapter.notifyDataSetChanged();

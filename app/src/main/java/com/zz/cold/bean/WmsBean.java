@@ -3,7 +3,7 @@ package com.zz.cold.bean;
 public class WmsBean {
     String id;// 1,
     String       coldstorageId;// 3,
-    String       operationType;// 1,
+    int       operationType;// 1,
     String     operationTypeText;// 进货,
     String     goodsId;// 1,
     String     goodsName;// 商品,
@@ -24,7 +24,7 @@ public class WmsBean {
         return coldstorageId;
     }
 
-    public String getOperationType() {
+    public int getOperationType() {
         return operationType;
     }
 

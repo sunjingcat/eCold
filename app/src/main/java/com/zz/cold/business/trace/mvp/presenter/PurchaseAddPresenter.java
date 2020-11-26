@@ -107,7 +107,7 @@ public class PurchaseAddPresenter extends MyBasePresenterImpl<Contract.IGetPurch
             @Override
             protected void onSuccess(JsonT<List<ImageBack>> data) {
                 if (data.isSuccess()) {
-                    view.showImage(data.getData());
+                    view.showImage(type,data.getData());
                 } else {
 
                 }

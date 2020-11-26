@@ -117,12 +117,12 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
         });
         if (CacheUtility.getRole() == 2) {
             toolbar_subtitle_mine.setVisibility(View.VISIBLE);
-            toolbar_subtitle.setVisibility(View.GONE);
+            toolbar_subtitle.setText("历");
             bt_ru.setVisibility(View.VISIBLE);
         } else {
             bt_ru.setVisibility(View.GONE);
             toolbar_subtitle_mine.setVisibility(View.GONE);
-            toolbar_subtitle.setVisibility(View.VISIBLE);
+            toolbar_subtitle.setText("待");
         }
     }
 
@@ -136,10 +136,15 @@ public class TraceActivity extends MyBaseActivity implements OnRefreshListener, 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
-
-                Intent intent = new Intent();
-                intent.setClass(TraceActivity.this, PendingCompanyActivity.class);
-                startActivity(intent);
+                if (CacheUtility.getRole() == 2) {
+                    Intent intent = new Intent();
+                    intent.setClass(TraceActivity.this, HisPendingActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent();
+                    intent.setClass(TraceActivity.this, PendingCompanyActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.toolbar_subtitle_mine:
 
