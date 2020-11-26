@@ -23,7 +23,6 @@ public class TracePostBean {
     String period;// 2020-11-25,
     String isImported;// 1,
     String entryPort;// ,
-    String time;// ,
     int isSphsjc;// 0,
     int isRyhsjc;// 0,
     int isClhsjc;// 0,
@@ -35,9 +34,6 @@ public class TracePostBean {
         this.id = id;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public void setColdstorageId(String coldstorageId) {
         this.coldstorageId = coldstorageId;

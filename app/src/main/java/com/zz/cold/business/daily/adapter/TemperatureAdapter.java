@@ -12,6 +12,7 @@ import com.zz.cold.R;
 import com.zz.cold.bean.DailyBean;
 import com.zz.cold.bean.TemperatureBean;
 import com.zz.cold.utils.GlideUtils;
+import com.zz.cold.utils.ImagePreview;
 
 
 import java.util.List;
@@ -31,5 +32,12 @@ public class TemperatureAdapter extends BaseQuickAdapter<DailyBean.Temperature, 
         holder.setText(R.id.item_title,item.getTemperatureName()+"");
         holder.setText(R.id.item_content,item.getTemperatureValue()+"");
         GlideUtils.loadImage(getContext(), item.getDownloadUrl(),  holder.getView(R.id.image));
+        holder.getView(R.id.image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str = item.getDownloadUrl();
+                ImagePreview.preview(getContext(), str);
+            }
+        });
     }
 }

@@ -118,16 +118,14 @@
                     android:text="生产日期/批次" />
 
 
-                <TextView
+                <EditText
                     android:id="@+id/text_productionDate"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:drawableRight="@drawable/image_arrow"
-                    android:drawablePadding="5dp"
                     android:gravity="center_vertical|right"
-                    android:hint="请选择"
+                    android:hint="请填写"
                     android:textColor="@color/colorTextBlack33"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -322,14 +320,12 @@
                     android:layout_height="wrap_content"
                     android:text="保质期" />
 
-                <TextView
+                <EditText
                     android:id="@+id/text_period"
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
-                    android:drawableRight="@drawable/image_arrow"
-                    android:drawablePadding="5dp"
                     android:gravity="center_vertical|right"
-                    android:hint="请选择" />
+                    android:hint="请填写" />
             </LinearLayout>
 
             <LinearLayout
