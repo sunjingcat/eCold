@@ -39,6 +39,7 @@
 
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -146,6 +147,7 @@
         </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
+            android:id="@+id/ll_jc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

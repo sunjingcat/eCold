@@ -30,6 +30,7 @@ import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.lib.core.utils.LoadingUtils;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,6 +62,10 @@ public class GoodsActivity extends MyBaseActivity {
     Button bt_chu;
     @BindView(R.id.ll_review)
     LinearLayout ll_review;
+    @BindView(R.id.ll_jc)
+    LinearLayout ll_jc;
+    @BindView(R.id.nestedScrollView)
+    NestedScrollView nestedScrollView;
 
 
     private WmsAdapter adapter;
@@ -110,6 +115,18 @@ public class GoodsActivity extends MyBaseActivity {
             bt_ru.setVisibility(View.GONE);
             bt_chu.setVisibility(View.GONE);
         }
+        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+
+
+                if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
+                    ll_jc.setVisibility(View.GONE);
+                }else {
+                    ll_jc.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     @Override
