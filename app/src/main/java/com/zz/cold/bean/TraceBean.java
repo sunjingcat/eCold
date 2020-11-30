@@ -24,8 +24,8 @@ public class TraceBean {
     String isImported;// 1,
     String entryPort;// ,
     int isSphsjc;// 0,
-    int isRyhsjc;// 0,
-    int isClhsjc;// 0,
+    int isCrjjyjyzm;// 0,
+    int isBgd;// 0,
     int isXdzm;// 0,
     int isFfzzwjc;// 0,
     String operatorName;// 冷库1
@@ -35,13 +35,13 @@ public class TraceBean {
     String transportModeText;// ,
     String isImportedText;// 国产,
     String isSphsjcText;// 否,
-    String isRyhsjcText;// 否,
-    String isClhsjcText;// 否,
+    String isCrjjyjyzmText;// 否,
+    String isBgdText;// 否,
     String isXdzmText;// 否,
     String isFfzzwjcText;// 否,
     List<ImageBack> sphsjcEnclosureList;// null,
-    List<ImageBack> ryhsjcEnclosureList;// null,
-    List<ImageBack> clhsjcEnclosureList;// null,
+    List<ImageBack> crjjyjyzmEnclosureList;// null,
+    List<ImageBack> bgdEnclosureIdList;// null,
     List<ImageBack> xdzmEnclosureList;// null,
     List<ImageBack> ffzzwjcEnclosureList;// null,
     List<WmsBean> coldchainGoodsAccountcList;// null,
@@ -74,12 +74,12 @@ public class TraceBean {
         return isSphsjcText;
     }
 
-    public String getIsRyhsjcText() {
-        return isRyhsjcText;
+    public String getIsCrjjyjyzmText() {
+        return isCrjjyjyzmText;
     }
 
-    public String getIsClhsjcText() {
-        return isClhsjcText;
+    public String getTsBgdText() {
+        return isBgdText;
     }
 
     public String getIsXdzmText() {
@@ -94,12 +94,20 @@ public class TraceBean {
         return sphsjcEnclosureList;
     }
 
-    public List<ImageBack> getRyhsjcEnclosureList() {
-        return ryhsjcEnclosureList;
+    public int getIsBgd() {
+        return isBgd;
     }
 
-    public List<ImageBack> getClhsjcEnclosureList() {
-        return clhsjcEnclosureList;
+    public String getIsBgdText() {
+        return isBgdText;
+    }
+
+    public List<ImageBack> getCrjjyjyzmEnclosureList() {
+        return crjjyjyzmEnclosureList;
+    }
+
+    public List<ImageBack> getBgdEnclosureIdList() {
+        return bgdEnclosureIdList;
     }
 
     public List<ImageBack> getXdzmEnclosureList() {
@@ -190,13 +198,11 @@ public class TraceBean {
         return isSphsjc;
     }
 
-    public int getIsRyhsjc() {
-        return isRyhsjc;
+    public int getIsCrjjyjyzm() {
+        return isCrjjyjyzm;
     }
 
-    public int getIsClhsjc() {
-        return isClhsjc;
-    }
+
 
     public int getIsXdzm() {
         return isXdzm;

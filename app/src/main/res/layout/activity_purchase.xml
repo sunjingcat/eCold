@@ -459,10 +459,10 @@
                         style="@style/textLeftStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="人员核酸检测" />
+                        android:text="出入境检验检疫证明" />
 
                     <TextView
-                        android:id="@+id/text_isRyhsjc"
+                        android:id="@+id/text_isCrjjyjyzm"
                         style="@style/textRightStyle"
                         android:layout_height="match_parent"
                         android:drawableRight="@drawable/image_arrow"
@@ -472,7 +472,7 @@
 
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_Ryhsjc"
+                    android:id="@+id/rv_Crjjyjyzm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <LinearLayout
@@ -488,10 +488,10 @@
                         style="@style/textLeftStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="车辆核酸检测" />
+                        android:text="报关单" />
 
                     <TextView
-                        android:id="@+id/text_isClhsjc"
+                        android:id="@+id/text_isBgd"
                         style="@style/textRightStyle"
                         android:layout_height="match_parent"
                         android:drawableRight="@drawable/image_arrow"
@@ -500,7 +500,7 @@
                         android:hint="请选择" />
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_Clhsjc"
+                    android:id="@+id/rv_Bgd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

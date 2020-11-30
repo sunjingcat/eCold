@@ -1,6 +1,7 @@
 package com.zz.cold.business.trace;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,6 +27,7 @@ import com.codbking.widget.bean.DateType;
 import com.codbking.widget.utils.UIAdjuster;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
+import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.CategoryBean;
@@ -77,15 +79,15 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     ArrayList<ImageBack> images_Sphsjc = new ArrayList<>();
     ImageDeleteItemAdapter adapter_Sphsjc;
 
-    @BindView(R.id.rv_Ryhsjc)
-    RecyclerView rv_Ryhsjc;
-    ArrayList<ImageBack> images_Ryhsjc = new ArrayList<>();
-    ImageDeleteItemAdapter adapter_Ryhsjc;
+    @BindView(R.id.rv_Crjjyjyzm)
+    RecyclerView rv_Crjjyjyzm;
+    ArrayList<ImageBack> images_Crjjyjyzm = new ArrayList<>();
+    ImageDeleteItemAdapter adapter_Crjjyjyzm;
 
-    @BindView(R.id.rv_Clhsjc)
-    RecyclerView rv_Clhsjc;
-    ArrayList<ImageBack> images_Clhsjc = new ArrayList<>();
-    ImageDeleteItemAdapter adapter_Clhsjc;
+    @BindView(R.id.rv_Bgd)
+    RecyclerView rv_Bgd;
+    ArrayList<ImageBack> images_Bgd = new ArrayList<>();
+    ImageDeleteItemAdapter adapter_Bgd;
 
     @BindView(R.id.rv_Xdzm)
     RecyclerView rv_Xdzm;
@@ -135,12 +137,12 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     @BindView(R.id.text_isSphsjc)
     TextView text_isSphsjc;
     int isSphsjc = 0;
-    @BindView(R.id.text_isRyhsjc)
-    TextView text_isRyhsjc;
-    int isRyhsjc = 0;
-    @BindView(R.id.text_isClhsjc)
-    TextView text_isClhsjc;
-    int isClhsjc = 0;
+    @BindView(R.id.text_isCrjjyjyzm)
+    TextView text_isCrjjyjyzm;
+    int isCrjjyjyzm = 0;
+    @BindView(R.id.text_isBgd)
+    TextView text_isBgd;
+    int isBgd = 0;
     @BindView(R.id.text_isXdzm)
     TextView text_isXdzm;
     int isXdzm = 0;
@@ -151,7 +153,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     int isFfzzwjc = 0;
     TraceBean goodsBean;
 
-    String id;
+
 
     String goodsType1 = "";
     String goodsType2 = "";
@@ -179,13 +181,13 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         adapter_Sphsjc = new ImageDeleteItemAdapter(this, images_Sphsjc);
         rv_Sphsjc.setAdapter(adapter_Sphsjc);
 
-        rv_Ryhsjc.setLayoutManager(new GridLayoutManager(this, 3));
-        adapter_Ryhsjc = new ImageDeleteItemAdapter(this, images_Ryhsjc);
-        rv_Ryhsjc.setAdapter(adapter_Ryhsjc);
+        rv_Crjjyjyzm.setLayoutManager(new GridLayoutManager(this, 3));
+        adapter_Crjjyjyzm = new ImageDeleteItemAdapter(this, images_Crjjyjyzm);
+        rv_Crjjyjyzm.setAdapter(adapter_Crjjyjyzm);
 
-        rv_Clhsjc.setLayoutManager(new GridLayoutManager(this, 3));
-        adapter_Clhsjc = new ImageDeleteItemAdapter(this, images_Clhsjc);
-        rv_Clhsjc.setAdapter(adapter_Clhsjc);
+        rv_Bgd.setLayoutManager(new GridLayoutManager(this, 3));
+        adapter_Bgd = new ImageDeleteItemAdapter(this, images_Bgd);
+        rv_Bgd.setAdapter(adapter_Bgd);
 
         rv_Xdzm.setLayoutManager(new GridLayoutManager(this, 3));
         adapter_Xdzm = new ImageDeleteItemAdapter(this, images_Xdzm);
@@ -195,11 +197,6 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         adapter_ffzzwjc = new ImageDeleteItemAdapter(this, images_ffzzwjc);
         rv_ffzzwjc.setAdapter(adapter_ffzzwjc);
 
-        id = getIntent().getStringExtra("id");
-        if (!TextUtils.isEmpty(id)) {
-            mPresenter.getData(id);
-
-        }
         mPresenter.getGoodsType();
         mPresenter.getType("transportMode");
         mPresenter.getType("isImported");
@@ -254,20 +251,20 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
             }
         });
 
-        adapter_Ryhsjc.setOnclick(new ImageDeleteItemAdapter.Onclick() {
+        adapter_Crjjyjyzm.setOnclick(new ImageDeleteItemAdapter.Onclick() {
             @Override
             public void onclickAdd(View v, int option) {
                 ArrayList<String> localPath = new ArrayList<>();
-                for (int i = 0; i < images_Ryhsjc.size(); i++) {
-                    if (!TextUtils.isEmpty(images_Ryhsjc.get(i).getPath())) {
-                        localPath.add(images_Ryhsjc.get(i).getPath());
+                for (int i = 0; i < images_Crjjyjyzm.size(); i++) {
+                    if (!TextUtils.isEmpty(images_Crjjyjyzm.get(i).getPath())) {
+                        localPath.add(images_Crjjyjyzm.get(i).getPath());
                     } else {
                     }
                 }
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9 - images_Ryhsjc.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(9 - images_Crjjyjyzm.size()) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setSelected(localPath) // 把已选的图片传入默认选中。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(PurchaseActivity.this, 1103); // 打开相册
@@ -275,25 +272,25 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
 
             @Override
             public void onclickDelete(View v, int option) {
-                images_Ryhsjc.remove(option);
-                adapter_Ryhsjc.notifyDataSetChanged();
+                images_Crjjyjyzm.remove(option);
+                adapter_Crjjyjyzm.notifyDataSetChanged();
             }
         });
 
-        adapter_Clhsjc.setOnclick(new ImageDeleteItemAdapter.Onclick() {
+        adapter_Bgd.setOnclick(new ImageDeleteItemAdapter.Onclick() {
             @Override
             public void onclickAdd(View v, int option) {
                 ArrayList<String> localPath = new ArrayList<>();
-                for (int i = 0; i < images_Clhsjc.size(); i++) {
-                    if (!TextUtils.isEmpty(images_Clhsjc.get(i).getPath())) {
-                        localPath.add(images_Clhsjc.get(i).getPath());
+                for (int i = 0; i < images_Bgd.size(); i++) {
+                    if (!TextUtils.isEmpty(images_Bgd.get(i).getPath())) {
+                        localPath.add(images_Bgd.get(i).getPath());
                     } else {
                     }
                 }
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9 - images_Clhsjc.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(9 - images_Bgd.size()) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setSelected(localPath) // 把已选的图片传入默认选中。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(PurchaseActivity.this, 1104); // 打开相册
@@ -301,8 +298,8 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
 
             @Override
             public void onclickDelete(View v, int option) {
-                images_Clhsjc.remove(option);
-                adapter_Clhsjc.notifyDataSetChanged();
+                images_Bgd.remove(option);
+                adapter_Bgd.notifyDataSetChanged();
             }
         });
         adapter_Xdzm.setOnclick(new ImageDeleteItemAdapter.Onclick() {
@@ -363,11 +360,11 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     }
 
 
-    @OnClick({R.id.toolbar_subtitle, R.id.text_goodsType, R.id.text_purchaseTime, R.id.text_transportMode, R.id.text_isImported, R.id.text_isSphsjc, R.id.text_isRyhsjc, R.id.text_isClhsjc, R.id.text_isXdzm, R.id.text_isFfzzwjc})
+    @OnClick({R.id.toolbar_subtitle, R.id.text_goodsType, R.id.text_purchaseTime, R.id.text_transportMode, R.id.text_isImported, R.id.text_isSphsjc, R.id.text_isCrjjyjyzm, R.id.text_isBgd, R.id.text_isXdzm, R.id.text_isFfzzwjc})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
-                postData();
+                postData("");
                 break;
             case R.id.text_goodsType:
                 UIAdjuster.closeKeyBoard(this);
@@ -376,13 +373,20 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                     @Override
                     public void onOptionsSelect(int options1, int option2, int options3, View v) {
                         //返回的分别是三个级别的选中位置
+
                         String tx = options1Items.get(options1).getPickerViewText()
-                                + options2Items.get(options1).get(option2).getPickerViewText()
-                                + options3Items.get(options1).get(option2).get(options3).getPickerViewText();
+                                + options2Items.get(options1).get(option2).getPickerViewText();
+                        if (options3Items.get(options1)!=null&&options3Items.get(options1).size()>0
+                                &&options3Items.get(options1).get(option2)!=null&&options3Items.get(options1).get(option2).size()>0
+                                &&options3Items.get(options1).get(option2).get(options3)!=null){
+                            tx= tx+options3Items.get(options1).get(option2).get(options3).getPickerViewText();
+                            goodsType3 = options3Items.get(options1).get(option2).get(options3).getDictValue();
+                        }else {
+                            goodsType3 = "";
+                        }
                         text_goodsType.setText(tx);
                         goodsType1 = options1Items.get(options1).getDictValue();
                         goodsType2 = options2Items.get(options1).get(option2).getDictValue();
-                        goodsType3 = options3Items.get(options1).get(option2).get(options3).getDictValue();
                         if (goodsType1.equals("5") || goodsType1.equals("6") || goodsType1.equals("7")) {
                             ll_typeRemark.setVisibility(View.VISIBLE);
                         } else {
@@ -392,8 +396,6 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 }).build();
                 pvOptions.setPicker(options1Items, options2Items, options3Items);
                 pvOptions.show();
-
-
                 break;
 
             case R.id.text_purchaseTime:
@@ -433,11 +435,11 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
             case R.id.text_isSphsjc:
                 showSelectPopWindow("isSphsjc");
                 break;
-            case R.id.text_isRyhsjc:
-                showSelectPopWindow("isRyhsjc");
+            case R.id.text_isCrjjyjyzm:
+                showSelectPopWindow("isCrjjyjyzm");
                 break;
-            case R.id.text_isClhsjc:
-                showSelectPopWindow("isClhsjc");
+            case R.id.text_isBgd:
+                showSelectPopWindow("isBgd");
                 break;
             case R.id.text_isXdzm:
                 showSelectPopWindow("isXdzm");
@@ -449,7 +451,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         }
     }
 
-    void postData() {
+    void postData(String id) {
 
         TracePostBean params = new TracePostBean();
         params.setOperationType(1);
@@ -470,78 +472,81 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         params.setIsImported(isImported);
         params.setEntryPort(getText(text_entryPort));
         params.setIsSphsjc(isSphsjc);
-        params.setIsRyhsjc(isRyhsjc);
-        params.setIsClhsjc(isClhsjc);
+        params.setIsCrjjyjyzm(isCrjjyjyzm);
+        params.setIsBgd(isBgd);
         params.setIsXdzm(isXdzm);
         params.setIsFfzzwjc(isFfzzwjc);
 
         params.setSphsjcEnclosureIdList(PostUtils.getImageIdList(images_Sphsjc));
-        params.setRyhsjcEnclosureIdList(PostUtils.getImageIdList(images_Ryhsjc));
-        params.setClhsjcEnclosureIdList(PostUtils.getImageIdList(images_Clhsjc));
+        params.setCrjjyjyzmEnclosureIdList(PostUtils.getImageIdList(images_Crjjyjyzm));
+        params.setBgdEnclosureIdList(PostUtils.getImageIdList(images_Bgd));
         params.setXdzmEnclosureIdList(PostUtils.getImageIdList(images_Xdzm));
         params.setFfzzwjcEnclosureIdList(PostUtils.getImageIdList(images_ffzzwjc));
         params.setEnclosureIds(PostUtils.getImageIdList(images));
         if (!TextUtils.isEmpty(id)) {
             params.setId(id);
+            mPresenter.submitData(params);
+        }else {
+            mPresenter.confirmData(params);
         }
 
-        mPresenter.submitData(params);
+
     }
 
     @Override
     public void showInfo(TraceBean data) {
-        goodsBean = data;
-        text_goodsName.setText(data.getGoodsName() + "");
-        text_productionDate.setText(data.getProductionDate() + "");
-        text_spec.setText(data.getSpec() + "");
-        text_count.setText(data.getCount() + "");
-        text_purchaseTime.setText(data.getPurchaseTime() + "");
-        text_supplierName.setText(data.getSupplierName() + "");
-        text_supplierAddress.setText(data.getSupplierAddress() + "");
-        text_supplierContact.setText(data.getSupplierContact() + "");
-        text_period.setText(data.getPeriod() + "");
-
-        isImported = data.getIsImported();
-        text_isImported.setText(data.getIsImportedText() + "");
-        text_entryPort.setText(data.getEntryPort() + "");
-
-        if (isImported.equals("进口")) {
-            ll_isImported.setVisibility(View.VISIBLE);
-
-            isSphsjc = data.getIsSphsjc();
-            text_isSphsjc.setText(data.getIsSphsjcText());
-
-            isRyhsjc = data.getIsRyhsjc();
-            text_isRyhsjc.setText(data.getIsRyhsjcText());
-
-            isClhsjc = data.getIsClhsjc();
-            text_isClhsjc.setText(data.getIsClhsjcText());
-
-            isXdzm = data.getIsXdzm();
-            text_isXdzm.setText(data.getIsXdzmText());
-
-            isFfzzwjc = data.getIsFfzzwjc();
-            text_isFfzzwjc.setText(data.getIsFfzzwjcText());
-            mPresenter.getImage("sphsjc", id);
-            mPresenter.getImage("ryhsjc", id);
-            mPresenter.getImage("clhsjc", id);
-            mPresenter.getImage("xdzm", id);
-            mPresenter.getImage("ffzzwjc", id);
-        } else {
-            ll_isImported.setVisibility(View.GONE);
-        }
-
-
-        goodsType1 = data.getGoodsType1();
-        goodsType2 = data.getGoodsType2();
-        goodsType3 = data.getGoodsType3();
-        text_goodsType.setText(data.getGoodsType1Text() + "" + data.getGoodsType2Text() + data.getGoodsType3Text());
-        text_typeRemark.setText(data.getTypeRemark() + "");
-        if (goodsType1.equals("5") || goodsType1.equals("6") || goodsType1.equals("7")) {
-            ll_typeRemark.setVisibility(View.VISIBLE);
-        } else {
-            ll_typeRemark.setVisibility(View.GONE);
-        }
+//        goodsBean = data;
+//        text_goodsName.setText(data.getGoodsName() + "");
+//        text_productionDate.setText(data.getProductionDate() + "");
+//        text_spec.setText(data.getSpec() + "");
+//        text_count.setText(data.getCount() + "");
+//        text_purchaseTime.setText(data.getPurchaseTime() + "");
+//        text_supplierName.setText(data.getSupplierName() + "");
+//        text_supplierAddress.setText(data.getSupplierAddress() + "");
+//        text_supplierContact.setText(data.getSupplierContact() + "");
+//        text_period.setText(data.getPeriod() + "");
+//
+//        isImported = data.getIsImported();
+//        text_isImported.setText(data.getIsImportedText() + "");
+//        text_entryPort.setText(data.getEntryPort() + "");
+//
+//        if (isImported.equals("进口")) {
+//            ll_isImported.setVisibility(View.VISIBLE);
+//
+//            isSphsjc = data.getIsSphsjc();
+//            text_isSphsjc.setText(data.getIsSphsjcText());
+//
+//            isCrjjyjyzm = data.getIsCrjjyjyzm();
+//            text_isCrjjyjyzm.setText(data.getIsCrjjyjyzmText());
+//
+//            isBgd = data.getIsBgd();
+//            text_isBgd.setText(data.getIsBgd());
+//
+//            isXdzm = data.getIsXdzm();
+//            text_isXdzm.setText(data.getIsXdzmText());
+//
+//            isFfzzwjc = data.getIsFfzzwjc();
+//            text_isFfzzwjc.setText(data.getIsFfzzwjcText());
+//            mPresenter.getImage("sphsjc", id);
+//            mPresenter.getImage("crjjyjyzm", id);
+//            mPresenter.getImage("bgd", id);
+//            mPresenter.getImage("xdzm", id);
+//            mPresenter.getImage("ffzzwjc", id);
+//        } else {
+//            ll_isImported.setVisibility(View.GONE);
+//        }
+//
+//
+//        goodsType1 = data.getGoodsType1();
+//        goodsType2 = data.getGoodsType2();
+//        goodsType3 = data.getGoodsType3();
+//        text_goodsType.setText(data.getGoodsType1Text() + "" + data.getGoodsType2Text() + data.getGoodsType3Text());
+//        text_typeRemark.setText(data.getTypeRemark() + "");
+//        if (goodsType1.equals("5") || goodsType1.equals("6") || goodsType1.equals("7")) {
+//            ll_typeRemark.setVisibility(View.VISIBLE);
+//        } else {
+//            ll_typeRemark.setVisibility(View.GONE);
+//        }
     }
 
 
@@ -549,6 +554,27 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     public void showResult() {
         setResult(RESULT_OK);
         finish();
+    }
+    private CustomDialog customDialog;
+    @Override
+    public void showDialog(String id) {
+        CustomDialog.Builder builder = new CustomDialog.Builder(this)
+                .setTitle("提示")
+                .setMessage("待入库商品信息已存在，是否对已存在商品进行进/出货操作？")
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        postData(id);
+                    }
+                });
+        customDialog = builder.create();
+        customDialog.show();
     }
 
     @Override
@@ -565,12 +591,12 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 adapter_Sphsjc.notifyDataSetChanged();
                 break;
             case 1103:
-                images_Ryhsjc.add(imageBack);
-                adapter_Ryhsjc.notifyDataSetChanged();
+                images_Crjjyjyzm.add(imageBack);
+                adapter_Crjjyjyzm.notifyDataSetChanged();
                 break;
             case 1104:
-                images_Clhsjc.add(imageBack);
-                adapter_Clhsjc.notifyDataSetChanged();
+                images_Bgd.add(imageBack);
+                adapter_Bgd.notifyDataSetChanged();
                 break;
             case 1105:
                 images_Xdzm.add(imageBack);
@@ -592,14 +618,14 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
             images_Sphsjc.clear();
             images_Sphsjc.addAll(list);
             adapter_Sphsjc.notifyDataSetChanged();
-        } else if ("ryhsjc".equals(type)) {
-            images_Ryhsjc.clear();
-            images_Ryhsjc.addAll(list);
-            adapter_Ryhsjc.notifyDataSetChanged();
-        } else if ("clhsjc".equals(type)) {
-            images_Clhsjc.clear();
-            images_Clhsjc.addAll(list);
-            adapter_Clhsjc.notifyDataSetChanged();
+        } else if ("Crjjyjyzm".equals(type)) {
+            images_Crjjyjyzm.clear();
+            images_Crjjyjyzm.addAll(list);
+            adapter_Crjjyjyzm.notifyDataSetChanged();
+        } else if ("Bgd".equals(type)) {
+            images_Bgd.clear();
+            images_Bgd.addAll(list);
+            adapter_Bgd.notifyDataSetChanged();
         } else if ("xdzm".equals(type)) {
             images_Xdzm.clear();
             images_Xdzm.addAll(list);
@@ -742,12 +768,12 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 } else if (type.equals("isSphsjc")) {
                     text_isSphsjc.setText(msg);
                     isSphsjc = index == 0 ? 1 : 0;
-                } else if (type.equals("isRyhsjc")) {
-                    text_isRyhsjc.setText(msg);
-                    isRyhsjc = index == 0 ? 1 : 0;
-                } else if (type.equals("isClhsjc")) {
-                    text_isClhsjc.setText(msg);
-                    isClhsjc = index == 0 ? 1 : 0;
+                } else if (type.equals("isCrjjyjyzm")) {
+                    text_isCrjjyjyzm.setText(msg);
+                    isCrjjyjyzm = index == 0 ? 1 : 0;
+                } else if (type.equals("isBgd")) {
+                    text_isBgd.setText(msg);
+                    isBgd = index == 0 ? 1 : 0;
                 } else if (type.equals("isXdzm")) {
                     text_isXdzm.setText(msg);
                     isXdzm = index == 0 ? 1 : 0;
@@ -767,6 +793,8 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtils.v("------onDestroy");
+        if (customDialog != null && customDialog.isShowing()) {
+            customDialog.dismiss();
+        }
     }
 }

@@ -84,7 +84,8 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider> <!-- 配置的第三方参数属性 -->
+        </provider>
+        <!-- 配置的第三方参数属性 -->
         <meta-data
             android:name="PUSH_APPID"
             android:value="${GETUI_APP_ID}" />
@@ -167,7 +168,8 @@
         <activity android:name=".business.trace.PendingGoodsActivity" />
         <activity android:name=".business.map.SelectLocationActivity" />
         <activity android:name=".business.trace.DeliverActivity" />
-        <activity android:name=".business.trace.PurchaseActivity" />
+        <activity android:name=".business.trace.PurchaseActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".business.storage.EquipmentInfoActivity" />
         <activity android:name=".business.trace.HisPendingActivity" />
         <activity android:name=".business.qualification.StoragePasswordActivity" />

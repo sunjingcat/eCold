@@ -30,7 +30,7 @@ public class TemperatureAdapter extends BaseQuickAdapter<DailyBean.Temperature, 
     protected void convert(BaseViewHolder holder, final DailyBean.Temperature item) {
         //名称，温度
         holder.setText(R.id.item_title,item.getTemperatureName()+"");
-        holder.setText(R.id.item_content,item.getTemperatureValue()+"");
+        holder.setText(R.id.item_content,item.getTemperatureValue()+"℃");
         GlideUtils.loadImage(getContext(), item.getDownloadUrl(),  holder.getView(R.id.image));
         holder.getView(R.id.image).setOnClickListener(new View.OnClickListener() {
             @Override

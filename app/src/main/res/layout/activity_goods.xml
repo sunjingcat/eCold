@@ -150,8 +150,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="20dp"
+
             android:paddingBottom="20dp"
+            android:layout_marginRight="40dp"
             android:orientation="vertical">
 
             <Button

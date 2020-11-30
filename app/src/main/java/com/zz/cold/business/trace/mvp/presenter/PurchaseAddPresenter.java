@@ -1,6 +1,8 @@
 package com.zz.cold.business.trace.mvp.presenter;
 
 
+import android.text.TextUtils;
+
 import com.zz.cold.bean.CategoryBean;
 import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.GoodsBean;
@@ -122,23 +124,29 @@ public class PurchaseAddPresenter extends MyBasePresenterImpl<Contract.IGetPurch
     }
 
     @Override
-    public void submitData(TracePostBean tracePostBean) {
+    public void confirmData(TracePostBean tracePostBean) {
 
-        RxNetUtils.request(getApi(ApiService.class).confirmGoodsAccount(tracePostBean), new RequestObserver<JsonT>(this) {
+        RxNetUtils.request(getApi(ApiService.class).confirmGoodsAccount(tracePostBean), new RequestObserver<JsonT<String>>(this) {
             @Override
-            protected void onSuccess(JsonT jsonT) {
-                postData(tracePostBean);
+            protected void onSuccess(JsonT<String> jsonT) {
+                if (TextUtils.isEmpty(jsonT.getData())){
+                    submitData(tracePostBean);
+                }else {
+                    view.showDialog(jsonT.getData());
+                }
+
             }
 
             @Override
-            protected void onFail2(JsonT stringJsonT) {
+            protected void onFail2(JsonT<String> stringJsonT) {
                 super.onFail2(stringJsonT);
                 view.showToast(stringJsonT.getMessage());
             }
         }, mDialog);
     }
 
-    public void postData(TracePostBean tracePostBean) {
+    @Override
+    public void submitData(TracePostBean tracePostBean) {
         RxNetUtils.request(getApi(ApiService.class).postGoodsAccount(tracePostBean), new RequestObserver<JsonT>(this) {
             @Override
             protected void onSuccess(JsonT jsonT) {

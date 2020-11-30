@@ -16,6 +16,7 @@ import okhttp3.MultipartBody;
 
 public class Contract {
     public interface IsetPurchaseAddPresenter extends BasePresenter {
+        void confirmData(TracePostBean tracePostBean);
         void submitData(TracePostBean tracePostBean);
         void getData(String id);
         void getType(String type);
@@ -30,6 +31,7 @@ public class Contract {
     public interface IGetPurchaseAddView extends BaseView {
         void showInfo(TraceBean data);
         void showResult();
+        void showDialog(String id);
         void showPostImage(int requestCode,String localPath,ImageBack imageBack);
 
         void showImage(String type,List<ImageBack> list);

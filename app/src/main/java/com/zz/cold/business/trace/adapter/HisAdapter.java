@@ -1,6 +1,7 @@
 package com.zz.cold.business.trace.adapter;
 
 import android.graphics.Color;
+import android.view.View;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -25,10 +26,12 @@ public class HisAdapter extends BaseQuickAdapter<WmsBean, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder holder, final WmsBean item) {
         holder.setText(R.id.item_title,item.getGoodsName()+"");
-        holder.setText(R.id.item_weight,item.getOperationType()==1?("+"+item.getCount()):("-"+item.getCount()));
+        holder.setText(R.id.item_weight,item.getOperationType()==1?("+"+item.getCount()+item.getSpec()):("-"+item.getCount()+item.getSpec()));
         holder.setTextColor(R.id.item_weight,item.getOperationType()==1? Color.RED :Color.GREEN);
         holder.setText(R.id.item_time,item.getReviewTime()+"");
-        holder.setText(R.id.item_status,item.getReviewRemark()+"");
+        holder.setText(R.id.item_status,item.getReviewStatusText()+"");
+        holder.setText(R.id.item_remark,item.getReviewRemark()+"");
+        holder.getView(R.id.item_remark).setVisibility(View.VISIBLE);
 
     }
 }

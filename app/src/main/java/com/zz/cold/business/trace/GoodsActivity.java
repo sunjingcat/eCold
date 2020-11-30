@@ -118,8 +118,8 @@ public class GoodsActivity extends MyBaseActivity {
     }
 
     InfoBean sphsjc;
-    InfoBean ryhsjc;
-    InfoBean clhsjc;
+    InfoBean crjjyjyzm;
+    InfoBean bgd;
     InfoBean xdzm;
     InfoBean ffzzwjc;
 
@@ -143,17 +143,17 @@ public class GoodsActivity extends MyBaseActivity {
             infoList.add(new InfoBean("入境口岸", data.getEntryPort() + ""));
             sphsjc = new InfoBean("食品核酸检测", data.getIsSphsjcText() + "");
             infoList.add(sphsjc);
-            ryhsjc = new InfoBean("人员核酸检测", data.getIsRyhsjcText() + "");
-            infoList.add(ryhsjc);
-            clhsjc = new InfoBean("车辆核酸检测", data.getIsClhsjcText() + "");
-            infoList.add(clhsjc);
+            crjjyjyzm = new InfoBean("出入境检验检疫证明", data.getIsCrjjyjyzmText() + "");
+            infoList.add(crjjyjyzm);
+            bgd = new InfoBean("报关单", data.getIsBgdText() + "");
+            infoList.add(bgd);
             xdzm = new InfoBean("消毒证明", data.getIsXdzmText() + "");
             infoList.add(xdzm);
             ffzzwjc = new InfoBean("非非洲猪瘟检测报告", data.getIsFfzzwjcText() + "");
             infoList.add(ffzzwjc);
             getImages("sphsjc");
-            getImages("ryhsjc");
-            getImages("clhsjc");
+            getImages("crjjyjyzm");
+            getImages("bgd");
             getImages("xdzm");
             getImages("ffzzwjc");
         }
@@ -275,16 +275,18 @@ public class GoodsActivity extends MyBaseActivity {
                 if (jsonT.getData() != null && jsonT.getData().size() > 0) {
                     if ("sphsjc".equals(type)) {
                         sphsjc.setImages(jsonT.getData());
-                    } else if ("ryhsjc".equals(type)) {
-                        ryhsjc.setImages(jsonT.getData());
-                    } else if ("clhsjc".equals(type)) {
-                        clhsjc.setImages(jsonT.getData());
+                    } else if ("crjjyjyzm".equals(type)) {
+                        crjjyjyzm.setImages(jsonT.getData());
+                    } else if ("bgd".equals(type)) {
+                        bgd.setImages(jsonT.getData());
                     } else if ("xdzm".equals(type)) {
                         xdzm.setImages(jsonT.getData());
                     } else if ("ffzzwjc".equals(type)) {
                         ffzzwjc.setImages(jsonT.getData());
                     }
+                    infoAdapter.notifyDataSetChanged();
                 }
+
             }
 
             @Override

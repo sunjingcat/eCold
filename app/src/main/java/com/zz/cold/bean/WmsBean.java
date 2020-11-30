@@ -15,6 +15,11 @@ public class WmsBean {
     String     reviewStatusText;// 待审核,
     String    reviewTime;// null,
     String     reviewRemark;// null
+    String     spec;// null
+
+    public String getSpec() {
+        return spec;
+    }
 
     public String getId() {
         return id;

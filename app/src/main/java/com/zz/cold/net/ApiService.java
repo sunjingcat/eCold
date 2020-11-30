@@ -189,7 +189,7 @@ public interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoodsAccount/confirm")
-    Observable<JsonT> confirmGoodsAccount(@Body TracePostBean requestBody);
+    Observable<JsonT<String>> confirmGoodsAccount(@Body TracePostBean requestBody);
 
     @POST("/app/v1/coldchain/coldchainGoodsAccount/review/{accountId}")
     Observable<JsonT> reviewGoods(@Path("accountId") String accountId,@QueryMap Map<String, Object> params);

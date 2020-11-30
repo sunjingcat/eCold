@@ -24,8 +24,8 @@ public class TracePostBean {
     String isImported;// 1,
     String entryPort;// ,
     int isSphsjc;// 0,
-    int isRyhsjc;// 0,
-    int isClhsjc;// 0,
+    int isCrjjyjyzm;// 0,
+    int isBgd;// 0,
     int isXdzm;// 0,
     int isFfzzwjc;// 0,
     int operationType;// 0,
@@ -111,12 +111,12 @@ public class TracePostBean {
         this.isSphsjc = isSphsjc;
     }
 
-    public void setIsRyhsjc(int isRyhsjc) {
-        this.isRyhsjc = isRyhsjc;
+    public void setIsCrjjyjyzm(int isCrjjyjyzm) {
+        this.isCrjjyjyzm = isCrjjyjyzm;
     }
 
-    public void setIsClhsjc(int isClhsjc) {
-        this.isClhsjc = isClhsjc;
+    public void setIsBgd(int isBgd) {
+        this.isBgd = isBgd;
     }
 
     public void setIsXdzm(int isXdzm) {
@@ -137,8 +137,8 @@ public class TracePostBean {
 
 
     List<String> sphsjcEnclosureIdList;// null,
-    List<String> ryhsjcEnclosureIdList;// null,
-    List<String> clhsjcEnclosureIdList;// null,
+    List<String> crjjyjyzmEnclosureIdList;// null,
+    List<String> bgdEnclosureIdList;// null,
     List<String> xdzmEnclosureIdList;// null,
     List<String> ffzzwjcEnclosureIdList;// null,
     List<String> enclosureIds;// null,
@@ -147,12 +147,12 @@ public class TracePostBean {
         this.sphsjcEnclosureIdList = sphsjcEnclosureIdList;
     }
 
-    public void setRyhsjcEnclosureIdList(List<String> ryhsjcEnclosureIdList) {
-        this.ryhsjcEnclosureIdList = ryhsjcEnclosureIdList;
+    public void setCrjjyjyzmEnclosureIdList(List<String> crjjyjyzmEnclosureIdList) {
+        this.crjjyjyzmEnclosureIdList = crjjyjyzmEnclosureIdList;
     }
 
-    public void setClhsjcEnclosureIdList(List<String> clhsjcEnclosureIdList) {
-        this.clhsjcEnclosureIdList = clhsjcEnclosureIdList;
+    public void setBgdEnclosureIdList(List<String> BgdEnclosureIdList) {
+        this.bgdEnclosureIdList = BgdEnclosureIdList;
     }
 
     public void setXdzmEnclosureIdList(List<String> xdzmEnclosureIdList) {
@@ -171,12 +171,12 @@ public class TracePostBean {
         return sphsjcEnclosureIdList;
     }
 
-    public List<String> getRyhsjcEnclosureIdList() {
-        return ryhsjcEnclosureIdList;
+    public List<String> getCrjjyjyzmEnclosureIdList() {
+        return crjjyjyzmEnclosureIdList;
     }
 
-    public List<String> getClhsjcEnclosureIdList() {
-        return clhsjcEnclosureIdList;
+    public List<String> getBgdEnclosureIdList() {
+        return bgdEnclosureIdList;
     }
 
     public List<String> getXdzmEnclosureIdList() {
@@ -271,12 +271,12 @@ public class TracePostBean {
         return isSphsjc;
     }
 
-    public int getIsRyhsjc() {
-        return isRyhsjc;
+    public int getIsCrjjyjyzm() {
+        return isCrjjyjyzm;
     }
 
-    public int getIsClhsjc() {
-        return isClhsjc;
+    public int getIsBgd() {
+        return isBgd;
     }
 
     public int getIsXdzm() {
