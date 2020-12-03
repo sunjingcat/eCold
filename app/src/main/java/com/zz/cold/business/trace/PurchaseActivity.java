@@ -37,6 +37,7 @@ import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.TraceBean;
 import com.zz.cold.bean.TracePostBean;
 import com.zz.cold.business.daily.AddDailyActivity;
+import com.zz.cold.business.qualification.QualificationActivity;
 import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
 import com.zz.cold.business.trace.mvp.Contract;
 import com.zz.cold.business.trace.mvp.presenter.PurchaseAddPresenter;
@@ -183,7 +184,6 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        coldstorageId = getIntent().getStringExtra("coldstorageId");
         rvImages.setLayoutManager(new GridLayoutManager(this, 3));
         adapter = new ImageDeleteItemAdapter(this, images);
         rvImages.setAdapter(adapter);
@@ -378,7 +378,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 postData("");
                 break;
             case R.id.text_coldstorageId:
-
+                startActivityForResult(new Intent(PurchaseActivity.this, QualificationActivity.class).putExtra("page", "import"), 1001);
                 break;
             case R.id.text_goodsType:
                 UIAdjuster.closeKeyBoard(this);
@@ -713,30 +713,35 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {
-            ArrayList<String> selectImages = data.getStringArrayListExtra(
-                    ImageSelectorUtils.SELECT_RESULT);
-            for (String path : selectImages) {
-                Luban.with(this)
-                        .load(path)
-                        .ignoreBy(100)
-                        .setCompressListener(new OnCompressListener() {
-                            @Override
-                            public void onStart() {
-                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
-                            }
+            if (requestCode == 1001) {
+               coldstorageId= data.getStringExtra("id");
+               text_coldstorageId.setText(data.getStringExtra("name"));
+            } else {
+                ArrayList<String> selectImages = data.getStringArrayListExtra(
+                        ImageSelectorUtils.SELECT_RESULT);
+                for (String path : selectImages) {
+                    Luban.with(this)
+                            .load(path)
+                            .ignoreBy(100)
+                            .setCompressListener(new OnCompressListener() {
+                                @Override
+                                public void onStart() {
+                                    // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                                }
 
-                            @Override
-                            public void onSuccess(File file) {
+                                @Override
+                                public void onSuccess(File file) {
 
-                                mPresenter.postImage(requestCode, file.getPath(), getImageBody(file.getPath()));
-                            }
+                                    mPresenter.postImage(requestCode, file.getPath(), getImageBody(file.getPath()));
+                                }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                // TODO 当压缩过程出现问题时调用
-                            }
-                        }).launch();
+                                @Override
+                                public void onError(Throwable e) {
+                                    // TODO 当压缩过程出现问题时调用
+                                }
+                            }).launch();
 
+                }
             }
         }
     }
@@ -805,9 +810,9 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 } else if (type.equals("isThird")) {
                     text_isThird.setText(msg);
                     isThird = index == 0 ? 1 : 0;
-                    if (isThird==1){
+                    if (isThird == 1) {
                         ll_coldstorageId.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         ll_coldstorageId.setVisibility(View.GONE);
                     }
                 }

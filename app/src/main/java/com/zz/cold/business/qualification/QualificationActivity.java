@@ -48,7 +48,7 @@ import butterknife.OnClick;
 import static com.zz.cold.net.RxNetUtils.getApi;
 
 /**
- *冷库资质
+ * 冷库资质
  */
 public class QualificationActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
 
@@ -68,6 +68,7 @@ public class QualificationActivity extends MyBaseActivity implements OnRefreshLi
     private int pagenum = 1;
     private int pagesize = 20;
     private String searchStr = "";
+
     @Override
     protected int getContentView() {
         return R.layout.activity_qualification;
@@ -87,13 +88,22 @@ public class QualificationActivity extends MyBaseActivity implements OnRefreshLi
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
+        String page = getIntent().getStringExtra("page");
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                Intent intent = new Intent();
-                intent.setClass(QualificationActivity.this, QualificationInfoActivity.class);
-                intent.putExtra("id",mlist.get(position).getId());
-                startActivity(intent);
+                if (page.equals("import")) {
+                    Intent intent = new Intent();
+                    intent.putExtra("id", mlist.get(position).getId());
+                    intent.putExtra("name", mlist.get(position).getOperatorName());
+                    setResult(RESULT_OK,intent);
+                } else {
+                    Intent intent = new Intent();
+                    intent.setClass(QualificationActivity.this, QualificationInfoActivity.class);
+                    intent.putExtra("id", mlist.get(position).getId());
+                    startActivity(intent);
+                }
+
             }
         });
         et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -119,10 +129,12 @@ public class QualificationActivity extends MyBaseActivity implements OnRefreshLi
                 break;
         }
     }
+
     @Override
     protected void initToolBar() {
         ToolBarUtils.getInstance().setNavigation(toolbar);
     }
+
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         pagenum = 1;
@@ -142,12 +154,14 @@ public class QualificationActivity extends MyBaseActivity implements OnRefreshLi
             llNull.setVisibility(View.GONE);
         }
     }
+
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pagenum++;
         getDate();
         refreshLayout.finishLoadMore();
     }
+
     void getDate() {
         Map<String, Object> map = new HashMap<>();
         map.put("pageNum", pagenum);
