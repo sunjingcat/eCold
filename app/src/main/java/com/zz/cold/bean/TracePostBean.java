@@ -23,12 +23,22 @@ public class TracePostBean {
     String period;// 2020-11-25,
     String isImported;// 1,
     String entryPort;// ,
+    String batchNumber;// ,
+    String goodsRemark;// ,
     int isSphsjc;// 0,
     int isCrjjyjyzm;// 0,
     int isBgd;// 0,
     int isXdzm;// 0,
     int isFfzzwjc;// 0,
     int operationType;// 0,
+
+    public void setGoodsRemark(String goodsRemark) {
+        this.goodsRemark = goodsRemark;
+    }
+
+    public void setBatchNumber(String batchNumber) {
+        this.batchNumber = batchNumber;
+    }
 
     public void setId(String id) {
         this.id = id;

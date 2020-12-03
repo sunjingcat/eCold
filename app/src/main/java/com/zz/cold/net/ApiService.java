@@ -6,6 +6,8 @@ import com.zz.cold.bean.DailyBean;
 import com.zz.cold.bean.DailyPost;
 import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.EquipmentBean;
+import com.zz.cold.bean.GoodsBean;
+import com.zz.cold.bean.GroupCountBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.ImageBean;
 import com.zz.cold.bean.MainShowData;
@@ -108,6 +110,16 @@ public interface ApiService {
 
     @GET("/app/v1/coldchain/coldstorage/list")
     Observable<JsonT<List<QualificationBean>>> getQualificationList(@QueryMap Map<String, Object> params);
+
+
+    @GET("/app/v1/coldchain/coldchainGoods/selectImportColdstorageGroupCount")
+    Observable<JsonT<List<GroupCountBean>>> selectImportColdstorageGroupCount();
+
+    @GET("/app/v1/coldchain/coldchainGoods/selectExportColdstorageGroupCount")
+    Observable<JsonT<List<GroupCountBean>>> selectExportColdstorageGroupCount();
+
+    @GET("/app/v1/coldchain/coldchainGoods/importExportList/{coldstorageId}")
+    Observable<JsonT<List<GoodsBean>>> importExportList(@Path("coldstorageId") String coldstorageId,@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/coldstorage/{id}")
     Observable<JsonT<QualificationBean>> getQualificationInfo(@Path("id") String id);

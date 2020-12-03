@@ -44,11 +44,9 @@ public class StartpageActivity extends MyBaseActivity implements View.OnClickLis
                 if (TextUtils.isEmpty(CacheUtility.getToken())) {
                     startActivity(new Intent(StartpageActivity.this, LoginActivity.class));
                 } else {
-                    if (CacheUtility.getRole()==1) {
-                        startActivity(new Intent(StartpageActivity.this, MainActivity.class));
-                    }else {
-                        startActivity(new Intent(StartpageActivity.this, TraceActivity.class));
-                    }
+
+                    startActivity(new Intent(StartpageActivity.this, MainActivity.class));
+
 
                 }
 
@@ -83,11 +81,8 @@ public class StartpageActivity extends MyBaseActivity implements View.OnClickLis
                 if (TextUtils.isEmpty(CacheUtility.getToken())) {
                     startActivity(new Intent(StartpageActivity.this, LoginActivity.class));
                 } else {
-                    if (CacheUtility.getRole()==1) {
-                        startActivity(new Intent(StartpageActivity.this, MainActivity.class));
-                    }else {
-                        startActivity(new Intent(StartpageActivity.this, TraceActivity.class));
-                    }
+
+                    startActivity(new Intent(StartpageActivity.this, MainActivity.class));
 
 
                 }

@@ -173,6 +173,8 @@
         <activity android:name=".business.storage.EquipmentInfoActivity" />
         <activity android:name=".business.trace.HisPendingActivity" />
         <activity android:name=".business.qualification.StoragePasswordActivity" />
+        <activity android:name=".business.export.ExportListActivity" />
+        <activity android:name=".business.export.ImportActivity" />
         <!--  屏幕适配########################################-->
         <meta-data
             android:name="android.max_aspect"

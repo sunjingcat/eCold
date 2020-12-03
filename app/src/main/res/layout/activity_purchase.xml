@@ -135,6 +135,68 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textLeftStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="是否第三方冷库" />
+
+
+                <TextView
+                    android:id="@+id/text_isThird"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical|right"
+                    android:hint="请选择"
+                    android:textColor="@color/colorTextBlack33"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_coldstorageId"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/textLeftStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="第三方冷库" />
+
+
+                <TextView
+                    android:id="@+id/text_coldstorageId"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical|right"
+                    android:hint="请选择"
+                    android:textColor="@color/colorTextBlack33"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
                 android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
@@ -150,6 +212,34 @@
 
                 <EditText
                     android:id="@+id/text_productionDate"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="center_vertical|right"
+                    android:hint="请填写"
+                    android:textColor="@color/colorTextBlack33"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textLeftStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="批号" />
+
+
+                <EditText
+                    android:id="@+id/text_batchNumber"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -209,8 +299,8 @@
                     style="@style/textRightStyle"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
-                    android:inputType="number"
-                    android:hint="请填写" />
+                    android:hint="请填写"
+                    android:inputType="number" />
             </LinearLayout>
 
             <LinearLayout
@@ -231,9 +321,9 @@
                 <TextView
                     android:id="@+id/text_purchaseTime"
                     style="@style/textRightStyle"
+                    android:layout_height="match_parent"
                     android:drawableRight="@drawable/image_arrow"
                     android:drawablePadding="5dp"
-                    android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
                     android:hint="请选择" />
             </LinearLayout>
@@ -359,6 +449,29 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textLeftStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="商品备注" />
+
+                <EditText
+                    android:id="@+id/text_goodsRemark"
+                    style="@style/textRightStyle"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:hint="请填写" />
+            </LinearLayout>
+
+            <LinearLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -442,10 +555,12 @@
 
 
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_Sphsjc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -471,10 +586,12 @@
                         android:hint="请选择" />
 
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_Crjjyjyzm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -499,6 +616,7 @@
                         android:gravity="center_vertical|right"
                         android:hint="请选择" />
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_Bgd"
                     android:layout_width="match_parent"
@@ -528,10 +646,12 @@
                         android:gravity="center_vertical|right"
                         android:hint="请选择" />
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_Xdzm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -546,6 +666,7 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="非非洲猪瘟检测报告" />
+
                     <TextView
                         android:id="@+id/text_isFfzzwjc"
                         style="@style/textRightStyle"
@@ -556,14 +677,16 @@
                         android:hint="请选择" />
 
                 </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_ffzzwjc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
-            <include layout="@layout/layout_images"
-                android:visibility="gone"/>
+            <include
+                layout="@layout/layout_images"
+                android:visibility="gone" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

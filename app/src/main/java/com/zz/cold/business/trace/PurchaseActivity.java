@@ -120,6 +120,8 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     TextView text_purchaseTime;
     @BindView(R.id.text_supplierName)
     EditText text_supplierName;
+    @BindView(R.id.text_batchNumber)
+    EditText text_batchNumber;
     @BindView(R.id.text_supplierAddress)
     EditText text_supplierAddress;
     @BindView(R.id.text_supplierContact)
@@ -129,6 +131,8 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     String transportMode;
     @BindView(R.id.text_period)
     EditText text_period;
+    @BindView(R.id.text_goodsRemark)
+    EditText text_goodsRemark;
     @BindView(R.id.text_isImported)
     TextView text_isImported;
     String isImported = "";
@@ -151,13 +155,19 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     @BindView(R.id.text_isFfzzwjc)
     TextView text_isFfzzwjc;
     int isFfzzwjc = 0;
+    @BindView(R.id.text_isThird)
+    TextView text_isThird;
+    int isThird = 0;
     TraceBean goodsBean;
-
-
+    @BindView(R.id.text_coldstorageId)
+    TextView text_coldstorageId;
+    @BindView(R.id.ll_coldstorageId)
+    LinearLayout ll_coldstorageId;
 
     String goodsType1 = "";
     String goodsType2 = "";
     String goodsType3 = "";
+    String coldstorageId = "";
 
     @Override
     protected int getContentView() {
@@ -173,6 +183,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        coldstorageId = getIntent().getStringExtra("coldstorageId");
         rvImages.setLayoutManager(new GridLayoutManager(this, 3));
         adapter = new ImageDeleteItemAdapter(this, images);
         rvImages.setAdapter(adapter);
@@ -360,11 +371,14 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     }
 
 
-    @OnClick({R.id.toolbar_subtitle, R.id.text_goodsType, R.id.text_purchaseTime, R.id.text_transportMode, R.id.text_isImported, R.id.text_isSphsjc, R.id.text_isCrjjyjyzm, R.id.text_isBgd, R.id.text_isXdzm, R.id.text_isFfzzwjc})
+    @OnClick({R.id.toolbar_subtitle, R.id.text_goodsType, R.id.text_coldstorageId, R.id.text_purchaseTime, R.id.text_transportMode, R.id.text_isThird, R.id.text_isImported, R.id.text_isSphsjc, R.id.text_isCrjjyjyzm, R.id.text_isBgd, R.id.text_isXdzm, R.id.text_isFfzzwjc})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
                 postData("");
+                break;
+            case R.id.text_coldstorageId:
+
                 break;
             case R.id.text_goodsType:
                 UIAdjuster.closeKeyBoard(this);
@@ -376,12 +390,12 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
 
                         String tx = options1Items.get(options1).getPickerViewText()
                                 + options2Items.get(options1).get(option2).getPickerViewText();
-                        if (options3Items.get(options1)!=null&&options3Items.get(options1).size()>0
-                                &&options3Items.get(options1).get(option2)!=null&&options3Items.get(options1).get(option2).size()>0
-                                &&options3Items.get(options1).get(option2).get(options3)!=null){
-                            tx= tx+options3Items.get(options1).get(option2).get(options3).getPickerViewText();
+                        if (options3Items.get(options1) != null && options3Items.get(options1).size() > 0
+                                && options3Items.get(options1).get(option2) != null && options3Items.get(options1).get(option2).size() > 0
+                                && options3Items.get(options1).get(option2).get(options3) != null) {
+                            tx = tx + options3Items.get(options1).get(option2).get(options3).getPickerViewText();
                             goodsType3 = options3Items.get(options1).get(option2).get(options3).getDictValue();
-                        }else {
+                        } else {
                             goodsType3 = "";
                         }
                         text_goodsType.setText(tx);
@@ -432,6 +446,9 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
             case R.id.text_isImported:
                 showSelectPopWindow("isImported");
                 break;
+            case R.id.text_isThird:
+                showSelectPopWindow("isThird");
+                break;
             case R.id.text_isSphsjc:
                 showSelectPopWindow("isSphsjc");
                 break;
@@ -457,6 +474,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         params.setOperationType(1);
         params.setGoodsName(getText(text_goodsName));
         params.setProductionDate(getText(text_productionDate));
+        params.setColdstorageId(coldstorageId);
         params.setGoodsType1(goodsType1);
         params.setGoodsType2(goodsType2);
         params.setGoodsType3(goodsType3);
@@ -468,6 +486,8 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         params.setSupplierAddress(getText(text_supplierAddress));
         params.setSupplierContact(getText(text_supplierContact));
         params.setPeriod(getText(text_period));
+        params.setBatchNumber(getText(text_batchNumber));
+        params.setGoodsRemark(getText(text_goodsRemark));
 
         params.setIsImported(isImported);
         params.setEntryPort(getText(text_entryPort));
@@ -486,7 +506,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         if (!TextUtils.isEmpty(id)) {
             params.setId(id);
             mPresenter.submitData(params);
-        }else {
+        } else {
             mPresenter.confirmData(params);
         }
 
@@ -555,7 +575,9 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         setResult(RESULT_OK);
         finish();
     }
+
     private CustomDialog customDialog;
+
     @Override
     public void showDialog(String id) {
         CustomDialog.Builder builder = new CustomDialog.Builder(this)
@@ -674,7 +696,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                     optionsItems2.add(child1);
                 }
 
-            }else {
+            } else {
                 optionsItems2.add(new DictBean());
                 List<DictBean> optionsItems = new ArrayList<>();
                 optionsItems.add(new DictBean());
@@ -780,6 +802,14 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 } else if (type.equals("isFfzzwjc")) {
                     text_isFfzzwjc.setText(msg);
                     isFfzzwjc = index == 0 ? 1 : 0;
+                } else if (type.equals("isThird")) {
+                    text_isThird.setText(msg);
+                    isThird = index == 0 ? 1 : 0;
+                    if (isThird==1){
+                        ll_coldstorageId.setVisibility(View.VISIBLE);
+                    }else {
+                        ll_coldstorageId.setVisibility(View.GONE);
+                    }
                 }
             }
 

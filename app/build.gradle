@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    def API_RELEASE_HOST = "\"http://121.89.175.40:8787\""
-    def API_DEV_HOST = "\"http://121.89.175.40:8787\""
+    def API_RELEASE_HOST = "\"http://121.89.175.40:5555\""
+    def API_DEV_HOST = "\"http://121.89.175.40:5555\""
 
     compileSdkVersion 28
     defaultConfig {

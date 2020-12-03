@@ -5,37 +5,19 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
-
-import com.zz.cold.R;
 import com.zz.cold.bean.MainShowData;
 import com.zz.cold.business.daily.DailyActivity;
-import com.zz.cold.business.qualification.QualificationActivity;
-import com.zz.cold.business.storage.StorageActivity;
+import com.zz.cold.business.export.ExportListActivity;
 import com.zz.cold.business.trace.TraceActivity;
-import com.zz.lib.commonlib.utils.CacheUtility;
 import com.zz.lib.core.http.utils.ToastUtils;
 import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.cold.base.MyBaseActivity;
-import com.zz.cold.bean.EventBusSimpleInfo;
 import com.zz.cold.business.mine.MineActivity;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;
 import com.zz.cold.net.RxNetUtils;
 import com.zz.cold.utils.UpdateManager;
-
-import org.cups4j.CupsClient;
-import org.cups4j.CupsPrinter;
-import org.cups4j.PrintJob;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,12 +76,14 @@ public class MainActivity extends MyBaseActivity {
             case R.id.main_group_1:
 
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, QualificationActivity.class);
+                intent.setClass(MainActivity.this, ExportListActivity.class);
+                intent.putExtra("page","import");
                 startActivity(intent);
                 break;
             case R.id.main_group_2:
                 Intent intent1 = new Intent();
-                intent1.setClass(MainActivity.this, StorageActivity.class);
+                intent1.setClass(MainActivity.this, ExportListActivity.class);
+                intent1.putExtra("page","export");
                 startActivity(intent1);
                 break;
             case R.id.main_group_3:

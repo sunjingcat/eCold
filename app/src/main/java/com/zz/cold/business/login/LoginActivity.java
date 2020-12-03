@@ -114,11 +114,9 @@ public class LoginActivity extends MyBaseActivity<Contract.IsetLoginPresenter> i
         showToast("登录成功");
         PushManager.getInstance().turnOnPush(this);
         Intent intent = new Intent();
-        if (CacheUtility.getRole() == 1) {
+
             intent.setClass(this, MainActivity.class);
-        } else {
-            intent.setClass(this, TraceActivity.class);
-        }
+
         startActivity(intent);
         finish();
     }
