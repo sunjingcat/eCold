@@ -19,6 +19,7 @@ import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.QualificationBean;
+import com.zz.cold.bean.TraceBean;
 import com.zz.cold.business.export.adapter.GoodsAdapter;
 import com.zz.cold.business.qualification.AddQualificationActivity;
 import com.zz.cold.business.qualification.QualificationActivity;
@@ -66,7 +67,7 @@ public class ImportActivity extends MyBaseActivity implements OnRefreshListener,
     SmartRefreshLayout refreshLayout;
 
     private GoodsAdapter adapter;
-    List<GoodsBean> mlist = new ArrayList<>();
+    List<TraceBean> mlist = new ArrayList<>();
     private int pagenum = 1;
     private int pagesize = 20;
     private String searchStr = "";
@@ -85,7 +86,7 @@ public class ImportActivity extends MyBaseActivity implements OnRefreshListener,
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new GoodsAdapter(R.layout.item_goods, mlist);
+        adapter = new GoodsAdapter(R.layout.item_goods, mlist,1);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
@@ -132,7 +133,7 @@ public class ImportActivity extends MyBaseActivity implements OnRefreshListener,
         refreshlayout.finishRefresh();
     }
 
-    public void showResult(List<GoodsBean> data) {
+    public void showResult(List<TraceBean> data) {
         if (pagenum == 1) {
             mlist.clear();
         }
@@ -158,14 +159,14 @@ public class ImportActivity extends MyBaseActivity implements OnRefreshListener,
         if (!TextUtils.isEmpty(searchStr)) {
             map.put("searchValue", searchStr);
         }
-        RxNetUtils.request(getApi(ApiService.class).importExportList("",map), new RequestObserver<JsonT<List<GoodsBean>>>() {
+        RxNetUtils.request(getApi(ApiService.class).importList("",map), new RequestObserver<JsonT<List<TraceBean>>>() {
             @Override
-            protected void onSuccess(JsonT<List<GoodsBean>> jsonT) {
+            protected void onSuccess(JsonT<List<TraceBean>> jsonT) {
                 showResult(jsonT.getData());
             }
 
             @Override
-            protected void onFail2(JsonT<List<GoodsBean>> stringJsonT) {
+            protected void onFail2(JsonT<List<TraceBean>> stringJsonT) {
                 super.onFail2(stringJsonT);
             }
         }, LoadingUtils.build(this));

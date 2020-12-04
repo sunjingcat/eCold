@@ -6,6 +6,7 @@ import com.zz.cold.bean.DailyBean;
 import com.zz.cold.bean.DailyPost;
 import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.EquipmentBean;
+import com.zz.cold.bean.ExportPost;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.GroupCountBean;
 import com.zz.cold.bean.ImageBack;
@@ -118,8 +119,11 @@ public interface ApiService {
     @GET("/app/v1/coldchain/coldchainGoods/selectExportColdstorageGroupCount")
     Observable<JsonT<List<GroupCountBean>>> selectExportColdstorageGroupCount();
 
-    @GET("/app/v1/coldchain/coldchainGoods/importExportList/{coldstorageId}")
-    Observable<JsonT<List<GoodsBean>>> importExportList(@Path("coldstorageId") String coldstorageId,@QueryMap Map<String, Object> params);
+    @GET("/app/v1/coldchain/coldchainGoods/importList/{coldstorageId}")
+    Observable<JsonT<List<TraceBean>>> importList(@Path("coldstorageId") String coldstorageId,@QueryMap Map<String, Object> params);
+
+    @GET("/app/v1/coldchain/coldchainGoods/exportList/{coldstorageId}")
+    Observable<JsonT<List<TraceBean>>> exportList(@Path("coldstorageId") String coldstorageId,@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/coldstorage/{id}")
     Observable<JsonT<QualificationBean>> getQualificationInfo(@Path("id") String id);
@@ -198,6 +202,10 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoods")
     Observable<JsonT> postGoodsAccount(@Body TracePostBean requestBody);
+
+    @Headers("Content-Type: application/json")
+    @POST("/app/v1/coldchain/coldchainGoods")
+    Observable<JsonT> postGoodsAccountJian(@Body ExportPost requestBody);
 
     @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoods/confirm")

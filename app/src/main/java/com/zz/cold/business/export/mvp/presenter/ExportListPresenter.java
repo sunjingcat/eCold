@@ -5,6 +5,7 @@ import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.GroupCountBean;
 import com.zz.cold.bean.QualificationBean;
+import com.zz.cold.bean.TraceBean;
 import com.zz.cold.business.export.mvp.Contract;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
@@ -26,18 +27,32 @@ public class ExportListPresenter extends MyBasePresenterImpl<Contract.IGetExport
     }
 
     @Override
-    public void getData(Map<String,Object> map, String id) {
-        RxNetUtils.request(getApi(ApiService.class).importExportList(id,map), new RequestObserver<JsonT<List<GoodsBean>>>(this) {
-            @Override
-            protected void onSuccess(JsonT<List<GoodsBean>> jsonT) {
-                view.showResult(jsonT.getData());
-            }
+    public void getData(String type,Map<String,Object> map, String id) {
+        if (type.equals("import")) {
+            RxNetUtils.request(getApi(ApiService.class).importList(id, map), new RequestObserver<JsonT<List<TraceBean>>>(this) {
+                @Override
+                protected void onSuccess(JsonT<List<TraceBean>> jsonT) {
+                    view.showResult(jsonT.getData());
+                }
 
-            @Override
-            protected void onFail2(JsonT<List<GoodsBean>> stringJsonT) {
-                super.onFail2(stringJsonT);
-            }
-        }, mDialog);
+                @Override
+                protected void onFail2(JsonT<List<TraceBean>> stringJsonT) {
+                    super.onFail2(stringJsonT);
+                }
+            }, mDialog);
+        }else {
+            RxNetUtils.request(getApi(ApiService.class).exportList(id, map), new RequestObserver<JsonT<List<TraceBean>>>(this) {
+                @Override
+                protected void onSuccess(JsonT<List<TraceBean>> jsonT) {
+                    view.showResult(jsonT.getData());
+                }
+
+                @Override
+                protected void onFail2(JsonT<List<TraceBean>> stringJsonT) {
+                    super.onFail2(stringJsonT);
+                }
+            }, mDialog);
+        }
     }
 
     @Override

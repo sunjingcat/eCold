@@ -99,16 +99,16 @@ public class GoodsActivity extends MyBaseActivity {
         infoAdapter = new InfoAdapter(R.layout.item_info, infoList);
         rv_info.setAdapter(infoAdapter);
         String page = getIntent().getStringExtra("page");
-//        if (!TextUtils.isEmpty(page)) {
-//            ll_review.setVisibility(View.VISIBLE);
-//        } else {
-//            ll_review.setVisibility(View.GONE);
-//        }
+        if (page.equals("approve")) {
+            ll_review.setVisibility(View.VISIBLE);
+        } else {
+            ll_review.setVisibility(View.GONE);
+        }
         id = getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(id)) {
             getData(id);
         }
-        if (page == "import") {
+        if (page.equals("import") ) {
             bt_ru.setVisibility(View.VISIBLE);
             bt_chu.setVisibility(View.GONE);
         } else {
@@ -202,6 +202,7 @@ public class GoodsActivity extends MyBaseActivity {
                 startActivity(new Intent(GoodsActivity.this, DeliverActivity.class)
                         .putExtra("operationType", 1)
                         .putExtra("id", id)
+                        .putExtra("isThird", traceBean.getIsThird())
                         .putExtra("name", traceBean.getGoodsName()));
                 break;
             case R.id.bt_chu:

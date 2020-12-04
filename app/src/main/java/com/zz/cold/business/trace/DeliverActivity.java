@@ -3,6 +3,7 @@ package com.zz.cold.business.trace;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,19 +12,23 @@ import com.codbking.widget.DatePickDialog;
 import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
+import com.codbking.widget.utils.UIAdjuster;
 import com.donkingliang.imageselector.utils.ImageSelector;
 import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.zz.cold.R;
 
 import com.zz.cold.base.MyBaseActivity;
+import com.zz.cold.bean.ExportPost;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.TracePostBean;
+import com.zz.cold.business.qualification.QualificationActivity;
 import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
 import com.zz.cold.business.trace.mvp.Contract;
 import com.zz.cold.business.trace.mvp.presenter.DeliverPresenter;
 import com.zz.cold.utils.PostUtils;
 import com.zz.cold.utils.TimeUtils;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
+import com.zz.lib.commonlib.widget.SelectPopupWindows;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -49,20 +54,28 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    ArrayList<ImageBack> images = new ArrayList<>();
-    ImageDeleteItemAdapter adapter;
-    @BindView(R.id.rv_image)
-    RecyclerView rvImages;
-    @BindView(R.id.text_time)
-    TextView text_time;
     @BindView(R.id.toolbar_title)
     TextView toolbar_title;
     @BindView(R.id.text_Name)
     TextView text_Name;
-    @BindView(R.id.text_count)
-    EditText text_count;
+    @BindView(R.id.text_isTransfer)
+    TextView text_isTransfer;
+    @BindView(R.id.ll_isTransfer)
+    TextView ll_isTransfer;
+    @BindView(R.id.text_coldstorageId)
+    TextView text_coldstorageId;
+    @BindView(R.id.ll_coldstorageId)
+    TextView ll_coldstorageId;
+    @BindView(R.id.text_operationCount)
+    EditText text_operationCount;
+    @BindView(R.id.text_operationRemark)
+    EditText text_operationRemark;
     String id;
+    String coldstorageId;
     int operationType;
+    int isThird;
+    int isTransfer;
+
     @Override
     protected int getContentView() {
         return R.layout.activity_deliver;
@@ -77,60 +90,47 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        rvImages.setLayoutManager(new GridLayoutManager(this, 3));
-        adapter = new ImageDeleteItemAdapter(this, images);
-        rvImages.setAdapter(adapter);
-        adapter.setOnclick(new ImageDeleteItemAdapter.Onclick() {
-            @Override
-            public void onclickAdd(View v, int option) {
-                ArrayList<String> localPath = new ArrayList<>();
-                for (int i = 0; i < images.size(); i++) {
-                    if (!TextUtils.isEmpty(images.get(i).getPath())) {
-                        localPath.add(images.get(i).getPath());
-                    } else {
-                    }
-                }
-                ImageSelector.builder()
-                        .useCamera(true) // 设置是否使用拍照
-                        .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9 - images.size()) // 图片的最大选择数量，小于等于0时，不限数量。
-                        .setSelected(localPath) // 把已选的图片传入默认选中。
-                        .setViewImage(true) //是否点击放大图片查看,，默认为true
-                        .start(DeliverActivity.this, 1101); // 打开相册
-            }
 
-            @Override
-            public void onclickDelete(View v, int option) {
-                images.remove(option);
-                adapter.notifyDataSetChanged();
-            }
-        });
         id = getIntent().getStringExtra("id");
         String name = getIntent().getStringExtra("name");
-         operationType = getIntent().getIntExtra("operationType",1);
-        if (operationType==2){
+        operationType = getIntent().getIntExtra("operationType", 1);
+        isThird = getIntent().getIntExtra("isThird", 0);
+        if (operationType == 2) {
             toolbar_title.setText("出货");
-        }else {
+            if (isThird == 0) {
+                ll_isTransfer.setVisibility(View.VISIBLE);
+            } else {
+                ll_isTransfer.setVisibility(View.GONE);
+            }
+        } else {
             toolbar_title.setText("进货");
         }
-        text_Name.setText(name+"");
+
+        text_Name.setText(name + "");
     }
 
-    @OnClick({R.id.toolbar_subtitle})
+    @OnClick({R.id.toolbar_subtitle, R.id.text_coldstorageId, R.id.text_isTransfer})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
                 postData();
                 break;
+            case R.id.text_coldstorageId:
+                startActivityForResult(new Intent(DeliverActivity.this, QualificationActivity.class).putExtra("page", "import"), 1001);
+                break;
+            case R.id.text_isTransfer:
+                showSelectPopWindow();
+                break;
         }
     }
 
     void postData() {
-        TracePostBean params = new TracePostBean();
+        ExportPost params = new ExportPost();
         params.setOperationType(operationType);
         params.setId(id);
-        params.setCount(getText(text_count));
-        params.setEnclosureIds(PostUtils.getImageIdList(images));
+        params.setOperationCount(getText(text_operationCount));
+        params.setOperationRemark(getText(text_operationRemark));
+        params.setIsTransfer(isTransfer);
         mPresenter.submitData(params);
     }
 
@@ -147,10 +147,7 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
 
     @Override
     public void showPostImage(String localPath, ImageBack imageBack) {
-        if (imageBack == null) return;
-        imageBack.setPath(localPath);
-        images.add(imageBack);
-        adapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -158,35 +155,40 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {
             switch (requestCode) {
-                case 1101:
-                    ArrayList<String> selectImages = data.getStringArrayListExtra(
-                            ImageSelectorUtils.SELECT_RESULT);
-                    for (String path : selectImages) {
-                        Luban.with(this)
-                                .load(path)
-                                .ignoreBy(100)
-                                .setCompressListener(new OnCompressListener() {
-                                    @Override
-                                    public void onStart() {
-                                        // TODO 压缩开始前调用，可以在方法内启动 loading UI
-                                    }
-
-                                    @Override
-                                    public void onSuccess(File file) {
-
-                                        mPresenter.postImage(file.getPath(), getImageBody(file.getPath()));
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        // TODO 当压缩过程出现问题时调用
-                                    }
-                                }).launch();
-
-                    }
+                case 1001:
+                    coldstorageId = data.getStringExtra("id");
+                    text_coldstorageId.setText(data.getStringExtra("name"));
                     break;
             }
         }
 
+    }
+    SelectPopupWindows selectPopupWindows;
+
+    void showSelectPopWindow() {
+        UIAdjuster.closeKeyBoard(this);
+
+        String[] array = {"是", "否"};
+        selectPopupWindows = new SelectPopupWindows(this, array);
+        selectPopupWindows.showAtLocation(findViewById(R.id.bg),
+                Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectPopupWindows.setOnItemClickListener(new SelectPopupWindows.OnItemClickListener() {
+            @Override
+            public void onSelected(int index, String msg) {
+                text_isTransfer.setText(msg);
+                if (index == 0) {
+                    isTransfer = 1;
+                    ll_coldstorageId.setVisibility(View.VISIBLE);
+                } else {
+                    isTransfer = 0;
+                    ll_coldstorageId.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancel() {
+                selectPopupWindows.dismiss();
+            }
+        });
     }
 }

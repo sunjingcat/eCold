@@ -22,6 +22,7 @@ import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.GroupCountBean;
+import com.zz.cold.bean.TraceBean;
 import com.zz.cold.business.export.adapter.GoodsAdapter;
 import com.zz.cold.business.export.mvp.Contract;
 import com.zz.cold.business.export.mvp.presenter.ExportListPresenter;
@@ -70,7 +71,7 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
     Button bt_jin;
 
     private GoodsAdapter adapter;
-    List<GoodsBean> mlist = new ArrayList<>();
+    List<TraceBean> mlist = new ArrayList<>();
     ArrayList<GroupCountBean> tabList = new ArrayList<>();
     private int pagenum = 1;
     private int pagesize = 20;
@@ -93,13 +94,16 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
         ButterKnife.bind(this);
         page = getIntent().getStringExtra("page");
         mPresenter.getTab(page);
+        int type = 1;
         if (page.equals("import")){
             bt_jin.setVisibility(View.VISIBLE);
+            type = 1;
         }else {
             bt_jin.setVisibility(View.GONE);
+            type = 2;
         }
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new GoodsAdapter(R.layout.item_goods, mlist);
+        adapter = new GoodsAdapter(R.layout.item_goods, mlist,type);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
@@ -164,7 +168,7 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
     }
 
     @Override
-    public void showResult(List<GoodsBean> data) {
+    public void showResult(List<TraceBean> data) {
         if (pagenum == 1) {
             mlist.clear();
         }
@@ -192,8 +196,7 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
     @Override
     protected void onResume() {
         super.onResume();
-        pagenum = 1;
-        getDate();
+        mPresenter.getTab(page);
     }
 
     void getDate() {
@@ -204,7 +207,7 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
         if (!TextUtils.isEmpty(searchStr)) {
             map.put("searchValue", searchStr);
         }
-        mPresenter.getData(map, tabId);
+        mPresenter.getData(page,map, tabId);
     }
 
     @Override
