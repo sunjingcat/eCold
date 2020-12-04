@@ -78,7 +78,6 @@ public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshLis
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
-        coldstorageId = getIntent().getStringExtra("id");
 
         adapter.setOnclick(new PendingGoodsAdapter.Onclick() {
             @Override
@@ -146,7 +145,6 @@ public class PendingGoodsActivity extends MyBaseActivity implements OnRefreshLis
         Map<String, Object> map = new HashMap<>();
         map.put("pageNum", pagenum);
         map.put("pageSize", pagesize);
-        map.put("coldstorageId", coldstorageId);
 
         RxNetUtils.request(getApi(ApiService.class).getPendingGoodsList(map), new RequestObserver<JsonT<List<PendingGoods>>>() {
             @Override

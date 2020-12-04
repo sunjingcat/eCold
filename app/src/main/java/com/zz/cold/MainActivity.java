@@ -7,8 +7,10 @@ import android.widget.TextView;
 
 import com.zz.cold.bean.MainShowData;
 import com.zz.cold.business.daily.DailyActivity;
+import com.zz.cold.business.trace.PendingGoodsActivity;
 import com.zz.cold.business.v2.ExportListActivity;
 import com.zz.cold.business.trace.TraceActivity;
+import com.zz.cold.business.v2.SellListActivity;
 import com.zz.lib.core.http.utils.ToastUtils;
 import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.cold.base.MyBaseActivity;
@@ -88,12 +90,12 @@ public class MainActivity extends MyBaseActivity {
                 break;
             case R.id.main_group_3:
                 Intent intent2 = new Intent();
-                intent2.setClass(MainActivity.this, TraceActivity.class);
+                intent2.setClass(MainActivity.this, SellListActivity.class);
                 startActivity(intent2);
                 break;
             case R.id.main_group_4:
                 Intent intent3 = new Intent();
-                intent3.setClass(MainActivity.this, DailyActivity.class);
+                intent3.setClass(MainActivity.this, PendingGoodsActivity.class);
                 startActivity(intent3);
                 break;
             case R.id.toolbar_subtitle:

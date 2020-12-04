@@ -55,8 +55,8 @@ public class GoodsActivity extends MyBaseActivity {
     RecyclerView rv_info;
     @BindView(R.id.bt_action)
     Button bt_action;
-    @BindView(R.id.ll_review)
-    LinearLayout ll_review;
+    @BindView(R.id.bt_action2)
+    Button bt_action2;
     @BindView(R.id.ll_jc)
     LinearLayout ll_jc;
     @BindView(R.id.nestedScrollView)
@@ -95,11 +95,6 @@ public class GoodsActivity extends MyBaseActivity {
         infoAdapter = new InfoAdapter(R.layout.item_info, infoList);
         rv_info.setAdapter(infoAdapter);
         page = getIntent().getStringExtra("page");
-        if (page.equals("approve")) {
-            ll_review.setVisibility(View.VISIBLE);
-        } else {
-            ll_review.setVisibility(View.GONE);
-        }
         id = getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(id)) {
             getData(id);
@@ -113,8 +108,13 @@ public class GoodsActivity extends MyBaseActivity {
         } else if (page.equals("sell")) {
             bt_action.setVisibility(View.VISIBLE);
             bt_action.setText("售");
+        } else if (page.equals("review")) {
+            bt_action.setVisibility(View.VISIBLE);
+            bt_action2.setVisibility(View.VISIBLE);
+            bt_action.setText("通过");
         } else {
             bt_action.setVisibility(View.GONE);
+            bt_action2.setVisibility(View.GONE);
         }
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -196,7 +196,7 @@ public class GoodsActivity extends MyBaseActivity {
         }
     }
 
-    @OnClick({R.id.bt_action, R.id.bt_ok, R.id.bt_no})
+    @OnClick({R.id.bt_action, R.id.bt_action2, R.id.bt_ok, R.id.bt_no})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_action:
@@ -217,12 +217,11 @@ public class GoodsActivity extends MyBaseActivity {
                             .putExtra("id", id)
                             .putExtra("name", traceBean.getGoodsName());
                     startActivity(intent);
+                } else if (page.equals("review")) {
+                    ask(1, traceBean.getId());
                 }
                 break;
-            case R.id.bt_ok:
-                ask(1, traceBean.getId());
-                break;
-            case R.id.bt_no:
+            case R.id.bt_action2:
                 askRefuse(0, traceBean.getId());
                 break;
         }

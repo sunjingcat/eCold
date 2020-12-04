@@ -194,7 +194,7 @@ public interface ApiService {
     @GET("/app/v1/coldchain/coldchainGoodsAccount/toBeReviewedCompanyList")
     Observable<JsonT<List<PendingCompanyBean>>> getPendingList(@QueryMap Map<String, Object> params);
 
-    @GET("/app/v1/coldchain/coldchainGoodsAccount/listByColdstorageId")
+    @GET("/app/v1/coldchain/coldchainGoods/toBeReviewedList")
     Observable<JsonT<List<PendingGoods>>> getPendingGoodsList(@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/coldchainGoodsAccount/notPassList")
@@ -219,7 +219,7 @@ public interface ApiService {
     @POST("/app/v1/coldchain/coldchainGoods/confirm")
     Observable<JsonT<String>> confirmGoodsAccount(@Body TracePostBean requestBody);
 
-    @POST("/app/v1/coldchain/coldchainGoodsAccount/review/{accountId}")
+    @POST("/app/v1/coldchain/coldchainGoods/review/{accountId}")
     Observable<JsonT> reviewGoods(@Path("accountId") String accountId,@QueryMap Map<String, Object> params);
 }
 
