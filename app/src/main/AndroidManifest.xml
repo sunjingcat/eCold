@@ -176,6 +176,7 @@
         <activity android:name=".business.v2.ExportListActivity" />
         <activity android:name=".business.v2.SellListActivity" />
         <activity android:name=".business.v2.SellActivity" />
+        <activity android:name=".business.v2.ReviewActivity" />
         <!--  屏幕适配########################################-->
         <meta-data
             android:name="android.max_aspect"
