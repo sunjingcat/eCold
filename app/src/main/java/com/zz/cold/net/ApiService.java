@@ -15,6 +15,7 @@ import com.zz.cold.bean.MainShowData;
 import com.zz.cold.bean.PendingCompanyBean;
 import com.zz.cold.bean.PendingGoods;
 import com.zz.cold.bean.QualificationBean;
+import com.zz.cold.bean.SellPost;
 import com.zz.cold.bean.StorageBean;
 import com.zz.cold.bean.TemperatureBean;
 import com.zz.cold.bean.TraceBean;
@@ -209,6 +210,10 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoods")
     Observable<JsonT> postGoodsAccountJian(@Body ExportPost requestBody);
+
+    @Headers("Content-Type: application/json")
+    @POST("/app/v1/coldchain/coldchainGoods/sell/{goodsId}")
+    Observable<JsonT> postSell(@Path("goodsId") String goodsId,@Body SellPost requestBody);
 
     @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoods/confirm")

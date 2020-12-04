@@ -16,6 +16,7 @@ import com.zz.cold.bean.PendingGoods;
 import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.bean.TraceBean;
 import com.zz.cold.bean.WmsBean;
+import com.zz.cold.business.export.SellActivity;
 import com.zz.cold.business.trace.adapter.InfoAdapter;
 import com.zz.cold.business.trace.adapter.WmsAdapter;
 import com.zz.cold.net.ApiService;
@@ -216,9 +217,8 @@ public class GoodsActivity extends MyBaseActivity {
                             .putExtra("name", traceBean.getGoodsName());
                     startActivity(intent);
                 } else if (page.equals("sell")) {
-                    Intent intent = new Intent(GoodsActivity.this, DeliverActivity.class)
+                    Intent intent = new Intent(GoodsActivity.this, SellActivity.class)
                             .putExtra("id", id)
-                            .putExtra("operationType", 2)
                             .putExtra("name", traceBean.getGoodsName());
                     startActivity(intent);
                 }

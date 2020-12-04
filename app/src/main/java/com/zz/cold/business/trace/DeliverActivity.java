@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.codbking.widget.DatePickDialog;
@@ -61,11 +62,11 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
     @BindView(R.id.text_isTransfer)
     TextView text_isTransfer;
     @BindView(R.id.ll_isTransfer)
-    TextView ll_isTransfer;
+    LinearLayout ll_isTransfer;
     @BindView(R.id.text_coldstorageId)
     TextView text_coldstorageId;
     @BindView(R.id.ll_coldstorageId)
-    TextView ll_coldstorageId;
+    LinearLayout ll_coldstorageId;
     @BindView(R.id.text_operationCount)
     EditText text_operationCount;
     @BindView(R.id.text_operationRemark)

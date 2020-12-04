@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="售卖"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/toolbar_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/text_Name"
+                    style="@style/textInfoTitleStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="货品"
+                    android:textColor="@color/colorTextBlack33" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textInfoTitleStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="购买数量"
+                    android:textColor="@color/colorTextBlack33" />
+
+                <EditText
+                    android:id="@+id/text_operationCount"
+                    style="@style/textRightStyle"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:hint="请填写" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textInfoTitleStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="购买人姓名"
+                    android:textColor="@color/colorTextBlack33" />
+
+                <EditText
+                    android:id="@+id/text_buyerName"
+                    style="@style/textRightStyle"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:hint="请填写" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textInfoTitleStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="购买人家庭住址"
+                    android:textColor="@color/colorTextBlack33" />
+
+                <EditText
+                    android:id="@+id/text_buyerAddress"
+                    style="@style/textRightStyle"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:hint="请填写" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textInfoTitleStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="购买人联系方式"
+                    android:textColor="@color/colorTextBlack33" />
+
+                <EditText
+                    android:id="@+id/text_buyerContact"
+                    style="@style/textRightStyle"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|right"
+                    android:hint="请填写" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textInfoTitleStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="购买人用途"
+                    android:textColor="@color/colorTextBlack33" />
+
+                <TextView
+                    android:id="@+id/text_buyerRemark"
+                    style="@style/textRightStyle"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical|right"
+                    android:hint="请选择" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

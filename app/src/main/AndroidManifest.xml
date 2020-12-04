@@ -175,6 +175,7 @@
         <activity android:name=".business.qualification.StoragePasswordActivity" />
         <activity android:name=".business.export.ExportListActivity" />
         <activity android:name=".business.export.SellListActivity" />
+        <activity android:name=".business.export.SellActivity" />
         <!--  屏幕适配########################################-->
         <meta-data
             android:name="android.max_aspect"
