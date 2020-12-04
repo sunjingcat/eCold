@@ -46,7 +46,7 @@ import butterknife.OnClick;
 import static com.zz.cold.net.RxNetUtils.getApi;
 
 /**
- * 货品详情
+ * 售
  */
 public class GoodsActivity extends MyBaseActivity {
 
@@ -56,10 +56,8 @@ public class GoodsActivity extends MyBaseActivity {
     RecyclerView rv;
     @BindView(R.id.rv_info)
     RecyclerView rv_info;
-    @BindView(R.id.bt_ru)
-    Button bt_ru;
-    @BindView(R.id.bt_chu)
-    Button bt_chu;
+    @BindView(R.id.bt_action)
+    Button bt_action;
     @BindView(R.id.ll_review)
     LinearLayout ll_review;
     @BindView(R.id.ll_jc)
@@ -76,6 +74,7 @@ public class GoodsActivity extends MyBaseActivity {
     String id;
 
     TraceBean traceBean;
+    String page = "";
 
     @Override
     protected int getContentView() {
@@ -98,7 +97,7 @@ public class GoodsActivity extends MyBaseActivity {
         rv_info.setLayoutManager(new LinearLayoutManager(this));
         infoAdapter = new InfoAdapter(R.layout.item_info, infoList);
         rv_info.setAdapter(infoAdapter);
-        String page = getIntent().getStringExtra("page");
+        page = getIntent().getStringExtra("page");
         if (page.equals("approve")) {
             ll_review.setVisibility(View.VISIBLE);
         } else {
@@ -108,12 +107,17 @@ public class GoodsActivity extends MyBaseActivity {
         if (!TextUtils.isEmpty(id)) {
             getData(id);
         }
-        if (page.equals("import") ) {
-            bt_ru.setVisibility(View.VISIBLE);
-            bt_chu.setVisibility(View.GONE);
+        if (page.equals("import")) {
+            bt_action.setVisibility(View.VISIBLE);
+            bt_action.setText("入");
+        } else if (page.equals("export")) {
+            bt_action.setVisibility(View.VISIBLE);
+            bt_action.setText("出");
+        } else if (page.equals("sell")) {
+            bt_action.setVisibility(View.VISIBLE);
+            bt_action.setText("售");
         } else {
-            bt_ru.setVisibility(View.GONE);
-            bt_chu.setVisibility(View.VISIBLE);
+            bt_action.setVisibility(View.GONE);
         }
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -147,9 +151,9 @@ public class GoodsActivity extends MyBaseActivity {
         traceBean = data;
         infoList.add(new InfoBean("商品名称", data.getGoodsName() + ""));
         infoList.add(new InfoBean("进货品种", data.getGoodsType1Text() + "" + data.getGoodsType2Text() + data.getGoodsType3Text()));
-        infoList.add(new InfoBean("是否第三方冷库", data.getIsThirdText()+""));
-        if (data.getIsThird()==1){
-            infoList.add(new InfoBean("冷库名称", data.getOperatorName()+""));
+        infoList.add(new InfoBean("是否第三方冷库", data.getIsThirdText() + ""));
+        if (data.getIsThird() == 1) {
+            infoList.add(new InfoBean("冷库名称", data.getOperatorName() + ""));
         }
         infoList.add(new InfoBean("生产日期/批次", data.getProductionDate() + ""));
         infoList.add(new InfoBean("规格", data.getSpec() + ""));
@@ -195,23 +199,29 @@ public class GoodsActivity extends MyBaseActivity {
         }
     }
 
-    @OnClick({R.id.bt_ru, R.id.bt_chu, R.id.bt_ok, R.id.bt_no})
+    @OnClick({R.id.bt_action, R.id.bt_ok, R.id.bt_no})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.bt_ru:
-                startActivity(new Intent(GoodsActivity.this, DeliverActivity.class)
-                        .putExtra("operationType", 1)
-                        .putExtra("id", id)
-                        .putExtra("isThird", traceBean.getIsThird())
-                        .putExtra("name", traceBean.getGoodsName()));
-                break;
-            case R.id.bt_chu:
-                if (traceBean == null) return;
-                Intent intent = new Intent(GoodsActivity.this, DeliverActivity.class)
-                        .putExtra("id", id)
-                        .putExtra("operationType", 2)
-                        .putExtra("name", traceBean.getGoodsName());
-                startActivity(intent);
+            case R.id.bt_action:
+                if (page.equals("import")) {
+                    startActivity(new Intent(GoodsActivity.this, DeliverActivity.class)
+                            .putExtra("operationType", 1)
+                            .putExtra("id", id)
+                            .putExtra("isThird", traceBean.getIsThird())
+                            .putExtra("name", traceBean.getGoodsName()));
+                } else if (page.equals("export")) {
+                    Intent intent = new Intent(GoodsActivity.this, DeliverActivity.class)
+                            .putExtra("id", id)
+                            .putExtra("operationType", 2)
+                            .putExtra("name", traceBean.getGoodsName());
+                    startActivity(intent);
+                } else if (page.equals("sell")) {
+                    Intent intent = new Intent(GoodsActivity.this, DeliverActivity.class)
+                            .putExtra("id", id)
+                            .putExtra("operationType", 2)
+                            .putExtra("name", traceBean.getGoodsName());
+                    startActivity(intent);
+                }
                 break;
             case R.id.bt_ok:
                 ask(1, traceBean.getId());
@@ -314,7 +324,7 @@ public class GoodsActivity extends MyBaseActivity {
                         xdzm.setImages(jsonT.getData());
                     } else if ("ffzzwjc".equals(type)) {
                         ffzzwjc.setImages(jsonT.getData());
-                    }else if ("mddhsjc".equals(type)) {
+                    } else if ("mddhsjc".equals(type)) {
                         mddhsjc.setImages(jsonT.getData());
                     }
                     infoAdapter.notifyDataSetChanged();

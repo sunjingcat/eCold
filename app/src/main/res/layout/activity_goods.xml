@@ -159,7 +159,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/bt_ru"
+                android:id="@+id/bt_action"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/border_radius_40_theme"
@@ -168,15 +168,7 @@
                 android:textColor="@color/white"
                 android:elevation="@dimen/dp_10" />
 
-            <Button
-                android:id="@+id/bt_chu"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/border_radius_40_gray"
-                android:clickable="true"
-                android:layout_marginTop="10dp"
-                android:text="出"
-                android:elevation="@dimen/dp_10" />
+
         </LinearLayout>
     </RelativeLayout>
 

@@ -17,14 +17,11 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
-import com.zz.cold.bean.GoodsBean;
-import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.bean.TraceBean;
 import com.zz.cold.business.export.adapter.GoodsAdapter;
 import com.zz.cold.business.qualification.AddQualificationActivity;
-import com.zz.cold.business.qualification.QualificationActivity;
 import com.zz.cold.business.qualification.QualificationInfoActivity;
-import com.zz.cold.business.qualification.adapter.QualificationAdapter;
+import com.zz.cold.business.trace.GoodsActivity;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;
@@ -53,7 +50,7 @@ import static com.zz.cold.net.RxNetUtils.getApi;
 /**
  *进
  */
-public class ImportActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
+public class SellListActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -94,8 +91,9 @@ public class ImportActivity extends MyBaseActivity implements OnRefreshListener,
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(ImportActivity.this, QualificationInfoActivity.class);
+                intent.setClass(SellListActivity.this, GoodsActivity.class);
                 intent.putExtra("id",mlist.get(position).getId());
+                intent.putExtra("page","sell");
                 startActivity(intent);
             }
         });
@@ -117,7 +115,7 @@ public class ImportActivity extends MyBaseActivity implements OnRefreshListener,
             case R.id.toolbar_subtitle:
 
                 Intent intent = new Intent();
-                intent.setClass(ImportActivity.this, AddQualificationActivity.class);
+                intent.setClass(SellListActivity.this, AddQualificationActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -159,7 +157,7 @@ public class ImportActivity extends MyBaseActivity implements OnRefreshListener,
         if (!TextUtils.isEmpty(searchStr)) {
             map.put("searchValue", searchStr);
         }
-        RxNetUtils.request(getApi(ApiService.class).importList("",map), new RequestObserver<JsonT<List<TraceBean>>>() {
+        RxNetUtils.request(getApi(ApiService.class).sellList(map), new RequestObserver<JsonT<List<TraceBean>>>() {
             @Override
             protected void onSuccess(JsonT<List<TraceBean>> jsonT) {
                 showResult(jsonT.getData());

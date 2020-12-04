@@ -174,7 +174,7 @@
         <activity android:name=".business.trace.HisPendingActivity" />
         <activity android:name=".business.qualification.StoragePasswordActivity" />
         <activity android:name=".business.export.ExportListActivity" />
-        <activity android:name=".business.export.ImportActivity" />
+        <activity android:name=".business.export.SellListActivity" />
         <!--  屏幕适配########################################-->
         <meta-data
             android:name="android.max_aspect"

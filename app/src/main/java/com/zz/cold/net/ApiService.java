@@ -119,6 +119,9 @@ public interface ApiService {
     @GET("/app/v1/coldchain/coldchainGoods/selectExportColdstorageGroupCount")
     Observable<JsonT<List<GroupCountBean>>> selectExportColdstorageGroupCount();
 
+    @GET("/app/v1/coldchain/coldchainGoods/sellList")
+    Observable<JsonT<List<TraceBean>>> sellList(@QueryMap Map<String, Object> params);
+
     @GET("/app/v1/coldchain/coldchainGoods/importList/{coldstorageId}")
     Observable<JsonT<List<TraceBean>>> importList(@Path("coldstorageId") String coldstorageId,@QueryMap Map<String, Object> params);
 
