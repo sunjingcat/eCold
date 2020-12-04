@@ -489,6 +489,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         params.setBatchNumber(getText(text_batchNumber));
         params.setGoodsRemark(getText(text_goodsRemark));
 
+        params.setIsThird(isThird);
         params.setIsImported(isImported);
         params.setEntryPort(getText(text_entryPort));
         params.setIsSphsjc(isSphsjc);
@@ -714,8 +715,8 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {
             if (requestCode == 1001) {
-               coldstorageId= data.getStringExtra("id");
-               text_coldstorageId.setText(data.getStringExtra("name"));
+                coldstorageId = data.getStringExtra("id");
+                text_coldstorageId.setText(data.getStringExtra("name"));
             } else {
                 ArrayList<String> selectImages = data.getStringArrayListExtra(
                         ImageSelectorUtils.SELECT_RESULT);

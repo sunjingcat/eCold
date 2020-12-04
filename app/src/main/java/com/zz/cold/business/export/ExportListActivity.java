@@ -27,6 +27,7 @@ import com.zz.cold.business.export.mvp.Contract;
 import com.zz.cold.business.export.mvp.presenter.ExportListPresenter;
 import com.zz.cold.business.qualification.AddQualificationActivity;
 import com.zz.cold.business.qualification.QualificationInfoActivity;
+import com.zz.cold.business.trace.GoodsActivity;
 import com.zz.cold.business.trace.PurchaseActivity;
 import com.zz.cold.widget.TabPopWindow;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
@@ -90,6 +91,13 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        page = getIntent().getStringExtra("page");
+        mPresenter.getTab(page);
+        if (page.equals("import")){
+            bt_jin.setVisibility(View.VISIBLE);
+        }else {
+            bt_jin.setVisibility(View.GONE);
+        }
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new GoodsAdapter(R.layout.item_goods, mlist);
         rv.setAdapter(adapter);
@@ -99,8 +107,9 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(ExportListActivity.this, QualificationInfoActivity.class);
+                intent.setClass(ExportListActivity.this, GoodsActivity.class);
                 intent.putExtra("id", mlist.get(position).getId());
+                intent.putExtra("page", page);
                 startActivity(intent);
             }
         });
@@ -114,13 +123,7 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
                 return true;
             }
         });
-        page = getIntent().getStringExtra("page");
-        mPresenter.getTab(page);
-        if (page.equals("import")){
-            bt_jin.setVisibility(View.VISIBLE);
-        }else {
-            bt_jin.setVisibility(View.GONE);
-        }
+
     }
 
     TabPopWindow tabPopWindow;

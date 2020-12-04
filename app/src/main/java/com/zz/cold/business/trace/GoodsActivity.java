@@ -98,22 +98,22 @@ public class GoodsActivity extends MyBaseActivity {
         rv_info.setLayoutManager(new LinearLayoutManager(this));
         infoAdapter = new InfoAdapter(R.layout.item_info, infoList);
         rv_info.setAdapter(infoAdapter);
-        String from = getIntent().getStringExtra("from");
-        if (!TextUtils.isEmpty(from)) {
-            ll_review.setVisibility(View.VISIBLE);
-        } else {
-            ll_review.setVisibility(View.GONE);
-        }
+        String page = getIntent().getStringExtra("page");
+//        if (!TextUtils.isEmpty(page)) {
+//            ll_review.setVisibility(View.VISIBLE);
+//        } else {
+//            ll_review.setVisibility(View.GONE);
+//        }
         id = getIntent().getStringExtra("id");
         if (!TextUtils.isEmpty(id)) {
             getData(id);
         }
-        if (CacheUtility.getRole() == 2) {
+        if (page == "import") {
             bt_ru.setVisibility(View.VISIBLE);
-            bt_chu.setVisibility(View.VISIBLE);
+            bt_chu.setVisibility(View.GONE);
         } else {
             bt_ru.setVisibility(View.GONE);
-            bt_chu.setVisibility(View.GONE);
+            bt_chu.setVisibility(View.VISIBLE);
         }
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -122,7 +122,7 @@ public class GoodsActivity extends MyBaseActivity {
 
                 if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
                     ll_jc.setVisibility(View.GONE);
-                }else {
+                } else {
                     ll_jc.setVisibility(View.VISIBLE);
                 }
             }
@@ -146,8 +146,14 @@ public class GoodsActivity extends MyBaseActivity {
         traceBean = data;
         infoList.add(new InfoBean("商品名称", data.getGoodsName() + ""));
         infoList.add(new InfoBean("进货品种", data.getGoodsType1Text() + "" + data.getGoodsType2Text() + data.getGoodsType3Text()));
+        infoList.add(new InfoBean("是否第三方冷库", data.getIsThirdText()+""));
+        if (data.getIsThird()==1){
+            infoList.add(new InfoBean("冷库名称", data.getOperatorName()+""));
+        }
         infoList.add(new InfoBean("生产日期/批次", data.getProductionDate() + ""));
         infoList.add(new InfoBean("规格", data.getSpec() + ""));
+        infoList.add(new InfoBean("批号", data.getBatchNumber() + ""));
+        infoList.add(new InfoBean("批号", data.getBatchNumber() + ""));
         infoList.add(new InfoBean("入库数量", data.getCount() + ""));
         infoList.add(new InfoBean("进货时间", data.getPurchaseTime() + ""));
         infoList.add(new InfoBean("供货单位", data.getSupplierName() + ""));
@@ -155,6 +161,7 @@ public class GoodsActivity extends MyBaseActivity {
         infoList.add(new InfoBean("联系方式", data.getSupplierContact() + ""));
         infoList.add(new InfoBean("运输方式", data.getTransportModeText() + ""));
         infoList.add(new InfoBean("保质期", data.getPeriod() + ""));
+        infoList.add(new InfoBean("商品备注", data.getGoodsRemark() + ""));
         infoList.add(new InfoBean("是否进口", data.getIsImportedText() + ""));
         if (!TextUtils.isEmpty(data.getIsImportedText()) && data.getIsImportedText().equals("进口")) {
             infoList.add(new InfoBean("入境口岸", data.getEntryPort() + ""));

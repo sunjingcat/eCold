@@ -31,6 +31,11 @@ public class TracePostBean {
     int isXdzm;// 0,
     int isFfzzwjc;// 0,
     int operationType;// 0,
+    int isThird;// 0,
+
+    public void setIsThird(int isThird) {
+        this.isThird = isThird;
+    }
 
     public void setGoodsRemark(String goodsRemark) {
         this.goodsRemark = goodsRemark;

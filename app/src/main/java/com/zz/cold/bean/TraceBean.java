@@ -23,11 +23,15 @@ public class TraceBean {
     String period;// 2020-11-25,
     String isImported;// 1,
     String entryPort;// ,
+
+    String batchNumber;// ,
+    String goodsRemark;// ,
     int isSphsjc;// 0,
     int isCrjjyjyzm;// 0,
     int isBgd;// 0,
     int isXdzm;// 0,
     int isFfzzwjc;// 0,
+    int isThird;// 0,
     String operatorName;// 冷库1
     String goodsType1Text;// ,
     String goodsType2Text;// ,
@@ -36,6 +40,7 @@ public class TraceBean {
     String isImportedText;// 国产,
     String isSphsjcText;// 否,
     String isCrjjyjyzmText;// 否,
+    String isThirdText;// 否,
     String isBgdText;// 否,
     String isXdzmText;// 否,
     String isFfzzwjcText;// 否,
@@ -45,6 +50,22 @@ public class TraceBean {
     List<ImageBack> xdzmEnclosureList;// null,
     List<ImageBack> ffzzwjcEnclosureList;// null,
     List<WmsBean> coldchainGoodsAccountcList;// null,
+
+    public String getBatchNumber() {
+        return batchNumber;
+    }
+
+    public String getGoodsRemark() {
+        return goodsRemark;
+    }
+
+    public String getIsThirdText() {
+        return isThirdText;
+    }
+
+    public int getIsThird() {
+        return isThird;
+    }
 
     public List<WmsBean> getColdchainGoodsAccountcList() {
         return coldchainGoodsAccountcList;
