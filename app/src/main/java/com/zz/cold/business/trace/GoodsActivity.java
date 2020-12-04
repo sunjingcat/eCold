@@ -139,6 +139,7 @@ public class GoodsActivity extends MyBaseActivity {
     InfoBean bgd;
     InfoBean xdzm;
     InfoBean ffzzwjc;
+    InfoBean mddhsjc;
 
     public void showResult(TraceBean data) {
 
@@ -165,6 +166,8 @@ public class GoodsActivity extends MyBaseActivity {
         infoList.add(new InfoBean("是否进口", data.getIsImportedText() + ""));
         if (!TextUtils.isEmpty(data.getIsImportedText()) && data.getIsImportedText().equals("进口")) {
             infoList.add(new InfoBean("入境口岸", data.getEntryPort() + ""));
+            infoList.add(new InfoBean("进口企业注册号", data.getImportRegistNum() + ""));
+            infoList.add(new InfoBean("进口时间", data.getImportTime() + ""));
             sphsjc = new InfoBean("食品核酸检测", data.getIsSphsjcText() + "");
             infoList.add(sphsjc);
             crjjyjyzm = new InfoBean("出入境检验检疫证明", data.getIsCrjjyjyzmText() + "");
@@ -175,11 +178,14 @@ public class GoodsActivity extends MyBaseActivity {
             infoList.add(xdzm);
             ffzzwjc = new InfoBean("非非洲猪瘟检测报告", data.getIsFfzzwjcText() + "");
             infoList.add(ffzzwjc);
+            mddhsjc = new InfoBean("目的地核酸检测", data.getIsMddhsjcText() + "");
+            infoList.add(mddhsjc);
             getImages("sphsjc");
             getImages("crjjyjyzm");
             getImages("bgd");
             getImages("xdzm");
             getImages("ffzzwjc");
+            getImages("mddhsjc");
         }
         infoAdapter.notifyDataSetChanged();
         if (data.getColdchainGoodsAccountcList() != null) {
@@ -307,6 +313,8 @@ public class GoodsActivity extends MyBaseActivity {
                         xdzm.setImages(jsonT.getData());
                     } else if ("ffzzwjc".equals(type)) {
                         ffzzwjc.setImages(jsonT.getData());
+                    }else if ("mddhsjc".equals(type)) {
+                        mddhsjc.setImages(jsonT.getData());
                     }
                     infoAdapter.notifyDataSetChanged();
                 }

@@ -166,7 +166,7 @@
                 android:id="@+id/ll_coldstorageId"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
@@ -542,6 +542,108 @@
                         style="@style/textLeftStyle"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
+                        android:text="进口企业注册号" />
+
+                    <EditText
+                        android:id="@+id/text_importRegistNum"
+                        style="@style/textRightStyle"
+                        android:layout_height="match_parent"
+
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        style="@style/textLeftStyle"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="入境时间" />
+
+                    <TextView
+                        android:id="@+id/text_importTime"
+                        style="@style/textRightStyle"
+                        android:layout_height="match_parent"
+                        android:drawableRight="@drawable/image_arrow"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical|right"
+                        android:hint="请选择" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        style="@style/textLeftStyle"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="中国经销（代理）商名称" />
+
+                    <EditText
+                        android:id="@+id/text_chinaDistributorName"
+                        style="@style/textRightStyle"
+                        android:layout_height="match_parent"
+
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        style="@style/textLeftStyle"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="中国经销（代理）商联系方式" />
+
+                    <EditText
+                        android:id="@+id/text_chinaDistributorContact"
+                        style="@style/textRightStyle"
+                        android:layout_height="match_parent"
+
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical|right"
+                        android:hint="请输入" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        style="@style/textLeftStyle"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
                         android:text="食品核酸检测" />
 
                     <TextView
@@ -680,6 +782,37 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_ffzzwjc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        style="@style/textLeftStyle"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="目的地核酸检测" />
+
+                    <TextView
+                        android:id="@+id/text_isMddhsjc"
+                        style="@style/textRightStyle"
+                        android:layout_height="match_parent"
+                        android:drawableRight="@drawable/image_arrow"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical|right"
+                        android:hint="请选择" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_mddhsjc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

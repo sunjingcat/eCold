@@ -196,11 +196,11 @@ public interface ApiService {
     Observable<JsonT<TraceBean>> getTraceInfo(@Path("id") String id);
 
     @Headers("Content-Type: application/json")
-    @POST("/app/v1/coldchain/coldchainGoodsAccount")
+    @POST("/app/v1/coldchain/coldchainGoods")
     Observable<JsonT> postGoodsAccount(@Body TracePostBean requestBody);
 
     @Headers("Content-Type: application/json")
-    @POST("/app/v1/coldchain/coldchainGoodsAccount/confirm")
+    @POST("/app/v1/coldchain/coldchainGoods/confirm")
     Observable<JsonT<String>> confirmGoodsAccount(@Body TracePostBean requestBody);
 
     @POST("/app/v1/coldchain/coldchainGoodsAccount/review/{accountId}")

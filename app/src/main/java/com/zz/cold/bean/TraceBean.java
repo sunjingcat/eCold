@@ -23,7 +23,8 @@ public class TraceBean {
     String period;// 2020-11-25,
     String isImported;// 1,
     String entryPort;// ,
-
+    String importRegistNum;// ,
+    String importTime;// ,
     String batchNumber;// ,
     String goodsRemark;// ,
     int isSphsjc;// 0,
@@ -32,6 +33,7 @@ public class TraceBean {
     int isXdzm;// 0,
     int isFfzzwjc;// 0,
     int isThird;// 0,
+    int isMddhsjc;// 0,
     String operatorName;// 冷库1
     String goodsType1Text;// ,
     String goodsType2Text;// ,
@@ -44,15 +46,47 @@ public class TraceBean {
     String isBgdText;// 否,
     String isXdzmText;// 否,
     String isFfzzwjcText;// 否,
+    String isMddhsjcText;// 否,
+    String chinaDistributorName;// ,
+    String chinaDistributorContact;// ,
     List<ImageBack> sphsjcEnclosureList;// null,
     List<ImageBack> crjjyjyzmEnclosureList;// null,
     List<ImageBack> bgdEnclosureIdList;// null,
     List<ImageBack> xdzmEnclosureList;// null,
     List<ImageBack> ffzzwjcEnclosureList;// null,
+    List<ImageBack> mddhsjcEnclosureList;// null,
     List<WmsBean> coldchainGoodsAccountcList;// null,
+
+    public int getIsMddhsjc() {
+        return isMddhsjc;
+    }
+
+    public String getIsMddhsjcText() {
+        return isMddhsjcText;
+    }
+
+    public List<ImageBack> getMddhsjcEnclosureList() {
+        return mddhsjcEnclosureList;
+    }
+
+    public String getChinaDistributorName() {
+        return chinaDistributorName;
+    }
+
+    public String getChinaDistributorContact() {
+        return chinaDistributorContact;
+    }
 
     public String getBatchNumber() {
         return batchNumber;
+    }
+
+    public String getImportRegistNum() {
+        return importRegistNum;
+    }
+
+    public String getImportTime() {
+        return importTime;
     }
 
     public String getGoodsRemark() {

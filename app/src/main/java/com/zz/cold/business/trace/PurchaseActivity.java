@@ -100,6 +100,11 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     ArrayList<ImageBack> images_ffzzwjc = new ArrayList<>();
     ImageDeleteItemAdapter adapter_ffzzwjc;
 
+    @BindView(R.id.rv_mddhsjc)
+    RecyclerView rv_mddhsjc;
+    ArrayList<ImageBack> images_mddhsjc = new ArrayList<>();
+    ImageDeleteItemAdapter adapter_mddhsjc;
+
     @BindView(R.id.text_goodsName)
     EditText text_goodsName;
 
@@ -155,6 +160,13 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     EditText text_entryPort;
     @BindView(R.id.text_isFfzzwjc)
     TextView text_isFfzzwjc;
+    @BindView(R.id.text_isMddhsjc)
+    TextView text_isMddhsjc;
+    int isMddhsjc;
+    @BindView(R.id.text_importRegistNum)
+    EditText text_importRegistNum;
+    @BindView(R.id.text_importTime)
+    TextView text_importTime;
     int isFfzzwjc = 0;
     @BindView(R.id.text_isThird)
     TextView text_isThird;
@@ -164,6 +176,10 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     TextView text_coldstorageId;
     @BindView(R.id.ll_coldstorageId)
     LinearLayout ll_coldstorageId;
+    @BindView(R.id.text_chinaDistributorName)
+    EditText text_chinaDistributorName;
+    @BindView(R.id.text_chinaDistributorContact)
+    EditText text_chinaDistributorContact;
 
     String goodsType1 = "";
     String goodsType2 = "";
@@ -207,6 +223,10 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         rv_ffzzwjc.setLayoutManager(new GridLayoutManager(this, 3));
         adapter_ffzzwjc = new ImageDeleteItemAdapter(this, images_ffzzwjc);
         rv_ffzzwjc.setAdapter(adapter_ffzzwjc);
+
+        rv_mddhsjc.setLayoutManager(new GridLayoutManager(this, 3));
+        adapter_mddhsjc = new ImageDeleteItemAdapter(this, images_mddhsjc);
+        rv_mddhsjc.setAdapter(adapter_mddhsjc);
 
         mPresenter.getGoodsType();
         mPresenter.getType("transportMode");
@@ -363,6 +383,31 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 adapter_ffzzwjc.notifyDataSetChanged();
             }
         });
+        adapter_mddhsjc.setOnclick(new ImageDeleteItemAdapter.Onclick() {
+            @Override
+            public void onclickAdd(View v, int option) {
+                ArrayList<String> localPath = new ArrayList<>();
+                for (int i = 0; i < images_mddhsjc.size(); i++) {
+                    if (!TextUtils.isEmpty(images_mddhsjc.get(i).getPath())) {
+                        localPath.add(images_mddhsjc.get(i).getPath());
+                    } else {
+                    }
+                }
+                ImageSelector.builder()
+                        .useCamera(true) // 设置是否使用拍照
+                        .setSingle(false)  //设置是否单选
+                        .setMaxSelectCount(9 - images_mddhsjc.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setSelected(localPath) // 把已选的图片传入默认选中。
+                        .setViewImage(true) //是否点击放大图片查看,，默认为true
+                        .start(PurchaseActivity.this, 1107); // 打开相册
+            }
+
+            @Override
+            public void onclickDelete(View v, int option) {
+                images_mddhsjc.remove(option);
+                adapter_mddhsjc.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -371,7 +416,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     }
 
 
-    @OnClick({R.id.toolbar_subtitle, R.id.text_goodsType, R.id.text_coldstorageId, R.id.text_purchaseTime, R.id.text_transportMode, R.id.text_isThird, R.id.text_isImported, R.id.text_isSphsjc, R.id.text_isCrjjyjyzm, R.id.text_isBgd, R.id.text_isXdzm, R.id.text_isFfzzwjc})
+    @OnClick({R.id.toolbar_subtitle, R.id.text_goodsType, R.id.text_coldstorageId, R.id.text_purchaseTime, R.id.text_importTime, R.id.text_transportMode, R.id.text_isThird, R.id.text_isImported, R.id.text_isSphsjc, R.id.text_isCrjjyjyzm, R.id.text_isBgd, R.id.text_isXdzm, R.id.text_isFfzzwjc, R.id.text_isMddhsjc})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
@@ -412,6 +457,34 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 pvOptions.show();
                 break;
 
+            case R.id.text_importTime:
+                DatePickDialog dialog = new DatePickDialog(PurchaseActivity.this);
+                //设置上下年分限制
+                //设置上下年分限制
+                dialog.setYearLimt(20);
+                //设置标题
+                dialog.setTitle("选择时间");
+                //设置类型
+                dialog.setType(DateType.TYPE_YMD);
+                //设置消息体的显示格式，日期格式
+                dialog.setMessageFormat("yyyy-MM-dd");
+                //设置选择回调
+                dialog.setOnChangeLisener(new OnChangeLisener() {
+                    @Override
+                    public void onChanged(Date date) {
+                        Log.v("+++", date.toString());
+                    }
+                });
+                //设置点击确定按钮回调
+                dialog.setOnSureLisener(new OnSureLisener() {
+                    @Override
+                    public void onSure(Date date) {
+                        String time = TimeUtils.getTime(date.getTime(), TimeUtils.DATE_FORMAT_DATE);
+                        text_importTime.setText(time);
+                    }
+                });
+                dialog.show();
+                break;
             case R.id.text_purchaseTime:
                 DatePickDialog dialog1 = new DatePickDialog(PurchaseActivity.this);
                 //设置上下年分限制
@@ -464,6 +537,9 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
             case R.id.text_isFfzzwjc:
                 showSelectPopWindow("isFfzzwjc");
                 break;
+            case R.id.text_isMddhsjc:
+                showSelectPopWindow("isMddhsjc");
+                break;
 
         }
     }
@@ -497,12 +573,18 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         params.setIsBgd(isBgd);
         params.setIsXdzm(isXdzm);
         params.setIsFfzzwjc(isFfzzwjc);
+        params.setIsMddhsjc(isMddhsjc);
+        params.setImportRegistNum(getText(text_importRegistNum));
+        params.setImportTime(getText(text_importTime));
+        params.setChinaDistributorName(getText(text_chinaDistributorName));
+        params.setChinaDistributorContact(getText(text_chinaDistributorContact));
 
         params.setSphsjcEnclosureIdList(PostUtils.getImageIdList(images_Sphsjc));
         params.setCrjjyjyzmEnclosureIdList(PostUtils.getImageIdList(images_Crjjyjyzm));
         params.setBgdEnclosureIdList(PostUtils.getImageIdList(images_Bgd));
         params.setXdzmEnclosureIdList(PostUtils.getImageIdList(images_Xdzm));
         params.setFfzzwjcEnclosureIdList(PostUtils.getImageIdList(images_ffzzwjc));
+        params.setMddhsjcEnclosureIdList(PostUtils.getImageIdList(images_mddhsjc));
         params.setEnclosureIds(PostUtils.getImageIdList(images));
         if (!TextUtils.isEmpty(id)) {
             params.setId(id);
@@ -629,6 +711,10 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 images_ffzzwjc.add(imageBack);
                 adapter_ffzzwjc.notifyDataSetChanged();
                 break;
+            case 1107:
+                images_mddhsjc.add(imageBack);
+                adapter_mddhsjc.notifyDataSetChanged();
+                break;
         }
 
     }
@@ -657,6 +743,10 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
             images_ffzzwjc.clear();
             images_ffzzwjc.addAll(list);
             adapter_ffzzwjc.notifyDataSetChanged();
+        } else if ("mddhsjc".equals(type)) {
+            images_mddhsjc.clear();
+            images_mddhsjc.addAll(list);
+            adapter_mddhsjc.notifyDataSetChanged();
         }
 
     }
@@ -808,6 +898,9 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 } else if (type.equals("isFfzzwjc")) {
                     text_isFfzzwjc.setText(msg);
                     isFfzzwjc = index == 0 ? 1 : 0;
+                } else if (type.equals("isMddhsjc")) {
+                    text_isMddhsjc.setText(msg);
+                    isMddhsjc = index == 0 ? 1 : 0;
                 } else if (type.equals("isThird")) {
                     text_isThird.setText(msg);
                     isThird = index == 0 ? 1 : 0;

@@ -25,6 +25,10 @@ public class TracePostBean {
     String entryPort;// ,
     String batchNumber;// ,
     String goodsRemark;// ,
+    String importRegistNum;// ,
+    String importTime;// ,
+    String chinaDistributorName;// ,
+    String chinaDistributorContact;// ,
     int isSphsjc;// 0,
     int isCrjjyjyzm;// 0,
     int isBgd;// 0,
@@ -32,6 +36,27 @@ public class TracePostBean {
     int isFfzzwjc;// 0,
     int operationType;// 0,
     int isThird;// 0,
+    int isMddhsjc;// 0,
+
+    public void setIsMddhsjc(int isMddhsjc) {
+        this.isMddhsjc = isMddhsjc;
+    }
+
+    public void setChinaDistributorName(String chinaDistributorName) {
+        this.chinaDistributorName = chinaDistributorName;
+    }
+
+    public void setChinaDistributorContact(String chinaDistributorContact) {
+        this.chinaDistributorContact = chinaDistributorContact;
+    }
+
+    public void setImportTime(String importTime) {
+        this.importTime = importTime;
+    }
+
+    public void setImportRegistNum(String importRegistNum) {
+        this.importRegistNum = importRegistNum;
+    }
 
     public void setIsThird(int isThird) {
         this.isThird = isThird;
@@ -156,7 +181,12 @@ public class TracePostBean {
     List<String> bgdEnclosureIdList;// null,
     List<String> xdzmEnclosureIdList;// null,
     List<String> ffzzwjcEnclosureIdList;// null,
+    List<String> mddhsjcEnclosureIdList;// null,
     List<String> enclosureIds;// null,
+
+    public void setMddhsjcEnclosureIdList(List<String> mddhsjcEnclosureIdList) {
+        this.mddhsjcEnclosureIdList = mddhsjcEnclosureIdList;
+    }
 
     public void setSphsjcEnclosureIdList(List<String> sphsjcEnclosureIdList) {
         this.sphsjcEnclosureIdList = sphsjcEnclosureIdList;

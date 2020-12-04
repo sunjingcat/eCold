@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.zz.cold.R;
 import com.zz.cold.bean.GoodsBean;
 
 
@@ -24,6 +25,6 @@ public class GoodsAdapter extends BaseQuickAdapter<GoodsBean, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder holder, final GoodsBean item) {
-
+        holder.setText(R.id.item_title,item.getId());
     }
 }
