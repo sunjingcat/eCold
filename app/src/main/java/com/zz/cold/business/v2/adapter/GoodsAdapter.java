@@ -1,8 +1,6 @@
-package com.zz.cold.business.export.adapter;
+package com.zz.cold.business.v2.adapter;
 
 import android.graphics.Color;
-import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -10,7 +8,6 @@ import androidx.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.zz.cold.R;
-import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.TraceBean;
 
 

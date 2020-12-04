@@ -1,24 +1,17 @@
-package com.zz.cold.business.export;
+package com.zz.cold.business.v2;
 
-import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
 import com.codbking.widget.utils.UIAdjuster;
 import com.zz.cold.R;
 import com.zz.cold.base.BasePresenter;
 import com.zz.cold.base.MyBaseActivity;
-import com.zz.cold.bean.ExportPost;
-import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.SellPost;
-import com.zz.cold.business.qualification.QualificationActivity;
-import com.zz.cold.business.trace.mvp.Contract;
-import com.zz.cold.business.trace.mvp.presenter.DeliverPresenter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;

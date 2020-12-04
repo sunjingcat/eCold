@@ -1,12 +1,9 @@
-package com.zz.cold.business.export.mvp.presenter;
+package com.zz.cold.business.v2.mvp.presenter;
 
 
-import com.zz.cold.bean.DictBean;
-import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.GroupCountBean;
-import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.bean.TraceBean;
-import com.zz.cold.business.export.mvp.Contract;
+import com.zz.cold.business.v2.mvp.Contract;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.MyBasePresenterImpl;

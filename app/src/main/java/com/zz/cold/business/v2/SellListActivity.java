@@ -1,14 +1,11 @@
-package com.zz.cold.business.export;
+package com.zz.cold.business.v2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Build;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,22 +17,20 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
-import com.zz.cold.bean.GoodsBean;
-import com.zz.cold.bean.GroupCountBean;
 import com.zz.cold.bean.TraceBean;
-import com.zz.cold.business.export.adapter.GoodsAdapter;
-import com.zz.cold.business.export.mvp.Contract;
-import com.zz.cold.business.export.mvp.presenter.ExportListPresenter;
+import com.zz.cold.business.v2.adapter.GoodsAdapter;
 import com.zz.cold.business.qualification.AddQualificationActivity;
-import com.zz.cold.business.qualification.QualificationInfoActivity;
 import com.zz.cold.business.trace.GoodsActivity;
-import com.zz.cold.business.trace.PurchaseActivity;
-import com.zz.cold.widget.TabPopWindow;
+import com.zz.cold.net.ApiService;
+import com.zz.cold.net.JsonT;
+import com.zz.cold.net.RequestObserver;
+import com.zz.cold.net.RxNetUtils;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
 import com.zz.lib.commonlib.widget.ClearEditText;
+import com.zz.lib.core.ui.mvp.BasePresenter;
+import com.zz.lib.core.utils.LoadingUtils;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,14 +44,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.zz.cold.net.RxNetUtils.getApi;
+
 /**
- * 出
+ *进
  */
-public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPresenter> implements Contract.IGetExportListView, OnRefreshListener, OnLoadMoreListener {
+public class SellListActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    String page;
     @BindView(R.id.ll_null)
     LinearLayout llNull;
     @BindView(R.id.et_search)
@@ -65,45 +61,28 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
     RecyclerView rv;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
-    @BindView(R.id.text_tab)
-    TextView text_tab;
-    @BindView(R.id.bt_jin)
-    Button bt_jin;
 
     private GoodsAdapter adapter;
     List<TraceBean> mlist = new ArrayList<>();
-    ArrayList<GroupCountBean> tabList = new ArrayList<>();
     private int pagenum = 1;
     private int pagesize = 20;
     private String searchStr = "";
-    String tabId;
-
     @Override
     protected int getContentView() {
-        return R.layout.activity_export_list;
+        return R.layout.activity_import_list;
 
     }
 
     @Override
-    public Contract.IsetExportListPresenter initPresenter() {
-        return new ExportListPresenter(this);
+    public BasePresenter initPresenter() {
+        return null;
     }
 
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        page = getIntent().getStringExtra("page");
-        mPresenter.getTab(page);
-        int type = 1;
-        if (page.equals("import")){
-            bt_jin.setVisibility(View.VISIBLE);
-            type = 1;
-        }else {
-            bt_jin.setVisibility(View.GONE);
-            type = 2;
-        }
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new GoodsAdapter(R.layout.item_goods, mlist,type);
+        adapter = new GoodsAdapter(R.layout.item_goods, mlist,1);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
@@ -111,9 +90,9 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(ExportListActivity.this, GoodsActivity.class);
-                intent.putExtra("id", mlist.get(position).getId());
-                intent.putExtra("page", page);
+                intent.setClass(SellListActivity.this, GoodsActivity.class);
+                intent.putExtra("id",mlist.get(position).getId());
+                intent.putExtra("page","sell");
                 startActivity(intent);
             }
         });
@@ -127,39 +106,23 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
                 return true;
             }
         });
-
     }
 
-    TabPopWindow tabPopWindow;
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @OnClick({R.id.toolbar_subtitle, R.id.text_tab, R.id.bt_jin})
+    @OnClick({R.id.toolbar_subtitle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
+
                 Intent intent = new Intent();
-                intent.setClass(ExportListActivity.this, AddQualificationActivity.class);
+                intent.setClass(SellListActivity.this, AddQualificationActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.bt_jin:
-                startActivity(new Intent(ExportListActivity.this, PurchaseActivity.class));
-                break;
-            case R.id.text_tab:
-                tabPopWindow = new TabPopWindow(this, tabList, tabId);
-                tabPopWindow.showAsDropDown(toolbar, 0, 0, Gravity.BOTTOM);
-                tabPopWindow.setOnItemClickListener(new TabPopWindow.OnItemClickListener() {
-                    @Override
-                    public void onSelected(int index) {
-                        text_tab.setText(tabList.get(index).getOperatorName() + "");
-                        tabId = tabList.get(index).getColdstorageId();
-                        pagenum = 1;
-                        getDate();
-                    }
-                });
                 break;
         }
     }
-
+    @Override
+    protected void initToolBar() {
+        ToolBarUtils.getInstance().setNavigation(toolbar);
+    }
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         pagenum = 1;
@@ -167,7 +130,6 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
         refreshlayout.finishRefresh();
     }
 
-    @Override
     public void showResult(List<TraceBean> data) {
         if (pagenum == 1) {
             mlist.clear();
@@ -180,25 +142,12 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
             llNull.setVisibility(View.GONE);
         }
     }
-
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pagenum++;
         getDate();
         refreshLayout.finishLoadMore();
     }
-
-    @Override
-    protected void initToolBar() {
-        ToolBarUtils.getInstance().setNavigation(toolbar);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.getTab(page);
-    }
-
     void getDate() {
         Map<String, Object> map = new HashMap<>();
         map.put("pageNum", pagenum);
@@ -207,19 +156,23 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
         if (!TextUtils.isEmpty(searchStr)) {
             map.put("searchValue", searchStr);
         }
-        mPresenter.getData(page,map, tabId);
+        RxNetUtils.request(getApi(ApiService.class).sellList(map), new RequestObserver<JsonT<List<TraceBean>>>() {
+            @Override
+            protected void onSuccess(JsonT<List<TraceBean>> jsonT) {
+                showResult(jsonT.getData());
+            }
+
+            @Override
+            protected void onFail2(JsonT<List<TraceBean>> stringJsonT) {
+                super.onFail2(stringJsonT);
+            }
+        }, LoadingUtils.build(this));
     }
 
     @Override
-    public void showTabType(List<GroupCountBean> list) {
-        if (list == null) return;
-        tabList.clear();
-        tabList.addAll(list);
-        if (list.size() > 0) {
-            text_tab.setText(tabList.get(0).getOperatorName() + "");
-            tabId = tabList.get(0).getColdstorageId();
-            pagenum = 1;
-            getDate();
-        }
+    protected void onResume() {
+        super.onResume();
+        pagenum = 1;
+        getDate();
     }
 }
