@@ -15,19 +15,29 @@ import com.igexin.sdk.PushManager;
 import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
+import com.zz.cold.bean.QualificationBean;
 import com.zz.cold.bean.UserBasicBean;
 import com.zz.cold.business.mine.mvp.Contract;
 import com.zz.cold.business.mine.mvp.presenter.MineInfoPresenter;
+import com.zz.cold.business.qualification.AddQualificationActivity;
+import com.zz.cold.business.qualification.QualificationInfoActivity;
+import com.zz.cold.net.ApiService;
+import com.zz.cold.net.JsonT;
 import com.zz.cold.net.OutDateEvent;
+import com.zz.cold.net.RequestObserver;
+import com.zz.cold.net.RxNetUtils;
 import com.zz.cold.utils.GlideUtils;
 import com.zz.lib.commonlib.utils.CacheUtility;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
+import com.zz.lib.core.utils.LoadingUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.zz.cold.net.RxNetUtils.getApi;
 
 /**
  * 我的
@@ -51,7 +61,9 @@ public class MineActivity extends MyBaseActivity<Contract.IsetMineInfoPresenter>
     LinearLayout myPassword;
     @BindView(R.id.my_code)
     LinearLayout myCode;
-
+    @BindView(R.id.my_company)
+    LinearLayout my_company;
+    QualificationBean qualificationBean;
     @Override
     protected int getContentView() {
         return R.layout.fragment_my;
@@ -85,6 +97,12 @@ public class MineActivity extends MyBaseActivity<Contract.IsetMineInfoPresenter>
 //
 //            GlideUtils.loadCircleImage(this, userInfo.getAvatar(), myHead);
 //        }
+        mPresenter.getCompany(userInfo.getId()+"");
+    }
+
+    @Override
+    public void showCompany(QualificationBean qualificationBean) {
+        this.qualificationBean = qualificationBean;
     }
 
     @Override
@@ -100,7 +118,7 @@ public class MineActivity extends MyBaseActivity<Contract.IsetMineInfoPresenter>
 
     private CustomDialog customDialog;
 
-    @OnClick({R.id.my_password, R.id.my_code, R.id.my_about, R.id.my_logout, R.id.my_log})
+    @OnClick({R.id.my_password, R.id.my_code, R.id.my_about, R.id.my_logout, R.id.my_log, R.id.my_company})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.my_password:
@@ -112,6 +130,14 @@ public class MineActivity extends MyBaseActivity<Contract.IsetMineInfoPresenter>
                 break;
             case R.id.my_code:
                 startActivity(new Intent(MineActivity.this, ChangeCodeActivity.class));
+
+                break;
+            case R.id.my_company:
+                if (this.qualificationBean!=null&&!TextUtils.isEmpty(qualificationBean.getId())) {
+                    startActivity(new Intent(MineActivity.this, QualificationInfoActivity.class).putExtra("id",qualificationBean.getId()));
+                }else {
+                    startActivity(new Intent(MineActivity.this, AddQualificationActivity.class));
+                }
 
                 break;
             case R.id.my_about:
@@ -146,4 +172,5 @@ public class MineActivity extends MyBaseActivity<Contract.IsetMineInfoPresenter>
             customDialog.dismiss();
         }
     }
+
 }

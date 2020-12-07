@@ -90,7 +90,7 @@ public class GoodsActivity extends MyBaseActivity {
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        rv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         adapter = new WmsAdapter(R.layout.item_wms, mlist);
         rv.setAdapter(adapter);
 

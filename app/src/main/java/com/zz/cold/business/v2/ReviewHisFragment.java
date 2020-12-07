@@ -23,6 +23,8 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zz.cold.R;
 import com.zz.cold.bean.PendingGoods;
 import com.zz.cold.bean.WmsBean;
+import com.zz.cold.business.trace.GoodsActivity;
+import com.zz.cold.business.trace.HisPendingActivity;
 import com.zz.cold.business.trace.PendingGoodsActivity;
 import com.zz.cold.business.trace.adapter.HisAdapter;
 import com.zz.cold.business.trace.adapter.PendingGoodsAdapter;
@@ -88,7 +90,7 @@ public class ReviewHisFragment extends Fragment implements OnRefreshListener, On
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), PendingGoodsActivity.class);
+                intent.setClass(getActivity(), GoodsActivity.class);
                 intent.putExtra("id", mlist.get(position).getId());
                 startActivity(intent);
             }
