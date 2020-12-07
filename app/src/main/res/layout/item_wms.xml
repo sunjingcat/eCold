@@ -4,11 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    app:contentView="@+id/content"
-    app:rightMenuView="@+id/right"
+    android:orientation="vertical"
     android:layout_marginTop="1dp">
-
     <LinearLayout
         android:id="@+id/content"
         android:layout_width="match_parent"

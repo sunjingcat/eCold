@@ -26,8 +26,10 @@ import com.zz.lib.commonlib.utils.ToolBarUtils;
 import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.lib.core.utils.LoadingUtils;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -88,6 +90,7 @@ public class GoodsActivity extends MyBaseActivity {
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         adapter = new WmsAdapter(R.layout.item_wms, mlist);
         rv.setAdapter(adapter);
 
@@ -101,7 +104,7 @@ public class GoodsActivity extends MyBaseActivity {
         }
         if (page.equals("import")) {
             bt_action.setVisibility(View.VISIBLE);
-            bt_action.setText("入");
+            bt_action.setText("进");
         } else if (page.equals("export")) {
             bt_action.setVisibility(View.VISIBLE);
             bt_action.setText("出");
@@ -196,27 +199,27 @@ public class GoodsActivity extends MyBaseActivity {
         }
     }
 
-    @OnClick({R.id.bt_action, R.id.bt_action2, R.id.bt_ok, R.id.bt_no})
+    @OnClick({R.id.bt_action, R.id.bt_action2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_action:
                 if (page.equals("import")) {
-                    startActivity(new Intent(GoodsActivity.this, DeliverActivity.class)
+                    startActivityForResult(new Intent(GoodsActivity.this, DeliverActivity.class)
                             .putExtra("operationType", 1)
                             .putExtra("id", id)
                             .putExtra("isThird", traceBean.getIsThird())
-                            .putExtra("name", traceBean.getGoodsName()));
+                            .putExtra("name", traceBean.getGoodsName()), 1001);
                 } else if (page.equals("export")) {
                     Intent intent = new Intent(GoodsActivity.this, DeliverActivity.class)
                             .putExtra("id", id)
                             .putExtra("operationType", 2)
                             .putExtra("name", traceBean.getGoodsName());
-                    startActivity(intent);
+                    startActivityForResult(intent, 1002);
                 } else if (page.equals("sell")) {
                     Intent intent = new Intent(GoodsActivity.this, SellActivity.class)
                             .putExtra("id", id)
                             .putExtra("name", traceBean.getGoodsName());
-                    startActivity(intent);
+                    startActivityForResult(intent, 1003);
                 } else if (page.equals("review")) {
                     ask(1, traceBean.getId());
                 }
@@ -345,4 +348,11 @@ public class GoodsActivity extends MyBaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            getData(id);
+        }
+    }
 }

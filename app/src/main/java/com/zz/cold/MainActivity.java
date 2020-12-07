@@ -10,6 +10,9 @@ import com.zz.cold.business.daily.DailyActivity;
 import com.zz.cold.business.trace.PendingGoodsActivity;
 import com.zz.cold.business.v2.ExportListActivity;
 import com.zz.cold.business.trace.TraceActivity;
+import com.zz.cold.business.v2.ImportExportAccountActivity;
+import com.zz.cold.business.v2.ReviewActivity;
+import com.zz.cold.business.v2.SalesAccountActivity;
 import com.zz.cold.business.v2.SellListActivity;
 import com.zz.lib.core.http.utils.ToastUtils;
 import com.zz.lib.core.ui.mvp.BasePresenter;
@@ -30,16 +33,10 @@ import static com.zz.cold.net.RxNetUtils.getApi;
 public class MainActivity extends MyBaseActivity {
 
     private long mExitTime = 0;
-    @BindView(R.id.tv_employCount)
-    TextView tv_employCount;
-    @BindView(R.id.tv_warehouseCount)
-    TextView tv_warehouseCount;
     @BindView(R.id.tv_goodsCount)
     TextView tv_goodsCount;
     @BindView(R.id.tv_goodsNoNucleicCount)
     TextView tv_goodsNoNucleicCount;
-    @BindView(R.id.tv_noReportedCount)
-    TextView tv_noReportedCount;
     @BindView(R.id.tv_goodsImportCount)
     TextView tv_goodsImportCount;
 
@@ -71,7 +68,7 @@ public class MainActivity extends MyBaseActivity {
     protected void initToolBar() {
     }
 
-    @OnClick({R.id.main_group_1, R.id.main_group_2, R.id.main_group_3, R.id.main_group_4, R.id.toolbar_subtitle})
+    @OnClick({R.id.main_group_1, R.id.main_group_2, R.id.main_group_3, R.id.main_group_4, R.id.main_group_5, R.id.main_group_6, R.id.toolbar_subtitle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
@@ -79,13 +76,13 @@ public class MainActivity extends MyBaseActivity {
 
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, ExportListActivity.class);
-                intent.putExtra("page","import");
+                intent.putExtra("page", "import");
                 startActivity(intent);
                 break;
             case R.id.main_group_2:
                 Intent intent1 = new Intent();
                 intent1.setClass(MainActivity.this, ExportListActivity.class);
-                intent1.putExtra("page","export");
+                intent1.putExtra("page", "export");
                 startActivity(intent1);
                 break;
             case R.id.main_group_3:
@@ -95,8 +92,18 @@ public class MainActivity extends MyBaseActivity {
                 break;
             case R.id.main_group_4:
                 Intent intent3 = new Intent();
-                intent3.setClass(MainActivity.this, PendingGoodsActivity.class);
+                intent3.setClass(MainActivity.this, ReviewActivity.class);
                 startActivity(intent3);
+                break;
+            case R.id.main_group_5:
+                Intent intent4 = new Intent();
+                intent4.setClass(MainActivity.this, SalesAccountActivity.class);
+                startActivity(intent4);
+                break;
+            case R.id.main_group_6:
+                Intent intent5 = new Intent();
+                intent5.setClass(MainActivity.this, ImportExportAccountActivity.class);
+                startActivity(intent5);
                 break;
             case R.id.toolbar_subtitle:
                 startActivity(new Intent(MainActivity.this, MineActivity.class));
@@ -126,12 +133,9 @@ public class MainActivity extends MyBaseActivity {
 
                 if (jsonT.isSuccess()) {
                     MainShowData data = jsonT.getData();
-                    tv_employCount.setText(data.getEmployCount() + "");
                     tv_goodsCount.setText(data.getGoodsCount() + "");
-                    tv_warehouseCount.setText(data.getWarehouseCount() + "");
                     tv_goodsImportCount.setText(data.getGoodsImportCount() + "");
                     tv_goodsNoNucleicCount.setText(data.getGoodsNoNucleicCount() + "");
-                    tv_noReportedCount.setText(data.getNoReportedCount() + "");
                 } else {
 
                 }

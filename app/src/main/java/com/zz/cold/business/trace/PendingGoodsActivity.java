@@ -22,7 +22,6 @@ import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.PendingCompanyBean;
 import com.zz.cold.bean.PendingGoods;
-import com.zz.cold.business.trace.adapter.PendingAdapter;
 import com.zz.cold.business.trace.adapter.PendingGoodsAdapter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;

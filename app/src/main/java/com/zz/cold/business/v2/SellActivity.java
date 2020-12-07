@@ -20,6 +20,9 @@ import com.zz.lib.commonlib.utils.ToolBarUtils;
 import com.zz.lib.commonlib.widget.SelectPopupWindows;
 import com.zz.lib.core.utils.LoadingUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -52,7 +55,7 @@ public class SellActivity extends MyBaseActivity {
 
     @Override
     protected int getContentView() {
-        return R.layout.activity_deliver;
+        return R.layout.activity_sell;
 
     }
 
@@ -83,12 +86,12 @@ public class SellActivity extends MyBaseActivity {
     }
 
     void postData() {
-        SellPost params = new SellPost();
-        params.setId(id);
-        params.setOperationCount(getText(text_operationCount));
-        params.setBuyerName(getText(text_buyerName));
-        params.setBuyerAddress(getText(text_buyerAddress));
-        params.setBuyerContact(getText(text_buyerContact));
+        Map<String, Object> params = new HashMap<>();
+        params.put("operationCount",getText(text_operationCount));
+        params.put("buyerAddress",getText(text_buyerAddress));
+        params.put("buyerName",getText(text_buyerName));
+        params.put("buyerContact",getText(text_buyerContact));
+        params.put("buyerRemark",buyerRemark);
         submitData(params);
     }
 
@@ -129,7 +132,7 @@ public class SellActivity extends MyBaseActivity {
             }
         });
     }
-    void submitData(SellPost params){
+    void submitData(Map<String, Object> params ){
         RxNetUtils.request(getApi(ApiService.class).postSell(id,params), new RequestObserver<JsonT>(this) {
             @Override
             protected void onSuccess(JsonT jsonT) { showResult();

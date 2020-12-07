@@ -1,13 +1,16 @@
-package com.zz.cold.business.trace;
+package com.zz.cold.business.v2;
 
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,19 +20,16 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
-import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.PendingGoods;
 import com.zz.cold.bean.WmsBean;
+import com.zz.cold.business.trace.PendingGoodsActivity;
 import com.zz.cold.business.trace.adapter.HisAdapter;
+import com.zz.cold.business.trace.adapter.PendingGoodsAdapter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;
 import com.zz.cold.net.RxNetUtils;
-import com.zz.cold.widget.InputDialog;
-import com.zz.lib.commonlib.utils.ToolBarUtils;
-import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.lib.core.utils.LoadingUtils;
 
 import java.util.ArrayList;
@@ -39,15 +39,16 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import butterknife.Unbinder;
 
 import static com.zz.cold.net.RxNetUtils.getApi;
 
-/**
- * 待审核进出货请求
- */
-public class HisPendingActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
 
+/**
+ * 申请历史
+ */
+@SuppressLint("ValidFragment")
+public class ReviewHisFragment extends Fragment implements OnRefreshListener, OnLoadMoreListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.ll_null)
@@ -56,23 +57,29 @@ public class HisPendingActivity extends MyBaseActivity implements OnRefreshListe
     RecyclerView rv;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
-
     private HisAdapter adapter;
     List<WmsBean> mlist = new ArrayList<>();
     private int pagenum = 1;
     private int pagesize = 20;
-
+    Unbinder unbinder;
 
     @Override
-    protected int getContentView() {
-        return R.layout.activity_pending_his;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_pending_his, container, false);
 
+        unbinder = ButterKnife.bind(this, view);
+        init(view);
+        return view;
     }
 
-    @Override
-    protected void initView() {
-        ButterKnife.bind(this);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+    @SuppressLint("ValidFragment")
+    public ReviewHisFragment() {
+    }
+
+    private void init(View view) {
+        toolbar.setVisibility(View.GONE);
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new HisAdapter(R.layout.item_wms, mlist);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
@@ -81,32 +88,25 @@ public class HisPendingActivity extends MyBaseActivity implements OnRefreshListe
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(HisPendingActivity.this, GoodsActivity.class);
+                intent.setClass(getActivity(), PendingGoodsActivity.class);
                 intent.putExtra("id", mlist.get(position).getId());
                 startActivity(intent);
             }
         });
+
     }
 
     @Override
-    protected void onResume() {
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @Override
+    public void onResume() {
         super.onResume();
         pagenum = 1;
         getDate();
-    }
-
-    @OnClick({R.id.toolbar_subtitle})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.toolbar_subtitle:
-
-                break;
-        }
-    }
-
-    @Override
-    protected void initToolBar() {
-        ToolBarUtils.getInstance().setNavigation(toolbar);
     }
 
     @Override
@@ -151,14 +151,7 @@ public class HisPendingActivity extends MyBaseActivity implements OnRefreshListe
             protected void onFail2(JsonT<List<WmsBean>> stringJsonT) {
                 super.onFail2(stringJsonT);
             }
-        }, LoadingUtils.build(this));
+        }, LoadingUtils.build(getActivity()));
     }
-
-
-    @Override
-    public BasePresenter initPresenter() {
-        return null;
-    }
-
 
 }

@@ -34,10 +34,8 @@ public class ReviewActivity extends MyBaseActivity {
     @BindView(R.id.viewpager)
     ViewPager viewpager;
     public FmPagerAdapter pagerAdapter;
-    @BindView(R.id.toolbar_title)
-    TextView toolbarTitle;
     private ArrayList<Fragment> fragments = new ArrayList<>();
-    private String[] titles = new String[]{"待审核", "已提交"};
+    private String[] titles = new String[]{"审核列表", "申请历史"};
     int rewardsPunishmentsType = 1;
 
     @Override
@@ -53,12 +51,11 @@ public class ReviewActivity extends MyBaseActivity {
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        toolbarTitle.setText("审批");
         for (int i = 0; i < titles.length; i++) {
-            fragments.add(new ReviewFragment());
             tablayout.addTab(tablayout.newTab());
         }
-
+        fragments.add(new ReviewFragment());
+        fragments.add(new ReviewHisFragment());
         tablayout.setupWithViewPager(viewpager, false);
         pagerAdapter = new FmPagerAdapter(fragments, getSupportFragmentManager());
         viewpager.setAdapter(pagerAdapter);
