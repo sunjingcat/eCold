@@ -54,7 +54,7 @@ public class TraceBean {
     String chinaDistributorContact;// ,
     List<ImageBack> sphsjcEnclosureList;// null,
     List<ImageBack> crjjyjyzmEnclosureList;// null,
-    List<ImageBack> bgdEnclosureIdList;// null,
+    List<ImageBack> bgdEnclosureList;// null,
     List<ImageBack> xdzmEnclosureList;// null,
     List<ImageBack> ffzzwjcEnclosureList;// null,
     List<ImageBack> mddhsjcEnclosureList;// null,
@@ -164,8 +164,8 @@ public class TraceBean {
         return crjjyjyzmEnclosureList;
     }
 
-    public List<ImageBack> getBgdEnclosureIdList() {
-        return bgdEnclosureIdList;
+    public List<ImageBack> getBgdEnclosureList() {
+        return bgdEnclosureList;
     }
 
     public List<ImageBack> getXdzmEnclosureList() {

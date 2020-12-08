@@ -138,7 +138,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="四证一报告不全数"
+                            android:text="缺失四证一报告"
                             android:textColor="#57B4E1"
                             android:textSize="12dp" />
                     </LinearLayout>

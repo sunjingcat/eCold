@@ -172,7 +172,12 @@
 
                     <TextView
                         android:id="@+id/tv_coldstorageType"
-                        style="@style/textRightStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:background="@android:color/transparent"
                         tools:text="" />
                 </LinearLayout>
 
@@ -269,6 +274,7 @@
                 android:paddingBottom="10dp"
                 android:text="删除"
                 android:textColor="@color/red"
+                android:visibility="gone"
                 android:textSize="14dp" />
             <TextView
                 android:id="@+id/bt_password"
@@ -282,6 +288,7 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:text="重置密码"
+                android:visibility="gone"
                 android:textColor="@color/colorThemeLight"
                 android:textSize="14dp" />
         </LinearLayout>

@@ -116,6 +116,9 @@ public class GoodsActivity extends MyBaseActivity {
                 bt_action.setVisibility(View.VISIBLE);
                 bt_action2.setVisibility(View.VISIBLE);
                 bt_action.setText("通过");
+                rv.setVisibility(View.GONE);
+            }else if (page.equals("reviewHis")) {
+                rv.setVisibility(View.GONE);
             } else {
                 bt_action.setVisibility(View.GONE);
                 bt_action2.setVisibility(View.GONE);
@@ -143,17 +146,13 @@ public class GoodsActivity extends MyBaseActivity {
         ToolBarUtils.getInstance().setNavigation(toolbar);
     }
 
-    InfoBean sphsjc;
-    InfoBean crjjyjyzm;
-    InfoBean bgd;
-    InfoBean xdzm;
-    InfoBean ffzzwjc;
-    InfoBean mddhsjc;
+
 
     public void showResult(TraceBean data) {
 
         if (data == null) return;
         traceBean = data;
+        infoList.clear();
         infoList.add(new InfoBean("商品名称", data.getGoodsName() + ""));
         infoList.add(new InfoBean("进货品种", data.getGoodsType1Text() + "" + data.getGoodsType2Text() + data.getGoodsType3Text()));
         infoList.add(new InfoBean("是否第三方冷库", data.getIsThirdText() + ""));
@@ -177,24 +176,24 @@ public class GoodsActivity extends MyBaseActivity {
             infoList.add(new InfoBean("入境口岸", data.getEntryPort() + ""));
             infoList.add(new InfoBean("进口企业注册号", data.getImportRegistNum() + ""));
             infoList.add(new InfoBean("进口时间", data.getImportTime() + ""));
-            sphsjc = new InfoBean("食品核酸检测", data.getIsSphsjcText() + "");
+           InfoBean sphsjc = new InfoBean("食品核酸检测", data.getIsSphsjcText() + "");
+            sphsjc.setImages(data.getSphsjcEnclosureList());
             infoList.add(sphsjc);
-            crjjyjyzm = new InfoBean("出入境检验检疫证明", data.getIsCrjjyjyzmText() + "");
+            InfoBean crjjyjyzm = new InfoBean("出入境检验检疫证明", data.getIsCrjjyjyzmText() + "");
+            crjjyjyzm.setImages(data.getCrjjyjyzmEnclosureList());
             infoList.add(crjjyjyzm);
-            bgd = new InfoBean("报关单", data.getIsBgdText() + "");
+            InfoBean   bgd = new InfoBean("报关单", data.getIsBgdText() + "");
+            bgd.setImages(data.getBgdEnclosureList());
             infoList.add(bgd);
-            xdzm = new InfoBean("消毒证明", data.getIsXdzmText() + "");
+            InfoBean  xdzm = new InfoBean("消毒证明", data.getIsXdzmText() + "");
+            xdzm.setImages(data.getXdzmEnclosureList());
             infoList.add(xdzm);
-            ffzzwjc = new InfoBean("非非洲猪瘟检测报告", data.getIsFfzzwjcText() + "");
+            InfoBean ffzzwjc = new InfoBean("非非洲猪瘟检测报告", data.getIsFfzzwjcText() + "");
+            ffzzwjc.setImages(data.getFfzzwjcEnclosureList());
             infoList.add(ffzzwjc);
-            mddhsjc = new InfoBean("目的地核酸检测", data.getIsMddhsjcText() + "");
+            InfoBean mddhsjc = new InfoBean("目的地核酸检测", data.getIsMddhsjcText() + "");
+            mddhsjc.setImages(data.getMddhsjcEnclosureList());
             infoList.add(mddhsjc);
-            getImages("sphsjc");
-            getImages("crjjyjyzm");
-            getImages("bgd");
-            getImages("xdzm");
-            getImages("ffzzwjc");
-            getImages("mddhsjc");
         }
         infoAdapter.notifyDataSetChanged();
         if (data.getColdchainGoodsAccountcList() != null) {
@@ -307,36 +306,6 @@ public class GoodsActivity extends MyBaseActivity {
 
             @Override
             protected void onFail2(JsonT stringJsonT) {
-                super.onFail2(stringJsonT);
-            }
-        }, LoadingUtils.build(this));
-    }
-
-    void getImages(String type) {
-        RxNetUtils.request(getApi(ApiService.class).getModelImages(type, id), new RequestObserver<JsonT<List<ImageBack>>>(this) {
-            @Override
-            protected void onSuccess(JsonT<List<ImageBack>> jsonT) {
-                if (jsonT.getData() != null && jsonT.getData().size() > 0) {
-                    if ("sphsjc".equals(type)) {
-                        sphsjc.setImages(jsonT.getData());
-                    } else if ("crjjyjyzm".equals(type)) {
-                        crjjyjyzm.setImages(jsonT.getData());
-                    } else if ("bgd".equals(type)) {
-                        bgd.setImages(jsonT.getData());
-                    } else if ("xdzm".equals(type)) {
-                        xdzm.setImages(jsonT.getData());
-                    } else if ("ffzzwjc".equals(type)) {
-                        ffzzwjc.setImages(jsonT.getData());
-                    } else if ("mddhsjc".equals(type)) {
-                        mddhsjc.setImages(jsonT.getData());
-                    }
-                    infoAdapter.notifyDataSetChanged();
-                }
-
-            }
-
-            @Override
-            protected void onFail2(JsonT<List<ImageBack>> stringJsonT) {
                 super.onFail2(stringJsonT);
             }
         }, LoadingUtils.build(this));

@@ -29,7 +29,7 @@ public class GoodsAdapter extends BaseQuickAdapter<TraceBean, BaseViewHolder> {
         holder.setText(R.id.item_title,item.getGoodsName()+"");
         holder.setText(R.id.item_operatorName,item.getOperatorName()+"");
         holder.setText(R.id.item_count,type==1?("+"+item.getCount()+item.getSpec()):("-"+item.getCount()+item.getSpec()));
-        holder.setTextColor(R.id.item_count,type==1? Color.RED :Color.GREEN);
+        holder.setTextColor(R.id.item_count,type==1? Color.RED :Color.parseColor("FF155917"));
         holder.setText(R.id.item_time,item.getPurchaseTime()+"");
     }
 }

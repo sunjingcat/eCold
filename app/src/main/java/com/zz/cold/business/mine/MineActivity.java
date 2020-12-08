@@ -90,7 +90,7 @@ public class MineActivity extends MyBaseActivity<Contract.IsetMineInfoPresenter>
     @Override
     public void showUserInfo(UserBasicBean userInfo) {
         this.userInfo = userInfo;
-        myName.setText(userInfo.getLoginName() + "");
+        myName.setText(userInfo.getOperatorName() + "");
 //        notContent.setText(userInfo.getPhonenumber() + "");
 
 //        if (!TextUtils.isEmpty(userInfo.getAvatar())) {

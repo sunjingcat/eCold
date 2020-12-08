@@ -134,7 +134,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     EditText text_supplierContact;
     @BindView(R.id.text_transportMode)
     TextView text_transportMode;
-    String transportMode;
+    String transportMode="";
     @BindView(R.id.text_period)
     EditText text_period;
     @BindView(R.id.text_goodsRemark)
@@ -146,28 +146,28 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     LinearLayout ll_isImported;
     @BindView(R.id.text_isSphsjc)
     TextView text_isSphsjc;
-    int isSphsjc = 0;
+    int isSphsjc = -1;
     @BindView(R.id.text_isCrjjyjyzm)
     TextView text_isCrjjyjyzm;
-    int isCrjjyjyzm = 0;
+    int isCrjjyjyzm = -1;
     @BindView(R.id.text_isBgd)
     TextView text_isBgd;
-    int isBgd = 0;
+    int isBgd = -1;
     @BindView(R.id.text_isXdzm)
     TextView text_isXdzm;
-    int isXdzm = 0;
+    int isXdzm = -1;
     @BindView(R.id.text_entryPort)
     EditText text_entryPort;
     @BindView(R.id.text_isFfzzwjc)
     TextView text_isFfzzwjc;
     @BindView(R.id.text_isMddhsjc)
     TextView text_isMddhsjc;
-    int isMddhsjc;
+    int isMddhsjc=-1;
     @BindView(R.id.text_importRegistNum)
     EditText text_importRegistNum;
     @BindView(R.id.text_importTime)
     TextView text_importTime;
-    int isFfzzwjc = 0;
+    int isFfzzwjc = -1;
     @BindView(R.id.text_isThird)
     TextView text_isThird;
     int isThird = 0;
@@ -564,6 +564,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         params.setPeriod(getText(text_period));
         params.setBatchNumber(getText(text_batchNumber));
         params.setGoodsRemark(getText(text_goodsRemark));
+        params.setTransportMode(transportMode);
 
         params.setIsThird(isThird);
         params.setIsImported(isImported);

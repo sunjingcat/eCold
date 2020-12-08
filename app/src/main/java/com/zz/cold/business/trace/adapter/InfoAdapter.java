@@ -30,11 +30,14 @@ public class InfoAdapter extends BaseQuickAdapter<InfoBean, BaseViewHolder> {
     protected void convert(BaseViewHolder holder, final InfoBean item) {
         holder.setText(R.id.item_title,item.getTitle()+"");
         holder.setText(R.id.item_content,item.getValue()+"");
+        RecyclerView rvImages = holder.getView(R.id.rv_image);
         if (item.getImages()!=null&&item.getImages().size()>0) {
-            RecyclerView rvImages = holder.getView(R.id.rv_image);
+            rvImages.setVisibility(View.VISIBLE);
             rvImages.setLayoutManager(new GridLayoutManager(getContext(), 3));
             ImageItemAdapter adapter = new ImageItemAdapter(R.layout.item_image, item.getImages());
             rvImages.setAdapter(adapter);
+        }else {
+            rvImages.setVisibility(View.GONE);
         }
     }
 }

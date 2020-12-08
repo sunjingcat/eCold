@@ -15,6 +15,11 @@ public class PendingGoods {
     String    reviewStatus;// 1,
     String    reviewTime;// null,
     String     reviewRemark;// null
+    String     coldstorageUserName;// null
+
+    public String getColdstorageUserName() {
+        return coldstorageUserName;
+    }
 
     public String getDeptId() {
         return deptId;

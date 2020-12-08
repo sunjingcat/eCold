@@ -28,7 +28,7 @@ public class WmsAdapter extends BaseQuickAdapter<WmsBean, BaseViewHolder> {
     protected void convert(BaseViewHolder holder, final WmsBean item) {
         holder.setText(R.id.item_title,item.getOperationTypeText()+"");
         holder.setText(R.id.item_weight,item.getOperationType()==1?("+"+item.getCount()+item.getSpec()):("-"+item.getCount()+item.getSpec()));
-        holder.setTextColor(R.id.item_weight,item.getOperationType()==1? Color.RED :Color.GREEN);
+        holder.setTextColor(R.id.item_weight,item.getOperationType()!=1? Color.RED :Color.parseColor("FF155917"));
         holder.setText(R.id.item_time,item.getOperationTime()+"");
         holder.setText(R.id.item_status,item.getReviewStatusText()+"");
         holder.getView(R.id.item_remark).setVisibility(View.GONE);
