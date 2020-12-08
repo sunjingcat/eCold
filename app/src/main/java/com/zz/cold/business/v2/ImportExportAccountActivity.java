@@ -90,7 +90,7 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(ImportExportAccountActivity.this, GoodsActivity.class);
+                intent.setClass(ImportExportAccountActivity.this, AccountDetailActivity.class);
                 intent.putExtra("id",mlist.get(position).getId());
                 intent.putExtra("page","cold");
                 startActivity(intent);

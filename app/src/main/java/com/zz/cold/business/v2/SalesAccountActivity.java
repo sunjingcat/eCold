@@ -90,7 +90,7 @@ public class SalesAccountActivity extends MyBaseActivity implements OnRefreshLis
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(SalesAccountActivity.this, GoodsActivity.class);
+                intent.setClass(SalesAccountActivity.this, AccountDetailActivity.class);
                 intent.putExtra("id",mlist.get(position).getId());
                 intent.putExtra("page","sales");
                 startActivity(intent);

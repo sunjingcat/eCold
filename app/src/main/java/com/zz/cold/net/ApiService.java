@@ -12,6 +12,7 @@ import com.zz.cold.bean.MainShowData;
 import com.zz.cold.bean.PendingCompanyBean;
 import com.zz.cold.bean.PendingGoods;
 import com.zz.cold.bean.QualificationBean;
+import com.zz.cold.bean.StorageAccount;
 import com.zz.cold.bean.StorageBean;
 import com.zz.cold.bean.TraceBean;
 import com.zz.cold.bean.TracePostBean;
@@ -202,6 +203,9 @@ public interface ApiService {
 
     @GET("/app/v1/coldchain/coldchainGoodsAccount/{id}")
     Observable<JsonT<TraceBean>> getTraceInfo(@Path("id") String id);
+
+    @GET("/app/v1/coldchain/coldchainGoods/storageAccount/{id}")
+    Observable<JsonT<StorageAccount>> getStorageAccount(@Path("id") String id);
 
     @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoods")
