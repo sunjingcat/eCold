@@ -47,7 +47,7 @@ import butterknife.OnClick;
 import static com.zz.cold.net.RxNetUtils.getApi;
 
 /**
- *冷库台账
+ * 冷库台账
  */
 public class ImportExportAccountActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
 
@@ -67,6 +67,7 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
     private int pagenum = 1;
     private int pagesize = 20;
     private String searchStr = "";
+
     @Override
     protected int getContentView() {
         return R.layout.activity_import_list;
@@ -82,7 +83,7 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new GoodsAdapter(R.layout.item_goods, mlist,1);
+        adapter = new GoodsAdapter(R.layout.item_goods, mlist, 1);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
@@ -91,8 +92,8 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
                 intent.setClass(ImportExportAccountActivity.this, AccountDetailActivity.class);
-                intent.putExtra("id",mlist.get(position).getId());
-                intent.putExtra("page","cold");
+                intent.putExtra("id", mlist.get(position).getId());
+                intent.putExtra("page", "cold");
                 startActivity(intent);
             }
         });
@@ -116,10 +117,12 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
                 break;
         }
     }
+
     @Override
     protected void initToolBar() {
         ToolBarUtils.getInstance().setNavigation(toolbar);
     }
+
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         pagenum = 1;
@@ -139,12 +142,14 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
             llNull.setVisibility(View.GONE);
         }
     }
+
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pagenum++;
         getDate();
         refreshLayout.finishLoadMore();
     }
+
     void getDate() {
         Map<String, Object> map = new HashMap<>();
         map.put("pageNum", pagenum);

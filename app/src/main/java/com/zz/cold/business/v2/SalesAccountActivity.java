@@ -22,10 +22,12 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
+import com.zz.cold.bean.StorageAccount;
 import com.zz.cold.bean.TraceBean;
 import com.zz.cold.business.qualification.AddQualificationActivity;
 import com.zz.cold.business.trace.GoodsActivity;
 import com.zz.cold.business.v2.adapter.GoodsAdapter;
+import com.zz.cold.business.v2.adapter.SalesAdapter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;
@@ -62,8 +64,8 @@ public class SalesAccountActivity extends MyBaseActivity implements OnRefreshLis
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
-    private GoodsAdapter adapter;
-    List<TraceBean> mlist = new ArrayList<>();
+    private SalesAdapter adapter;
+    List<StorageAccount> mlist = new ArrayList<>();
     private int pagenum = 1;
     private int pagesize = 20;
     private String searchStr = "";
@@ -82,7 +84,7 @@ public class SalesAccountActivity extends MyBaseActivity implements OnRefreshLis
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new GoodsAdapter(R.layout.item_goods, mlist,1);
+        adapter = new SalesAdapter(R.layout.item_goods, mlist,1);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
@@ -127,7 +129,7 @@ public class SalesAccountActivity extends MyBaseActivity implements OnRefreshLis
         refreshlayout.finishRefresh();
     }
 
-    public void showResult(List<TraceBean> data) {
+    public void showResult(List<StorageAccount> data) {
         if (pagenum == 1) {
             mlist.clear();
         }
@@ -153,14 +155,14 @@ public class SalesAccountActivity extends MyBaseActivity implements OnRefreshLis
         if (!TextUtils.isEmpty(searchStr)) {
             map.put("searchValue", searchStr);
         }
-        RxNetUtils.request(getApi(ApiService.class).salesAccount(map), new RequestObserver<JsonT<List<TraceBean>>>() {
+        RxNetUtils.request(getApi(ApiService.class).salesAccount(map), new RequestObserver<JsonT<List<StorageAccount>>>() {
             @Override
-            protected void onSuccess(JsonT<List<TraceBean>> jsonT) {
+            protected void onSuccess(JsonT<List<StorageAccount>> jsonT) {
                 showResult(jsonT.getData());
             }
 
             @Override
-            protected void onFail2(JsonT<List<TraceBean>> stringJsonT) {
+            protected void onFail2(JsonT<List<StorageAccount>> stringJsonT) {
                 super.onFail2(stringJsonT);
             }
         }, LoadingUtils.build(this));

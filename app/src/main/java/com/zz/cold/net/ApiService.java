@@ -119,7 +119,7 @@ public interface ApiService {
     Observable<JsonT<List<TraceBean>>> sellList(@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/coldchainGoods/salesAccount")
-    Observable<JsonT<List<TraceBean>>> salesAccount(@QueryMap Map<String, Object> params);
+    Observable<JsonT<List<StorageAccount>>> salesAccount(@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/coldchainGoods/importExportAccount")
     Observable<JsonT<List<TraceBean>>> importExportAccount(@QueryMap Map<String, Object> params);
@@ -206,6 +206,9 @@ public interface ApiService {
 
     @GET("/app/v1/coldchain/coldchainGoods/storageAccount/{id}")
     Observable<JsonT<StorageAccount>> getStorageAccount(@Path("id") String id);
+
+    @GET("/app/v1/coldchain/coldchainGoods/sellAccount/{id}")
+    Observable<JsonT<StorageAccount>> getSellAccount(@Path("id") String id);
 
     @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoods")

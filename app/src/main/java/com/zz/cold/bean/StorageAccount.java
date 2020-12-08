@@ -25,6 +25,11 @@ public class StorageAccount {
     String operatorName;//  富拉尔基第一冷库 ,
     int isTransfer;// 0,
     String coldstorageName;//  富拉尔基第一冷库
+    String batchNumber;//  富拉尔基第一冷库
+
+    public String getBatchNumber() {
+        return batchNumber;
+    }
 
     public String getId() {
         return id;
