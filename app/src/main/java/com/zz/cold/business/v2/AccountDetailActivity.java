@@ -1,6 +1,7 @@
 package com.zz.cold.business.v2;
 
 import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
@@ -39,6 +40,8 @@ public class AccountDetailActivity extends MyBaseActivity {
     Toolbar toolbar;
     @BindView(R.id.rv_info)
     RecyclerView rv_info;
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
     private InfoAdapter infoAdapter;
     List<InfoBean> infoList = new ArrayList<>();
     String page;
@@ -61,6 +64,11 @@ public class AccountDetailActivity extends MyBaseActivity {
         rv_info.setAdapter(infoAdapter);
         String id = getIntent().getStringExtra("id");
        page = getIntent().getStringExtra("page");
+        if (page.equals("sales")) {
+            toolbar_title.setText("销售台账");
+        }else {
+            toolbar_title.setText("冷库台账");
+        }
         getData(id);
     }
 
