@@ -41,7 +41,7 @@ public class Contract {
     }
 
     public interface IsetDeliverPresenter extends BasePresenter {
-        void submitData(ExportPost tracePostBean);
+        void submitData(int operationType,String id,ExportPost tracePostBean);
         void postImage(String localPath,List<MultipartBody.Part> imgs);
     }
 

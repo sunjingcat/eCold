@@ -5,16 +5,7 @@ public   class ExportPost{
     String coldstorageId;
     String operationCount;
     String operationRemark ;
-    String id ;
-    int operationType ;
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setOperationType(int operationType) {
-        this.operationType = operationType;
-    }
 
     public void setIsTransfer(int isTransfer) {
         this.isTransfer = isTransfer;

@@ -8,14 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.codbking.widget.DatePickDialog;
-import com.codbking.widget.OnChangeLisener;
-import com.codbking.widget.OnSureLisener;
-import com.codbking.widget.bean.DateType;
 import com.codbking.widget.utils.UIAdjuster;
-import com.donkingliang.imageselector.utils.ImageSelector;
-import com.donkingliang.imageselector.utils.ImageSelectorUtils;
 import com.zz.cold.R;
 
 import com.zz.cold.base.MyBaseActivity;
@@ -26,27 +19,15 @@ import com.zz.cold.business.qualification.QualificationActivity;
 import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
 import com.zz.cold.business.trace.mvp.Contract;
 import com.zz.cold.business.trace.mvp.presenter.DeliverPresenter;
-import com.zz.cold.utils.PostUtils;
-import com.zz.cold.utils.TimeUtils;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
 import com.zz.lib.commonlib.widget.SelectPopupWindows;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnCompressListener;
 
 /**
  * 出库
@@ -127,12 +108,11 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
 
     void postData() {
         ExportPost params = new ExportPost();
-        params.setOperationType(operationType);
-        params.setId(id);
         params.setOperationCount(getText(text_operationCount));
         params.setOperationRemark(getText(text_operationRemark));
         params.setIsTransfer(isTransfer);
-        mPresenter.submitData(params);
+        params.setColdstorageId(coldstorageId);
+        mPresenter.submitData(operationType,id,params);
     }
 
     @Override

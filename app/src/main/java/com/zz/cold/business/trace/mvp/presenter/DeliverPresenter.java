@@ -50,22 +50,9 @@ public class DeliverPresenter extends MyBasePresenterImpl<Contract.IGetDeliverVi
     }
 
     @Override
-    public void submitData(ExportPost tracePostBean) {
-//        if (map.containsKey("id")) {
-//            RxNetUtils.request(getApi(ApiService.class).editPurchaseInfo(map), new RequestObserver<JsonT>(this) {
-//                @Override
-//                protected void onSuccess(JsonT jsonT) {
-//                    view.showResult();
-//                }
-//
-//                @Override
-//                protected void onFail2(JsonT stringJsonT) {
-//                    super.onFail2(stringJsonT);
-//                    view.showToast(stringJsonT.getMessage());
-//                }
-//            }, mDialog);
-//        } else {
-            RxNetUtils.request(getApi(ApiService.class).postGoodsAccountJian(tracePostBean), new RequestObserver<JsonT>(this) {
+    public void submitData(int operationType,String id,ExportPost tracePostBean) {
+        if (operationType==2) {
+            RxNetUtils.request(getApi(ApiService.class).exportGoodsAccountJian(id,tracePostBean), new RequestObserver<JsonT>(this) {
                 @Override
                 protected void onSuccess(JsonT jsonT) {
                     view.showResult();
@@ -77,7 +64,20 @@ public class DeliverPresenter extends MyBasePresenterImpl<Contract.IGetDeliverVi
                     view.showToast(stringJsonT.getMessage());
                 }
             }, mDialog);
-//        }
+        } else {
+            RxNetUtils.request(getApi(ApiService.class).postGoodsAccountJian(id,tracePostBean), new RequestObserver<JsonT>(this) {
+                @Override
+                protected void onSuccess(JsonT jsonT) {
+                    view.showResult();
+                }
+
+                @Override
+                protected void onFail2(JsonT stringJsonT) {
+                    super.onFail2(stringJsonT);
+                    view.showToast(stringJsonT.getMessage());
+                }
+            }, mDialog);
+        }
     }
 
 

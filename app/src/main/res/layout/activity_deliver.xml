@@ -178,7 +178,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
-                    android:drawableRight="@drawable/image_arrow"
                     android:drawablePadding="5dp"
                     android:gravity="left"
                     android:hint="请填写" />

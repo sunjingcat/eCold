@@ -214,8 +214,12 @@ public interface ApiService {
     Observable<JsonT> postGoodsAccount(@Body TracePostBean requestBody);
 
     @Headers("Content-Type: application/json")
-    @POST("/app/v1/coldchain/coldchainGoods")
-    Observable<JsonT> postGoodsAccountJian(@Body ExportPost requestBody);
+    @POST("/app/v1/coldchain/coldchainGoods/detailsImport/{goodsId}")
+    Observable<JsonT> postGoodsAccountJian(@Path("goodsId") String goodsId,@Body ExportPost requestBody);
+
+    @Headers("Content-Type: application/json")
+    @POST("/app/v1/coldchain/coldchainGoods/export/{goodsId}")
+    Observable<JsonT> exportGoodsAccountJian(@Path("goodsId") String goodsId,@Body ExportPost requestBody);
 
     @POST("/app/v1/coldchain/coldchainGoods/sell/{goodsId}")
     Observable<JsonT> postSell(@Path("goodsId") String goodsId,@QueryMap Map<String, Object> params);
