@@ -1,5 +1,7 @@
 package com.zz.cold.bean;
 
+import android.text.TextUtils;
+
 import java.util.List;
 
 public class TraceBean {
@@ -15,6 +17,7 @@ public class TraceBean {
     String spec;// kg,
     String count;// 0.0,
     String purchaseTime;// 2020-11-24,
+    String operationTime;// 2020-11-24,
     String supplierName;// 单位,
     String supplierAddress;// 地址,
     String supplierContact;// ,
@@ -214,7 +217,11 @@ public class TraceBean {
     }
 
     public String getPurchaseTime() {
-        return purchaseTime;
+        if (TextUtils.isEmpty(purchaseTime)) {
+            return operationTime;
+        } else {
+            return purchaseTime;
+        }
     }
 
     public String getSupplierName() {
@@ -256,7 +263,6 @@ public class TraceBean {
     public int getIsCrjjyjyzm() {
         return isCrjjyjyzm;
     }
-
 
 
     public int getIsXdzm() {
