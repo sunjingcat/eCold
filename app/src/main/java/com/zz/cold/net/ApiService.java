@@ -104,7 +104,7 @@ public interface ApiService {
     @GET("/app/v1/supervise/pdfPrint/getPdfDownPath/{id}")
     Observable<JsonT<String>> getDocInfo(@Path("id") String id, @QueryMap Map<String, Object> params);
 
-    @GET("/app/v1/coldchain/coldstorage/list")
+    @GET("/app/v1/coldchain/coldstorage/availableStorageList")
     Observable<JsonT<List<QualificationBean>>> getQualificationList(@QueryMap Map<String, Object> params);
 
 
@@ -197,7 +197,7 @@ public interface ApiService {
     @GET("/app/v1/coldchain/coldchainGoods/toBeReviewedList")
     Observable<JsonT<List<PendingGoods>>> getPendingGoodsList(@QueryMap Map<String, Object> params);
 
-    @GET("/app/v1/coldchain/coldchainGoodsAccount/notPassList")
+    @GET("/app/v1/coldchain/coldchainGoods/notPassList")
     Observable<JsonT<List<WmsBean>>> getPendingHisList(@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/coldchainGoodsAccount/{id}")
@@ -207,11 +207,9 @@ public interface ApiService {
     @POST("/app/v1/coldchain/coldchainGoods")
     Observable<JsonT> postGoodsAccount(@Body TracePostBean requestBody);
 
-    @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoods/detailsImport/{goodsId}")
     Observable<JsonT> postGoodsAccountJian(@Path("goodsId") String goodsId,@QueryMap Map<String, Object> params);
 
-    @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoods/export/{goodsId}")
     Observable<JsonT> exportGoodsAccountJian(@Path("goodsId") String goodsId,@QueryMap Map<String, Object> params);
 

@@ -97,6 +97,7 @@ public class QualificationActivity extends MyBaseActivity implements OnRefreshLi
                     intent.putExtra("id", mlist.get(position).getId());
                     intent.putExtra("name", mlist.get(position).getOperatorName());
                     setResult(RESULT_OK,intent);
+                    finish();
                 } else {
                     Intent intent = new Intent();
                     intent.setClass(QualificationActivity.this, QualificationInfoActivity.class);
