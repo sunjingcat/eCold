@@ -51,10 +51,10 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
     @BindView(R.id.text_operationRemark)
     EditText text_operationRemark;
     String id;
-    String coldstorageId;
+    String coldstorageId="";
     int operationType;
     int isThird;
-    int isTransfer;
+    int isTransfer=0;
 
     @Override
     protected int getContentView() {

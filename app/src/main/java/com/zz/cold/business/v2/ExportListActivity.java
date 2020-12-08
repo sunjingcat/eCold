@@ -57,6 +57,8 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
     String page;
     @BindView(R.id.ll_null)
     LinearLayout llNull;
+    @BindView(R.id.ll_tab)
+    LinearLayout ll_tab;
     @BindView(R.id.et_search)
     ClearEditText et_search;
     @BindView(R.id.rv)
@@ -144,7 +146,7 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
                 break;
             case R.id.text_tab:
                 tabPopWindow = new TabPopWindow(this, tabList, tabId);
-                tabPopWindow.showAsDropDown(toolbar, 0, 0, Gravity.BOTTOM);
+                tabPopWindow.showAsDropDown(ll_tab, 0, 0, Gravity.BOTTOM);
                 tabPopWindow.setOnItemClickListener(new TabPopWindow.OnItemClickListener() {
                     @Override
                     public void onSelected(int index) {

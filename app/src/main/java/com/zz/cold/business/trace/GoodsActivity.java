@@ -102,20 +102,25 @@ public class GoodsActivity extends MyBaseActivity {
         if (!TextUtils.isEmpty(id)) {
             getData(id);
         }
-        if (page.equals("import")) {
-            bt_action.setVisibility(View.VISIBLE);
-            bt_action.setText("进");
-        } else if (page.equals("export")) {
-            bt_action.setVisibility(View.VISIBLE);
-            bt_action.setText("出");
-        } else if (page.equals("sell")) {
-            bt_action.setVisibility(View.VISIBLE);
-            bt_action.setText("售");
-        } else if (page.equals("review")) {
-            bt_action.setVisibility(View.VISIBLE);
-            bt_action2.setVisibility(View.VISIBLE);
-            bt_action.setText("通过");
-        } else {
+        if (!TextUtils.isEmpty(page)) {
+            if (page.equals("import")) {
+                bt_action.setVisibility(View.VISIBLE);
+                bt_action.setText("进");
+            } else if (page.equals("export")) {
+                bt_action.setVisibility(View.VISIBLE);
+                bt_action.setText("出");
+            } else if (page.equals("sell")) {
+                bt_action.setVisibility(View.VISIBLE);
+                bt_action.setText("售");
+            } else if (page.equals("review")) {
+                bt_action.setVisibility(View.VISIBLE);
+                bt_action2.setVisibility(View.VISIBLE);
+                bt_action.setText("通过");
+            } else {
+                bt_action.setVisibility(View.GONE);
+                bt_action2.setVisibility(View.GONE);
+            }
+        }else {
             bt_action.setVisibility(View.GONE);
             bt_action2.setVisibility(View.GONE);
         }

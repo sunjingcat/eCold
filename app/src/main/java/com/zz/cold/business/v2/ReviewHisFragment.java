@@ -92,6 +92,7 @@ public class ReviewHisFragment extends Fragment implements OnRefreshListener, On
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), GoodsActivity.class);
                 intent.putExtra("id", mlist.get(position).getId());
+                intent.putExtra("page", "reviewHis");
                 startActivity(intent);
             }
         });
