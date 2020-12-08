@@ -1,8 +1,6 @@
 package com.zz.cold.business.trace;
 
 import android.content.Intent;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -12,11 +10,8 @@ import com.codbking.widget.utils.UIAdjuster;
 import com.zz.cold.R;
 
 import com.zz.cold.base.MyBaseActivity;
-import com.zz.cold.bean.ExportPost;
 import com.zz.cold.bean.ImageBack;
-import com.zz.cold.bean.TracePostBean;
 import com.zz.cold.business.qualification.QualificationActivity;
-import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
 import com.zz.cold.business.trace.mvp.Contract;
 import com.zz.cold.business.trace.mvp.presenter.DeliverPresenter;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
@@ -24,6 +19,9 @@ import com.zz.lib.commonlib.widget.SelectPopupWindows;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -107,11 +105,11 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
     }
 
     void postData() {
-        ExportPost params = new ExportPost();
-        params.setOperationCount(getText(text_operationCount));
-        params.setOperationRemark(getText(text_operationRemark));
-        params.setIsTransfer(isTransfer);
-        params.setColdstorageId(coldstorageId);
+        Map<String,Object>  params = new HashMap<>();
+        params.put("operationCount",getText(text_operationCount));
+        params.put("operationRemark",getText(text_operationRemark));
+        params.put("isTransfer",isTransfer);
+        params.put("coldstorageId",coldstorageId);
         mPresenter.submitData(operationType,id,params);
     }
 

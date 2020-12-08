@@ -3,11 +3,8 @@ package com.zz.cold.net;
 
 import com.zz.cold.bean.CategoryBean;
 import com.zz.cold.bean.DailyBean;
-import com.zz.cold.bean.DailyPost;
 import com.zz.cold.bean.DictBean;
 import com.zz.cold.bean.EquipmentBean;
-import com.zz.cold.bean.ExportPost;
-import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.GroupCountBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.ImageBean;
@@ -15,9 +12,7 @@ import com.zz.cold.bean.MainShowData;
 import com.zz.cold.bean.PendingCompanyBean;
 import com.zz.cold.bean.PendingGoods;
 import com.zz.cold.bean.QualificationBean;
-import com.zz.cold.bean.SellPost;
 import com.zz.cold.bean.StorageBean;
-import com.zz.cold.bean.TemperatureBean;
 import com.zz.cold.bean.TraceBean;
 import com.zz.cold.bean.TracePostBean;
 import com.zz.cold.bean.UserBasicBean;
@@ -26,7 +21,6 @@ import com.zz.cold.bean.Version;
 import com.zz.cold.bean.WarehouseBean;
 import com.zz.cold.bean.WmsBean;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -215,11 +209,11 @@ public interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoods/detailsImport/{goodsId}")
-    Observable<JsonT> postGoodsAccountJian(@Path("goodsId") String goodsId,@Body ExportPost requestBody);
+    Observable<JsonT> postGoodsAccountJian(@Path("goodsId") String goodsId,@QueryMap Map<String, Object> params);
 
     @Headers("Content-Type: application/json")
     @POST("/app/v1/coldchain/coldchainGoods/export/{goodsId}")
-    Observable<JsonT> exportGoodsAccountJian(@Path("goodsId") String goodsId,@Body ExportPost requestBody);
+    Observable<JsonT> exportGoodsAccountJian(@Path("goodsId") String goodsId,@QueryMap Map<String, Object> params);
 
     @POST("/app/v1/coldchain/coldchainGoods/sell/{goodsId}")
     Observable<JsonT> postSell(@Path("goodsId") String goodsId,@QueryMap Map<String, Object> params);

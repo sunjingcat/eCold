@@ -1,9 +1,7 @@
 package com.zz.cold.business.trace.mvp.presenter;
 
 
-import com.zz.cold.bean.ExportPost;
 import com.zz.cold.bean.ImageBack;
-import com.zz.cold.bean.TracePostBean;
 import com.zz.cold.business.trace.mvp.Contract;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
@@ -50,9 +48,9 @@ public class DeliverPresenter extends MyBasePresenterImpl<Contract.IGetDeliverVi
     }
 
     @Override
-    public void submitData(int operationType,String id,ExportPost tracePostBean) {
+    public void submitData(int operationType,String id,Map<String,Object> map) {
         if (operationType==2) {
-            RxNetUtils.request(getApi(ApiService.class).exportGoodsAccountJian(id,tracePostBean), new RequestObserver<JsonT>(this) {
+            RxNetUtils.request(getApi(ApiService.class).exportGoodsAccountJian(id,map), new RequestObserver<JsonT>(this) {
                 @Override
                 protected void onSuccess(JsonT jsonT) {
                     view.showResult();
@@ -65,7 +63,7 @@ public class DeliverPresenter extends MyBasePresenterImpl<Contract.IGetDeliverVi
                 }
             }, mDialog);
         } else {
-            RxNetUtils.request(getApi(ApiService.class).postGoodsAccountJian(id,tracePostBean), new RequestObserver<JsonT>(this) {
+            RxNetUtils.request(getApi(ApiService.class).postGoodsAccountJian(id,map), new RequestObserver<JsonT>(this) {
                 @Override
                 protected void onSuccess(JsonT jsonT) {
                     view.showResult();

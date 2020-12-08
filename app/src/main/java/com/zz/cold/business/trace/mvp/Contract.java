@@ -2,8 +2,6 @@ package com.zz.cold.business.trace.mvp;
 
 import com.zz.cold.bean.CategoryBean;
 import com.zz.cold.bean.DictBean;
-import com.zz.cold.bean.ExportPost;
-import com.zz.cold.bean.GoodsBean;
 import com.zz.cold.bean.ImageBack;
 import com.zz.cold.bean.TraceBean;
 import com.zz.cold.bean.TracePostBean;
@@ -41,7 +39,7 @@ public class Contract {
     }
 
     public interface IsetDeliverPresenter extends BasePresenter {
-        void submitData(int operationType,String id,ExportPost tracePostBean);
+        void submitData(int operationType,String id,Map<String,Object> map);
         void postImage(String localPath,List<MultipartBody.Part> imgs);
     }
 
