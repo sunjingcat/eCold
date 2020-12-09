@@ -4,6 +4,7 @@ public class WmsBean {
     String id;// 1,
     String       coldstorageId;// 3,
     int       operationType;// 1,
+    String       operatorName;// 1,
     String     operationTypeText;// 进货,
     String     goodsId;// 1,
     String     goodsName;// 商品,
@@ -16,6 +17,10 @@ public class WmsBean {
     String    reviewTime;// null,
     String     reviewRemark;// null
     String     spec;// null
+
+    public String getOperatorName() {
+        return operatorName;
+    }
 
     public String getSpec() {
         return spec;

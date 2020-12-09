@@ -77,13 +77,14 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
         isThird = getIntent().getIntExtra("isThird", 0);
         if (operationType == 2) {
             toolbar_title.setText("出货");
+
+        } else {
+            toolbar_title.setText("进货");
             if (isThird == 0) {
                 ll_isTransfer.setVisibility(View.VISIBLE);
             } else {
                 ll_isTransfer.setVisibility(View.GONE);
             }
-        } else {
-            toolbar_title.setText("进货");
         }
 
         text_Name.setText(name + "");

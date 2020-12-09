@@ -197,6 +197,37 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_coldstorageType2"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:visibility="gone"
+                android:paddingRight="10dp">
+
+                <TextView
+                    style="@style/textLeftStyle"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="冷库种类2" />
+
+                <TextView
+                    android:id="@+id/et_coldstorageType2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@drawable/image_arrow"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical|right"
+                    android:hint="请选择"
+                    android:textColor="@color/colorTextBlack33"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/ll_loginName"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -251,8 +282,8 @@
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
-                android:visibility="gone"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/textLeftStyle"

@@ -89,11 +89,11 @@ public class ReviewHisFragment extends Fragment implements OnRefreshListener, On
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), GoodsActivity.class);
-                intent.putExtra("id", mlist.get(position).getId());
-                intent.putExtra("page", "reviewHis");
-                startActivity(intent);
+//                Intent intent = new Intent();
+//                intent.setClass(getActivity(), GoodsActivity.class);
+//                intent.putExtra("id", mlist.get(position).getId());
+//                intent.putExtra("page", "reviewHis");
+//                startActivity(intent);
             }
         });
 

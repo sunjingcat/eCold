@@ -67,6 +67,8 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     TextView etLocation;
     @BindView(R.id.et_coldstorageType)
     TextView et_coldstorageType;
+    @BindView(R.id.et_coldstorageType2)
+    TextView et_coldstorageType2;
     String coldstorageType1 = "";
     String coldstorageType2 = "";
 
@@ -94,6 +96,8 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     LinearLayout ll_loginName;
     @BindView(R.id.ll_password)
     LinearLayout ll_password;
+    @BindView(R.id.ll_coldstorageType2)
+    LinearLayout ll_coldstorageType2;
 
     QualificationBean qualificationBean;
 
@@ -163,7 +167,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
     }
 
 
-    @OnClick({R.id.toolbar_subtitle, R.id.et_location, R.id.et_coldstorageType})
+    @OnClick({R.id.toolbar_subtitle, R.id.et_location, R.id.et_coldstorageType, R.id.et_coldstorageType2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
@@ -172,6 +176,9 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
 
             case R.id.et_coldstorageType:
                 showSelectPopWindow();
+                break;
+            case R.id.et_coldstorageType2:
+                showSelectPopWindow2(coldstorageType1);
                 break;
             case R.id.et_location:
                 PermissionUtils.getInstance().checkPermission(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -229,9 +236,11 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
         et_password.setText("******");
         et_password.setEnabled(false);
         etLocation.setText(data.getAddress() + "");
-        et_coldstorageType.setText(data.getColdstorageType1Text() + "-" + data.getColdstorageType2Text());
+        et_coldstorageType.setText(data.getColdstorageType1Text());
+        et_coldstorageType2.setText( data.getColdstorageType2Text());
         coldstorageType1 = data.getColdstorageType1();
         coldstorageType2 = data.getColdstorageType2();
+        ll_coldstorageType2.setVisibility(TextUtils.isEmpty(coldstorageType1)?View.GONE:View.VISIBLE);
     }
 
 
@@ -329,7 +338,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
             public void onSelected(int index, String msg) {
                 et_coldstorageType.setText(msg);
                 coldstorageType1 = values[index];
-                showSelectPopWindow2(values[index]);
+                ll_coldstorageType2.setVisibility(View.VISIBLE);
             }
 
             @Override

@@ -180,30 +180,31 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingLeft="10dp"
+                android:paddingTop="10dp"
                 android:paddingRight="10dp">
 
                 <TextView
                     style="@style/textInfoTitleStyle"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="购买人用途"
                     android:textColor="@color/colorTextBlack33" />
 
-                <TextView
+                <EditText
                     android:id="@+id/text_buyerRemark"
                     style="@style/textRightStyle"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableRight="@drawable/image_arrow"
+                    android:layout_marginTop="10dp"
                     android:drawablePadding="5dp"
-                    android:gravity="center_vertical|right"
-                    android:hint="请选择" />
+                    android:gravity="left"
+                    android:hint="例如（A自己吃、B饭店使用）" />
             </LinearLayout>
 
 
