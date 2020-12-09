@@ -82,7 +82,7 @@ public class SellListActivity extends MyBaseActivity implements OnRefreshListene
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new GoodsAdapter(R.layout.item_goods, mlist,1);
+        adapter = new GoodsAdapter(R.layout.item_goods, mlist);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);

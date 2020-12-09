@@ -14,25 +14,14 @@
         android:focusableInTouchMode="true"
         android:background="@color/colorPrimary">
 
-        <com.zz.lib.commonlib.widget.ClearEditText
-            android:id="@+id/et_search"
-            android:layout_width="match_parent"
-            android:layout_marginRight="60dp"
-            android:layout_marginLeft="1dp"
-            android:layout_height="40dp"
-            android:paddingLeft="15dp"
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:hint="搜索"
-            android:textColor="@color/colorTextBlack33"
-            android:textSize="15dp"
-            android:imeOptions="actionSearch"
-            android:singleLine="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:background="@drawable/border_radius_5_white"
-            />
-
+            android:text="进出货审核"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/toolbar_subtitle"

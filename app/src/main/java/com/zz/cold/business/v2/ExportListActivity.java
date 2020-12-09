@@ -103,7 +103,7 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
             type = 2;
         }
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new GoodsAdapter(R.layout.item_goods, mlist,type);
+        adapter = new GoodsAdapter(R.layout.item_goods, mlist);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);

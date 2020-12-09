@@ -138,6 +138,7 @@
                 android:background="@drawable/border_radius_40_theme"
                 android:clickable="true"
                 android:text="不通过"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/white"
                 android:visibility="gone"
                 android:elevation="@dimen/dp_10" />

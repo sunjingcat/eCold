@@ -23,10 +23,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.StorageAccount;
-import com.zz.cold.bean.TraceBean;
-import com.zz.cold.business.qualification.AddQualificationActivity;
-import com.zz.cold.business.trace.GoodsActivity;
-import com.zz.cold.business.v2.adapter.GoodsAdapter;
 import com.zz.cold.business.v2.adapter.SalesAdapter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
@@ -84,7 +80,7 @@ public class SalesAccountActivity extends MyBaseActivity implements OnRefreshLis
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new SalesAdapter(R.layout.item_goods, mlist,1);
+        adapter = new SalesAdapter(R.layout.item_sales, mlist,1);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);

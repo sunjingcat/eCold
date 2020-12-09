@@ -23,9 +23,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.zz.cold.R;
 import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.bean.TraceBean;
-import com.zz.cold.business.qualification.AddQualificationActivity;
-import com.zz.cold.business.trace.GoodsActivity;
-import com.zz.cold.business.v2.adapter.GoodsAdapter;
+import com.zz.cold.business.v2.adapter.AccountAdapter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;
@@ -62,7 +60,7 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
-    private GoodsAdapter adapter;
+    private AccountAdapter adapter;
     List<TraceBean> mlist = new ArrayList<>();
     private int pagenum = 1;
     private int pagesize = 20;
@@ -83,7 +81,7 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new GoodsAdapter(R.layout.item_goods, mlist, 1);
+        adapter = new AccountAdapter(R.layout.item_sales, mlist, 1);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
