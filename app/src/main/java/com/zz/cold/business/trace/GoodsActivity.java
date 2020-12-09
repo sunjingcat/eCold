@@ -61,6 +61,8 @@ public class GoodsActivity extends MyBaseActivity {
     Button bt_action2;
     @BindView(R.id.ll_jc)
     LinearLayout ll_jc;
+    @BindView(R.id.ll_rv)
+    LinearLayout ll_rv;
     @BindView(R.id.nestedScrollView)
     NestedScrollView nestedScrollView;
 
@@ -116,10 +118,8 @@ public class GoodsActivity extends MyBaseActivity {
                 bt_action.setVisibility(View.VISIBLE);
                 bt_action2.setVisibility(View.VISIBLE);
                 bt_action.setText("通过");
-                rv.setVisibility(View.GONE);
-            }else if (page.equals("reviewHis")) {
-                rv.setVisibility(View.GONE);
-            } else {
+                ll_rv.setVisibility(View.GONE);
+            }else {
                 bt_action.setVisibility(View.GONE);
                 bt_action2.setVisibility(View.GONE);
             }

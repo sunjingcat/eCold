@@ -56,7 +56,7 @@ public class PendingGoodsAdapter extends BaseQuickAdapter<PendingGoods, BaseView
             public void onClick(View v) {
                 getContext().startActivity(new Intent(getContext(), GoodsActivity.class)
                         .putExtra("id",item.getGoodsId())
-                        .putExtra("from","review")
+                        .putExtra("page","review")
                 );
             }
         });

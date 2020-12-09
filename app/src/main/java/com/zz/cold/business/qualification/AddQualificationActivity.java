@@ -237,10 +237,10 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
         et_password.setEnabled(false);
         etLocation.setText(data.getAddress() + "");
         et_coldstorageType.setText(data.getColdstorageType1Text());
-        et_coldstorageType2.setText( data.getColdstorageType2Text());
+        et_coldstorageType2.setText(data.getColdstorageType2Text());
         coldstorageType1 = data.getColdstorageType1();
         coldstorageType2 = data.getColdstorageType2();
-        ll_coldstorageType2.setVisibility(TextUtils.isEmpty(coldstorageType1)?View.GONE:View.VISIBLE);
+        ll_coldstorageType2.setVisibility(TextUtils.isEmpty(coldstorageType1) ? View.GONE : View.VISIBLE);
     }
 
 
@@ -339,6 +339,8 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
                 et_coldstorageType.setText(msg);
                 coldstorageType1 = values[index];
                 ll_coldstorageType2.setVisibility(View.VISIBLE);
+                et_coldstorageType2.setText("");
+                coldstorageType2 = "";
             }
 
             @Override
@@ -371,7 +373,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
         selectPopupWindows2.setOnItemClickListener(new SelectPopupWindows.OnItemClickListener() {
             @Override
             public void onSelected(int index, String msg) {
-                et_coldstorageType.append("\n" + msg);
+                et_coldstorageType2.setText(msg);
                 coldstorageType2 = values[index];
             }
 

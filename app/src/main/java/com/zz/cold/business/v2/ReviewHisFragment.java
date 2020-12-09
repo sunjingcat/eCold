@@ -82,7 +82,7 @@ public class ReviewHisFragment extends Fragment implements OnRefreshListener, On
     private void init(View view) {
         toolbar.setVisibility(View.GONE);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new HisAdapter(R.layout.item_wms, mlist);
+        adapter = new HisAdapter(R.layout.item_review_his, mlist);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
