@@ -642,9 +642,9 @@
 
                     <TextView
                         style="@style/textLeftStyle"
-                        android:layout_width="150dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="食品核酸检测" />
+                        android:text="是否有食品核酸检测" />
 
                     <TextView
                         android:id="@+id/text_isSphsjc"
@@ -674,9 +674,9 @@
 
                     <TextView
                         style="@style/textLeftStyle"
-                        android:layout_width="150dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="出入境检验检疫证明" />
+                        android:text="是否有出入境检验检疫证明" />
 
                     <TextView
                         android:id="@+id/text_isCrjjyjyzm"
@@ -705,9 +705,9 @@
 
                     <TextView
                         style="@style/textLeftStyle"
-                        android:layout_width="150dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="报关单" />
+                        android:text="是否有报关单" />
 
                     <TextView
                         android:id="@+id/text_isBgd"
@@ -735,9 +735,9 @@
 
                     <TextView
                         style="@style/textLeftStyle"
-                        android:layout_width="150dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="消毒证明" />
+                        android:text="是否有消毒证明" />
 
                     <TextView
                         android:id="@+id/text_isXdzm"
@@ -765,9 +765,9 @@
 
                     <TextView
                         style="@style/textLeftStyle"
-                        android:layout_width="150dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="非非洲猪瘟检测报告" />
+                        android:text="是否有非非洲猪瘟检测报告" />
 
                     <TextView
                         android:id="@+id/text_isFfzzwjc"
@@ -796,9 +796,9 @@
 
                     <TextView
                         style="@style/textLeftStyle"
-                        android:layout_width="150dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="目的地核酸检测" />
+                        android:text="是否有目的地核酸检测" />
 
                     <TextView
                         android:id="@+id/text_isMddhsjc"

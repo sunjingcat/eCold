@@ -159,11 +159,10 @@ public class GoodsActivity extends MyBaseActivity {
         if (data.getIsThird() == 1) {
             infoList.add(new InfoBean("冷库名称", data.getOperatorName() + ""));
         }
-        infoList.add(new InfoBean("生产日期/批次", data.getProductionDate() + ""));
+        infoList.add(new InfoBean("生产日期", data.getProductionDate() + ""));
         infoList.add(new InfoBean("规格", data.getSpec() + ""));
         infoList.add(new InfoBean("批号", data.getBatchNumber() + ""));
-        infoList.add(new InfoBean("批号", data.getBatchNumber() + ""));
-        infoList.add(new InfoBean("入库数量", data.getCount() + ""));
+        infoList.add(new InfoBean("当前库存量", data.getCount() + ""));
         infoList.add(new InfoBean("进货时间", data.getPurchaseTime() + ""));
         infoList.add(new InfoBean("供货单位", data.getSupplierName() + ""));
         infoList.add(new InfoBean("供货者地址", data.getSupplierAddress() + ""));

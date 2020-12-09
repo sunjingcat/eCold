@@ -47,11 +47,11 @@ public class SellActivity extends MyBaseActivity {
     @BindView(R.id.text_buyerContact)
     EditText text_buyerContact;
     @BindView(R.id.text_buyerRemark)
-    TextView text_buyerRemark;
+    EditText text_buyerRemark;
     @BindView(R.id.text_operationCount)
     EditText text_operationCount;
     String id;
-    String buyerRemark;
+
 
     @Override
     protected int getContentView() {
@@ -73,15 +73,13 @@ public class SellActivity extends MyBaseActivity {
         text_Name.setText(name + "");
     }
 
-    @OnClick({R.id.toolbar_subtitle,R.id.text_buyerRemark})
+    @OnClick({R.id.toolbar_subtitle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
                 postData();
                 break;
-            case R.id.text_buyerRemark:
-                showSelectPopWindow();
-                break;
+
         }
     }
 
@@ -91,7 +89,7 @@ public class SellActivity extends MyBaseActivity {
         params.put("buyerAddress",getText(text_buyerAddress));
         params.put("buyerName",getText(text_buyerName));
         params.put("buyerContact",getText(text_buyerContact));
-        params.put("buyerRemark",buyerRemark);
+        params.put("buyerRemark",getText(text_buyerRemark));
         submitData(params);
     }
 
@@ -106,32 +104,6 @@ public class SellActivity extends MyBaseActivity {
         finish();
     }
 
-    SelectPopupWindows selectPopupWindows;
-
-    void showSelectPopWindow() {
-        UIAdjuster.closeKeyBoard(this);
-
-        String[] array = {"自己吃", "饭店使用"};
-        selectPopupWindows = new SelectPopupWindows(this, array);
-        selectPopupWindows.showAtLocation(findViewById(R.id.bg),
-                Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-        selectPopupWindows.setOnItemClickListener(new SelectPopupWindows.OnItemClickListener() {
-            @Override
-            public void onSelected(int index, String msg) {
-                text_buyerRemark.setText(msg);
-                if (index == 0) {
-                    buyerRemark = "A";
-                } else {
-                    buyerRemark = "B";
-                }
-            }
-
-            @Override
-            public void onCancel() {
-                selectPopupWindows.dismiss();
-            }
-        });
-    }
     void submitData(Map<String, Object> params ){
         RxNetUtils.request(getApi(ApiService.class).postSell(id,params), new RequestObserver<JsonT>(this) {
             @Override

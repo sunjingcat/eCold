@@ -51,7 +51,7 @@
                     android:ellipsize="end"
                     android:gravity="right"
                     android:lines="1"
-                    android:textColor="#999999"
+                    android:textColor="#333333"
                     android:textSize="15dp"
                     tools:text="+56" />
 
