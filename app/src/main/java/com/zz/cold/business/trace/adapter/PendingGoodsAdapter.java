@@ -51,16 +51,9 @@ public class PendingGoodsAdapter extends BaseQuickAdapter<PendingGoods, BaseView
                 onclick.onclickNo(v,holder.getAdapterPosition());
             }
         });
+        holder.setVisible(R.id.ll_review,item.getReviewStatus()==1);
 
-        holder.getView(R.id.item_title).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getContext().startActivity(new Intent(getContext(), GoodsActivity.class)
-                        .putExtra("id",item.getGoodsId())
-                        .putExtra("page","review")
-                );
-            }
-        });
+
 
     }
 

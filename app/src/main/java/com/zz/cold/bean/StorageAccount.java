@@ -4,7 +4,8 @@ public class StorageAccount {
     String id;// 1,
     String coldstorageId;// 6,
     String operationType;// 1,
-    String operationTypeText;//  进货 ,
+    String operationTypeText;// 1,
+    String coldstorageUserName;// 1,
     String goodsId;// 37,
     String goodsName;//  西班牙牛肉 ,
     int beforeCount;// 0,
@@ -26,6 +27,10 @@ public class StorageAccount {
     int isTransfer;// 0,
     String coldstorageName;//  富拉尔基第一冷库
     String batchNumber;//  富拉尔基第一冷库
+
+    public String getColdstorageUserName() {
+        return coldstorageUserName;
+    }
 
     public String getBatchNumber() {
         return batchNumber;

@@ -61,7 +61,7 @@ public class LoginActivity extends MyBaseActivity<Contract.IsetLoginPresenter> i
     protected void initView() {
         ButterKnife.bind(this);
         if (BuildConfig.DEBUG) {
-            logNumber.setText("apptest");
+            logNumber.setText("flej1");
             logPassword.setText("123456");
         }
     }

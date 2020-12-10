@@ -12,7 +12,7 @@ public class PendingGoods {
     String     count;// 100.0,
     String    afterCount;// null,
     String     operationTime;// 2020-11-24,
-    String    reviewStatus;// 1,
+    int    reviewStatus;// 1,
     String    reviewTime;// null,
     String     reviewRemark;// null
     String     coldstorageUserName;// null
@@ -61,7 +61,7 @@ public class PendingGoods {
         return operationTime;
     }
 
-    public String getReviewStatus() {
+    public int getReviewStatus() {
         return reviewStatus;
     }
 

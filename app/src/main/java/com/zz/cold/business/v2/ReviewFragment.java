@@ -27,6 +27,7 @@ import com.troila.customealert.CustomDialog;
 import com.zz.cold.R;
 import com.zz.cold.bean.PendingCompanyBean;
 import com.zz.cold.bean.PendingGoods;
+import com.zz.cold.business.trace.GoodsActivity;
 import com.zz.cold.business.trace.PendingGoodsActivity;
 import com.zz.cold.business.trace.adapter.PendingAdapter;
 import com.zz.cold.business.trace.adapter.PendingGoodsAdapter;
@@ -98,6 +99,15 @@ public class ReviewFragment extends Fragment implements OnRefreshListener, OnLoa
             @Override
             public void onclickNo(View v, int option) {
                 askRefuse(3, mlist.get(option));
+            }
+        });
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                getContext().startActivity(new Intent(getContext(), GoodsActivity.class)
+                        .putExtra("id",mlist.get(position).getGoodsId())
+                        .putExtra("page","review")
+                );
             }
         });
     }
