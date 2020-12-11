@@ -17,18 +17,18 @@ import java.util.List;
  */
 
 public class AccountAdapter extends BaseQuickAdapter<TraceBean, BaseViewHolder> {
-    int type;
-    public AccountAdapter(@LayoutRes int layoutResId, @Nullable List<TraceBean> data, int type) {
+
+    public AccountAdapter(@LayoutRes int layoutResId, @Nullable List<TraceBean> data) {
         super(layoutResId, data);
-        this.type = type;
+
     }
 
     @Override
     protected void convert(BaseViewHolder holder, final TraceBean item) {
         holder.setText(R.id.item_title,item.getGoodsName()+"");
         holder.setText(R.id.item_operatorName,item.getOperatorName()+"");
-        holder.setText(R.id.item_count,type==1?("+"+item.getCount()+item.getSpec()):("-"+item.getCount()+item.getSpec()));
-        holder.setTextColor(R.id.item_count,type==1? Color.RED :Color.parseColor("#FF155917"));
+        holder.setText(R.id.item_count,item.getOperationType()==1?("+"+item.getCount()+item.getSpec()):("-"+item.getCount()+item.getSpec()));
+        holder.setTextColor(R.id.item_count,item.getOperationType()==1? Color.RED :Color.parseColor("#FF155917"));
         holder.setText(R.id.item_time,item.getPurchaseTime()+"");
     }
 }

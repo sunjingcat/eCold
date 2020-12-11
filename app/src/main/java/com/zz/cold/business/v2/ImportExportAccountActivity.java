@@ -3,19 +3,30 @@ package com.zz.cold.business.v2;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.codbking.widget.DatePickDialog;
+import com.codbking.widget.OnChangeLisener;
+import com.codbking.widget.OnSureLisener;
+import com.codbking.widget.bean.DateType;
+import com.codbking.widget.utils.UIAdjuster;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -28,12 +39,15 @@ import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;
 import com.zz.cold.net.RxNetUtils;
+import com.zz.cold.utils.TimeUtils;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
 import com.zz.lib.commonlib.widget.ClearEditText;
+import com.zz.lib.commonlib.widget.SelectPopupWindows;
 import com.zz.lib.core.ui.mvp.BasePresenter;
 import com.zz.lib.core.utils.LoadingUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,9 +80,44 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
     private int pagesize = 20;
     private String searchStr = "";
 
+
+    int imported = -1;
+    int operationType = -1;
+    String beginTime = "";
+    String endTime = "";
+    @BindView(R.id.et_goodsName)
+    EditText et_goodsName;
+    @BindView(R.id.et_batchNumber)
+    EditText et_batchNumber;
+    @BindView(R.id.et_entryPort)
+    EditText et_entryPort;
+
+    @BindView(R.id.drawer)
+    DrawerLayout drawer;
+    @BindView(R.id.et_operationType)
+    TextView et_operationType;
+    @BindView(R.id.et_beginTime)
+    TextView et_beginTime;
+    @BindView(R.id.et_endTime)
+    TextView et_endTime;
+    @BindView(R.id.et_imported)
+    TextView et_imported;
+
+    @BindView(R.id.bt_ok)
+    Button bt_ok;
+    @BindView(R.id.bt_cancel)
+    Button bt_cancel;
+
+    @BindView(R.id.toolbar_title)
+    TextView toolbar_title;
+    @BindView(R.id.ll_operationType)
+    LinearLayout ll_operationType;
+    @BindView(R.id.v_operationType)
+    View v_operationType;
+
     @Override
     protected int getContentView() {
-        return R.layout.activity_import_list;
+        return R.layout.activity_sell_list;
 
     }
 
@@ -81,7 +130,7 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AccountAdapter(R.layout.item_sales, mlist, 1);
+        adapter = new AccountAdapter(R.layout.item_sales, mlist);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
@@ -105,13 +154,102 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
                 return true;
             }
         });
+        toolbar_title.setText("冷库台账");
+        ll_operationType.setVisibility(View.VISIBLE);
+        v_operationType.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.toolbar_subtitle})
+    @OnClick({R.id.toolbar_subtitle, R.id.et_imported, R.id.et_operationType, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
+                drawer.openDrawer(GravityCompat.END);
+                break;
+            case R.id.et_imported:
+                showSelectPopWindow(1);
+                break;
+            case R.id.et_operationType:
+                showSelectPopWindow(2);
+                break;
+            case R.id.et_beginTime:
+                DatePickDialog dialog = new DatePickDialog(ImportExportAccountActivity.this);
+                //设置上下年分限制
+                //设置上下年分限制
+                dialog.setYearLimt(20);
+                //设置标题
+                dialog.setTitle("选择时间");
+                //设置类型
+                dialog.setType(DateType.TYPE_YMD);
+                //设置消息体的显示格式，日期格式
+                dialog.setMessageFormat("yyyy-MM-dd");
+                //设置选择回调
+                dialog.setOnChangeLisener(new OnChangeLisener() {
+                    @Override
+                    public void onChanged(Date date) {
+                        Log.v("+++", date.toString());
+                    }
+                });
+                //设置点击确定按钮回调
+                dialog.setOnSureLisener(new OnSureLisener() {
+                    @Override
+                    public void onSure(Date date) {
 
+                        String time = TimeUtils.getTime(date.getTime(), TimeUtils.DATE_FORMAT_DATE);
+                        beginTime = time;
+                        et_beginTime.setText(time);
+                    }
+                });
+                dialog.show();
+                break;
+            case R.id.et_endTime:
+                DatePickDialog dialog2 = new DatePickDialog(ImportExportAccountActivity.this);
+                //设置上下年分限制
+                //设置上下年分限制
+                dialog2.setYearLimt(20);
+                //设置标题
+                dialog2.setTitle("选择时间");
+                //设置类型
+                dialog2.setType(DateType.TYPE_YMD);
+                //设置消息体的显示格式，日期格式
+                dialog2.setMessageFormat("yyyy-MM-dd");
+                //设置选择回调
+                dialog2.setOnChangeLisener(new OnChangeLisener() {
+                    @Override
+                    public void onChanged(Date date) {
+                        Log.v("+++", date.toString());
+                    }
+                });
+                //设置点击确定按钮回调
+                dialog2.setOnSureLisener(new OnSureLisener() {
+                    @Override
+                    public void onSure(Date date) {
+
+                        String time = TimeUtils.getTime(date.getTime(), TimeUtils.DATE_FORMAT_DATE);
+                        endTime = time;
+                        et_endTime.setText(time);
+                    }
+                });
+                dialog2.show();
+                break;
+            case R.id.bt_ok:
+                UIAdjuster.closeKeyBoard(this);
+                drawer.closeDrawers();
+                pagenum = 1;
+                getDate();
+                et_goodsName.setText("");
+                et_batchNumber.setText("");
+                et_entryPort.setText("");
+                et_beginTime.setText("");
+                beginTime = "";
+                et_endTime.setText("");
+                endTime = "";
+                imported = -1;
+                et_imported.setText("");
+
+                break;
+            case R.id.bt_cancel:
+                UIAdjuster.closeKeyBoard(this);
+                drawer.closeDrawers();
                 break;
         }
     }
@@ -156,6 +294,30 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
         if (!TextUtils.isEmpty(searchStr)) {
             map.put("searchValue", searchStr);
         }
+        if (!TextUtils.isEmpty(beginTime)) {
+            map.put("beginTime", beginTime);
+        }
+        if (!TextUtils.isEmpty(endTime)) {
+            map.put("endTime", endTime);
+        }
+        String goodsName = et_goodsName.getText().toString();
+        if (!TextUtils.isEmpty(goodsName)) {
+            map.put("goodsName", goodsName);
+        }
+        String batchNumber = et_batchNumber.getText().toString();
+        if (!TextUtils.isEmpty(batchNumber)) {
+            map.put("batchNumber", batchNumber);
+        }
+        String entryPort = et_entryPort.getText().toString();
+        if (!TextUtils.isEmpty(entryPort)) {
+            map.put("entryPort", entryPort);
+        }
+        if (imported > -1) {
+            map.put("imported", imported);
+        }
+        if (operationType > -1) {
+            map.put("operationType", operationType);
+        }
         RxNetUtils.request(getApi(ApiService.class).importExportAccount(map), new RequestObserver<JsonT<List<TraceBean>>>() {
             @Override
             protected void onSuccess(JsonT<List<TraceBean>> jsonT) {
@@ -174,5 +336,41 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
         super.onResume();
         pagenum = 1;
         getDate();
+    }
+
+    SelectPopupWindows selectPopupWindows;
+
+    void showSelectPopWindow(int type) {
+        UIAdjuster.closeKeyBoard(this);
+        String[] array = {"国产", "进口"};
+        String[] array2 = {"进货", "出货"};
+        selectPopupWindows = new SelectPopupWindows(this, type==1?array:array2);
+        selectPopupWindows.showAtLocation(findViewById(R.id.bg),
+                Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        selectPopupWindows.setOnItemClickListener(new SelectPopupWindows.OnItemClickListener() {
+            @Override
+            public void onSelected(int index, String msg) {
+                if (type==1) {
+                    et_imported.setText(msg);
+                    if (index == 0) {
+                        imported = 1;
+                    } else {
+                        imported = 2;
+                    }
+                }else {
+                    et_operationType.setText(msg);
+                    if (index == 0) {
+                        operationType = 1;
+                    } else {
+                        operationType = 2;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancel() {
+                selectPopupWindows.dismiss();
+            }
+        });
     }
 }

@@ -37,6 +37,7 @@ public class TraceBean {
     int isFfzzwjc;// 0,
     int isThird;// 0,
     int isMddhsjc;// 0,
+    int operationType;// 0,
     String operatorName;// 冷库1
     String goodsType1Text;// ,
     String goodsType2Text;// ,
@@ -59,6 +60,10 @@ public class TraceBean {
     List<ImageBack> ffzzwjcEnclosureList;// null,
     List<ImageBack> mddhsjcEnclosureList;// null,
     List<WmsBean> coldchainGoodsAccountcList;// null,
+
+    public int getOperationType() {
+        return operationType;
+    }
 
     public int getIsMddhsjc() {
         return isMddhsjc;

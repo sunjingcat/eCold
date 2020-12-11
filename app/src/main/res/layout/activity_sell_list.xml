@@ -36,7 +36,6 @@
                 android:paddingLeft="15dp"
                 android:singleLine="true"
                 android:textColor="@color/colorTextBlack33"
-                android:textSize="15dp"
                 android:visibility="gone"/>
 
             <TextView
@@ -62,44 +61,10 @@
                 android:textSize="16dp" />
         </androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
-            android:id="@+id/ll_tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="12dp">
-
-            <TextView
-                android:id="@+id/text_tab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/image_sanjiao"
-                tools:text="冷库一" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include layout="@layout/refresh_layout" />
-
-            <Button
-                android:id="@+id/bt_jin"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="20dp"
-                android:background="@drawable/border_radius_40_theme"
-                android:clickable="true"
-                android:elevation="@dimen/dp_10"
-                android:text="进"
-                android:textColor="@color/white" />
-        </RelativeLayout>
-
-
+        <include layout="@layout/refresh_layout" />
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/drawer_bg"
         android:layout_width="match_parent"
