@@ -80,10 +80,10 @@ public class AccountDetailActivity extends MyBaseActivity {
         infoList.add(new InfoBean("冷库名称", data.getOperatorName() + ""));
         if (page.equals("sales")) {
             infoList.add(new InfoBean("购买数量", data.getCount() + ""));
-            infoList.add(new InfoBean("购买人姓名", data.getBuyerContact() + ""));
+            infoList.add(new InfoBean("购买人姓名", data.getBuyerName() + ""));
             infoList.add(new InfoBean("购买人家庭住址", data.getBuyerAddress() + ""));
             infoList.add(new InfoBean("购买人联系方式", data.getBuyerContact() + ""));
-            infoList.add(new InfoBean("购买人用途", data.getReviewRemark() + ""));
+            infoList.add(new InfoBean("购买人用途", data.getBuyerRemark() + ""));
         }else {
             infoList.add(new InfoBean("经营业户", data.getColdstorageUserName() + ""));
             infoList.add(new InfoBean("操作类型", data.getOperationTypeText() + ""));

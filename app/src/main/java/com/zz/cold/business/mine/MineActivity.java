@@ -44,8 +44,7 @@ import static com.zz.cold.net.RxNetUtils.getApi;
  */
 public class MineActivity extends MyBaseActivity<Contract.IsetMineInfoPresenter> implements Contract.IMineInfoView {
 
-    @BindView(R.id.my_head)
-    ImageView myHead;
+
     @BindView(R.id.my_about)
     LinearLayout myAbout;
     UserBasicBean userInfo;
@@ -53,8 +52,6 @@ public class MineActivity extends MyBaseActivity<Contract.IsetMineInfoPresenter>
     Toolbar toolbar;
     @BindView(R.id.my_name)
     TextView myName;
-    @BindView(R.id.not_content)
-    TextView notContent;
     @BindView(R.id.my_information)
     RelativeLayout myInformation;
     @BindView(R.id.my_password)
