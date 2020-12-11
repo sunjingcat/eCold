@@ -53,7 +53,7 @@ public class MineActivity extends MyBaseActivity<Contract.IsetMineInfoPresenter>
     @BindView(R.id.my_name)
     TextView myName;
     @BindView(R.id.my_information)
-    RelativeLayout myInformation;
+    LinearLayout myInformation;
     @BindView(R.id.my_password)
     LinearLayout myPassword;
     @BindView(R.id.my_code)

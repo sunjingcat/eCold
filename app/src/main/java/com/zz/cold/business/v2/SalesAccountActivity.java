@@ -153,7 +153,7 @@ public class SalesAccountActivity extends MyBaseActivity implements OnRefreshLis
         toolbar_title.setText("销售台账");
     }
 
-    @OnClick({R.id.toolbar_subtitle, R.id.bt_jin, R.id.et_imported, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
+    @OnClick({R.id.toolbar_subtitle, R.id.et_imported, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
