@@ -143,10 +143,12 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
             bt_jin.setVisibility(View.VISIBLE);
             toolbar_title.setText("进货管理");
             type = 1;
+            ll_tab.setVisibility(View.GONE);
         } else {
             bt_jin.setVisibility(View.GONE);
             type = 2;
             toolbar_title.setText("出货管理");
+            ll_tab.setVisibility(View.VISIBLE);
         }
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new GoodsAdapter(R.layout.item_goods, mlist);

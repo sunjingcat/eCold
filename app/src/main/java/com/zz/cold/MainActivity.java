@@ -6,11 +6,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zz.cold.bean.MainShowData;
-import com.zz.cold.business.daily.DailyActivity;
-import com.zz.cold.business.trace.PendingGoodsActivity;
+import com.zz.cold.business.v2.ColdAccountActivity;
+import com.zz.cold.business.v2.ColdAccountFragment;
 import com.zz.cold.business.v2.ExportListActivity;
-import com.zz.cold.business.trace.TraceActivity;
-import com.zz.cold.business.v2.ImportExportAccountActivity;
 import com.zz.cold.business.v2.ReviewActivity;
 import com.zz.cold.business.v2.SalesAccountActivity;
 import com.zz.cold.business.v2.SellListActivity;
@@ -102,7 +100,7 @@ public class MainActivity extends MyBaseActivity {
                 break;
             case R.id.main_group_6:
                 Intent intent5 = new Intent();
-                intent5.setClass(MainActivity.this, ImportExportAccountActivity.class);
+                intent5.setClass(MainActivity.this, ColdAccountActivity.class);
                 startActivity(intent5);
                 break;
             case R.id.toolbar_subtitle:

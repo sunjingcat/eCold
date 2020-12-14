@@ -52,6 +52,7 @@ public class TraceBean {
     String isFfzzwjcText;// 否,
     String isMddhsjcText;// 否,
     String chinaDistributorName;// ,
+    String originCountry;// ,
     String chinaDistributorContact;// ,
     List<ImageBack> sphsjcEnclosureList;// null,
     List<ImageBack> crjjyjyzmEnclosureList;// null,
@@ -60,6 +61,14 @@ public class TraceBean {
     List<ImageBack> ffzzwjcEnclosureList;// null,
     List<ImageBack> mddhsjcEnclosureList;// null,
     List<WmsBean> coldchainGoodsAccountcList;// null,
+
+    public String getOperationTime() {
+        return operationTime;
+    }
+
+    public String getOriginCountry() {
+        return originCountry;
+    }
 
     public int getOperationType() {
         return operationType;

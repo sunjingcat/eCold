@@ -17,16 +17,16 @@ import java.util.Map;
  * Created by 77 on 2018/8/8.
  */
 
-public class ExportListPresenter extends MyBasePresenterImpl<Contract.IGetExportListView> implements Contract.IsetExportListPresenter {
+public class ColdAccountPresenter extends MyBasePresenterImpl<Contract.IGetExportListView> implements Contract.IsetExportListPresenter {
 
-    public ExportListPresenter(Contract.IGetExportListView view) {
+    public ColdAccountPresenter(Contract.IGetExportListView view) {
         super(view);
     }
 
     @Override
     public void getData(String type,Map<String,Object> map, String id) {
-        if (type.equals("import")) {
-            RxNetUtils.request(getApi(ApiService.class).importList( map), new RequestObserver<JsonT<List<TraceBean>>>(this) {
+        if (type.equals("my")) {
+            RxNetUtils.request(getApi(ApiService.class).selfAccount(id, map), new RequestObserver<JsonT<List<TraceBean>>>(this) {
                 @Override
                 protected void onSuccess(JsonT<List<TraceBean>> jsonT) {
                     view.showResult(jsonT.getData());
@@ -38,7 +38,7 @@ public class ExportListPresenter extends MyBasePresenterImpl<Contract.IGetExport
                 }
             }, mDialog);
         }else {
-            RxNetUtils.request(getApi(ApiService.class).exportList(id, map), new RequestObserver<JsonT<List<TraceBean>>>(this) {
+            RxNetUtils.request(getApi(ApiService.class).tripartiteAccount(id, map), new RequestObserver<JsonT<List<TraceBean>>>(this) {
                 @Override
                 protected void onSuccess(JsonT<List<TraceBean>> jsonT) {
                     view.showResult(jsonT.getData());
@@ -54,8 +54,8 @@ public class ExportListPresenter extends MyBasePresenterImpl<Contract.IGetExport
 
     @Override
     public void getTab(String type) {
-        if (type.equals("import")) {
-            RxNetUtils.request(getApi(ApiService.class).selectImportColdstorageGroupCount(), new RequestObserver<JsonT<List<GroupCountBean>>>(this) {
+        if (type.equals("my")) {
+            RxNetUtils.request(getApi(ApiService.class).selectSelfAccountGroupCount(), new RequestObserver<JsonT<List<GroupCountBean>>>(this) {
                 @Override
                 protected void onSuccess(JsonT<List<GroupCountBean>> jsonT) {
                     view.showTabType(jsonT.getData());
@@ -67,7 +67,7 @@ public class ExportListPresenter extends MyBasePresenterImpl<Contract.IGetExport
                 }
             }, mDialog);
         } else {
-            RxNetUtils.request(getApi(ApiService.class).selectExportColdstorageGroupCount(), new RequestObserver<JsonT<List<GroupCountBean>>>(this) {
+            RxNetUtils.request(getApi(ApiService.class).selectTripartiteAccountGroupCount(), new RequestObserver<JsonT<List<GroupCountBean>>>(this) {
                 @Override
                 protected void onSuccess(JsonT<List<GroupCountBean>> jsonT) {
                     view.showTabType(jsonT.getData());

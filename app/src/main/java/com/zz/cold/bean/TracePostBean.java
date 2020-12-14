@@ -29,6 +29,7 @@ public class TracePostBean {
     String importTime;// ,
     String chinaDistributorName;// ,
     String chinaDistributorContact;// ,
+    String originCountry;// ,
     int isSphsjc;// 0,
     int isCrjjyjyzm;// 0,
     int isBgd;// 0,
@@ -37,6 +38,10 @@ public class TracePostBean {
     int operationType;// 0,
     int isThird;// 0,
     int isMddhsjc;// 0,
+
+    public void setOriginCountry(String originCountry) {
+        this.originCountry = originCountry;
+    }
 
     public void setIsMddhsjc(int isMddhsjc) {
         this.isMddhsjc = isMddhsjc;

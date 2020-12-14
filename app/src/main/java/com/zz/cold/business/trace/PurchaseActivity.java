@@ -165,6 +165,10 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     int isMddhsjc=-1;
     @BindView(R.id.text_importRegistNum)
     EditText text_importRegistNum;
+    @BindView(R.id.text_originCountry)
+    EditText text_originCountry;
+    @BindView(R.id.text_productionAddress)
+    EditText text_productionAddress;
     @BindView(R.id.text_importTime)
     TextView text_importTime;
     int isFfzzwjc = -1;
@@ -564,6 +568,8 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
         params.setPeriod(getText(text_period));
         params.setBatchNumber(getText(text_batchNumber));
         params.setGoodsRemark(getText(text_goodsRemark));
+        params.setProductionAddress(getText(text_productionAddress));
+        params.setOriginCountry(getText(text_originCountry));
         params.setTransportMode(transportMode);
 
         params.setIsThird(isThird);

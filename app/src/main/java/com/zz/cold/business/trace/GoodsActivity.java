@@ -167,6 +167,8 @@ public class GoodsActivity extends MyBaseActivity {
         infoList.add(new InfoBean("供货单位", data.getSupplierName() + ""));
         infoList.add(new InfoBean("供货者地址", data.getSupplierAddress() + ""));
         infoList.add(new InfoBean("联系方式", data.getSupplierContact() + ""));
+        infoList.add(new InfoBean("产地", data.getProductionAddress() + ""));
+        infoList.add(new InfoBean("原产国", data.getOriginCountry() + ""));
         infoList.add(new InfoBean("运输方式", data.getTransportModeText() + ""));
         infoList.add(new InfoBean("保质期", data.getPeriod() + ""));
         infoList.add(new InfoBean("商品备注", data.getGoodsRemark() + ""));

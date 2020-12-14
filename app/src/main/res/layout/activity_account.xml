@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:background="@color/colorThemeLight"
+                app:tabIndicatorColor="@color/white"
+                app:tabTextColor="@color/white" />
+
+            <TextView
+                android:id="@+id/toolbar_subtitle"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/border_radius_40_huan_theme"
+                android:gravity="center"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:text="筛"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/drawer_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_marginTop="30dp"
+        android:background="#FFFFFF"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+
+        <LinearLayout
+            android:id="@+id/ll_goodsName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="冷库名称"
+                android:textColor="#ff929292"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_goodsName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#F0F0F0"
+                android:drawableLeft="@drawable/image_search"
+                android:drawablePadding="10dp"
+                android:hint="输入相关关键词"
+                android:padding="10dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_batchNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="批次号"
+                android:textColor="#ff929292"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_batchNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#F0F0F0"
+                android:drawableLeft="@drawable/image_search"
+                android:drawablePadding="10dp"
+                android:hint="输入相关关键词"
+                android:padding="10dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_entryPort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="入境港口"
+                android:textColor="#ff929292"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_entryPort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#F0F0F0"
+                android:drawableLeft="@drawable/image_search"
+                android:drawablePadding="10dp"
+                android:hint="输入相关关键词"
+                android:padding="10dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorbg" />
+
+        <LinearLayout
+            android:id="@+id/ll_inspectionResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/textLeftStyle"
+                android:layout_width="wrap_content"
+                android:text="是否进口" />
+
+            <TextView
+                android:id="@+id/et_imported"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:drawableRight="@drawable/image_arrow"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical|right"
+                android:hint="请选择"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#333"
+                android:textSize="14dp">
+
+            </TextView>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/v_operationType"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorbg"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/ll_operationType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/textLeftStyle"
+                android:layout_width="wrap_content"
+                android:text="操作类型" />
+
+            <TextView
+                android:id="@+id/et_operationType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:drawableRight="@drawable/image_arrow"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical|right"
+                android:hint="请选择"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#333"
+                android:textSize="14dp">
+
+            </TextView>
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorbg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/textLeftStyle"
+                android:layout_width="wrap_content"
+                android:text="开始时间" />
+
+            <TextView
+                android:id="@+id/et_beginTime"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:drawableRight="@drawable/image_arrow"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical|right"
+                android:hint="请选择"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#333"
+                android:textSize="14dp">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorbg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/textLeftStyle"
+                android:layout_width="wrap_content"
+                android:text="结束时间" />
+
+            <TextView
+                android:id="@+id/et_endTime"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:drawableRight="@drawable/image_arrow"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical|right"
+                android:hint="请选择"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#333"
+                android:textSize="14dp">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorbg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <Button
+                android:id="@+id/bt_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_radius_30_9c"
+                android:text="重置"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17sp" />
+
+            <Button
+                android:id="@+id/bt_ok"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_radius_3_blue"
+                android:text="确定"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

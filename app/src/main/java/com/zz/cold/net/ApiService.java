@@ -112,8 +112,14 @@ public interface ApiService {
     @GET("/app/v1/coldchain/coldchainGoods/selectImportColdstorageGroupCount")
     Observable<JsonT<List<GroupCountBean>>> selectImportColdstorageGroupCount();
 
+    @GET("/app/v1/coldchain/coldchainGoods/selectSelfAccountGroupCount")
+    Observable<JsonT<List<GroupCountBean>>> selectSelfAccountGroupCount();
+
     @GET("/app/v1/coldchain/coldchainGoods/selectExportColdstorageGroupCount")
     Observable<JsonT<List<GroupCountBean>>> selectExportColdstorageGroupCount();
+
+    @GET("/app/v1/coldchain/coldchainGoods/selectTripartiteAccountGroupCount")
+    Observable<JsonT<List<GroupCountBean>>> selectTripartiteAccountGroupCount();
 
     @GET("/app/v1/coldchain/coldchainGoods/sellList")
     Observable<JsonT<List<TraceBean>>> sellList(@QueryMap Map<String, Object> params);
@@ -124,11 +130,17 @@ public interface ApiService {
     @GET("/app/v1/coldchain/coldchainGoods/importExportAccount")
     Observable<JsonT<List<TraceBean>>> importExportAccount(@QueryMap Map<String, Object> params);
 
-    @GET("/app/v1/coldchain/coldchainGoods/importList/{coldstorageId}")
-    Observable<JsonT<List<TraceBean>>> importList(@Path("coldstorageId") String coldstorageId,@QueryMap Map<String, Object> params);
+    @GET("/app/v1/coldchain/coldchainGoods/importList")
+    Observable<JsonT<List<TraceBean>>> importList(@QueryMap Map<String, Object> params);
+
+    @GET("/app/v1/coldchain/coldchainGoods/selfAccount/{coldstorageId}")
+    Observable<JsonT<List<TraceBean>>> selfAccount(@Path("coldstorageId") String coldstorageId,@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/coldchainGoods/exportList/{coldstorageId}")
     Observable<JsonT<List<TraceBean>>> exportList(@Path("coldstorageId") String coldstorageId,@QueryMap Map<String, Object> params);
+
+    @GET("/app/v1/coldchain/coldchainGoods/tripartiteAccount/{coldstorageId}")
+    Observable<JsonT<List<TraceBean>>> tripartiteAccount(@Path("coldstorageId") String coldstorageId,@QueryMap Map<String, Object> params);
 
     @GET("/app/v1/coldchain/coldstorage/{id}")
     Observable<JsonT<QualificationBean>> getQualificationInfo(@Path("id") String id);

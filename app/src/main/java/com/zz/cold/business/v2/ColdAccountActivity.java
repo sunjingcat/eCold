@@ -1,85 +1,60 @@
 package com.zz.cold.business.v2;
 
-import android.annotation.SuppressLint;
+
 import android.content.Intent;
-import android.text.TextUtils;
+import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.codbking.widget.DatePickDialog;
 import com.codbking.widget.OnChangeLisener;
 import com.codbking.widget.OnSureLisener;
 import com.codbking.widget.bean.DateType;
 import com.codbking.widget.utils.UIAdjuster;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.google.android.material.tabs.TabLayout;
 import com.zz.cold.R;
+import com.zz.cold.base.BasePresenter;
 import com.zz.cold.base.MyBaseActivity;
-import com.zz.cold.bean.TraceBean;
-import com.zz.cold.business.v2.adapter.AccountAdapter;
-import com.zz.cold.net.ApiService;
-import com.zz.cold.net.JsonT;
-import com.zz.cold.net.RequestObserver;
-import com.zz.cold.net.RxNetUtils;
+import com.zz.cold.business.qualification.adapter.FmPagerAdapter;
+import com.zz.cold.business.trace.PurchaseActivity;
 import com.zz.cold.utils.TimeUtils;
+import com.zz.cold.widget.TabPopWindow;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
-import com.zz.lib.commonlib.widget.ClearEditText;
 import com.zz.lib.commonlib.widget.SelectPopupWindows;
-import com.zz.lib.core.ui.mvp.BasePresenter;
-import com.zz.lib.core.utils.LoadingUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.zz.cold.net.RxNetUtils.getApi;
-
 /**
  * 冷库台账
  */
-public class ImportExportAccountActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
+public class ColdAccountActivity extends MyBaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.ll_null)
-    LinearLayout llNull;
-    @BindView(R.id.et_search)
-    ClearEditText et_search;
-    @BindView(R.id.rv)
-    RecyclerView rv;
-    @BindView(R.id.refreshLayout)
-    SmartRefreshLayout refreshLayout;
-
-    private AccountAdapter adapter;
-    List<TraceBean> mlist = new ArrayList<>();
-    private int pagenum = 1;
-    private int pagesize = 20;
-    private String searchStr = "";
-
+    @BindView(R.id.tablayout)
+    TabLayout tablayout;
+    @BindView(R.id.viewpager)
+    ViewPager viewpager;
+    public FmPagerAdapter pagerAdapter;
+    private ArrayList<Fragment> fragments = new ArrayList<>();
+    private String[] titles = new String[]{"我的冷库", "第三方冷库"};
+    int type = 1;
 
     int imported = -1;
     int operationType = -1;
@@ -110,15 +85,10 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
 
     @BindView(R.id.toolbar_title)
     TextView toolbar_title;
-    @BindView(R.id.ll_operationType)
-    LinearLayout ll_operationType;
-    @BindView(R.id.v_operationType)
-    View v_operationType;
 
     @Override
     protected int getContentView() {
-        return R.layout.activity_sell_list;
-
+        return R.layout.activity_account;
     }
 
     @Override
@@ -126,44 +96,59 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
         return null;
     }
 
+    ColdAccountFragment coldAccountFragment1;
+    ColdAccountFragment coldAccountFragment2;
+
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AccountAdapter(R.layout.item_sales, mlist);
-        rv.setAdapter(adapter);
-        refreshLayout.setOnRefreshListener(this);
-        refreshLayout.setOnLoadMoreListener(this);
-        adapter.setOnItemClickListener(new OnItemClickListener() {
+        coldAccountFragment1 = new ColdAccountFragment(1);
+        coldAccountFragment2 = new ColdAccountFragment(1);
+        for (int i = 0; i < titles.length; i++) {
+            tablayout.addTab(tablayout.newTab());
+        }
+        fragments.add(coldAccountFragment1);
+        fragments.add(coldAccountFragment2);
+        tablayout.setupWithViewPager(viewpager, false);
+        pagerAdapter = new FmPagerAdapter(fragments, getSupportFragmentManager());
+        viewpager.setAdapter(pagerAdapter);
+
+        for (int i = 0; i < titles.length; i++) {
+            tablayout.getTabAt(i).setText(titles[i]);
+        }
+        tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                Intent intent = new Intent();
-                intent.setClass(ImportExportAccountActivity.this, AccountDetailActivity.class);
-                intent.putExtra("id", mlist.get(position).getId());
-                intent.putExtra("page", "cold");
-                startActivity(intent);
+            public void onTabSelected(TabLayout.Tab tab) {
+                type = tab.getPosition() + 1;
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
-        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                getDate();//搜索方法
-                //隐藏软键盘
-                @SuppressLint("WrongConstant") InputMethodManager imm = (InputMethodManager) context.getSystemService("input_method");
-                imm.toggleSoftInput(0, 2);
-                return true;
-            }
-        });
-        toolbar_title.setText("冷库台账");
-        ll_operationType.setVisibility(View.VISIBLE);
-        v_operationType.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.toolbar_subtitle, R.id.et_imported, R.id.et_operationType, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
+    @Override
+    protected void initToolBar() {
+        ToolBarUtils.getInstance().setNavigation(toolbar);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @OnClick({R.id.toolbar_subtitle, R.id.bt_jin, R.id.et_imported, R.id.et_operationType, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
                 drawer.openDrawer(GravityCompat.END);
+                break;
+            case R.id.bt_jin:
+                startActivity(new Intent(ColdAccountActivity.this, PurchaseActivity.class));
                 break;
             case R.id.et_imported:
                 showSelectPopWindow(1);
@@ -172,7 +157,7 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
                 showSelectPopWindow(2);
                 break;
             case R.id.et_beginTime:
-                DatePickDialog dialog = new DatePickDialog(ImportExportAccountActivity.this);
+                DatePickDialog dialog = new DatePickDialog(ColdAccountActivity.this);
                 //设置上下年分限制
                 //设置上下年分限制
                 dialog.setYearLimt(20);
@@ -202,7 +187,7 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
                 dialog.show();
                 break;
             case R.id.et_endTime:
-                DatePickDialog dialog2 = new DatePickDialog(ImportExportAccountActivity.this);
+                DatePickDialog dialog2 = new DatePickDialog(ColdAccountActivity.this);
                 //设置上下年分限制
                 //设置上下年分限制
                 dialog2.setYearLimt(20);
@@ -234,8 +219,12 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
             case R.id.bt_ok:
                 UIAdjuster.closeKeyBoard(this);
                 drawer.closeDrawers();
-                pagenum = 1;
-                getDate();
+                if (type == 1) {
+                    coldAccountFragment1.setSearchStr(imported, operationType, getText(et_beginTime), getText(et_endTime), getText(et_goodsName), getText(et_batchNumber), getText(et_entryPort));
+                }else {
+                    coldAccountFragment2.setSearchStr(imported, operationType, getText(et_beginTime), getText(et_endTime), getText(et_goodsName), getText(et_batchNumber), getText(et_entryPort));
+
+                }
                 et_goodsName.setText("");
                 et_batchNumber.setText("");
                 et_entryPort.setText("");
@@ -251,113 +240,31 @@ public class ImportExportAccountActivity extends MyBaseActivity implements OnRef
                 UIAdjuster.closeKeyBoard(this);
                 drawer.closeDrawers();
                 break;
-        }
-    }
 
-    @Override
-    protected void initToolBar() {
-        ToolBarUtils.getInstance().setNavigation(toolbar);
-    }
-
-    @Override
-    public void onRefresh(RefreshLayout refreshlayout) {
-        pagenum = 1;
-        getDate();
-        refreshlayout.finishRefresh();
-    }
-
-    public void showResult(List<TraceBean> data) {
-        if (pagenum == 1) {
-            mlist.clear();
         }
-        mlist.addAll(data);
-        adapter.notifyDataSetChanged();
-        if (mlist.size() == 0) {
-            llNull.setVisibility(View.VISIBLE);
-        } else {
-            llNull.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        pagenum++;
-        getDate();
-        refreshLayout.finishLoadMore();
-    }
-
-    void getDate() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("pageNum", pagenum);
-        map.put("pageSize", pagesize);
-        searchStr = et_search.getText().toString();
-        if (!TextUtils.isEmpty(searchStr)) {
-            map.put("searchValue", searchStr);
-        }
-        if (!TextUtils.isEmpty(beginTime)) {
-            map.put("beginTime", beginTime);
-        }
-        if (!TextUtils.isEmpty(endTime)) {
-            map.put("endTime", endTime);
-        }
-        String goodsName = et_goodsName.getText().toString();
-        if (!TextUtils.isEmpty(goodsName)) {
-            map.put("goodsName", goodsName);
-        }
-        String batchNumber = et_batchNumber.getText().toString();
-        if (!TextUtils.isEmpty(batchNumber)) {
-            map.put("batchNumber", batchNumber);
-        }
-        String entryPort = et_entryPort.getText().toString();
-        if (!TextUtils.isEmpty(entryPort)) {
-            map.put("entryPort", entryPort);
-        }
-        if (imported > -1) {
-            map.put("imported", imported);
-        }
-        if (operationType > -1) {
-            map.put("operationType", operationType);
-        }
-        RxNetUtils.request(getApi(ApiService.class).importExportAccount(map), new RequestObserver<JsonT<List<TraceBean>>>() {
-            @Override
-            protected void onSuccess(JsonT<List<TraceBean>> jsonT) {
-                showResult(jsonT.getData());
-            }
-
-            @Override
-            protected void onFail2(JsonT<List<TraceBean>> stringJsonT) {
-                super.onFail2(stringJsonT);
-            }
-        }, LoadingUtils.build(this));
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        pagenum = 1;
-        getDate();
     }
 
     SelectPopupWindows selectPopupWindows;
+
 
     void showSelectPopWindow(int type) {
         UIAdjuster.closeKeyBoard(this);
         String[] array = {"国产", "进口"};
         String[] array2 = {"进货", "出货"};
-        selectPopupWindows = new SelectPopupWindows(this, type==1?array:array2);
+        selectPopupWindows = new SelectPopupWindows(this, type == 1 ? array : array2);
         selectPopupWindows.showAtLocation(findViewById(R.id.bg),
                 Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         selectPopupWindows.setOnItemClickListener(new SelectPopupWindows.OnItemClickListener() {
             @Override
             public void onSelected(int index, String msg) {
-                if (type==1) {
+                if (type == 1) {
                     et_imported.setText(msg);
                     if (index == 0) {
                         imported = 1;
                     } else {
                         imported = 2;
                     }
-                }else {
+                } else {
                     et_operationType.setText(msg);
                     if (index == 0) {
                         operationType = 1;
