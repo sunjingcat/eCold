@@ -226,7 +226,7 @@ public class ColdAccountFragment extends MyBaseFragment<Contract.IsetExportListP
             map.put("entryPort", entryPort);
         }
         if (imported > -1) {
-            map.put("imported", imported);
+            map.put("isImported", imported);
         }
         if (operationType > -1) {
             map.put("operationType", operationType);

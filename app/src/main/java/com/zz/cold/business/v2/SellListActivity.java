@@ -212,7 +212,7 @@ public class SellListActivity extends MyBaseActivity implements OnRefreshListene
             map.put("entryPort", entryPort);
         }
         if (imported > -1) {
-            map.put("imported", imported);
+            map.put("isImported", imported);
         }
         RxNetUtils.request(getApi(ApiService.class).sellList(map), new RequestObserver<JsonT<List<TraceBean>>>() {
             @Override

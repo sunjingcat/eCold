@@ -358,7 +358,7 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
             map.put("entryPort", entryPort);
         }
         if (imported > -1) {
-            map.put("imported", imported);
+            map.put("isImported", imported);
         }
         mPresenter.getData(page, map, tabId);
     }

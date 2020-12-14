@@ -307,7 +307,7 @@ public class SalesAccountActivity extends MyBaseActivity implements OnRefreshLis
             map.put("entryPort", entryPort);
         }
         if (imported > -1) {
-            map.put("imported", imported);
+            map.put("isImported", imported);
         }
         RxNetUtils.request(getApi(ApiService.class).salesAccount(map), new RequestObserver<JsonT<List<StorageAccount>>>() {
             @Override
