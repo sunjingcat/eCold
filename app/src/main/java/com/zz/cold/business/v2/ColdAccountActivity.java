@@ -138,11 +138,13 @@ public class ColdAccountActivity extends MyBaseActivity {
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @OnClick({R.id.toolbar_subtitle, R.id.et_imported, R.id.et_operationType, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
+    @OnClick({R.id.toolbar_subtitle, R.id.et_imported, R.id.drawer_bg, R.id.et_operationType, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
                 drawer.openDrawer(GravityCompat.END);
+                break;
+            case R.id.drawer_bg:
                 break;
             case R.id.et_imported:
                 showSelectPopWindow(1);
@@ -215,7 +217,7 @@ public class ColdAccountActivity extends MyBaseActivity {
                 drawer.closeDrawers();
                 if (type == 1) {
                     coldAccountFragment1.setSearchStr(imported, operationType, getText(et_beginTime), getText(et_endTime), getText(et_goodsName), getText(et_batchNumber), getText(et_entryPort));
-                }else {
+                } else {
                     coldAccountFragment2.setSearchStr(imported, operationType, getText(et_beginTime), getText(et_endTime), getText(et_goodsName), getText(et_batchNumber), getText(et_entryPort));
 
                 }

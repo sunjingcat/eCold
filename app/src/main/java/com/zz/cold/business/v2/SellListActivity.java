@@ -63,7 +63,7 @@ import butterknife.OnClick;
 import static com.zz.cold.net.RxNetUtils.getApi;
 
 /**
- *销售
+ * 销售
  */
 public class SellListActivity extends MyBaseActivity implements OnRefreshListener, OnLoadMoreListener {
 
@@ -106,6 +106,7 @@ public class SellListActivity extends MyBaseActivity implements OnRefreshListene
     TextView et_imported;
     @BindView(R.id.toolbar_title)
     TextView toolbar_title;
+
     @Override
     protected int getContentView() {
         return R.layout.activity_sell_list;
@@ -130,8 +131,8 @@ public class SellListActivity extends MyBaseActivity implements OnRefreshListene
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
                 intent.setClass(SellListActivity.this, GoodsActivity.class);
-                intent.putExtra("id",mlist.get(position).getId());
-                intent.putExtra("page","sell");
+                intent.putExtra("id", mlist.get(position).getId());
+                intent.putExtra("page", "sell");
                 startActivity(intent);
             }
         });
@@ -152,6 +153,7 @@ public class SellListActivity extends MyBaseActivity implements OnRefreshListene
     protected void initToolBar() {
         ToolBarUtils.getInstance().setNavigation(toolbar);
     }
+
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         pagenum = 1;
@@ -171,12 +173,14 @@ public class SellListActivity extends MyBaseActivity implements OnRefreshListene
             llNull.setVisibility(View.GONE);
         }
     }
+
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         pagenum++;
         getDate();
         refreshLayout.finishLoadMore();
     }
+
     void getDate() {
         Map<String, Object> map = new HashMap<>();
         map.put("pageNum", pagenum);
@@ -229,11 +233,14 @@ public class SellListActivity extends MyBaseActivity implements OnRefreshListene
         pagenum = 1;
         getDate();
     }
-    @OnClick({R.id.toolbar_subtitle,  R.id.et_imported, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
+
+    @OnClick({R.id.toolbar_subtitle, R.id.drawer_bg, R.id.et_imported, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
                 drawer.openDrawer(GravityCompat.END);
+                break;
+            case R.id.drawer_bg:
                 break;
             case R.id.et_imported:
                 showSelectPopWindow();
@@ -301,7 +308,7 @@ public class SellListActivity extends MyBaseActivity implements OnRefreshListene
             case R.id.bt_ok:
                 UIAdjuster.closeKeyBoard(this);
                 drawer.closeDrawers();
-                pagenum=1;
+                pagenum = 1;
                 getDate();
                 et_goodsName.setText("");
                 et_batchNumber.setText("");
@@ -321,6 +328,7 @@ public class SellListActivity extends MyBaseActivity implements OnRefreshListene
 
         }
     }
+
     SelectPopupWindows selectPopupWindows;
 
     void showSelectPopWindow() {

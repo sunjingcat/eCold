@@ -181,11 +181,14 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
     TabPopWindow tabPopWindow;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @OnClick({R.id.toolbar_subtitle, R.id.text_tab, R.id.bt_jin, R.id.et_imported, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
+    @OnClick({R.id.toolbar_subtitle, R.id.text_tab, R.id.drawer_bg, R.id.bt_jin, R.id.et_imported, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
                 drawer.openDrawer(GravityCompat.END);
+                break;
+            case R.id.drawer_bg:
+
                 break;
             case R.id.bt_jin:
                 startActivity(new Intent(ExportListActivity.this, PurchaseActivity.class));
@@ -256,7 +259,7 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
             case R.id.bt_ok:
                 UIAdjuster.closeKeyBoard(this);
                 drawer.closeDrawers();
-                pagenum=1;
+                pagenum = 1;
                 getDate();
                 et_goodsName.setText("");
                 et_batchNumber.setText("");
