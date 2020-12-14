@@ -37,7 +37,7 @@ public class PendingGoodsAdapter extends BaseQuickAdapter<PendingGoods, BaseView
     @Override
     protected void convert(BaseViewHolder holder, final PendingGoods item) {
         holder.setText(R.id.item_title,item.getGoodsName()+"");
-        holder.setText(R.id.item_count,item.getOperationType()==1?"进货"+item.getCount()+item.getSpec():"出货"+item.getCount()+item.getSpec());
+        holder.setText(R.id.item_count,item.getOperationTypeText()+item.getCount()+item.getSpec());
         holder.setText(R.id.item_time,item.getOperationTime()+"");
         holder.setText(R.id.item_operatorName,item.getColdstorageUserName()+"");
         holder.getView(R.id.bt_ok).setOnClickListener(new View.OnClickListener() {

@@ -6,6 +6,7 @@ public class PendingGoods {
     String     id;// 1,
     String      coldstorageId;// 3,
     int      operationType;// 1,
+    String      operationTypeText;// 1,
     String    goodsId;// 1,
     String     goodsName;// 商品,
     String     spec;// 商品,
@@ -18,6 +19,10 @@ public class PendingGoods {
     String    reviewTime;// null,
     String     reviewRemark;// null
     String     coldstorageUserName;// null
+
+    public String getOperationTypeText() {
+        return operationTypeText;
+    }
 
     public String getReviewStatusText() {
         return reviewStatusText;
