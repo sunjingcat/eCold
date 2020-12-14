@@ -212,11 +212,31 @@ public class ReviewFragment extends Fragment implements OnRefreshListener, OnLoa
                 .setPositiveButton("确定", new InputDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, String msg) {
-                        reviewGoods(reviewStatus, data, msg);
+                        askRefuse2(reviewStatus, data, msg);
                     }
                 });
         inputDialog = builder.create();
         inputDialog.show();
+    }
+    void askRefuse2(int reviewStatus, PendingGoods data,String msg) {
+
+        CustomDialog.Builder builder = new CustomDialog.Builder(getActivity())
+                .setTitle("驳回提示")
+                .setMessage("驳回理由:" + msg)
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        reviewGoods(reviewStatus, data, msg);
+                    }
+                });
+        customDialog = builder.create();
+        customDialog.show();
     }
 
     void reviewGoods(int reviewStatus, PendingGoods data, String reviewRemark) {

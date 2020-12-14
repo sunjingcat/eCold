@@ -17,6 +17,11 @@ public class WmsBean {
     String    reviewTime;// null,
     String     reviewRemark;// null
     String     spec;// null
+    String     remark;// null
+
+    public String getRemark() {
+        return remark;
+    }
 
     public String getOperatorName() {
         return operatorName;

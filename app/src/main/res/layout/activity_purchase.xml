@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="入库"
+            android:text="进库"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
@@ -207,7 +207,7 @@
                     style="@style/textLeftStyle"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="生产日期/批次" />
+                    android:text="生产日期" />
 
 
                 <EditText
