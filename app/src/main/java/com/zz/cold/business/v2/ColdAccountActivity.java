@@ -83,9 +83,6 @@ public class ColdAccountActivity extends MyBaseActivity {
     @BindView(R.id.bt_cancel)
     Button bt_cancel;
 
-    @BindView(R.id.toolbar_title)
-    TextView toolbar_title;
-
     @Override
     protected int getContentView() {
         return R.layout.activity_account;
@@ -141,14 +138,11 @@ public class ColdAccountActivity extends MyBaseActivity {
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @OnClick({R.id.toolbar_subtitle, R.id.bt_jin, R.id.et_imported, R.id.et_operationType, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
+    @OnClick({R.id.toolbar_subtitle, R.id.et_imported, R.id.et_operationType, R.id.et_beginTime, R.id.et_endTime, R.id.bt_ok, R.id.bt_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_subtitle:
                 drawer.openDrawer(GravityCompat.END);
-                break;
-            case R.id.bt_jin:
-                startActivity(new Intent(ColdAccountActivity.this, PurchaseActivity.class));
                 break;
             case R.id.et_imported:
                 showSelectPopWindow(1);

@@ -101,6 +101,7 @@ public class GoodsActivity extends MyBaseActivity {
         rv_info.setAdapter(infoAdapter);
         page = getIntent().getStringExtra("page");
         id = getIntent().getStringExtra("id");
+        int  reviewStatus = getIntent().getIntExtra("reviewStatus",0);
         if (!TextUtils.isEmpty(id)) {
             getData(id);
         }
@@ -115,9 +116,11 @@ public class GoodsActivity extends MyBaseActivity {
                 bt_action.setVisibility(View.VISIBLE);
                 bt_action.setText("售");
             } else if (page.equals("review")) {
-                bt_action.setVisibility(View.VISIBLE);
-                bt_action2.setVisibility(View.VISIBLE);
-                bt_action.setText("通过");
+                if (reviewStatus==1) {
+                    bt_action.setVisibility(View.VISIBLE);
+                    bt_action2.setVisibility(View.VISIBLE);
+                    bt_action.setText("通过");
+                }
                 ll_rv.setVisibility(View.GONE);
             }else {
                 bt_action.setVisibility(View.GONE);
@@ -287,13 +290,32 @@ public class GoodsActivity extends MyBaseActivity {
                 .setPositiveButton("确定", new InputDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, String msg) {
-                        reviewGoods(reviewStatus, id, msg);
+                        ask2(reviewStatus,id,msg);
                     }
                 });
         inputDialog = builder.create();
         inputDialog.show();
     }
+    void ask2(int reviewStatus, String id,String msg) {
 
+        CustomDialog.Builder builder = new CustomDialog.Builder(this)
+                .setTitle("审核通过确认")
+                .setMessage("是否通过该条" + "请求?")
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        reviewGoods(reviewStatus, id, msg);
+                    }
+                });
+        customDialog = builder.create();
+        customDialog.show();
+    }
     void reviewGoods(int reviewStatus, String id, String reviewRemark) {
         Map<String, Object> map = new HashMap<>();
         map.put("reviewStatus", reviewStatus);

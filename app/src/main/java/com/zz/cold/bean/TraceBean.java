@@ -24,7 +24,7 @@ public class TraceBean {
     String productionAddress;// null,
     String transportMode;// null,
     String period;// 2020-11-25,
-    String isImported;// 1,
+    int isImported;// 1,
     String entryPort;// ,
     String importRegistNum;// ,
     String importTime;// ,
@@ -38,6 +38,7 @@ public class TraceBean {
     int isThird;// 0,
     int isMddhsjc;// 0,
     int operationType;// 0,
+    String operationTypeText;// 冷库1
     String operatorName;// 冷库1
     String goodsType1Text;// ,
     String goodsType2Text;// ,
@@ -53,6 +54,7 @@ public class TraceBean {
     String isMddhsjcText;// 否,
     String chinaDistributorName;// ,
     String originCountry;// ,
+    String coldstorageUserName;// ,
     String chinaDistributorContact;// ,
     List<ImageBack> sphsjcEnclosureList;// null,
     List<ImageBack> crjjyjyzmEnclosureList;// null,
@@ -66,8 +68,16 @@ public class TraceBean {
         return operationTime;
     }
 
+    public String getColdstorageUserName() {
+        return coldstorageUserName;
+    }
+
     public String getOriginCountry() {
         return originCountry;
+    }
+
+    public String getOperationTypeText() {
+        return operationTypeText;
     }
 
     public int getOperationType() {
@@ -262,7 +272,7 @@ public class TraceBean {
         return period;
     }
 
-    public String getIsImported() {
+    public int getIsImported() {
         return isImported;
     }
 

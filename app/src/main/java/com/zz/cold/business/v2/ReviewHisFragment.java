@@ -27,7 +27,6 @@ import com.zz.cold.business.trace.GoodsActivity;
 import com.zz.cold.business.trace.HisPendingActivity;
 import com.zz.cold.business.trace.PendingGoodsActivity;
 import com.zz.cold.business.trace.adapter.HisAdapter;
-import com.zz.cold.business.trace.adapter.PendingGoodsAdapter;
 import com.zz.cold.net.ApiService;
 import com.zz.cold.net.JsonT;
 import com.zz.cold.net.RequestObserver;

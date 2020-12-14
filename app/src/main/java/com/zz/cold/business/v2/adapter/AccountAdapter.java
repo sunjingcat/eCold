@@ -26,9 +26,11 @@ public class AccountAdapter extends BaseQuickAdapter<TraceBean, BaseViewHolder> 
     @Override
     protected void convert(BaseViewHolder holder, final TraceBean item) {
         holder.setText(R.id.item_title,item.getGoodsName()+"");
+        holder.setText(R.id.item_isImported,item.getIsImported()==2?"进口":"国产");
         holder.setText(R.id.item_operatorName,item.getOperatorName()+"");
-        holder.setText(R.id.item_count,item.getOperationType()==1?("+"+item.getCount()+item.getSpec()):("-"+item.getCount()+item.getSpec()));
-        holder.setTextColor(R.id.item_count,item.getOperationType()==1? Color.RED :Color.parseColor("#FF155917"));
-        holder.setText(R.id.item_time,item.getPurchaseTime()+"");
+        holder.setText(R.id.item_coldstorageUserName,item.getColdstorageUserName()+"");
+        holder.setText(R.id.item_weight,item.getCount()+item.getSpec());
+        holder.setTextColor(R.id.item_weight,item.getOperationType()==1? Color.RED :Color.parseColor("#FF155917"));
+        holder.setText(R.id.item_batchNumber,"批号："+item.getBatchNumber()+"");
     }
 }

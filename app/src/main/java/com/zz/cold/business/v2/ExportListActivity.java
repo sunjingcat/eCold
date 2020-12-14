@@ -151,7 +151,7 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
             ll_tab.setVisibility(View.VISIBLE);
         }
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new GoodsAdapter(R.layout.item_goods, mlist);
+        adapter = new GoodsAdapter(R.layout.item_account, mlist);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);

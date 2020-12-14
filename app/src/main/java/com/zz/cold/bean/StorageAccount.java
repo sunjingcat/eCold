@@ -3,7 +3,7 @@ package com.zz.cold.bean;
 public class StorageAccount {
     String id;// 1,
     String coldstorageId;// 6,
-    String operationType;// 1,
+    int operationType;// 1,
     String operationTypeText;// 1,
     String coldstorageUserName;// 1,
     String goodsId;// 37,
@@ -11,6 +11,7 @@ public class StorageAccount {
     int beforeCount;// 0,
     int count;// 1000,
     int afterCount;// 1000,
+    int isImported;// 1000,
     String operationTime;//  2020-12-03 ,
     String spec;//  kg ,
     String operationRemark;//   ,
@@ -28,6 +29,10 @@ public class StorageAccount {
     String coldstorageName;//  富拉尔基第一冷库
     String batchNumber;//  富拉尔基第一冷库
 
+    public int getIsImported() {
+        return isImported;
+    }
+
     public String getColdstorageUserName() {
         return coldstorageUserName;
     }
@@ -44,7 +49,7 @@ public class StorageAccount {
         return coldstorageId;
     }
 
-    public String getOperationType() {
+    public int getOperationType() {
         return operationType;
     }
 

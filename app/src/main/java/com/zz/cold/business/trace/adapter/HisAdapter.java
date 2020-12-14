@@ -29,9 +29,10 @@ public class HisAdapter extends BaseQuickAdapter<WmsBean, BaseViewHolder> {
         holder.setText(R.id.item_weight,item.getOperationType()==1?("+"+item.getCount()+item.getSpec()):("-"+item.getCount()+item.getSpec()));
         holder.setTextColor(R.id.item_weight,item.getOperationType()==1? Color.RED :Color.parseColor("#FF155917"));
         holder.setText(R.id.item_time,item.getReviewTime()+"");
-        holder.setText(R.id.item_status,item.getReviewStatusText()+"");
-        holder.setText(R.id.item_remark,item.getOperatorName()+"");
-        holder.getView(R.id.item_remark).setVisibility(View.VISIBLE);
+        holder.setText(R.id.item_operatorName,item.getOperatorName()+"");
+        holder.setText(R.id.item_review,item.getReviewStatusText()+"");
+        holder.setText(R.id.item_cause,item.getReviewRemark()+"");
+        holder.setTextColor(R.id.item_review,item.getReviewStatus()==3? Color.RED:Color.parseColor("#FF155917"));
 
     }
 }

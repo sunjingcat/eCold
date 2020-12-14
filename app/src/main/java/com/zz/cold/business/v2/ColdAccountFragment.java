@@ -108,7 +108,7 @@ public class ColdAccountFragment extends MyBaseFragment<Contract.IsetExportListP
     protected void initView(View view) {
         unbinder = ButterKnife.bind(this, view);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new AccountAdapter(R.layout.item_sales, mlist);
+        adapter = new AccountAdapter(R.layout.item_account, mlist);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
@@ -119,6 +119,7 @@ public class ColdAccountFragment extends MyBaseFragment<Contract.IsetExportListP
                 intent.setClass(getActivity(), AccountDetailActivity.class);
                 intent.putExtra("id", mlist.get(position).getId());
                 intent.putExtra("page", "cold");
+
                 startActivity(intent);
             }
         });
@@ -235,15 +236,14 @@ public class ColdAccountFragment extends MyBaseFragment<Contract.IsetExportListP
 
     @Override
     protected int getCreateView() {
-        return R.layout.activity_sell_list;
+        return R.layout.fragment_account_list;
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        pagenum=1;
-        getDate();
+        mPresenter.getTab(type==1?"my":"third");
     }
 
 

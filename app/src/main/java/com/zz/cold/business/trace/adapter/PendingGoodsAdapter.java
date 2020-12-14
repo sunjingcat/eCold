@@ -1,6 +1,7 @@
 package com.zz.cold.business.trace.adapter;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 
 import androidx.annotation.LayoutRes;
@@ -36,7 +37,7 @@ public class PendingGoodsAdapter extends BaseQuickAdapter<PendingGoods, BaseView
     @Override
     protected void convert(BaseViewHolder holder, final PendingGoods item) {
         holder.setText(R.id.item_title,item.getGoodsName()+"");
-        holder.setText(R.id.item_count,item.getOperationType()==1?"进货"+item.getCount():"出货"+item.getCount());
+        holder.setText(R.id.item_count,item.getOperationType()==1?"进货"+item.getCount()+item.getSpec():"出货"+item.getCount()+item.getSpec());
         holder.setText(R.id.item_time,item.getOperationTime()+"");
         holder.setText(R.id.item_operatorName,item.getColdstorageUserName()+"");
         holder.getView(R.id.bt_ok).setOnClickListener(new View.OnClickListener() {
@@ -51,8 +52,13 @@ public class PendingGoodsAdapter extends BaseQuickAdapter<PendingGoods, BaseView
                 onclick.onclickNo(v,holder.getAdapterPosition());
             }
         });
-        holder.setVisible(R.id.ll_review,item.getReviewStatus()==1);
-
+        holder.setGone(R.id.bt_ok,item.getReviewStatus()!=1);
+        holder.setGone(R.id.bt_no,item.getReviewStatus()!=1);
+        if (item.getReviewStatus()!=-1){
+            holder.setText(R.id.item_review,item.getReviewStatusText()+"");
+            holder.setText(R.id.item_cause,item.getReviewRemark()+"");
+            holder.setTextColor(R.id.item_review,item.getReviewStatus()==3? Color.RED:Color.parseColor("#FF155917"));
+        }
 
 
     }

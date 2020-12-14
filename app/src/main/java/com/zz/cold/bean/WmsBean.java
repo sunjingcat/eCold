@@ -12,7 +12,7 @@ public class WmsBean {
     String     count;// 100.0,
     String     afterCount;// null,
     String     operationTime;// 2020-11-24,
-    String     reviewStatus;// 1,
+    int     reviewStatus;// 1,
     String     reviewStatusText;// 待审核,
     String    reviewTime;// null,
     String     reviewRemark;// null
@@ -71,7 +71,7 @@ public class WmsBean {
         return operationTime;
     }
 
-    public String getReviewStatus() {
+    public int getReviewStatus() {
         return reviewStatus;
     }
 
