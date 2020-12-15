@@ -230,11 +230,11 @@ public class GoodsActivity extends MyBaseActivity {
                             .putExtra("name", traceBean.getGoodsName());
                     startActivityForResult(intent, 1003);
                 } else if (page.equals("review")) {
-                    ask(2, traceBean.getId());
+                    ask(2, id);
                 }
                 break;
             case R.id.bt_action2:
-                askRefuse(3, traceBean.getId());
+                askRefuse(3, id);
                 break;
         }
     }
@@ -332,7 +332,7 @@ public class GoodsActivity extends MyBaseActivity {
             @Override
             protected void onFail2(JsonT stringJsonT) {
                 super.onFail2(stringJsonT);
-                if (reviewStatus==3&&TextUtils.isEmpty(stringJsonT.getMessage())){
+                if (TextUtils.isEmpty(stringJsonT.getMessage())){
                     ask2(stringJsonT.getMessage());
                 }
             }

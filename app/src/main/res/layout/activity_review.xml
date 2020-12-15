@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="进出货审核"
+            android:text="进货审核"
             android:textColor="@color/white"
             android:textSize="18dp" />
 

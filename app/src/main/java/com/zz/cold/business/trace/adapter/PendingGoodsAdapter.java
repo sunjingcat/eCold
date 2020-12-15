@@ -59,6 +59,19 @@ public class PendingGoodsAdapter extends BaseQuickAdapter<PendingGoods, BaseView
             holder.setText(R.id.item_cause,item.getReviewRemark()+"");
             holder.setTextColor(R.id.item_review,item.getReviewStatus()==3? Color.RED:Color.parseColor("#FF155917"));
         }
+        if (holder.getAdapterPosition()!=0){
+            holder.getView(R.id.bt_ok).setEnabled(false);
+            holder.setBackgroundResource(R.id.bt_ok,R.drawable.border_radius_5_99);
+            holder.getView(R.id.bt_no).setEnabled(false);
+            holder.setBackgroundResource(R.id.bt_no,R.drawable.border_radius_30_3c3c3c);
+            holder.setTextColor(R.id.bt_no,R.color.colorTextBlack99);
+        }else {
+            holder.getView(R.id.bt_ok).setEnabled(true);
+            holder.setBackgroundResource(R.id.bt_ok,R.drawable.border_radius_30_f6);
+            holder.getView(R.id.bt_no).setEnabled(true);
+            holder.setBackgroundResource(R.id.bt_no,R.drawable.border_radius_30_9c);
+            holder.setTextColor(R.id.bt_no,R.color.colorPrimary);
+        }
 
 
     }

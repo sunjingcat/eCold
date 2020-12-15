@@ -65,6 +65,7 @@
         android:paddingLeft="15dp">
 
         <TextView
+            android:id="@+id/text_item_coldstorageUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -96,6 +97,7 @@
         android:layout_marginLeft="15dp">
 
         <TextView
+            android:id="@+id/text_item_operatorName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
