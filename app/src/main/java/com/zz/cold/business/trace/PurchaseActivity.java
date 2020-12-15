@@ -134,7 +134,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     EditText text_supplierContact;
     @BindView(R.id.text_transportMode)
     TextView text_transportMode;
-    String transportMode="";
+    String transportMode = "";
     @BindView(R.id.text_period)
     EditText text_period;
     @BindView(R.id.text_goodsRemark)
@@ -162,7 +162,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     TextView text_isFfzzwjc;
     @BindView(R.id.text_isMddhsjc)
     TextView text_isMddhsjc;
-    int isMddhsjc=-1;
+    int isMddhsjc = -1;
     @BindView(R.id.text_importRegistNum)
     EditText text_importRegistNum;
     @BindView(R.id.text_originCountry)
@@ -817,7 +817,40 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
             } else {
                 ArrayList<String> selectImages = data.getStringArrayListExtra(
                         ImageSelectorUtils.SELECT_RESULT);
-                for (String path : selectImages) {
+                ArrayList<ImageBack> images = new ArrayList<>();
+                switch (requestCode) {
+                    case 1102:
+                        images = images_Sphsjc;
+                        break;
+                    case 1103:
+                        images = images_Crjjyjyzm;
+                        break;
+                    case 1104:
+                        images = images_Bgd;
+                        break;
+                    case 1105:
+                        images = images_Xdzm;
+                        break;
+                    case 1106:
+                        images = images_ffzzwjc;
+                        break;
+                    case 1107:
+                        images = images_mddhsjc;
+                        break;
+                }
+                ArrayList<String> imagesUpload = new ArrayList<>();
+                if (images.size() == 0) {
+                    imagesUpload.addAll(selectImages);
+                } else {
+                    for (ImageBack imageBack : images) {
+                        if (!selectImages.contains(imageBack.getPath())) {
+                            imagesUpload.add(imageBack.getPath());
+                        }
+                    }
+                }
+
+
+                for (String path : imagesUpload) {
                     Luban.with(this)
                             .load(path)
                             .ignoreBy(100)
@@ -830,7 +863,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                                 @Override
                                 public void onSuccess(File file) {
 
-                                    mPresenter.postImage(requestCode, file.getPath(), getImageBody(file.getPath()));
+                                    mPresenter.postImage(requestCode, path, getImageBody(file.getPath()));
                                 }
 
                                 @Override
