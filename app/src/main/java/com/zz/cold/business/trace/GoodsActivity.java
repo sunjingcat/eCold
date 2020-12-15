@@ -120,6 +120,9 @@ public class GoodsActivity extends MyBaseActivity {
                     bt_action.setVisibility(View.VISIBLE);
                     bt_action2.setVisibility(View.VISIBLE);
                     bt_action.setText("通过");
+                }else {
+                    bt_action.setVisibility(View.GONE);
+                    bt_action2.setVisibility(View.GONE);
                 }
                 ll_rv.setVisibility(View.GONE);
             }else {
@@ -158,14 +161,12 @@ public class GoodsActivity extends MyBaseActivity {
         infoList.clear();
         infoList.add(new InfoBean("商品名称", data.getGoodsName() + ""));
         infoList.add(new InfoBean("进货品种", data.getGoodsType1Text() + "" + data.getGoodsType2Text() + data.getGoodsType3Text()));
-        infoList.add(new InfoBean("是否第三方冷库", data.getIsThirdText() + ""));
-        if (data.getIsThird() == 1) {
-            infoList.add(new InfoBean("冷库名称", data.getOperatorName() + ""));
-        }
+
         infoList.add(new InfoBean("生产日期", data.getProductionDate() + ""));
-        infoList.add(new InfoBean("规格", data.getSpec() + ""));
         infoList.add(new InfoBean("批号", data.getBatchNumber() + ""));
-        infoList.add(new InfoBean("当前库存量", data.getCount() + ""));
+        infoList.add(new InfoBean("所在冷库名称", data.getOperatorName() + ""));
+        infoList.add(new InfoBean("所在冷库存量", data.getCount() + ""+data.getSpec()));
+        infoList.add(new InfoBean("商品库存总量", data.getAllCount() + ""+data.getSpec()));
         infoList.add(new InfoBean("进货时间", data.getPurchaseTime() + ""));
         infoList.add(new InfoBean("供货单位", data.getSupplierName() + ""));
         infoList.add(new InfoBean("供货者地址", data.getSupplierAddress() + ""));
@@ -229,11 +230,11 @@ public class GoodsActivity extends MyBaseActivity {
                             .putExtra("name", traceBean.getGoodsName());
                     startActivityForResult(intent, 1003);
                 } else if (page.equals("review")) {
-                    ask(1, traceBean.getId());
+                    ask(2, traceBean.getId());
                 }
                 break;
             case R.id.bt_action2:
-                askRefuse(0, traceBean.getId());
+                askRefuse(3, traceBean.getId());
                 break;
         }
     }
@@ -254,6 +255,7 @@ public class GoodsActivity extends MyBaseActivity {
     }
 
     private CustomDialog customDialog;
+    private CustomDialog customDialog2;
     private InputDialog inputDialog;
 
     void ask(int reviewStatus, String id) {
@@ -290,17 +292,17 @@ public class GoodsActivity extends MyBaseActivity {
                 .setPositiveButton("确定", new InputDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, String msg) {
-                        ask2(reviewStatus,id,msg);
+                        reviewGoods(reviewStatus, id, msg);
                     }
                 });
         inputDialog = builder.create();
         inputDialog.show();
     }
-    void ask2(int reviewStatus, String id,String msg) {
+    void ask2(String msg) {
 
         CustomDialog.Builder builder = new CustomDialog.Builder(this)
-                .setTitle("审核通过确认")
-                .setMessage("是否通过该条" + "请求?")
+                .setTitle("提示")
+                .setMessage(msg+"")
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -310,11 +312,11 @@ public class GoodsActivity extends MyBaseActivity {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        reviewGoods(reviewStatus, id, msg);
+                        dialog.dismiss();
                     }
                 });
-        customDialog = builder.create();
-        customDialog.show();
+        customDialog2 = builder.create();
+        customDialog2.show();
     }
     void reviewGoods(int reviewStatus, String id, String reviewRemark) {
         Map<String, Object> map = new HashMap<>();
@@ -330,6 +332,9 @@ public class GoodsActivity extends MyBaseActivity {
             @Override
             protected void onFail2(JsonT stringJsonT) {
                 super.onFail2(stringJsonT);
+                if (reviewStatus==3&&TextUtils.isEmpty(stringJsonT.getMessage())){
+                    ask2(stringJsonT.getMessage());
+                }
             }
         }, LoadingUtils.build(this));
     }
@@ -339,6 +344,9 @@ public class GoodsActivity extends MyBaseActivity {
         super.onDestroy();
         if (customDialog != null && customDialog.isShowing()) {
             customDialog.dismiss();
+        }
+        if (customDialog2 != null && customDialog2.isShowing()) {
+            customDialog2.dismiss();
         }
         if (inputDialog != null && inputDialog.isShowing()) {
             inputDialog.dismiss();

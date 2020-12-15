@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,6 +121,9 @@ public class ReviewFragment extends Fragment implements OnRefreshListener, OnLoa
         if (customDialog != null && customDialog.isShowing()) {
             customDialog.dismiss();
         }
+        if (customDialog2 != null && customDialog2.isShowing()) {
+            customDialog2.dismiss();
+        }
         if (inputDialog != null && inputDialog.isShowing()) {
             inputDialog.dismiss();
         }
@@ -177,6 +181,7 @@ public class ReviewFragment extends Fragment implements OnRefreshListener, OnLoa
         }, LoadingUtils.build(getActivity()));
     }
     private CustomDialog customDialog;
+    private CustomDialog customDialog2;
     private InputDialog inputDialog;
 
     void ask(int reviewStatus, PendingGoods data) {
@@ -213,31 +218,24 @@ public class ReviewFragment extends Fragment implements OnRefreshListener, OnLoa
                 .setPositiveButton("确定", new InputDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, String msg) {
-                        askRefuse2(reviewStatus, data, msg);
+                        reviewGoods(reviewStatus, data, msg);
                     }
                 });
         inputDialog = builder.create();
         inputDialog.show();
     }
-    void askRefuse2(int reviewStatus, PendingGoods data,String msg) {
-
+    void askRefuse2(String msg) {
         CustomDialog.Builder builder = new CustomDialog.Builder(getActivity())
-                .setTitle("驳回提示")
-                .setMessage("驳回理由:" + msg)
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
+                .setTitle("提示")
+                .setMessage( msg+"")
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        reviewGoods(reviewStatus, data, msg);
+
                     }
                 });
-        customDialog = builder.create();
-        customDialog.show();
+        customDialog2 = builder.create();
+        customDialog2.show();
     }
 
     void reviewGoods(int reviewStatus, PendingGoods data, String reviewRemark) {
@@ -252,6 +250,10 @@ public class ReviewFragment extends Fragment implements OnRefreshListener, OnLoa
             @Override
             protected void onFail2(JsonT stringJsonT) {
                 super.onFail2(stringJsonT);
+                if (reviewStatus==3&&TextUtils.isEmpty(stringJsonT.getMessage())){
+                    askRefuse2(stringJsonT.getMessage());
+                }
+
             }
         }, LoadingUtils.build(getActivity()));
     }

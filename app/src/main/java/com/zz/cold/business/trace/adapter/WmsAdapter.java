@@ -29,7 +29,7 @@ public class WmsAdapter extends BaseQuickAdapter<WmsBean, BaseViewHolder> {
         holder.setText(R.id.item_title,item.getOperationTypeText()+"");
         holder.setText(R.id.item_weight,item.getCount()+item.getSpec());
 
-        holder.setText(R.id.item_time,item.getReviewRemark()+"");
+        holder.setText(R.id.item_time,item.getRemark()+"");
         holder.setText(R.id.item_status,item.getOperationTime()+"");
         holder.getView(R.id.item_remark).setVisibility(View.GONE);
 

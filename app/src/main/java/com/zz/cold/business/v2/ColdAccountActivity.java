@@ -100,7 +100,7 @@ public class ColdAccountActivity extends MyBaseActivity {
     protected void initView() {
         ButterKnife.bind(this);
         coldAccountFragment1 = new ColdAccountFragment(1);
-        coldAccountFragment2 = new ColdAccountFragment(1);
+        coldAccountFragment2 = new ColdAccountFragment(2);
         for (int i = 0; i < titles.length; i++) {
             tablayout.addTab(tablayout.newTab());
         }

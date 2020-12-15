@@ -126,7 +126,7 @@ public class SalesAccountActivity extends MyBaseActivity implements OnRefreshLis
     protected void initView() {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new SalesAdapter(R.layout.item_sales, mlist, 1);
+        adapter = new SalesAdapter(R.layout.item_account, mlist, 1);
         rv.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);

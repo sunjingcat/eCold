@@ -38,6 +38,7 @@ import com.zz.cold.base.MyBaseActivity;
 import com.zz.cold.base.MyBaseFragment;
 import com.zz.cold.bean.GroupCountBean;
 import com.zz.cold.bean.TraceBean;
+import com.zz.cold.business.trace.GoodsActivity;
 import com.zz.cold.business.v2.adapter.AccountAdapter;
 import com.zz.cold.business.v2.mvp.Contract;
 import com.zz.cold.business.v2.mvp.presenter.ColdAccountPresenter;
@@ -116,7 +117,7 @@ public class ColdAccountFragment extends MyBaseFragment<Contract.IsetExportListP
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), AccountDetailActivity.class);
+                intent.setClass(getActivity(), GoodsActivity.class);
                 intent.putExtra("id", mlist.get(position).getId());
                 intent.putExtra("page", "cold");
 

@@ -16,6 +16,7 @@ public class TraceBean {
     String productionDate;// 2020-11-24,
     String spec;// kg,
     String count;// 0.0,
+    String allCount;// 0.0,
     String purchaseTime;// 2020-11-24,
     String operationTime;// 2020-11-24,
     String supplierName;// 单位,
@@ -63,6 +64,10 @@ public class TraceBean {
     List<ImageBack> ffzzwjcEnclosureList;// null,
     List<ImageBack> mddhsjcEnclosureList;// null,
     List<WmsBean> coldchainGoodsAccountcList;// null,
+
+    public String getAllCount() {
+        return allCount;
+    }
 
     public String getOperationTime() {
         return operationTime;
