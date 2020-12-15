@@ -83,6 +83,7 @@ public class HisPendingActivity extends MyBaseActivity implements OnRefreshListe
                 Intent intent = new Intent();
                 intent.setClass(HisPendingActivity.this, GoodsActivity.class);
                 intent.putExtra("id", mlist.get(position).getId());
+                intent.putExtra("page", "review");
                 startActivity(intent);
             }
         });
