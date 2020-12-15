@@ -213,7 +213,7 @@ public interface ApiService {
     @GET("/app/v1/coldchain/coldchainGoods/notPassList")
     Observable<JsonT<List<WmsBean>>> getPendingHisList(@QueryMap Map<String, Object> params);
 
-    @GET("/app/v1/coldchain/coldchainGoodsAccount/{id}")
+    @GET("/app/v1/coldchain/coldchainGoods/{id}")
     Observable<JsonT<TraceBean>> getTraceInfo(@Path("id") String id);
 
     @GET("/app/v1/coldchain/coldchainGoods/storageAccount/{id}")

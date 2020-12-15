@@ -107,6 +107,7 @@ public class ReviewFragment extends Fragment implements OnRefreshListener, OnLoa
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 getContext().startActivity(new Intent(getContext(), GoodsActivity.class)
                         .putExtra("id",mlist.get(position).getGoodsId())
+                         .putExtra("reviewId",mlist.get(position).getId())
                         .putExtra("page","review")
                         .putExtra("reviewStatus",mlist.get(position).getReviewStatus())
                 );

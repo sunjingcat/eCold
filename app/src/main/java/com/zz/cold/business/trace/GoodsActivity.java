@@ -73,6 +73,7 @@ public class GoodsActivity extends MyBaseActivity {
     List<InfoBean> infoList = new ArrayList<>();
 
     String id;
+    String reviewId;
 
     TraceBean traceBean;
     String page = "";
@@ -101,6 +102,7 @@ public class GoodsActivity extends MyBaseActivity {
         rv_info.setAdapter(infoAdapter);
         page = getIntent().getStringExtra("page");
         id = getIntent().getStringExtra("id");
+        reviewId = getIntent().getStringExtra("reviewId");
         int  reviewStatus = getIntent().getIntExtra("reviewStatus",0);
         if (!TextUtils.isEmpty(id)) {
             getData(id);
@@ -166,7 +168,7 @@ public class GoodsActivity extends MyBaseActivity {
         infoList.add(new InfoBean("批号", data.getBatchNumber() + ""));
         infoList.add(new InfoBean("所在冷库名称", data.getOperatorName() + ""));
         infoList.add(new InfoBean("所在冷库存量", data.getCount() + ""+data.getSpec()));
-        infoList.add(new InfoBean("商品库存总量", data.getAllCount() + ""+data.getSpec()));
+        infoList.add(new InfoBean("商品总库存量", data.getAllCount() + ""+data.getSpec()));
         infoList.add(new InfoBean("进货时间", data.getPurchaseTime() + ""));
         infoList.add(new InfoBean("供货单位", data.getSupplierName() + ""));
         infoList.add(new InfoBean("供货者地址", data.getSupplierAddress() + ""));
@@ -230,11 +232,11 @@ public class GoodsActivity extends MyBaseActivity {
                             .putExtra("name", traceBean.getGoodsName());
                     startActivityForResult(intent, 1003);
                 } else if (page.equals("review")) {
-                    ask(2, id);
+                    ask(2, reviewId);
                 }
                 break;
             case R.id.bt_action2:
-                askRefuse(3, id);
+                askRefuse(3, reviewId);
                 break;
         }
     }
