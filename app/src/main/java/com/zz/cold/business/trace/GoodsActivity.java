@@ -328,13 +328,14 @@ public class GoodsActivity extends MyBaseActivity {
         RxNetUtils.request(getApi(ApiService.class).reviewGoods(id, map), new RequestObserver<JsonT>() {
             @Override
             protected void onSuccess(JsonT jsonT) {
-                getData(id);
+                finish();
+
             }
 
             @Override
             protected void onFail2(JsonT stringJsonT) {
                 super.onFail2(stringJsonT);
-                if (TextUtils.isEmpty(stringJsonT.getMessage())){
+                if (!TextUtils.isEmpty(stringJsonT.getMessage())){
                     ask2(stringJsonT.getMessage());
                 }
             }

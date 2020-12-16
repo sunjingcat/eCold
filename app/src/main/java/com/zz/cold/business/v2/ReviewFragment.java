@@ -251,7 +251,7 @@ public class ReviewFragment extends Fragment implements OnRefreshListener, OnLoa
             @Override
             protected void onFail2(JsonT stringJsonT) {
                 super.onFail2(stringJsonT);
-                if (TextUtils.isEmpty(stringJsonT.getMessage())){
+                if (!TextUtils.isEmpty(stringJsonT.getMessage())){
                     askRefuse2(stringJsonT.getMessage());
                 }
 
