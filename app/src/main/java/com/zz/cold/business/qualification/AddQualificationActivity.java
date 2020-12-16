@@ -147,7 +147,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9 - images.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(9) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setSelected(localPath) // 把已选的图片传入默认选中。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(AddQualificationActivity.this, 1101); // 打开相册
@@ -289,7 +289,21 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
                 case 1101:
                     ArrayList<String> selectImages = data.getStringArrayListExtra(
                             ImageSelectorUtils.SELECT_RESULT);
-                    for (String path : selectImages) {
+                    ArrayList<String> localPath = new ArrayList<>();
+                    for (int i = 0; i < images.size(); i++) {
+                        if (!TextUtils.isEmpty(images.get(i).getPath())) {
+                            localPath.add(images.get(i).getPath());
+                        } else {
+                        }
+                    }
+                    ArrayList<String> imagesUpload = new ArrayList<>();
+
+                    for (String strPath : selectImages) {
+                        if (!localPath.contains(strPath)) {
+                            imagesUpload.add(strPath);
+                        }
+                    }
+                    for (String path : imagesUpload) {
                         Luban.with(this)
                                 .load(path)
                                 .ignoreBy(100)
@@ -302,7 +316,7 @@ public class AddQualificationActivity extends MyBaseActivity<Contract.IsetQualif
                                     @Override
                                     public void onSuccess(File file) {
 
-                                        mPresenter.postImage(file.getPath(), getImageBody(file.getPath()));
+                                        mPresenter.postImage(path, getImageBody(file.getPath()));
                                     }
 
                                     @Override

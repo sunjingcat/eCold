@@ -248,7 +248,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9 - images.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(9 ) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setSelected(localPath) // 把已选的图片传入默认选中。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(PurchaseActivity.this, 1101); // 打开相册
@@ -273,7 +273,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9 - images_Sphsjc.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(9 ) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setSelected(localPath) // 把已选的图片传入默认选中。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(PurchaseActivity.this, 1102); // 打开相册
@@ -299,7 +299,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9 - images_Crjjyjyzm.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(9 ) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setSelected(localPath) // 把已选的图片传入默认选中。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(PurchaseActivity.this, 1103); // 打开相册
@@ -325,7 +325,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9 - images_Bgd.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(9 ) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setSelected(localPath) // 把已选的图片传入默认选中。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(PurchaseActivity.this, 1104); // 打开相册
@@ -350,7 +350,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9 - images_Xdzm.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(9 ) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setSelected(localPath) // 把已选的图片传入默认选中。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(PurchaseActivity.this, 1105); // 打开相册
@@ -375,7 +375,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9 - images_ffzzwjc.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(9 ) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setSelected(localPath) // 把已选的图片传入默认选中。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(PurchaseActivity.this, 1106); // 打开相册
@@ -400,7 +400,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                 ImageSelector.builder()
                         .useCamera(true) // 设置是否使用拍照
                         .setSingle(false)  //设置是否单选
-                        .setMaxSelectCount(9 - images_mddhsjc.size()) // 图片的最大选择数量，小于等于0时，不限数量。
+                        .setMaxSelectCount(9 ) // 图片的最大选择数量，小于等于0时，不限数量。
                         .setSelected(localPath) // 把已选的图片传入默认选中。
                         .setViewImage(true) //是否点击放大图片查看,，默认为true
                         .start(PurchaseActivity.this, 1107); // 打开相册
@@ -838,44 +838,47 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
                         images = images_mddhsjc;
                         break;
                 }
+                ArrayList<String> localPath = new ArrayList<>();
+                for (int i = 0; i < images.size(); i++) {
+                    if (!TextUtils.isEmpty(images.get(i).getPath())) {
+                        localPath.add(images.get(i).getPath());
+                    }
+                }
                 ArrayList<String> imagesUpload = new ArrayList<>();
-                if (images.size() == 0) {
-                    imagesUpload.addAll(selectImages);
-                } else {
-                    for (ImageBack imageBack : images) {
-                        if (!selectImages.contains(imageBack.getPath())) {
-                            imagesUpload.add(imageBack.getPath());
-                        }
+
+                for (String strPath : selectImages) {
+                    if (!localPath.contains(strPath)) {
+                        imagesUpload.add(strPath);
                     }
                 }
 
+            for (String path : imagesUpload) {
+                Luban.with(this)
+                        .load(path)
+                        .ignoreBy(100)
+                        .setCompressListener(new OnCompressListener() {
+                            @Override
+                            public void onStart() {
+                                // TODO 压缩开始前调用，可以在方法内启动 loading UI
+                            }
 
-                for (String path : imagesUpload) {
-                    Luban.with(this)
-                            .load(path)
-                            .ignoreBy(100)
-                            .setCompressListener(new OnCompressListener() {
-                                @Override
-                                public void onStart() {
-                                    // TODO 压缩开始前调用，可以在方法内启动 loading UI
-                                }
+                            @Override
+                            public void onSuccess(File file) {
 
-                                @Override
-                                public void onSuccess(File file) {
+                                mPresenter.postImage(requestCode, path, getImageBody(file.getPath()));
+                            }
 
-                                    mPresenter.postImage(requestCode, path, getImageBody(file.getPath()));
-                                }
+                            @Override
+                            public void onError(Throwable e) {
+                                // TODO 当压缩过程出现问题时调用
+                            }
+                        }).launch();
 
-                                @Override
-                                public void onError(Throwable e) {
-                                    // TODO 当压缩过程出现问题时调用
-                                }
-                            }).launch();
-
-                }
             }
         }
     }
+
+}
 
     SelectPopupWindows selectPopupWindows;
 
