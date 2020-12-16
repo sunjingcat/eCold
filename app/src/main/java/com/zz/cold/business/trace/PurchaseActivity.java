@@ -41,6 +41,7 @@ import com.zz.cold.business.qualification.QualificationActivity;
 import com.zz.cold.business.qualification.adapter.ImageDeleteItemAdapter;
 import com.zz.cold.business.trace.mvp.Contract;
 import com.zz.cold.business.trace.mvp.presenter.PurchaseAddPresenter;
+import com.zz.cold.utils.AndroidBug5497Workaround;
 import com.zz.cold.utils.PostUtils;
 import com.zz.cold.utils.TimeUtils;
 import com.zz.lib.commonlib.utils.ToolBarUtils;
@@ -204,6 +205,7 @@ public class PurchaseActivity extends MyBaseActivity<Contract.IsetPurchaseAddPre
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        AndroidBug5497Workaround.assistActivity(this);
         rvImages.setLayoutManager(new GridLayoutManager(this, 3));
         adapter = new ImageDeleteItemAdapter(this, images);
         rvImages.setAdapter(adapter);

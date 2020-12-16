@@ -73,7 +73,7 @@
             android:lines="1"
             android:textColor="#999999"
             android:textSize="15dp"
-            android:text="经营业户：" />
+            android:text="经营业户:" />
 
         <TextView
             android:id="@+id/item_coldstorageUserName"
@@ -82,7 +82,6 @@
             android:layout_marginLeft="20dp"
 
             android:ellipsize="end"
-            android:lines="1"
             android:textColor="#333333"
             android:textSize="15dp"
             tools:text="时间:" />
@@ -104,7 +103,7 @@
             android:lines="1"
             android:textColor="#999999"
             android:textSize="15dp"
-            android:text="存放冷库：" />
+            android:text="存放冷库:" />
 
         <TextView
             android:id="@+id/item_operatorName"
@@ -112,7 +111,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:ellipsize="end"
-            android:lines="1"
             android:textColor="#333333"
             android:textSize="15dp"
             tools:text="---" />

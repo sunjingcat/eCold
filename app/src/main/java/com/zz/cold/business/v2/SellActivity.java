@@ -1,5 +1,6 @@
 package com.zz.cold.business.v2;
 
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.codbking.widget.utils.UIAdjuster;
+import com.zz.cold.MainActivity;
 import com.zz.cold.R;
 import com.zz.cold.base.BasePresenter;
 import com.zz.cold.base.MyBaseActivity;
@@ -100,8 +102,7 @@ public class SellActivity extends MyBaseActivity {
 
 
     public void showResult() {
-        setResult(RESULT_OK);
-        finish();
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     void submitData(Map<String, Object> params ){

@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.codbking.widget.utils.UIAdjuster;
+import com.zz.cold.MainActivity;
 import com.zz.cold.R;
 
 import com.zz.cold.base.MyBaseActivity;
@@ -121,8 +122,7 @@ public class DeliverActivity extends MyBaseActivity<Contract.IsetDeliverPresente
 
     @Override
     public void showResult() {
-        setResult(RESULT_OK);
-        finish();
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     @Override

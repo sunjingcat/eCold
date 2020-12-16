@@ -229,15 +229,15 @@ public class SalesAccountActivity extends MyBaseActivity implements OnRefreshLis
                 drawer.closeDrawers();
                 pagenum = 1;
                 getDate();
-                et_goodsName.setText("");
-                et_batchNumber.setText("");
-                et_entryPort.setText("");
-                et_beginTime.setText("");
-                beginTime = "";
-                et_endTime.setText("");
-                endTime = "";
-                imported = -1;
-                et_imported.setText("");
+//                et_goodsName.setText("");
+//                et_batchNumber.setText("");
+//                et_entryPort.setText("");
+//                et_beginTime.setText("");
+//                beginTime = "";
+//                et_endTime.setText("");
+//                endTime = "";
+//                imported = -1;
+//                et_imported.setText("");
 
                 break;
             case R.id.bt_cancel:

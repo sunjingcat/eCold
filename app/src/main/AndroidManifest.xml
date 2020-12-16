@@ -48,7 +48,8 @@
             android:screenOrientation="fullSensor"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".business.mine.MineActivity" />
-        <activity android:name=".MainActivity" >
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTask">
 
         </activity>
         <activity android:name=".StartpageActivity">
@@ -169,7 +170,7 @@
         <activity android:name=".business.map.SelectLocationActivity" />
         <activity android:name=".business.trace.DeliverActivity" />
         <activity android:name=".business.trace.PurchaseActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".business.storage.EquipmentInfoActivity" />
         <activity android:name=".business.trace.HisPendingActivity" />
         <activity android:name=".business.qualification.StoragePasswordActivity" />
@@ -178,7 +179,6 @@
         <activity android:name=".business.v2.SellActivity" />
         <activity android:name=".business.v2.ReviewActivity" />
         <activity android:name=".business.v2.SalesAccountActivity" />
-        <activity android:name=".business.v2.ColdAccountFragment" />
         <activity android:name=".business.v2.AccountDetailActivity" />
         <activity android:name=".business.v2.ColdAccountActivity" />
         <!--  屏幕适配########################################-->

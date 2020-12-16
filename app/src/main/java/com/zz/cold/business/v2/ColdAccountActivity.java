@@ -221,15 +221,15 @@ public class ColdAccountActivity extends MyBaseActivity {
                     coldAccountFragment2.setSearchStr(imported, operationType, getText(et_beginTime), getText(et_endTime), getText(et_goodsName), getText(et_batchNumber), getText(et_entryPort));
 
                 }
-                et_goodsName.setText("");
-                et_batchNumber.setText("");
-                et_entryPort.setText("");
-                et_beginTime.setText("");
-                beginTime = "";
-                et_endTime.setText("");
-                endTime = "";
-                imported = -1;
-                et_imported.setText("");
+//                et_goodsName.setText("");
+//                et_batchNumber.setText("");
+//                et_entryPort.setText("");
+//                et_beginTime.setText("");
+//                beginTime = "";
+//                et_endTime.setText("");
+//                endTime = "";
+//                imported = -1;
+//                et_imported.setText("");
 
                 break;
             case R.id.bt_cancel:

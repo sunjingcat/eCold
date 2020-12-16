@@ -176,7 +176,7 @@ public class GoodsActivity extends MyBaseActivity {
         infoList.add(new InfoBean("产地", data.getProductionAddress() + ""));
         infoList.add(new InfoBean("原产国", data.getOriginCountry() + ""));
         infoList.add(new InfoBean("运输方式", data.getTransportModeText() + ""));
-        infoList.add(new InfoBean("保质期", data.getPeriod() + ""));
+        infoList.add(new InfoBean("保质期", data.getPeriod() + "月"));
         infoList.add(new InfoBean("商品备注", data.getGoodsRemark() + ""));
         infoList.add(new InfoBean("是否进口", data.getIsImportedText() + ""));
         if (!TextUtils.isEmpty(data.getIsImportedText()) && data.getIsImportedText().equals("进口")) {
@@ -305,12 +305,6 @@ public class GoodsActivity extends MyBaseActivity {
         CustomDialog.Builder builder = new CustomDialog.Builder(this)
                 .setTitle("提示")
                 .setMessage(msg+"")
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

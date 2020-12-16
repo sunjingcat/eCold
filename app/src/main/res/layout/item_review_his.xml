@@ -63,25 +63,25 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="26dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/item_operatorName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:textColor="#444444"
                     android:textSize="15dp"
-                    tools:text="入库" />
+                    tools:text="" />
 
 
                 <TextView
                     android:id="@+id/item_time"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:ellipsize="end"
                     android:gravity="right"
                     android:lines="1"
@@ -98,24 +98,27 @@
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/item_review"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
+                    android:minWidth="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:ellipsize="end"
                     android:lines="1"
                     android:textColor="#272727"
                     android:textSize="15dp"
-                    tools:text="" />
+                    tools:text="dddd" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/item_cause"
                     android:layout_width="wrap_content"
+                    android:paddingRight="100dp"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:gravity="right"
-                    android:lines="1"
                     android:textColor="#999999"
                     android:textSize="15dp"
-                    tools:text="sss" />
+                    tools:text="123456789012345678901234567890123456789012345678901234567890" />
 
             </LinearLayout>
 
