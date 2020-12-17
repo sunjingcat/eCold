@@ -235,6 +235,17 @@ public class ColdAccountActivity extends MyBaseActivity {
             case R.id.bt_cancel:
                 UIAdjuster.closeKeyBoard(this);
                 drawer.closeDrawers();
+                et_goodsName.setText("");
+                et_batchNumber.setText("");
+                et_entryPort.setText("");
+                et_beginTime.setText("");
+                beginTime = "";
+                et_endTime.setText("");
+                endTime = "";
+                imported = -1;
+                et_imported.setText("");
+                et_operationType.setText("");
+                operationType=-1;
                 break;
 
         }

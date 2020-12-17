@@ -324,6 +324,15 @@ public class SellListActivity extends MyBaseActivity implements OnRefreshListene
             case R.id.bt_cancel:
                 UIAdjuster.closeKeyBoard(this);
                 drawer.closeDrawers();
+                et_goodsName.setText("");
+                et_batchNumber.setText("");
+                et_entryPort.setText("");
+                et_beginTime.setText("");
+                beginTime = "";
+                et_endTime.setText("");
+                endTime = "";
+                imported = -1;
+                et_imported.setText("");
                 break;
 
         }
