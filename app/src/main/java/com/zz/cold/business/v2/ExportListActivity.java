@@ -276,6 +276,8 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
                 endTime = "";
                 imported = -1;
                 et_imported.setText("");
+                pagenum = 1;
+                getDate();
                 break;
             case R.id.text_tab:
                 tabPopWindow = new TabPopWindow(this, tabList, tabId);

@@ -246,6 +246,12 @@ public class ColdAccountActivity extends MyBaseActivity {
                 et_imported.setText("");
                 et_operationType.setText("");
                 operationType=-1;
+                if (type == 1) {
+                    coldAccountFragment1.setSearchStr(imported, operationType, getText(et_beginTime), getText(et_endTime), getText(et_goodsName), getText(et_batchNumber), getText(et_entryPort));
+                } else {
+                    coldAccountFragment2.setSearchStr(imported, operationType, getText(et_beginTime), getText(et_endTime), getText(et_goodsName), getText(et_batchNumber), getText(et_entryPort));
+
+                }
                 break;
 
         }

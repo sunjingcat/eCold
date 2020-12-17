@@ -252,6 +252,8 @@ public class SalesAccountActivity extends MyBaseActivity implements OnRefreshLis
                 endTime = "";
                 imported = -1;
                 et_imported.setText("");
+                pagenum = 1;
+                getDate();
                 break;
 
         }
