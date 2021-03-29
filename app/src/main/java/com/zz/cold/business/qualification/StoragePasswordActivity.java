@@ -80,10 +80,10 @@ public class StoragePasswordActivity extends MyBaseActivity {
         String edPassword_ = edPassword.getText().toString();
         String edPasswordAgain_ = edPasswordAgain.getText().toString();
         String id = getIntent().getStringExtra("id");
-        if (TextUtils.isEmpty(edPasswordOld_)){
-            showToast("请输入旧密码");
-            return;
-        }
+//        if (TextUtils.isEmpty(edPasswordOld_)){
+//            showToast("请输入旧密码");
+//            return;
+//        }
         if (TextUtils.isEmpty(edPassword_)){
             showToast("请输入新密码");
             return;
