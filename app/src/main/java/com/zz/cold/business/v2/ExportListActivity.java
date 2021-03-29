@@ -368,15 +368,25 @@ public class ExportListActivity extends MyBaseActivity<Contract.IsetExportListPr
 
     @Override
     public void showTabType(List<GroupCountBean> list) {
-        if (list == null) return;
-        tabList.clear();
-        tabList.addAll(list);
-        if (list.size() > 0) {
-            text_tab.setText(tabList.get(0).getOperatorName() + "");
-            tabId = tabList.get(0).getColdstorageId();
-            pagenum = 1;
-            getDate();
+
+        if (page.equals("import")) {
+                text_tab.setText( "");
+                tabId = "";
+                pagenum = 1;
+                getDate();
+
+        }else {
+            if (list == null) return;
+            tabList.clear();
+            tabList.addAll(list);
+            if (list.size() > 0) {
+                text_tab.setText(tabList.get(0).getOperatorName() + "");
+                tabId = tabList.get(0).getColdstorageId();
+                pagenum = 1;
+                getDate();
+            }
         }
+
     }
 
     SelectPopupWindows selectPopupWindows;

@@ -10,6 +10,7 @@ import com.zz.cold.net.MyBasePresenterImpl;
 import com.zz.cold.net.RequestObserver;
 import com.zz.cold.net.RxNetUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -55,17 +56,7 @@ public class ExportListPresenter extends MyBasePresenterImpl<Contract.IGetExport
     @Override
     public void getTab(String type) {
         if (type.equals("import")) {
-            RxNetUtils.request(getApi(ApiService.class).selectImportColdstorageGroupCount(), new RequestObserver<JsonT<List<GroupCountBean>>>(this) {
-                @Override
-                protected void onSuccess(JsonT<List<GroupCountBean>> jsonT) {
-                    view.showTabType(jsonT.getData());
-                }
-
-                @Override
-                protected void onFail2(JsonT<List<GroupCountBean>> stringJsonT) {
-                    super.onFail2(stringJsonT);
-                }
-            }, mDialog);
+            view.showTabType(new ArrayList<>());
         } else {
             RxNetUtils.request(getApi(ApiService.class).selectExportColdstorageGroupCount(), new RequestObserver<JsonT<List<GroupCountBean>>>(this) {
                 @Override
